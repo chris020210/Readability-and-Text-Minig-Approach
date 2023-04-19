@@ -1,0 +1,2334 @@
+---
+title: "A Readability and Text Mining Approach: Technical Apendix"
+author: "Christian Admin De la Huerta Avila"
+date: "`r Sys.Date()`"
+output: 
+  html_document: 
+    toc: yes
+    fig_height: 6
+---
+
+```{r setup, include=FALSE}
+
+# Libraries 
+# Before get start, we need to load the `KoRpus` library. In addition, we will
+# use the `koRpus.lang.en` and `koRpus.lang.en` libraries to identify the
+# languages of the statements, in this case, English and Spanish 
+library(koRpus)
+library(tidyverse)
+library(koRpus.lang.en)
+library(koRpus.lang.es)
+library(knitr)
+library(kableExtra)
+library(ggthemes)
+library(tinytex)
+
+library(extrafont)
+loadfonts(device = "win")
+
+library(openxlsx)
+#write.xlsx(MPM2, "MPM.xlsx")
+library(zoo)
+source("multiplot.R")
+library(urca)
+library(mFilter)
+library(strucchange)
+library(forecast)
+
+
+### Setup ----
+#options(encoding = 'UTF-8')# Cambiar locale para prevenir problemas con caracteres especiales
+options(scipen=999) # Prevenir notacion cientifica
+
+```
+
+This document serves as the technical appendix of the paper *Banco de México Communication. A readability and Text Mining Approach*, and it aims to build a full  reproducible code, using the open-source R software, that computes different readability measures of central bank communication documents; my research focused on monetary policy releases, minutes, and inflation reports. However, it can be applied to various raw text documents, such as financial stability reports, speeches delivered by central bank officials, interviews and press conference transcripts, or even other central banking-related raw text documents, including news and newspaper articles.
+In addition, I also present a data mining methodology, based on Benchimol et al. (2022), to analyze the content of documents by performing high-frequency words and semantic analysis. The code can be run for documents written in English and Spanish, it is possible to adapt it to other languages such as German, Italian, French or other languages available in the libraries being used.
+
+# 1. Banco de México documents
+
+Before presenting the code, it is necessary to preprocess the raw text documents. All information was obtained in pdf format from the official website of Banco de México and pre-processed them in a classic text editor[^1].
+The filter consists of removing all objects not related to the main text, such as headers, page numbers, title pages, indexes, tables of contents, footnotes, appendices, etc. Despite the many efforts made by scholars and researchers to develop techniques to include graphs, tables, figures, charts and other visual elements in linguistic analysis, no such method is available, so even when this material can add valuable content to the analysis, it is necessary to remove them from the documents.
+
+Elements removed from the documents are:
+
+-   **Monetary Policy Statements**:
+    -   Headers and footers.
+    -   Titles and captions.
+    -   Dates.
+    -   Footnotes.
+    -   Page numbers.
+    -   Forecast table.
+-   **Minutes**:
+    -   Headers and footers.
+    -   Titles and subtitles.
+    -   Footnotes.
+    -   Page numbers.
+    -   Charts and tables.
+    -   Material presented by the Economic Research and Central Bank Operations Departments.
+-   **Quarterly Inflation Reports**:
+    -   Front and back covers.
+    -   Headers and footers.
+    -   Disclaimers.
+    -   Table of contents.
+    -   Titles and captions.
+    -   Subtitles.
+    -   Footnotes.
+    -   Page numbers.
+    -   Charts and tables.
+    -   Boxes.
+    -   Appendices and technical chapters.
+
+Once all the raw text documents have been pre-processed, they need to be stored in a readable text format, such as .pdf, .txt, .csv, .doc, or any other text-readable file. In this case, I store the documents as `UTF-8` encoded .txt files and each document is named after the date it was released and suffixed with the document type. For example, the December 2022 Monetary Policy Decision was stored as `2022-12-15MPD`. The suffix is **MPD** for Monetary Policy Decision, **MPM** for Monetary Policy Minute and **QIR** for Quarterly Inflation Report.
+
+The following line of code presents a way to load the path to the Banco de México files.
+
+```{r Read Banxicos}
+
+#file path of the central bank statements
+file.path <- file.path("C:/Users/chris/Documents/GitHub/A-readability-and-Text-Mining-Approach/text")
+Banxico = list.files(file.path
+                     ,pattern = ".*.txt") #load the path
+
+str(Banxico) #str of the Banxico path
+tail(Banxico) #last 6 file
+
+```
+
+The path consists 242 length vector, each element representing the name of a document.
+
+# 2. Central Bank's Readability
+
+The next step is to build the readability function. I will make use of `koRpus`, `koRpus.lang.en`, `koRpus.lang.es`, `stringi` and `tidyverse` libraries. The code extracts from each .txt file the date, document type, total number of words, phrases, punctuation, number of characters, lines, spaces, and the average length of words and phrases. In addition, for text written in Spanish, it calculates the readability scores Fernández Huerta, Flesch-Szigritsz, and Gutiérrez, and for text written in English, it calculates the readability scores Flesch, Gunning FOG, and Flesch-Kincaid. The input variables are a vector containing the path of the text documents and the language, in this case, the function only accepts `"es"` for Spanish or `"en"` for English.
+
+## 2.1. The function
+
+
+```{r Central bank Readability function}
+
+# FUNCTION -------
+
+Central_Bank_Readability <- function(data,lang){
+  
+  library(koRpus) # load koRpus library 
+  library(koRpus.lang.en) # load koRpus.lang.en library 
+  library(koRpus.lang.es) # load koRpus.lang.es library
+  library(stringi) # load stringi library
+  library(tidyverse) # load tidyverse
+  
+  #Extract dates
+  dates <- as.Date(substring(data, first = 1, last = 10))
+  
+  #Extract type of document
+  document <- substring(data, first = 11, last = 13)
+  
+  
+  statements.words <- list() #empty list
+  
+  # For every element in central bank's documents data set, 
+  # convert the .txt file to a kRP.text object,
+  # then store each KRp.text object into the statements.words
+  # empty list.
+  
+  for (i in 1:length(data)) {
+    statements.words[i]<- koRpus::tokenize(
+      data[i], 
+      lang = lang, # language 
+      fileEncoding = 'UTF-8', # type of encoding 
+      # if there is a number of the form d.d convert it into dd
+      clean.raw = list("([[:digit:]])(.)([[:digit:]])"="\\1\\3"),
+      tag = T, # clean tags
+      detect = c(parag = T, hline =F), # detect paragraphs
+      ign.comp = c("%"), #do not break % symbol
+      # the sentence ends in every dot, colon or semicolon
+      sentc.end = c(".",";",":"))
+  }
+  
+  #asign names to the list
+  names(statements.words)<- dates
+  
+  #return the summary of the tokenized object
+  A = as.data.frame(t(sapply(statements.words,describe)))
+  #return the information of the tokenized object
+  B = as.data.frame(t(sapply(statements.words,taggedText)))
+  #return a list with the statements
+  C = sapply(B$token, paste)
+  
+  #create a data frame with the information of A, B and C
+  Statements =  data.frame(dates, # date of the data
+                           document, #type of document
+                           "statement"= rep(NA,length(dates)))                       
+  
+  #For each element of the list of statements save the
+  #stringed text of each document in the corresponding 
+  #space of the data frame
+  for (i in 1:length(C)) {
+    Statements[i,3] <- stri_paste(C[[i]], collapse = " ")
+    
+  }
+  
+  #save of the information of the tokenized object in the 
+  #statements data frame
+  Statements = data.frame(cbind(Statements,A,B),
+                           row.names = NULL)
+  #select the specific data
+  Statements <- Statements %>%
+    dplyr::select(dates,document,statement,all.chars,lines,normalized.space,
+                  chars.no.space,punct,digits,letters.only,words,
+                  sentences,avg.sentc.length,avg.word.length)
+  
+
+  
+  CB_Readability<- list() # empty list
+  CB_Readability2<- list() # empty list
+  CB_Readability3<- list() # empty list
+  
+  # For every position in the policy statements data set, 
+  # convert the .txt document into kRP.test object.
+  # IF THE LANGUAGE IS SPANISH, COMPUTATE THE Flesch-Szigriszt, 
+  # Fernández Huerta AND Gutiérrez TEST AND STORE THE SCORES INTO
+  # THE Statements data frame. IF NOT, COMPUTATE THE Flesch,
+  # Gunning FOG AND Flesch-Kincaid TEST AND STORE THE SCORES INTO
+  # THE Statetments data frame
+  
+  for (i in 1:length(statements.words)) {
+      if (lang == "es") {
+        
+        #Flesch-Szgrist
+        CB_Readability[i]<- koRpus::flesch(statements.words[[i]],
+                                         hyphen = NULL,
+                                         parameters = "es-s")
+        #Fernadez Huerta
+        CB_Readability2[i]<- koRpus::flesch(statements.words[[i]],
+                                         hyphen = NULL,
+                                         parameters = "es")
+        #Gutierrez
+        CB_Readability3[i]<- koRpus::gutierrez(statements.words[[i]],
+                                          hyphen = NULL)
+        } else{
+          
+          #Flesch
+          CB_Readability[i]<- koRpus::flesch(statements.words[[i]],
+                                           hyphen = NULL,
+                                           parameters = "en")
+          
+          #Flesch-Kincaid
+          CB_Readability2[i]<- flesch.kincaid(statements.words[[i]],
+                                            hyphen = NULL)
+          #Gunnan Fog
+          CB_Readability3[i]<- koRpus::FOG(statements.words[[i]],
+                                         hyphen = NULL)
+          
+    }
+
+  } 
+  
+  if (lang == "es") {
+    #Flesch Szigrist
+    names(CB_Readability) <- as.character(dates)
+    M <- sapply(CB_Readability,summary)
+    M1<- matrix(M[3,]) # Flesch index
+    M2<- matrix(M[2,]) # language
+    M3<- matrix(M[4,]) # difficulty at school level
+    
+    Statements <- Statements %>%
+      mutate("Flesch-Szigriszt" = as.numeric(M1),
+             "Flesch-Szigriszt grade" = as.character(M3))
+    
+    
+    #Fernandez Huerta
+    names(CB_Readability2) <- as.character(dates)
+    M <- sapply(CB_Readability2,summary)
+    M1<- matrix(M[3,]) # Fernández Huerta index
+    M2<- matrix(M[2,]) # language
+    M3<- matrix(M[4,]) # difficulty at school level
+    
+    Statements <- Statements %>%
+      mutate("Fernandez Huerta" = as.numeric(M1),
+             "Fernandez Huerta grade" = as.character(M3))
+    
+    
+    #Gutierrez
+    names(CB_Readability3) <- as.character(dates)
+    M <- sapply(CB_Readability3,summary)
+    M1<- matrix(M[3,]) # Fernández Huerta index
+    M2<- matrix(M[2,]) # language
+    M3<- matrix(M[4,]) # difficulty at school level
+    
+    Statements <- Statements %>%
+      mutate("Gutierrez" = as.numeric(M1))
+    
+  } else{
+    
+    #Flesch
+    names(CB_Readability) <- as.character(dates)
+    M <- sapply(CB_Readability, summary)
+    M1<- matrix(M[3,]) # Flesch index
+    M2<- matrix(M[2,]) # language
+    M3<- matrix(M[4,]) # difficulty at school level
+    
+    Statements <- Statements %>%
+      mutate("Flesch" = as.numeric(M1),
+             "Flesch grade" = as.character(M3))
+    
+    
+    #Gunning FOG
+    names(CB_Readability3) <- as.character(dates)
+    M <- sapply(CB_Readability3, summary)
+    M3<- matrix(M[4,]) # Gunning FOG index
+    
+    Statements <- Statements %>%
+      mutate("Gunning FOG" = as.numeric(M1))
+    
+    #Flesch-Kincaid
+    names(CBstatement2) <- as.character(dates)
+    M<- sapply(CB_Readability2, summary)
+    M1 <- M[4,] # grade
+    M2 <- M[5,]  # age
+    
+    Statements <- Statements %>%
+      mutate("Flesh-Kincaid grade" = as.numeric(M1),
+             "Flesh-Kincaid age" = as.character(M2))
+    
+    
+  }
+  
+  #return the statements data frame
+  return(Statements)
+}
+
+```
+
+## 2.2. Applying the function
+
+The function is applied to the path vector using the line of code:
+
+-   `Banxico_readability <- Central_Bank_Readability(data = Banxico, lang = "es")`
+
+
+```{r include=FALSE}
+load("Methodology data.RData")
+Banxico_readability <- Banxico_data
+rm(Banxico_data)
+
+```
+
+
+The output is a data frame of 19 variables (columns) and 242 observations (one row for each document).
+
+
+```{r tail Banxico, echo=FALSE, paged.print=TRUE}
+tail(Banxico_readability,3)
+```
+
+## 2.3. Linguistic analysis
+
+Given this data frame, the information extraction is highly achievable.
+For example, the Table 1 can be obtained using commands in the `dyplr` package:
+
+```{r Banco de México Documents, echo=TRUE, paged.print=TRUE}
+
+Table1 <- table(Banxico_readability %>%
+  mutate("Year" = format(dates, format = "%Y")) %>% # extract the year
+  filter(Year %in% 2011:2022) %>% # filter by year
+    select("Year", "document")) # select only the year and document columns
+
+Table1
+```
+
+```{r Doc count, include=FALSE}
+
+Documents_count <- knitr::kable(Table1,
+                       caption = "Banco de México Documents",
+             align = "c",
+             booktabs = T) %>%
+      kable_styling(latex_options = c("hold_position"),
+                  full_width = T) %>%
+    add_footnote(c("Source: Author's calculation."),
+                 notation = "none")
+
+```
+
+
+Further more, all the descriptive analysis and graphs were devolved using the `tidyverse` library.[^2] E.g., the word count descriptive statics was obtained with the following line of code.
+
+
+```{r WC_statics, paged.print=TRUE}
+
+library(tidyverse) # load package 
+
+WC_statics<- Banxico_readability %>%
+  mutate(words = as.numeric(words), # convert words to a numeric variable
+         "Year" = format(dates, format = "%Y"))%>% # extract years
+  select("Year", "document", "words") %>% # select variables
+  group_by(document) %>% # group by type of document
+  summarise(n = length(document), # descriptive statistics
+            mean = mean(words),
+            median = median(words),
+            sd = sd(words),
+            min = min(words),
+            max = max(words))
+WC_statics
+
+```
+
+```{r WordCount, include=FALSE}
+
+WordCount <- knitr::kable(WC_statics,
+                       caption = "Word Count- Descriptive Statics",
+             align = "c",
+             booktabs = T,
+  col.names = c("Document","N","Mean","Median","SD",
+                "Min.", "Max.")) %>%
+      kable_styling(latex_options = c("hold_position"),
+                  full_width = T) %>%
+    add_footnote(c("Source: Author's calculation.",
+                   "IQR max. (2020-11-25), IQR min (2011-08-10).", 
+                   "MPD max. (2017-08-10), MPD min. (2016-02-17).", 
+                   "MPM max. (2019-07-11), MPM min. (2011-02-04)."),
+                 notation = "none",
+                 threeparttable = F)
+```
+
+
+And the information of the figures was stored in a .csv of .xlsx format suing the `openxlsx` package:
+
+
+```{r Figure1 xlsx}
+
+library(openxlsx) #load xlsx package
+
+Figure1 <- Banxico_readability %>%
+  mutate(words = as.numeric(words), # convert words into numeric variable
+         "Year" = format(dates, format = "%Y")) %>% # year variable
+  select(dates,document,words,Year) # select specific variables
+
+write.xlsx(Figure1, "Figure 1.xlsx") #export data as .xlsx format
+```
+
+
+or plotted directly in the R environment using a wide variety of packages. `ggplot2` offers different ways to approach the visual elements:
+
+
+```{r}
+#using ggplot2 package
+
+Figure1plot <- Figure1 %>%
+  ggplot(aes(x= dates, # aesthetics
+             y= words,
+             color= document)) +
+  geom_point(# dot plot
+             size = 1)+
+  geom_line(aes(x= dates, # line plot
+                y= words,
+                group = 1.5),
+            size = 0.5)+
+  #labels of the Figure
+  labs( 
+    title = "Figure 1: Banco de México official documents. Word count.",
+        subtitle = "Jan 2011 - Dec 2022 (Number of Words)",
+        x = " ",
+        y = " ",
+    color = " ",
+    caption = "Source: Author's calculations.")+
+  scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+               date_labels = "%Y")
+  # split the figure using the type of document
+  facet_grid(
+             rows =vars(document),
+             shrink = T, scales = "free_y")
+```
+
+
+
+
+
+```{r Figure1 plot, include=FALSE}
+#using ggplot2 package
+
+Figure1plot <- Figure1 %>%
+  ggplot(aes(x= dates, # aesthetics
+             y= words,
+             color= document)) +
+  geom_point(# dot plot
+             size = 1)+
+  geom_line(aes(x= dates, # line plot
+                y= words,
+                group = 1.5),
+            size = 0.5)+
+  #labels of the Figure
+  labs( 
+    title = "Figure 1: Banco de México official documents. Word count.",
+        subtitle = "Jan 2011 - Dec 2022 (Number of Words)",
+        x = " ",
+        y = " ",
+    color = " ",
+    caption = "Source: Author's calculations.")+
+  theme_tufte(base_family = "serif", # type of theme
+            base_size = 12)+
+  scale_colour_wsj()+ # color palette 
+  scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+               date_labels = "%Y")+
+    theme(legend.position = "bottom", # position and type of labels
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot") +
+  # split the figure using the type of document
+  facet_grid(
+             rows =vars(document),
+             shrink = T, scales = "free_y")
+
+```
+
+
+And even build more complex figures like the following one:
+
+```{r Figure 2 xlsx and plot, echo=TRUE, message=FALSE, warning=FALSE}
+
+
+# Figure 2 xlsx export
+Figure2<- Banxico_readability %>%
+  # store new varaibles
+  dplyr::mutate("Year" = format(dates, 
+                                format="%Y"), #years
+                "Fernández Huerta" = `Fernandez Huerta`, #FH
+                "Flesch-Szigriszt" = `Flesch-Szigriszt`, #FSZ
+                # VARIABLE FOR SCALING THE GUTIERREZ INDEX
+                "sf" = max(`Flesch-Szigriszt`)/max(Gutierrez), 
+              #  "Gutiérrez" = Gutierrez,
+                "Gutiérrez" = sf*`Gutierrez`, # Scaling Gut index
+              # Average index
+                "Avg" = (`Fernandez Huerta` + `Flesch-Szigriszt`+ `Gutiérrez`)/3) %>%
+  dplyr::filter(Year %in% 2011:2022) %>% # filre by year
+  # store every index name into the Flesch column and every index value into
+  # the Flesch_index column
+  pivot_longer(cols = c(`Fernández Huerta`,`Flesch-Szigriszt`,
+                        `Gutiérrez`, `Avg`),                                    
+                            names_to = "Flesch", 
+                            values_to = "Flesch_index") 
+
+write.xlsx(Figure2, "Figure 2.xlsx") #xlsx export
+
+# Plot Figure 2
+Figure2plot <- Figure2 %>%
+  ggplot(aes(x= dates, # aesthetics
+             y= Flesch_index,
+             color = Flesch,
+             group = Flesch)) +
+  geom_line(size = 0.7)+ # LINE CHARTS
+  # labels 
+    labs(
+    title = "Figure 2: Readability of Banco de México Over Time",
+    subtitle = "Jan 2011 - Dec 2022 (Reading Ease Scores)",
+    x = " ",
+    y = " ",
+    color = " ",
+    caption = "Source: Author's calculation.
+Note: The average was calculated using the standard mean at each time position of the three readability measures. 
+The Gutierrez score was scaled to fit the other two measures. The dashed lines correspond to the respect readability 
+level on the INFLESZ scale.")+
+  theme_tufte(base_family = "serif", # theme type
+            base_size = 12)+
+  scale_color_wsj()+ # color pallette 
+  scale_x_date(date_breaks = "3 year", # change x-axis breaks
+               date_labels = "%Y")+
+  # split y-axis
+  scale_y_continuous(name="INFLESZ Scale",
+               sec.axis = sec_axis(~./Figure2$sf, name = "Gutiérrez Scale"))+
+  # legends and labels position
+  theme(legend.position = "bottom",
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot") +
+  # split by document type
+  facet_grid(
+             cols = vars(document),
+             shrink = T, scales = "free_x") +
+  # INFLESZ SCALE COLOR LINES
+  geom_hline(yintercept = 40, color = "#e3342f", 
+             linetype = "dashed", size = 0.3) +
+  geom_hline(yintercept = 55, color = "#f6993f",
+             linetype = "dashed", size = 0.3) +
+  geom_hline(yintercept = 65 , color = "#00b159",
+             linetype = "dashed", size = 0.3)
+
+Figure2plot
+  
+```
+
+
+The information extracted by the `Central_Bank_Readability` function allows us to perform various descriptive, statistical, or even econometric analyses.
+
+
+```{r Partial averages, include=FALSE}
+Banxico_readability <- Banxico_readability %>%
+  mutate(words = as.numeric(words),
+         "Year" = format(dates, format = "%Y"))
+
+A <- Banxico_readability%>%
+  select("Year", "document", "words") %>%
+  group_by(document) %>%
+  filter(Year %in% 2011:2019) %>%
+  summarise(n = length(document),
+            mean = mean(words),
+            median = median(words),
+            sd = sd(words),
+            min = min(words),
+            max = max(words))
+B <-Banxico_readability%>%
+  select("Year", "document", "words") %>%
+  group_by(document) %>%
+  filter(Year %in% 2020:2022) %>%
+  summarise(n = length(document),
+            mean = mean(words),
+            median = median(words),
+            sd = sd(words),
+            min = min(words),
+            max = max(words))
+```
+
+```{r Readability Measures- Descriptive Statics, message=FALSE, warning=FALSE, include=FALSE}
+
+A<- Banxico_readability %>%
+  select(dates,document,statement,`Flesch-Szigriszt`,
+         `Flesch-Szigriszt grade`,`Fernandez Huerta`,
+         `Flesch-Szigriszt grade`,Gutierrez,Year) %>%
+  mutate(FSZ = `Flesch-Szigriszt`,
+         FH = `Fernandez Huerta`,
+         Gut = Gutierrez,
+         "sf" = max(`Flesch-Szigriszt`)/max(Gutierrez),
+         "Avg" = (`Fernandez Huerta` + `Flesch-Szigriszt`+ Gutierrez)/3) %>%
+  pivot_longer(cols = c(FH,FSZ,Gut),                                    
+                            names_to = "Flesch", 
+                            values_to = "Flesch_index") %>%
+    group_by(document, Flesch) %>%
+    summarise(mean = mean(Flesch_index),
+              median = median(Flesch_index),
+              sd = sd(Flesch_index),
+              min = min(Flesch_index),
+              max = max(Flesch_index))
+#A <- as.data.frame(t(A))
+
+
+Readability_Stats <- knitr::kable(A,
+             caption = "Readability Measures- Descriptive Statics",
+             align = "c",
+             booktabs = T,
+  col.names = c("Test","Document","Mean","Median","SD",
+                "Min.", "Max.")) %>%
+      kable_styling(latex_options = c("hold_position"),
+                  full_width = T) %>%
+    add_footnote(c("Source: Author's calculation."),
+                 notation = "none",
+                 threeparttable = F) %>%
+  collapse_rows(columns = 1:3, latex_hline = "major", valign = "middle")
+
+```
+
+```{r Correlation Maps, fig.height=4.3, fig.width=6, message=FALSE, warning=FALSE, include=FALSE}
+#install.packages("GGally")
+library(GGally)
+source("multiplot.R")
+
+A<- Banxico_readability %>%
+  dplyr::mutate("Year" = format(dates, 
+                                format="%Y"),
+                "Fernández Huerta" = `Fernandez Huerta`,
+                "Flesch-Szigriszt" = `Flesch-Szigriszt`,
+                "sf" = max(`Flesch-Szigriszt`)/max(Gutierrez),
+              #  "Gutiérrez" = Gutierrez,
+                "Gutiérrez" = sf*`Gutierrez`,
+                "Avg" = (`Fernandez Huerta` + `Flesch-Szigriszt`+ `Gutiérrez`)/3) %>%
+  dplyr::filter(Year %in% 2011:2022)
+
+COR <- A %>%
+  select(dates,Year,document,words,sentences,
+         `Flesch-Szigriszt`,`Fernandez Huerta`,Gutierrez,Avg) %>%
+  mutate(sentences = as.numeric(sentences)) %>%
+  group_by(document)
+
+A<-COR %>%
+  filter(document == "MPD") %>%
+  mutate(W = words,
+         ST = sentences,
+         FSZ = `Flesch-Szigriszt`,
+         FH = `Fernandez Huerta`,
+         Gut = Gutierrez) %>%
+  select(W,ST,FSZ,
+         FH,Gut,Avg) %>%
+  ggcorr(label = F,
+         geom = "tile",
+         family = "serif",
+         label.size  = 3) +
+  theme(text = element_text(family = "serif"),
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot")+
+  labs(title = "Figure 3: Linguistic Correlation Maps",
+       subtitle = "
+       MPD")
+
+
+B<-COR %>%
+  filter(document == "MPM") %>%
+  mutate(W = words,
+         ST = sentences,
+         FSZ = `Flesch-Szigriszt`,
+         FH = `Fernandez Huerta`,
+         Gut = Gutierrez) %>%
+  select(W,ST,FSZ,
+         FH,Gut,Avg) %>%
+  ggcorr(label = F,
+         geom = "tile",
+         family = "serif") +
+    theme(text = element_text(family = "serif"),
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot") +
+  labs(title =" ",subtitle = "
+       MPM")
+
+C<-COR %>%
+  filter(document == "IQR") %>%
+  mutate(W = words,
+         ST = sentences,
+         FSZ = `Flesch-Szigriszt`,
+         FH = `Fernandez Huerta`,
+         Gut = Gutierrez) %>%
+  select(W,ST,FSZ,
+         FH,Gut,Avg) %>%
+  ggcorr(label = F,
+         geom = "tile",
+         family = "serif")+
+    theme(text = element_text(family = "serif"),
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot") +
+  labs(title =" ",subtitle = "
+       IQR")
+
+  
+LING_CORPLOT <- list(MPD = A,
+                     MPM = B,
+                     IQR = C,
+                     footnote = "> \footnotesize Source: Author's calculation.")
+```
+
+```{r Flesch-Szigriszt Score Smooth, message=FALSE, warning=FALSE, include=FALSE}
+library(psych)
+
+A<- Banxico_readability %>%
+  dplyr::mutate("Year" = format(dates, 
+                                format="%Y"),
+                "Fernández Huerta" = `Fernandez Huerta`,
+                "Flesch-Szigriszt" = `Flesch-Szigriszt`,
+                "sf" = max(`Flesch-Szigriszt`)/max(Gutierrez),
+              #  "Gutiérrez" = Gutierrez,
+                "Gutiérrez" = sf*`Gutierrez`,
+                "Avg" = (`Fernandez Huerta` + `Flesch-Szigriszt`+ `Gutiérrez`)/3) %>%
+  dplyr::filter(Year %in% 2011:2022)
+
+COR <- A %>%
+  select(dates,Year,document,words,sentences,
+         `Flesch-Szigriszt`,`Fernandez Huerta`,Gutierrez,Avg) %>%
+  mutate(sentences = as.numeric(sentences)) %>%
+  group_by(document)
+
+#COR<-cor(COR[,4:9])
+
+#corrplot::corrplot(COR,
+                  # method = "square")
+#heatmap(COR)
+#str(COR)
+
+FSZ_Smooth <- COR %>%
+  group_by(document) %>%
+  ggplot(aes(y=`Flesch-Szigriszt`,x=dates,
+             col = document)) +
+  geom_point() +
+  geom_smooth() +
+      labs(
+    title = "Figure 4: Readability of Banco de México. Flesch-Szigriszt Score",
+    subtitle = "Jan 2011 - Dec 2022 (Reading Ease Scores)",
+    x = " ",
+    y = "INFLESZ Scale",
+    color = " ",
+    caption = "Source: Author's calculation.
+Note: Smoothing data using local regression techniques.")+
+  theme_tufte(base_family = "serif",
+            base_size = 12)+
+  scale_color_wsj()+
+  scale_x_date(date_breaks = "2 year",
+               date_labels = "%Y")+
+  theme(legend.position = "bottom",
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot") 
+  #facet_grid(
+   #          cols = vars(document),
+    #         shrink = T, scales = "free_x") +
+  #geom_hline(yintercept = 40, color = "#e3342f", 
+    #         linetype = "dashed", size = 0.3) +
+  #geom_hline(yintercept = 55, color = "#f6993f",
+   #          linetype = "dashed", size = 0.3) +
+  #geom_hline(yintercept = 65 , color = "#00b159",
+   #          linetype = "dashed", size = 0.3)
+
+
+```
+
+# 3. Structural Break Analysis
+
+## 3.1. Setting up the Variables
+
+In this section, all the steps that have been performed are shown, as well as the results of the structural break analysis.
+
+The first step consists of storing the FSZ score information separately for each document and converting the dates into a monthly and quarterly vector respectively. The latter means converting each observation to monthly or quarterly frequency, e.g., if an observation occurred on any day of month 02, for the time series analysis the observation will be considered to correspond to month 02 regardless of the day it occurred. The information in the Inflation Reports needs no further manipulation because it is already prepared for time series analysis.
+
+```{r Date transform}
+
+# Minutes
+MPM <- Banxico_readability %>%
+  filter(document == "MPM") %>% # select MPMs
+  select(dates,document,`Flesch-Szigriszt`) %>% # filter interest variables
+  # dates to monthly frequency
+  mutate(dates = as.Date(format(dates, format= "%Y-%m-01"))) 
+
+# MP Statements
+MPD <- Banxico_readability %>%
+  filter(document == "MPD") %>% # select MPDs
+  select(dates,document,`Flesch-Szigriszt`) %>% # filter interest variables
+  # dates to monthly frequency
+  mutate(dates = as.Date(format(dates, format= "%Y-%m-01")))
+
+# Inflation Reports
+IQR <- Banxico_readability %>%
+  filter(document == "IQR") %>% # select IQRs
+  select(dates,document,`Flesch-Szigriszt`) # filter interest variables
+# separate date into year and quarter, inserting NAs in year as necessary
+IQR <- IQR %>% 
+  mutate(Q = paste(format(IQR$dates, "%Y"),  # Convert dates to quarterly
+                       sprintf("%02i", (as.POSIXlt(IQR$dates)$mon) %/% 3L + 1L), 
+                       sep = "/"))
+```
+
+As the monthly time series of the MPM and MPD are not collected on a regular monthly frequency, the imputation technique Last Observation Carried Forward (hereafter LOCF) was implemented. The latter follows the rationale that if the central bank coveys communication in month 1 and the next release is not until month 3, the communication given in month 1 still has effect in the later period until the next communication.
+
+In the case of the Minutes, two exceptions to the dating rule have been made.
+In December 2016 and May 2020, we have two observations, each at the beginning and end of the month. Subsequent observations were carried forward to fill in the following month.
+
+```{r MPM except,echo=TRUE}
+MPM$dates[48] <- as.Date("2017-01-01")
+MPM$dates[76] <- as.Date("2020-06-01")
+
+```
+
+
+There are two MPMs releases in February 2016. In this case, instead of carried forward the second observation, January 2016 was filled with the average.
+
+
+```{r MPD exept,echo=TRUE}
+MPD$`Flesch-Szigriszt`[41] <- mean(c(MPD$`Flesch-Szigriszt`[41],
+                                     MPD$`Flesch-Szigriszt`[42]))
+MPD$`Flesch-Szigriszt`[42] <- MPD$`Flesch-Szigriszt`[41]
+MPD$dates[42] <- as.Date("2016-03-01")
+MPD$`Flesch-Szigriszt`[42] <- MPD$`Flesch-Szigriszt`[43]
+MPD$dates[43] <- as.Date("2016-04-01")
+MPD$`Flesch-Szigriszt`[43] <- NA
+```
+
+
+Once this was done, the LOCF imputation was applied. The following line of code shows one way to do it.
+
+```{r LOCF}
+
+#Minutes
+MPM <- MPM %>%
+  mutate(month = format(dates, format = "%m"), # extract month
+         year = format(dates, format = "%Y")) # extract year
+
+# Build the monthly data frame
+MPM2 <- data.frame(dates = seq(from=as.Date("2011-01-01"), # dates
+                               by="month", length.out= 144), 
+                   FSZ = rep(NA,144), # FSZ 
+                   FSZadjusted = rep(NA,144)) #FSZ adjusted
+MPM2 <- MPM2 %>%
+  mutate(month = format(dates, format = "%m"), # extract month 
+         year = format(dates, format = "%Y")) # extrcat year
+
+# For each item in MPM df (i) and MPM2 df (j), if the month and year are 
+# the same, store the FSZ observation in the respective MPM2 column.
+for(i in 1:96) {
+  for(j in 1:144) {
+    if (MPM$month[i] == MPM2$month[j] & MPM$year[i] == MPM2$year[j]) {
+      MPM2$FSZ[j] = MPM$`Flesch-Szigriszt`[i]
+    }
+  }
+}
+
+# check for na's
+#summary(is.na(MPM2$FSZ))
+# repeat the same into the adjusted column
+MPM2$FSZadjusted <- MPM2$FSZ
+
+# carry backward the first observation
+MPM2$FSZadjusted[1] = MPM2$FSZadjusted[2]
+
+# for each element in the MPM2 df, if the observation i in column FSZadjusted 
+# is NA, carry forward the last observation
+for (i in 1:144) {
+  if (is.na(MPM2$FSZadjusted[i])) {
+    MPM2$FSZadjusted[i] = MPM2$FSZadjusted[i-1]
+  }
+}
+
+# Repeat the same methodology for the MP Statements
+
+MPD <- MPD %>%
+  mutate(month = format(dates, format = "%m"),
+         year = format(dates, format = "%Y"))
+
+MPD2 <- data.frame(dates = seq(from=as.Date("2011-01-01"), 
+                               by="month", length.out= 144),
+                   FSZ = rep(NA,144),
+                   FSZadjusted = rep(NA,144))
+MPD2 <- MPD2 %>%
+  mutate(month = format(dates, format = "%m"),
+         year = format(dates, format = "%Y"))
+
+for(i in 1:98) {
+  for(j in 1:144) {
+    if (MPD$month[i] == MPD2$month[j] & MPD$year[i] == MPD2$year[j]) {
+      MPD2$FSZ[j] = MPD$`Flesch-Szigriszt`[i]
+    }
+  }
+}
+
+
+#summary(is.na(MPD2$FSZ))
+MPD2$FSZadjusted <- MPD2$FSZ
+
+for (i in 1:144) {
+  if (is.na(MPD2$FSZadjusted[i])) {
+    MPD2$FSZadjusted[i] = MPD2$FSZadjusted[i-1]
+  }
+}
+```
+
+
+
+__Minutes__
+
+```{r echo=FALSE}
+
+A <- MPM2 %>%
+  ggplot(aes(x=dates, y=FSZadjusted)) +
+  geom_line() +
+  #geom_line(aes(y = MAFSZ), color = "firebrick")
+  labs(title = "Last Observation Carried Forward ")
+
+B <- MPM %>%
+  ggplot(aes(x=dates, y = `Flesch-Szigriszt`)) +
+  geom_line() +
+  labs(title = "Original")
+
+
+multiplot(A,B)
+
+```
+
+
+__Monetary Policy Statements__
+
+```{r echo=FALSE}
+
+A <- MPD2 %>%
+  ggplot(aes(x=dates, y=FSZadjusted)) +
+  geom_line() +
+  #geom_line(aes(y = MAFSZ), color = "firebrick")
+  labs(title = "Last Observation Carried Forward ")
+
+B <- MPD %>%
+  ggplot(aes(x=dates, y = `Flesch-Szigriszt`)) +
+  geom_line() +
+  labs(title = "Original")
+
+
+multiplot(A,B)
+
+```
+
+
+__Inflation Reports__
+
+```{r echo=FALSE}
+ggplot(IQR, aes(x=dates, y=`Flesch-Szigriszt`)) +
+  geom_line()
+```
+
+
+To remove noise from the imputed series, a 5-window centered moving average was applied. This requires the `rollmean()` function of the `zoo` package.
+
+
+```{r 5 WINDOW MA}
+
+
+# Minutes
+MPM2 <- MPM2 %>%
+  mutate(MAFSZ = rollmean(FSZadjusted, # Moving averaga
+                          k=5, # window
+                          fill = NA, # fill with missing values with NA'S
+                          align = "center")) # center MA
+
+# MP Statements
+MPD2 <- MPD2 %>%
+  mutate(MAFSZ = rollmean(FSZadjusted,k=5,
+                          fill = NA,
+                          align = "center"))
+```
+
+
+__Minutes__
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+A <- MPM2 %>%
+  ggplot(aes(x=dates, y=FSZadjusted)) +
+  geom_line() +
+  #geom_line(aes(y = MAFSZ), color = "firebrick")
+  labs(title = "Last Observation Carried Forward ") 
+
+
+B <- MPM2 %>%
+  ggplot(aes(x=dates, y = MAFSZ)) +
+  geom_line() +
+  labs(title = "Moving Average") 
+
+
+
+multiplot(A,B)
+
+```
+
+
+__Monetary Policy Statements__
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+A <- MPD2 %>%
+  ggplot(aes(x=dates, y=FSZadjusted)) +
+  geom_line() +
+  #geom_line(aes(y = MAFSZ), color = "firebrick")
+  labs(title = "Last Observation Carried Forward ") 
+
+B <- MPD2 %>%
+  ggplot(aes(x=dates, y = MAFSZ)) +
+  geom_line() +
+  labs(title = "Moving Average")
+
+
+
+multiplot(A,B)
+
+```
+
+
+
+```{r VARIABLES TO TS, message=FALSE, warning=FALSE, include=FALSE}
+
+#Minutes
+MPM_FSZ <- ts(MPM2$FSZadjusted, start = c(2011,1),
+              frequency = 12)
+MPM_MAFSZ <- ts(MPM2$MAFSZ, start = c(2011,3),
+                frequency = 12) 
+
+#MP Statements
+MPD_FSZ <- ts(MPD2$FSZadjusted, start = c(2011,1),
+              frequency = 12)
+MPD_MAFSZ <- ts(MPD2$MAFSZ, start = c(2011,3),
+                frequency = 12)
+
+# Inflation Reports
+IQR_FSZ <- ts(IQR$`Flesch-Szigriszt`, start = c(2011,1),
+              frequency = 4)
+```
+
+
+## 3.2. Unit Root Tests
+
+A set of unit root and structural break test models will be performed. This is aimed to confirm the visual evidence of a structural break-point in the readability scores of Banco de México's official documents.
+
+First, classic unit root tests such as the Augmented Dicky-Fuller [hereafter ADF] (Dicky and Fuller, 1981), Phillips-Perron [hereafter PP] (Phillips and Perron, 1988) and KPSS (Kwiatkowski et al., 1992) are executed to validate the hypothesis of sationarity in the Data Generating Process (hereafter DGP) of the series.
+The unit root specification includes models with no drift no trend (type A), drift and no trend (type B), and drift with trend (type C) respectively. The functions `adf.test()`, `pp.test()` and `kppss()` of the `aTSA` package run these tests:
+
+__Minutes__
+
+```{r message=FALSE, warning=FALSE}
+library(aTSA) # load package
+
+
+# Minutes
+
+adf.test(MPM_MAFSZ)
+pp.test(MPM_MAFSZ)
+kpss.test(MPM_MAFSZ)
+```
+
+For the MPMs readability, the ADF and the PP test do not reject the null-hypothesis of the presence of an unit root in the DGP in the three possible specification models, however, the KPPS test provides mix evidence non rejecting the null-hypothesis of stationarity in the type A and type C models, whereas rejecting the null hypothesis at the 5% level for the type B model.
+
+
+__Monetary Policy Statements__
+
+```{r}
+
+#Mp statemets
+adf.test(IQR_FSZ)
+pp.test(IQR_FSZ)
+kpss.test(IQR_FSZ)
+
+```
+
+For the MPDs readability, occurs something similar. The ADF and the PP test do not reject the null-hypothesis of the presence of an unit root in the three possible specification models. On the other hand, the KPPS test provides mix evidence non rejecting the null-hypothesis of stationarity in the type A and type C models, whereas rejecting the null hypothesis at the 10% level for the type B model.
+
+
+__Quarterly Inflation Reports__
+
+```{r}
+#Inflation Reports
+adf.test(IQR_FSZ)
+pp.test(IQR_FSZ)
+kpss.test(IQR_FSZ,
+          lag.short = F)
+```
+
+In the QIRs, we do not reject the null-hypothesis of the presence of an unit root in the three possible specification models of the ADF and PP tests, however, the KPPS test provides mix evidence non rejecting the null-hypothesis of stationarity in the type A and type B models, whereas ejecting the null hypothesis at the 5% level for the type C model.
+
+Prior visualization of the series indicates that the MPMs process follows an idiosyncratic pattern over time. In spite of this, the mix evidence open the possibility for a trend stationary process with an unknown structural break.
+In the case of the MPDs, the series seems to follow a stationary process before 2020, thus, it is possible that the hypothesis of the presence of an unit root should be biased due to a structural break in mean.
+Finally, the QIRs GDP shows not evident trends or structural breaks over time. The mix evidence calls for further investigation to determine if the unit root hypothesis in the series is caused by an unknown structural break.
+
+
+## 3.3. Unit Root with Structural Break
+
+The presence or one or multiple structural breakpoints in the time series might biased the test-statistics towards the non rejection of the null-hypothesis in the case of the ADF and PP tests, and the conclusion of an integrated process in the KPSS test. In order to allow the presence structural breaks in stationary processes a set of additional tests will be perform.
+
+
+### Zivot-Andrews Unit Root Test
+
+The unit root test of Zivot and Andrews [hereafter ZA] (1992) is a modification of the Perron (1989) test, which in parts is a variation of the ADF test taking into account the possibility of an exogenous known structural break in the time series. Perron based his research on prior observation of the series studied in the seminal paper of Nelson and Plosser (1982), then arguing that the conclusion of the laters might be biased due to a presence of structural changes in the US economy over the years of the "Great Depression" and the 1973 Oil-price crisis.
+
+Zivot and Andrews reviewed Perron's conclusion and criticized the exogenous structural break identification. They propose a test to allows for an endogenous unknown structural break identification. Like Perron, the ZA test allows for the presence of structural break in th level of the series ("crash model"), a change in the trend of the series ("changing growth" model), or both.
+According to Zivot and Andrews, the null hypothesis of the unit root test is :
+
+```{=tex}
+\begin{equation}
+
+y_t = \mu + y_{t-1} + e_{t}
+
+\end{equation}
+```
+
+
+thus, considering the series is integrated without the presence of exogenous structural breaks. Furthermore, Zivot and Andrews assume under the alternative hypothesis that $y_t$ can be represented by a trend-stationary process with a one time break in the trend at an unknown point in time.
+Thus, the algorithm of identification of the break consist on selects the weight to trend-stationary alternative, i.e., the break-point is selected endogenously where the test-statics reach a minimum. The approach consists to contrast the null-hypothesis over one of the three possible specifications:
+
+
+```{=tex}
+\begin{equation}
+
+y_t = \mu + \beta t + \rho y_{t-1} + \sum_{j=1}^{k} \gamma_{j} \Delta  y_{t-j}  + \delta D_u(\hat{\lambda}) +\epsilon _t
+  
+\end{equation}
+```
+
+```{=tex}
+\begin{equation}
+
+y_t = \mu + \beta t + \rho y_{t-1} + \sum_{j=1}^{k} \gamma_{j} \Delta  y_{t-j}  + \tau D_T(\hat{\lambda}) +\epsilon _t
+  
+\end{equation}
+```
+
+```{=tex}
+\begin{equation}
+
+y_t = \mu + \beta t + \rho y_{t-1} + \sum_{j=1}^{k} \gamma_{j} \Delta  y_{t-j}+  \tau D_T(\hat{\lambda}) + \delta D(u) +\epsilon _t
+
+\end{equation}
+```
+
+where $y_t$ is the time series, $\alpha$ is the drift, $t$ is a deterministic trend, $y_{t-1}$ is the auto regressive term, $\Delta y_{t-j}$ are k extra regressors aimed to eliminate possible nuisance-parameter dependencies in the limit distribution of the test statistics caused by temporal dependence in the innovations, $D_T(\hat{\lambda})$ is a dummy variable that controls for a structural break in trends, $D_u(\hat{\lambda})$ is a dummy variable that control for a structural break in drift, $\beta, \rho, \gamma, \tau, \delta$ are parameters and $\epsilon _t$ is the innovation term.
+
+The `ur. za()` function of the `urca` package permits us to implement this methodology.
+The first step is to determine the optimal model.
+To do so, I will test for a maximum of 5 lags in the 3 possible specifications:
+
+#### Minutes
+```{r}
+
+# Minutes
+
+# zivot andrews test for trend models
+AIC <- c(rep(NA,6)) # AIC vector
+BIC <- c(rep(NA,6)) # BIC vector
+
+# For 1 to 6 lags, run each trend model and save the AIC and BIC information criteria. Then, print which one has the minimum.
+
+for (i in 1:6) {
+  za<- ur.za(MPM_MAFSZ,
+            lag = i,
+            model = "trend")
+  aic <- AIC(za@testreg)
+  AIC[i] <- aic
+  bic <- BIC(za@testreg)
+  BIC[i] <- aic
+}
+
+# Compare the AIC and BIC values
+cat("AIC optimun:", which.min(AIC), "\n")
+cat("BIC optimun:", which.min(BIC), "\n")
+
+```
+
+According to the information criteria, the trend model with 5 lags is optimal.
+Run the five lag model and store the AIC and BIC values:
+
+```{r}
+
+#TREND MODEL SELECT UR.ZA WITH 5 LAG
+zat<- ur.za(MPM_MAFSZ,
+            lag = 6,
+            model = "trend")
+AIC1 <- AIC(zat@testreg)
+BIC1 <- BIC(zat@testreg)
+```
+
+The following lines of code repeat the methodology for the drift model and the model with both breaks:
+
+```{r}
+
+# zivot andrews test for drift models
+AIC <- c(rep(NA,6))
+BIC <- c(rep(NA,6))
+for (i in 1:6) {
+  za<- ur.za(MPM_MAFSZ,
+            lag = i,
+            model = "intercept")
+  aic <- AIC(za@testreg)
+  AIC[i] <- aic
+  bic <- BIC(za@testreg)
+  BIC[i] <- aic
+}
+
+# Compare the AIC and BIC values
+cat("AIC optimun:", which.min(AIC), "\n")
+cat("BIC optimun:", which.min(BIC), "\n")
+
+```
+
+```{r}
+# IN DRIFT MODEL SELECT UR.ZA WITH 5 LAG
+zad<- ur.za(MPM_MAFSZ,
+            lag = 6,
+            model = "intercept")
+AIC2 <- AIC(zad@testreg)
+BIC2 <- BIC(zad@testreg)
+
+```
+
+```{r}
+# zivot andrews test for both breaks models
+AIC <- c(rep(NA,6))
+BIC <- c(rep(NA,6))
+for (i in 1:6) {
+  za<- ur.za(MPM_MAFSZ,
+            lag = i,
+            model = "both")
+  aic <- AIC(za@testreg)
+  AIC[i] <- aic
+  bic <- BIC(za@testreg)
+  BIC[i] <- aic
+}
+
+# Compare the AIC and BIC values
+cat("AIC optimun:", which.min(AIC), "\n")
+cat("BIC optimun:", which.min(BIC), "\n")
+
+```
+
+```{r}
+
+# IN both break MODEL SELECT UR.ZA WITH 6 LAG
+zab<- ur.za(MPM_MAFSZ,
+            lag = 6,
+            model = "both")
+AIC3 <- AIC(zab@testreg)
+BIC3 <- BIC(zab@testreg)
+
+
+```
+
+Once the three optimal models have been selected, we perform a final comparison of information criteria to determine which specification is the best among them.
+
+```{r}
+
+# CRITERIA INFORMATION
+# Calculate AIC and BIC for the three models)
+
+AIC <- c(AIC1,AIC2,AIC3)
+BIC <- c(BIC1,BIC2,BIC3)
+
+# Compare the AIC and BIC values
+cat("AIC optimun:", which.min(AIC), "\n")
+cat("BIC optimun:", which.min(BIC), "\n")
+```
+
+The latter means that the optimum model is the 5 lag with a structural break in the drift model.
+The `summary` command return the information contained in the Zivot-Andrews unit root test.
+
+
+```{r}
+summary(zad)
+```
+
+
+According to the test, the time series of the Flesch-Szigritz readability score in the minutes is an integrated process with no structural changes.
+We do not reject the null hypothesis of a unit root.
+The test statics is -4.0616, higher than the critical values of 1% , 5% and 10%.
+Despite the dummy variable is statistically significant, indicating a possible structural break in the drift at position 30 (`r MPM2$dates[30]`), the hypothesis rejected the presence of structural changes in the integrated series.
+
+The next is to apply the same code to the Monetary Policy Statements and Inflation Reports readability time series.
+
+
+#### Monetary Policy Statements
+```{r}
+
+# Minutes
+
+# zivot andrews test for trend models
+AIC <- c(rep(NA,6)) # AIC vector
+BIC <- c(rep(NA,6)) # BIC vector
+
+# For 1 to 12 lags, run each trend model and save the AIC and BIC information criteria. Then, print which one has the minimum.
+
+for (i in 1:6) {
+  za<- ur.za(MPD_MAFSZ,
+            lag = i,
+            model = "trend")
+  aic <- AIC(za@testreg)
+  AIC[i] <- aic
+  bic <- BIC(za@testreg)
+  BIC[i] <- aic
+}
+
+# Compare the AIC and BIC values
+cat("AIC optimun:", which.min(AIC), "\n")
+cat("BIC optimun:", which.min(BIC), "\n")
+
+```
+
+```{r}
+
+#TREND MODEL SELECT UR.ZA WITH 5 LAG
+zat<- ur.za(MPD_MAFSZ,
+            lag = 6,
+            model = "trend")
+AIC1 <- AIC(zat@testreg)
+BIC1 <- BIC(zat@testreg)
+```
+
+```{r}
+
+# zivot andrews test for drift models
+AIC <- c(rep(NA,6))
+BIC <- c(rep(NA,6))
+for (i in 1:6) {
+  za<- ur.za(MPD_MAFSZ,
+            lag = i,
+            model = "intercept")
+  aic <- AIC(za@testreg)
+  AIC[i] <- aic
+  bic <- BIC(za@testreg)
+  BIC[i] <- aic
+}
+
+# Compare the AIC and BIC values
+cat("AIC optimun:", which.min(AIC), "\n")
+cat("BIC optimun:", which.min(BIC), "\n")
+
+```
+
+```{r}
+# IN DRIFT MODEL SELECT UR.ZA WITH 5 LAG
+zad<- ur.za(MPD_MAFSZ,
+            lag = 6,
+            model = "intercept")
+AIC2 <- AIC(zad@testreg)
+BIC2 <- BIC(zad@testreg)
+
+```
+
+```{r}
+# zivot andrews test for both breaks models
+AIC <- c(rep(NA,6))
+BIC <- c(rep(NA,6))
+for (i in 1:6) {
+  za<- ur.za(MPD_MAFSZ,
+            lag = i,
+            model = "both")
+  aic <- AIC(za@testreg)
+  AIC[i] <- aic
+  bic <- BIC(za@testreg)
+  BIC[i] <- aic
+}
+
+# Compare the AIC and BIC values
+cat("AIC optimun:", which.min(AIC), "\n")
+cat("BIC optimun:", which.min(BIC), "\n")
+
+```
+
+```{r}
+
+# IN both break MODEL SELECT UR.ZA WITH 5 LAG
+zab<- ur.za(MPD_MAFSZ,
+            lag = 6,
+            model = "both")
+AIC3 <- AIC(zab@testreg)
+BIC3 <- BIC(zab@testreg)
+
+
+```
+
+
+Once the three optimal models have been selected, we perform a final comparison of information criteria to determine which specification is the best among them.
+
+```{r}
+
+# CRITERIA INFORMATION
+# Calculate AIC and BIC for the three models)
+
+AIC <- c(AIC1,AIC2,AIC3)
+BIC <- c(BIC1,BIC2,BIC3)
+
+# Compare the AIC and BIC values
+cat("AIC optimun:", which.min(AIC), "\n")
+cat("BIC optimun:", which.min(BIC), "\n")
+```
+
+The latter means that the optimum model is the 5 lag with a structural break in the drift model.
+The `summary` command return the information contained in the Zivot-Andrews unit root test.
+
+```{r}
+summary(zad)
+```
+
+
+According to the test, the time series of the Flesch-Szigritz readability score in the monetary policy statements is an integrated, I(1), variable because we do not reject the null hypothesis of a unit root at the 1% and 5% level of significance.
+However, the test statics is close to the 5% critical value, and at the 10% level of significance is possible to say the series follows a stationary process with a significant and potential structural break in drift at the `r zad@bpoint` observation, corresponding to `r MPM2$dates[zad@bpoint]`.
+If we observe the process of the series the latter might be true:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+ZAPLOT <- data.frame(tstat = zad@tstats,
+                     x = seq(1:length(zad@tstats))) %>%
+  ggplot(aes(y=tstat,
+             x)) +
+  geom_line() +
+  geom_hline(yintercept = zad@cval[1],
+             linetype = 2,
+             color = "firebrick",
+             show.legend = TRUE) +
+  geom_hline(yintercept = zad@cval[2],
+             linetype = 2,
+             color = "steelblue4",
+             show.legend = T) +
+  geom_hline(yintercept = zad@cval[3],
+             linetype = 2,
+             color = "forestgreen",
+             show.legend = T)+
+  geom_vline(xintercept = 111,
+             color = "black",
+             linetype = 3) +
+  labs(title = "Zivot-Andres Unit Root Test",
+       y = " t-statisticcs",
+       y = "time",
+       caption = "Source: Author's calculation.
+Note: dashed color lines correspondig to 1%, 2.5% and 5% critic values.") +
+    theme(legend.position = "bottom",
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot")
+
+B <- MPD2 %>%
+  ggplot(aes(x=dates, y = MAFSZ)) +
+  geom_line() +
+  labs(title = "Flesch-Szigritz score. Moving Average",
+       y = "INFLESZ Scale") +
+
+multiplot(B, ZAPLOT)
+```
+
+```{r message=FALSE, warning=FALSE}
+MPD111 <- ts(MPD_MAFSZ[1:111], start = c(2011,03),
+             frequency = 12)
+autoplot.zoo(MPD111) +
+  labs(title = "Flesch-Szigritz score",
+       subtitle = "Before March 2020") +
+  geom_hline(yintercept = mean(na.omit(MPD111)))
+```
+
+```{r}
+#Unit root test
+adf.test(MPD111)
+pp.test(MPD111)
+kpss.test(MPD111,
+          lag.short = F)
+```
+
+Considering an specification with drift, no trend a 4 lag length, the time series of the MPDs' readability scores, before March 2020, rejects the null-hypothesis of unit-root.
+The later seems to confirm the conjecture that it is a trend-stationary series with a structural break in mean.
+Further investigation will be necessary.
+
+
+#### Quarterly Inflation Reports
+
+```{r}
+
+# IQRs
+
+# zivot andrews test for trend models
+AIC <- c(rep(NA,4)) # AIC vector
+BIC <- c(rep(NA,4)) # BIC vector
+
+# For 1 to 5 lags, run each trend model and save the AIC and BIC information criteria. Then, print which one has the minimum.
+
+for (i in 1:4) {
+  za<- ur.za(IQR_FSZ,
+            lag = i,
+            model = "trend")
+  aic <- AIC(za@testreg)
+  AIC[i] <- aic
+  bic <- BIC(za@testreg)
+  BIC[i] <- aic
+}
+
+# Compare the AIC and BIC values
+cat("AIC optimun:", which.min(AIC), "\n")
+cat("BIC optimun:", which.min(BIC), "\n")
+
+```
+
+```{r}
+
+#TREND MODEL SELECT UR.ZA WITH 5 LAG
+zat<- ur.za(IQR_FSZ,
+            lag = 4,
+            model = "trend")
+AIC1 <- AIC(zat@testreg)
+BIC1 <- BIC(zat@testreg)
+```
+
+```{r}
+
+# zivot andrews test for drift models
+AIC <- c(rep(NA,4))
+BIC <- c(rep(NA,4))
+for (i in 1:4) {
+  za<- ur.za(IQR_FSZ,
+            lag = i,
+            model = "intercept")
+  aic <- AIC(za@testreg)
+  AIC[i] <- aic
+  bic <- BIC(za@testreg)
+  BIC[i] <- aic
+}
+
+# Compare the AIC and BIC values
+cat("AIC optimun:", which.min(AIC), "\n")
+cat("BIC optimun:", which.min(BIC), "\n")
+
+```
+
+```{r}
+# IN DRIFT MODEL SELECT UR.ZA WITH 5 LAG
+zad<- ur.za(IQR_FSZ,
+            lag = 4,
+            model = "intercept")
+AIC2 <- AIC(zad@testreg)
+BIC2 <- BIC(zad@testreg)
+
+```
+
+```{r}
+# zivot andrews test for both breaks models
+AIC <- c(rep(NA,4))
+BIC <- c(rep(NA,4))
+for (i in 1:4) {
+  za<- ur.za(IQR_FSZ,
+            lag = i,
+            model = "both")
+  aic <- AIC(za@testreg)
+  AIC[i] <- aic
+  bic <- BIC(za@testreg)
+  BIC[i] <- aic
+}
+
+# Compare the AIC and BIC values
+cat("AIC optimun:", which.min(AIC), "\n")
+cat("BIC optimun:", which.min(BIC), "\n")
+
+```
+
+```{r}
+
+# IN both break MODEL SELECT UR.ZA WITH 5 LAG
+zab<- ur.za(IQR_FSZ,
+            lag = 4,
+            model = "both")
+AIC3 <- AIC(zab@testreg)
+BIC3 <- BIC(zab@testreg)
+
+
+```
+
+
+Once the three optimal models have been selected, we perform a final comparison of information criteria to determine which specification is the best among them.
+
+```{r}
+
+# CRITERIA INFORMATION
+# Calculate AIC and BIC for the three models)
+
+AIC <- c(AIC1,AIC2,AIC3)
+BIC <- c(BIC1,BIC2,BIC3)
+
+# Compare the AIC and BIC values
+cat("AIC optimun:", which.min(AIC), "\n")
+cat("BIC optimun:", which.min(BIC), "\n")
+```
+
+The latter means that the optimum model is the 5 lag with a structural break in the drift model.
+The `summary` command return the information contained in the Zivot-Andrews unit root test.
+
+```{r}
+summary(zat)
+```
+
+
+According to the test, the time series of the Flesch-Szigritz readability score in the monetary policy statements is an integrated, I(1), variable because we do not reject the null hypothesis of a unit root at the 1% and 5% level of significance.
+However, the test statics is close to the 5% critical value, and at the 10% level of significance is possible to say the series follows a stationary process with a significant and potential structural break in drift at the `r zat@bpoint` observation, corresponding to `r IQR$dates[zat@bpoint]`.
+If we observe the process of the series the latter might be true:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+
+ZAPLOT <- data.frame(tstat = zat@tstats,
+                     x = seq(1:length(zat@tstats))) %>%
+  ggplot(aes(y=tstat,
+             x)) +
+  geom_line() +
+  geom_hline(yintercept = zad@cval[1],
+             linetype = 2,
+             color = "firebrick",
+             show.legend = TRUE) +
+  geom_hline(yintercept = zad@cval[2],
+             linetype = 2,
+             color = "steelblue4",
+             show.legend = T) +
+  geom_hline(yintercept = zad@cval[3],
+             linetype = 2,
+             color = "forestgreen",
+             show.legend = T)+
+  geom_vline(xintercept = zat@bpoint,
+             color = "black",
+             linetype = 3) +
+  labs(title = "Zivot-Andres Unit Root Test",
+       y = " t-statisticcs",
+       y = "time",
+       caption = "Source: Author's calculation.
+       Note: dashed color lines correspondig to 1%, 2.5% and 5% critic values.") +
+    theme(legend.position = "bottom",
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot")
+
+B <- IQR %>%
+  ggplot(aes(x=dates, y = `Flesch-Szigriszt`)) +
+  geom_line() +
+  labs(title = "Flesch-Szigritz score. Moving Average",
+       y = "INFLESZ Scale") +
+
+multiplot(B, ZAPLOT)
+```
+
+```{r message=FALSE, warning=FALSE}
+IQR32 <- ts(IQR_FSZ[1:zat@bpoint], start = c(2011,03),
+             frequency = 4)
+autoplot.zoo(IQR32) +
+  labs(title = "Flesch-Szigritz score",
+       subtitle = "Before 2018Q4") +
+  geom_hline(yintercept = mean(na.omit(IQR32)))
+```
+
+```{r}
+#Unit root test
+adf.test(IQR32)
+pp.test(IQR32)
+kpss.test(IQR32,
+          lag.short = F)
+```
+
+
+Considering an specification with drift, no trend a 4 lag length, the time series of the MPDs' readability scores, before March 2020, rejects the null-hypothesis of unit-root. The later seems to confirm the conjecture that it is a trend-stationary series with a structural break in mean. Further investigation will be necessary.
+
+
+
+### Lagrange Multiplier Unit Root Test
+
+
+Lumsdaine and Papell [hereafter LP] (1997) showed that allowing for only one point break could biased the results and conclusions of ZA test, therefore, they extended the analysis to allow for two endogenous unknown structural breaks. However, as ZA model specifications, they also contrast their test under the unit root without breaks null.
+
+Lee and Strazicich [herefater LS] (2003) criticized this model specifications, stressing that under the unit root without breaks null, the rejection of the null-hypothesis does not mean that that the time series follows a trend-stationary with breaks DGP. In contrast, they concluded that the rejection of the null under the ZA and LP tests could be biased due to the possibility of difference stationary with breaks DGP. Thus, the solution presented is to expand the test to allows for two endogenous unknown breakpoints under the presence of unit root null. For instance, the model type B follows:
+
+__Null__
+```{=tex}
+\begin{equation}
+
+y_t = \mu  + y_{t-1} +  dB_{jt} + v _t
+
+\end{equation}
+```
+
+
+__Alternative__
+```{=tex}
+\begin{equation}
+
+y_t = \mu  + \rho y_{t-1} + \sum_{j=1}^{k} \gamma_{j} \Delta  y_{t-j} + dDU_{jt} + v_t
+
+\end{equation}
+```
+
+
+$y_t = \mu  + \rho y_{t-1} + \sum_{j=1}^{k} \gamma_{j} \Delta  y_{t-j} + dD_{jt}(U) + v_t$
+
+
+where $d= (d_1,d_2)$ are the two possible breaks, $B_{jt}$ is a vector of dummy variables necessary to ensure that the breaks distribution of the test statistics is invariant to the size breaks, which take the value of 1 in the subsequent period of the break, and 0 otherwise, $dDU_{jt}$ is the vector of dummy variables that allows for two shifts in level, and $v_t$ is a stationary error term. In type A model the dummy vectors change for $D_{jt}$ and $dDT_{jt}$ respectively, stating for the possible shift in trend, and the type C model includes all of them, allowing for two shifts in level and trend.
+
+The implementation of LS test follows the bootstrap procedure developed by Chou (2007) and implemented by Lips (2017). The functions can be downloaded from [Johannes Lips' github](https:// github.com/hannes101/LeeStrazicichUnitRoot) which follows LS Lagrange Multiplier Specification and Chou's Bootstrap implementation for finite samples. Additional to Lips's functions there will be necessary to install and load `foreach`, `dosNow` and `parallel` pacakages.
+
+
+```{r include=FALSE}
+source("LeeStrazicichUnitRootTest.R")
+library(foreach)
+library(doSNOW)
+library(parallel)
+```
+
+
+#### Minutes
+```{r}
+
+myLS_test <- ur.ls(y=na.omit(MPM_MAFSZ) , model = "crash", breaks = 2, lags = 6, method = "GTOS",pn = 0.1, print.results = "print" )
+```
+
+
+```{r}
+load("MPM_boot.RData")
+```
+
+
+#### Monetary Policy Statements
+
+
+#### Quarterly Inflation Reports
+
+
+
+# 3. Text mining approach
+
+The following is the text mining methodology. Given the official documents that we pre-processed in the previous section, this methodology consists of building a Corpus, cleaning and tokenizing the data, in order to apply big data and machine learning techniques to show frequencies and patterns among the language used in the Banco de México's wording.
+
+First of all, the following libraries will be needed: `readtext`, `tm`, `SnowballC`, `tidytext`, `ggthemes`, `ggthemes`, `wordcloud`, `stopwords` and `readtext`.
+Then, it is possible to build the corpus using the `Corpus()` function of the `tm` library.
+
+```{r text minning libraries, message=FALSE, warning=FALSE, include=FALSE}
+#libaries
+#install.packages("readtext")
+library(readtext)
+library(tidyverse)
+#install.packages("tidytext")
+library(tidytext)
+library(stopwords)
+#install.packages("wordcloud")
+library(wordcloud)
+#install.packages("quanteda")
+library(quanteda)
+library(ggthemes)
+library(koRpus)
+library(koRpus.lang.en)
+library(koRpus.lang.es)
+library(tidytext)
+library(SnowballC) # for stemming functions
+library(tm)
+```
+
+
+```{r}
+# corpora data of the central bank statements
+file.path <- getwd()
+#corpus  object
+corpus<- tm::Corpus(DirSource(file.path, # document pattern
+                              pattern = ".*.txt",
+                              encoding = "UTF-8"), # encoading
+                    readerControl = list(language = "es")) #language
+```
+
+
+The corpus contains all the 242 plain text documents documents used in the previous section.
+All the documents contain stringed objects with the original format.
+The following lines show an example of how the text is stored in the corpora
+
+```{r original text, echo=FALSE}
+writeLines(substring(as.character(corpus[[242]]), first = 1, last = 501))
+```
+
+## 3.1 Cleaning the data
+
+The next step is to prepare the data for further analysis.
+This means, to get tokens of the data to extract relevant information and remove all the unnecessary characters, such as punctuation, digits, extra white spaces, and so on.
+This can be done by the `tm_map()` function and all the transformations contained in the `tm` package.
+It is possible to see all the transformations available running the `getTransformations()` command.
+
+```{r getTransofmations}
+getTransformations() # visualize all available transformations
+```
+
+First, the `removePunctuation` command all punctuation matches in the corpora information and a set of predefined punctuation characters.
+The following lines show an example of how the command can be applied to the corpora and the resulting text without punctuation marks.
+
+```{r removePunctuation}
+corpus <- tm_map(corpus,removePunctuation) # remove punctuation
+```
+
+```{r removePunctuation output, echo=FALSE}
+writeLines(substring(as.character(corpus[[242]]), first = 1, last = 501))
+```
+
+Then, the `removeNumbers` command removes all the numbers and digit characters contained in the text.
+
+```{r removeNumbers}
+corpus <- tm_map(corpus,removeNumbers) # remove numbers and digits
+```
+
+```{r removeNumbers output, echo=FALSE}
+writeLines(substring(as.character(corpus[[242]]), first = 1, last = 501))
+```
+
+It is also useful to transform all the letter into lowercase `removeNumbers` command removes all the numbers and digit characters contained in the text.
+The reason to do that is because all the dictionaries and stop words libraries are stored with lowercase words, thus, if we do not transform the letter into lowercase format the later methodologies will not found many coincidences between the corpora and the dictionaries and stop-words libraries.
+It is possible to do this with the `tolower` command.
+
+```{r tolower}
+corpus <- tm_map(corpus,tolower) # convert to lowercase
+```
+
+```{r tolower output, echo=FALSE}
+writeLines(substring(as.character(corpus[[242]]), first = 1, last = 501))
+```
+
+Now, it is necessary to remove all the extra white spaces contained in the next.
+Despite R does not identify extra spaces, it is recommendable to do this as an aesthetic step.
+The `stripWhitespace` performs this action.
+
+```{r stripWhitespace}
+corpus <- tm_map(corpus,stripWhitespace) # strip extra spaces
+```
+
+```{r stripWhitespace output, echo=FALSE}
+writeLines(substring(as.character(corpus[[242]]), first = 1, last = 501))
+```
+
+Having done this, all the stop words can be remove with the `stopwords` command.
+Stop words are defined as these words that by themselves do not add any important meaning to the text.
+Typically they are conjunctions, prepositions, adverbs, etc.
+I use the Spanish stop words library of the `stopwords` package.[^3]
+The next code block shows and example of the common stop words included in this library.
+
+```{r spanish stop words, echo=TRUE}
+palabrastop <- head(get_stopwords("es"), 30) #get the first 30 stop words
+as.character(palabrastop$word) # print them
+```
+
+Before removing this words, two intermediate steps need to be performed.
+First there are common stop words necessary to give context of Banco de México's communication: *estado* and *estados*.
+These words print political and international context, thus, eliminating them will yield in a significant lost of information.
+For example, the word *estados* is commonly used for United States (Estados Unidos in Spanish).
+We replace this words with two other that do not appear in the library, *por* and *ciento*.
+These words will not be necessary because Banco de México use them a lot as replace of the % symbol, which already was removed in previous steps.
+
+```{r replace stopwords, echo=TRUE}
+palabrastop<-get_stopwords("es") # load stopwords
+palabrastop$word[162] <- "por" # change estado 
+palabrastop$word[164] <- "ciento" # change estados 
+```
+
+In second place, there are bi'grams and tri'grams that need to maintain together.
+N-grams are continuous sequences of words, symbols or tokens in a document, for instance, in the corpora that has built so far, bi-grams and tri-grams are strings of two and three words, respectively, that usually go together in the text.
+I adapt Taborda's list to fit Banco de Mexico writing style[^4]:
+
+-   banco central, bancos centrales, banca central -\> banco_central.
+-   banco central europeo -\> bce.
+-   banco de méxico -\> banxico.
+-   crecimiento económico, crecimiento de la economía -\> crecimiento_económico.
+-   crisis financiera -\> crisis_financiera.
+-   comercio internacional -\> comercio_internacional.
+-   covid-19, coronavirus, sarscov2 covid \<- covid.
+-   déficit fiscal, déficit público -\> déficit_fiscal.
+-   europa, eurozona, europeo, europea, europeos, eurosistema, eurogrupo \<- europa.
+-   estabilidad financiera -\> estabilidad_financiera.
+-   estados unidos, estadounise, estadounidenses \<- estados_unidos.
+-   internacional, internacionales, mundial, mundiales, mundo \<- internacional.
+-   junta de gobierno \<- junta_gobierno.
+-   objetivo de inflación, objetivos de inflación, inflación objetivo, meta de inflación, metas de inflación, inflación meta -\> inflación_objetivo.
+-   mercados financieros, mercado financiero, sistema financiero, sector financiero -\> mercado_financiero.
+-   meta, metas, objetivo, objetivos \<- meta.
+-   mexicana, mexicano, mexicanos, méxico \<- méxico.
+-   política fiscal, políticas fiscales -\> política_fiscal.
+-   política monetaria -\> política_monetaria.
+-   tasas de referencia, tasa de referencia -\> tasa_monetaria.
+-   tipo de cambio, tipos de cambio, tasa de cambio, tasas de cambio -\> tipo_cambio.
+-   tipo de interés, tipos de interés, tasa de interés, tasas de interés -\> tasa_interés.
+-   reserva federal -\> fed.
+-   sistemas bancarios, sistema bancario -\> sistema_bancario.
+
+The following function removes many symbols that are not included in the `removePunctuation` command, and collapse all the bi-grams and tri-grams.
+
+```{r remove_symbols}
+
+# this function removes all punctuation marks not included in 
+# the removePunctuation function, and collapses the common bigrams 
+# of the economic writing texts. The missing bigrams in this function 
+# will be remove after the visualization of the document term matrix.
+remove_symbols <- function(x){
+  x <- gsub("[[:punct:]]", "",x)
+  x <- gsub('”',"",x)
+  x <- gsub("–","",x)
+  x <- gsub("—","",x)
+  x <- gsub('“',"",x)
+  x <- gsub("’","",x)
+  x <- gsub("‘","",x)
+  x <- gsub("•","",x)
+  x <- gsub("banco de méxico","banxico",x)
+  x <- gsub("banco central europeo","bce",x)
+  x <- gsub("banco central","banco_central",x)
+  x <- gsub("bancos centrales","banco_central",x)
+  x <- gsub("banca central","banco_central",x)
+  x <- gsub("crecimiento económico","crecimiento_económico",x)
+  x <- gsub("crecimiento de la economía","crecimiento_económico",x)
+  x <- gsub("crisis financiera","crisis_financiera",x)
+  x <- gsub("comercio internacional","comercio_internacional",x)
+  x <- gsub("déficit fiscal","déficit_fiscal",x)
+  x <- gsub("déficit público","déficit_fiscal",x)
+  x <- gsub("estabilidad financiera","estabilidad_financiera",x)
+  x <- gsub("estados unidos","estados_unidos",x)
+  x <- gsub("junta de gobierno", "junta_gobierno",x)
+  x <- gsub("objetivo de inflación","inflación_objetivo",x)
+  x <- gsub("objetivos de inflación","inflación_objetivo",x)
+  x <- gsub("inflación objetivo","inflación_objetivo",x)
+  x <- gsub("inflación meta","inflación_objetivo",x)
+  x <- gsub("meta de inflación","inflación_objetivo",x)
+  x <- gsub("metas de inflación","inflación_objetivo",x)
+  x <- gsub("mercados financieros","mercado_financiero",x)
+  x <- gsub("mercado financiero","mercado_financiero",x)
+  x <- gsub("sistema financiero","mercado_financiero",x)
+  x <- gsub("sector financiero","mercado_financiero",x)
+  x <- gsub("sistemas bancarios","sistema_bancario",x)
+  x <- gsub("sistema bancario","sistema_bancario",x)
+  x <- gsub("política fiscal","política_fiscal",x)
+  x <- gsub("políticas fiscales","política_fiscal",x)
+  x <- gsub("política monetaria","política_monetaria",x)
+  x <- gsub("políticas monetarias","política_monetaria",x)
+  x <- gsub("tipo de cambio","tipo_cambio",x)
+  x <- gsub("tipos de cambio","tipo_cambio",x)
+  x <- gsub("tasa de cambio","tipo_cambio",x)
+  x <- gsub("tasas de cambio","tipo_cambio",x)
+  x <- gsub("tipo de interés","tasa_interés",x)
+  x <- gsub("tipos de interés","tasa_interés",x)
+  x <- gsub("tasa de interés","tasa_interés",x)
+  x <- gsub("tasas de interés","tasa_interés",x)
+  x <- gsub("tasas de referencia","tasa_monetaria",x)
+  x <- gsub("tasa de referencia","tasa_monetaria",x)
+  x <- gsub("reserva federal","fed",x)
+
+}
+
+```
+
+Applying the function yields into the following text structure.
+
+```{r remove_symbols apply}
+corpus <- tm_map(corpus, 
+                 content_transformer(remove_symbols)) # apply the later function
+```
+
+```{r remove_symbols output, echo=FALSE}
+writeLines(substring(as.character(corpus[[242]]), first = 1, last = 501))
+```
+
+Now, the corpora ready to remove stop words from the text:
+
+```{r remove stopwords}
+corpus <- tm_map(corpus,
+                 removeWords, palabrastop$word) # remove spanish stopwords
+```
+
+```{r remove stopwords output, echo=FALSE}
+writeLines(substring(as.character(corpus[[242]]), first = 1, last = 501))
+```
+
+Finally, it is necessary to stem the words.
+This step can be applied at the discretion of the researcher, however it is highly recommended to stem the remaining words in the corpora.
+When stemming the words, we collapse similar terms into their root form (e.g., economy, economic, economics, economical, economist, economize will collapse into **econom**).
+This is useful because represents a word normalization, allowing us to count different word variations as one term, thus, reducing the amount of information to manipulate in further analysis.
+Th code and output are:
+
+```{r stemDocument}
+Stem_corpus <- tm_map(corpus, 
+                      stemDocument, #collapse similar terms in root form
+          language = "spanish")
+```
+
+```{r stemDocument output, echo=FALSE}
+writeLines(substring(as.character(Stem_corpus[[242]]), first = 1, last = 501))
+```
+
+While the output text should seem like plain and without a clear meaning, it is possible to easily understand de message at first look.
+This type of text is very useful because they only contain the most important words and terms that Banco de México use in its writing style.
+With this step, we have finished cleaning up our data.
+The `corpus` object is ready to apply different methodologies to it.
+
+### Post-analysis solution!
+
+After doing an exhaustive review of the document term matrix, flaws in the corpora data were identified.
+The following function fixes many important break works.
+Even though there would be more break words in the corpora, the code fixes the most important terms, thus the conclusion will not be biased.
+
+```{r fix break words}
+
+# this function removes fix relevant break words
+fix_words <- function(x){
+  x <- gsub("latasa_interes", "tasa_interes",x)
+  x <- gsub("tasad","tasa_interes",x)
+  
+  x <- gsub("lainflacion","inflacion",x)
+  x <- gsub("inflaciony","inflacion",x)
+  x <- gsub("inflaciongeneral","inflacion",x)
+  x <- gsub("inflacionarioind","inflacion",x)
+  x <- gsub("inflacionari","inflacion",x)
+  x <- gsub("inflacionariasdur","inflacion",x)
+  x <- gsub("inflacional","inflacion",x)
+  
+  x <- gsub("trimestregraf","trimestr",x)
+  x <- gsub("trimestral","trimestr",x)
+  
+  x <- gsub("precios","banco_centpreciral",x)
+  
+  x <- gsub("tipo_cambiodel","tipo_cambi",x)
+  
+  x <- gsub("estadounidens","estados_un",x)
+  x <- gsub("estadunidens","estados_un",x)
+  
+  x <- gsub("covd","covid",x)
+  x <- gsub("covid","covid",x)
+  x <- gsub("sarscov","covid",x)
+  x <- gsub("cov","covid",x)
+  x <- gsub("coronavirus","covid",x)
+  
+  x <- gsub("eurosistem","europa",x)
+  x <- gsub("eurogrup","europa",x)
+  x <- gsub("eurozon", "europa",x)
+  x <- gsub("europe","europa",x)
+  x <- gsub("eur","europa",x)
+  x <- gsub("europ","europa",x)
+  x <- gsub("euroo","europa",x)
+  x <- gsub("euroop","europa",x)
+  
+  x <- gsub("mexicod","mexico",x)
+  x <- gsub("mexican","mexico",x)
+  
+  x <- gsub("losriesgosal","riesg",x)
+  x <- gsub("riesgop","riesg",x)
+  x <- gsub("riesgos","riesg",x)
+  
+  x <- gsub("politica_monetariaacomodatici","politica_monetari",x)
+  
+  x <- gsub("crecimientod","crecimient",x)
+  x <- gsub("crecimientodeb","crecimient",x)
+  x <- gsub("crecimientoh","crecimient",x)
+  
+  x <- gsub("internacionalesderiv","internacional",x)
+  x <- gsub("internacionalesporpart","internacional",x)
+  x <- gsub("internaliz","internacional",x)
+  x <- gsub("international","internacional",x)
+  x <- gsub("mundial","internacional",x)
+  x <- gsub("mund","internacional",x)
+  x <- gsub("mundo","internacional",x)
+  
+  x <- gsub("empresarial","empresa",x)
+  x <- gsub("empresari","empresa",x)
+  x <- gsub("empres","empresa",x)
+  
+  x <- gsub("industrial","industri",x)
+  x <- gsub("industrializ","industri",x)
+  
+  x <- gsub("met","meta",x)
+  x <- gsub("objet","meta",x)
+  
+  x <- gsub("inegl","inegi",x)
+  
+  x <- gsub("petroler","petroleo",x)
+  x <- gsub("petrole","petroleo",x)
+  x <- gsub("petroquim","petroleo",x)
+  x <- gsub("petrolifer","petroleo",x)
+  
+  x <- gsub("salariospreci","salario",x)
+  x <- gsub("salarial","salario",x)
+  x <- gsub("salari","salario",x)
+  
+  x <- gsub("mensul","mes",x)
+  x <- gsub("mensual","mes",x)
+
+
+}
+
+corpus <- tm_map(corpus, 
+                 content_transformer(fix_words)) # apply the later function
+Stem_corpus <- tm_map(Stem_corpus, 
+                 content_transformer(fix_words)) # apply the later function
+```
+
+## 3.2 Document term matrix
+
+After this reprocessing, its is necessary to build a document term matrix (DTM).
+This matrix has in each row an entry of each document with the respective id, whereas the columns represent every word contained in the corpora.
+The information is the number of times that each word appears in every documents.
+Many cells will be filled with zeros because not every words appears in each of the documents.
+The code and output are as follows:
+
+```{r DTM, paged.print=TRUE}
+dtm <- DocumentTermMatrix(Stem_corpus) # document term matrx
+dtm<- as.data.frame(as.matrix(dtm)) # dtm as data frame 
+dtm
+```
+
+The result is a mtarix of 242 rows and 4,938 columns.
+
+```{r doc id, paged.print=TRUE}
+# docuement id data frame
+doc_id <- data.frame("doc_id" = Banxico, # doc id
+                     "date" = as.Date(substring(Banxico, # dates
+                                        first = 1,
+                                        last = 10)))
+doc_id <- doc_id %>%
+  mutate( "year" = format(date,format="%Y"), # extract year
+          "month" = format(date,format="%m"), # extract month
+          "day" = format(date,format="%d"), # extract day
+          "doc" = as.character(substring(Banxico, # extract doc type
+                                         first = 11,
+                                         last = 13)))
+
+dtm<- cbind(doc_id,dtm) # merge columns
+dtm
+
+```
+
+```{r}
+tokens <-dtm %>% 
+  pivot_longer(cols = 7:(ncol(dtm)-1), # collapse from the 7 to last column
+               names_to = "word", # store the names into the word column
+               values_to = "freq") %>% # store the values into the freq column
+  group_by(doc_id, date, year, 
+           month, day, doc,
+           word) %>% # group the words by doc id
+  summarise(n = freq) %>% # sum all the frecuencies
+  arrange(desc(n)) # arrange from the highest to the lower frequency
+head(tokens, 20)
+
+```
+
+```{r eval=FALSE, include=FALSE}
+
+# Fix break words
+tokens$word[which(tokens$word == "latasa_interes")] = "tasa_interes"
+tokens$word[which(tokens$word == "tasad")] = "tasa_interes"
+
+tokens$word[which(tokens$word == "inflacionari")] = "inflacion"
+tokens$word[which(tokens$word == "inflacional")] = "inflacion"
+tokens$word[which(tokens$word == "inflacionariasdur")] = "inflacion"
+tokens$word[which(tokens$word == "inflacionarioind")] = "inflacion"
+tokens$word[which(tokens$word == "inflaciongeneral")] = "inflacion"
+tokens$word[which(tokens$word == "inflaciony")] = "inflacion"
+tokens$word[which(tokens$word == "lainflacion")] = "inflacion"
+
+tokens$word[which(tokens$word == "trimestral")] = "trimestr"
+tokens$word[which(tokens$word == "trimestregraf")] = "trimestr"
+
+tokens$word[which(tokens$word == "precios")] = "preci"
+
+tokens$word[which(tokens$word == "tipo_cambiodel")] = "tipo_cambi"
+
+tokens$word[which(tokens$word == "estadunidens")] = "estados_un"
+tokens$word[which(tokens$word == "estadounidens")] = "estados_un"
+
+tokens$word[which(tokens$word == "cov")] = "covid"
+tokens$word[which(tokens$word == "sarscov")] = "covid"
+tokens$word[which(tokens$word == "covid")] = "covid"
+tokens$word[which(tokens$word == "covd")] = "covid"
+
+tokens$word[which(tokens$word == "europ")] = "euro"
+tokens$word[which(tokens$word == "eur")] = "euro"
+tokens$word[which(tokens$word == "europe")] = "euro"
+tokens$word[which(tokens$word == "eurozon")] = "euro"
+tokens$word[which(tokens$word == "eurogrup")] = "euro"
+tokens$word[which(tokens$word == "eurosistem")] = "euro"
+
+tokens$word[which(tokens$word == "mexican")] = "mexic"
+tokens$word[which(tokens$word == "mexicod")] = "mexic"
+
+tokens$word[which(tokens$word == "riesgos")] = "riesg"
+tokens$word[which(tokens$word == "riesgop")] = "riesg"
+tokens$word[which(tokens$word == "losriesgosal")] = "riesg
+```
+
+```{r paged.print=TRUE}
+new_df <- aggregate(n~word, data = tokens, sum) # aggregate the word frequencies 
+new_df <- new_df %>% # arrange from the highest to the lower frequency
+  arrange(desc(n))
+head(new_df, 20)
+```
+
+```{r}
+new_df %>%
+  filter(n >= 3743) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(y=n, x=word,
+             fill = word))+
+  geom_col() + 
+  coord_flip() +
+  labs(
+    title = "Figure 1: Banco de México. Words per Monetary Policy Statement.",
+    subtitle = "Jan 2011 - March 2023 (Number of Words)",
+    x = " ",
+    y = " ",
+    fill = " ",
+    caption = "Source: Author's calculations.")+
+  theme_tufte(base_family = "serif",
+              base_size = 12)+
+  scale_colour_economist()+
+  theme(legend.position = "none",
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot")
+```
+
+```{r}
+new_df1 <- tokens %>% 
+  filter(doc %in% c("MPD","MPM"))
+new_df1 <- aggregate(n~word, data = new_df1, sum) # aggregate the word frequencies 
+new_df1 <- new_df1 %>% # arrange from the highest to the lower frequency
+  arrange(desc(n))
+
+new_df1 %>%
+  filter(n >= 1800) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(y=n, x=word,
+             fill = word))+
+  geom_col() + 
+  coord_flip() +
+  labs(
+    title = "Figure 1: Banco de México. Words per Monetary Policy Statement.",
+    subtitle = "Jan 2011 - March 2023 (Number of Words)",
+    x = " ",
+    y = " ",
+    fill = " ",
+    caption = "Source: Author's calculations.")+
+  theme_tufte(base_family = "serif",
+              base_size = 12)+
+  scale_colour_economist()+
+  theme(legend.position = "none",
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot")
+```
+
+```{r}
+top10dates <- data.frame()
+for (i in 2011:2022) {
+  
+  new_df1 <- tokens %>% 
+    filter(year == i,
+           doc %in% c("MPM","MPD"))
+  new_df1 <- aggregate(n~word, data = new_df1, sum) # aggregate the word frequencies
+  new_df1 <- new_df1 %>% # arrange from the highest to the lower frequency
+    arrange(desc(n)) %>%
+    mutate(word = reorder(word, n))
+  top10dates <- rbind(top10dates,
+                      data.frame(year = rep(i,10),
+                                 word = new_df1$word[1:10],
+                                 n = new_df1$n[1:10]))
+}
+
+top10dates %>%
+  filter(year %in% 2011:2022) %>%
+  ggplot(aes(y=n, x=word,
+             fill = year,
+             group_by = year))+
+  geom_col() + 
+  coord_flip()+
+  labs(
+    title = "Figure 1: Banco de México. Words per Monetary Policy Statement.",
+    subtitle = "Jan 2011 - March 2023 (Number of Words)",
+    x = " ",
+    y = " ",
+    fill = " ",
+    caption = "Source: Author's calculations.")+
+  theme_tufte(base_family = "serif",
+              base_size = 12)+
+  scale_colour_economist()+
+  theme(legend.position = "none",
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot") +
+  #facet_grid(
+   # rows = vars(year),
+    #shrink = T, scales = "free_y",
+    #as.table = T) +
+  facet_wrap(~year, ncol = 4, scales = "free")
+```
+
+```{r paged.print=TRUE}
+Weight_dtm <- DocumentTermMatrix(Stem_corpus,
+                           control = list(weighting = weightTfIdf))
+Weight_dtm <- removeSparseTerms(Weight_dtm, 0.05)
+Weight_dtm <- as.data.frame(as.matrix(Weight_dtm))
+
+Weight_dtm<- cbind(doc_id,Weight_dtm) # merge columns
+Weight_dtm
+```
+
+```{r}
+#which(dtm[,'inflacion'])
+
+
+dtm2 <- DocumentTermMatrix(Stem_corpus)
+findFreqTerms(DocumentTermMatrix(Stem_corpus), lowfreq = 5000, highfreq = Inf)
+
+termfreq <- colSums(as.matrix(DocumentTermMatrix(Stem_corpus)))
+termfreq <- as.data.frame(termfreq)
+termfreq <- termfreq %>%
+  arrange(desc(termfreq))
+
+```
+
+```{r}
+
+findAssocs(dtm2, "fed", corlimit = 0.5)
+```
+
+[^1]: I used Office Word, although it may be your preferred text editor.
+
+[^2]: For detailed guides on the packages included in the `tidyverse` library see [Tidyverse: R packages for data science.](https://www.tidyverse.org/)
+
+[^3]: For further information see [Hvitfeldt and Silge (2011).](https://%20smltar.com)
+
+[^4]: See Taborda (2015).
