@@ -46,14 +46,44 @@ options(scipen=999) # Prevenir notacion cientifica
 \setlength{\parindent}{10mm}
 \section{Introduction}
 
-Ever since Alan Greenspan stressed to "mumble with great incoherence"[^1], the world of central banking and monetary policy has evolved. As stated by Ben Bernanke, monetary policy is 98 percent talk and only two percent action, hence, the ability to shape market expectations of future policy through public statements is one of the most powerful tools the central banks have.[^2]
+Ever since Alan Greenspan stressed to "mumble with great incoherence"[^1], the world of central banking and monetary policy has undergone a major evolution. As stated by Ben Bernanke, monetary policy is 98 percent talk and only two percent action, hence, the ability to shape market expectations of future policy through public statements is one of the most powerful tools the central banks have.[^2]
 
 [^1]: These words were uttered by Alan Greenspan during his appearance before the Senate in 1987.
 
 [^2]: See [Bernanke (2015).](https://www.brookings.edu/blog/ben-bernanke/2015/03/30/inaugurating-a-new-blog/)
 
 
-Prior to 1980, the consensus was that central bankers should be secretive and mysterious authorities with a high degree of opacity. It was believed that central banks should maintain little or no communication with the public and markets, or if so, convey cryptographic messages extremely difficult to read and understand. In this regard, Milton Friedman commented that the most important variables in the central bank's lost function are, on the one hand, avoiding accountancy, and on the other, achieving public prestige.[^3]
+However, the tendency to increase transparency and communication channels of the central banks was not the result of spontaneous generation, it was accompanied by progress of economic theory and a lot of empirical evidence. The experience of the "Great Inflation", and developments on Time Inconsistency and Institutional Design Theory (see KP, BG, R) highlighted the need to have central bankers with high degree of independence and credibility.
+
+This led to an evolution of central banks focused on greater independence, and to the adoption of inflation targeting schemes, which allowed central banks to set clearer and more specific targets, and to gain credibility on them. While in the 1980s and 1990s the debate was about central bank independence and inflation targets, the 2000s saw the emergence of quite a bit of literature focused on the transparency of monetary authorities and central bank's communication channels.
+
+The latter was the result, on the one hand, of the growing consensus that central bank communication could be aimed at shaping expectations of future macroeconomic outcomes, thus improving the transmission of monetary policy, and on the other hand, of the need for greater transparency due to the fact that central bankers are not elected by democratic suffrage, but are appointed by the president in office, so that, in a democratic society, transparency allows their actions to be judged by the public they serve through accountability mechanisms.
+
+
+Despite growing evidence of the benefits of transparency and communication, it was not until the Global Financial Crisis (GFC) that major central banks began to introduce communication tools as part of their toolkit.[^3] In the literature and the world of central banking, there is a clear consensus regarding the role of communication tools in indirectly influencing the yield curve. While the policy rate is seen as the primary tool to influence directly very short-term interest rates, the central bank's communication generally is seen as a supportive tool that can influence long-term interest rates. This management of expectations approach was widely adopted by major central banks and other emerging markets authorities since the GFC due to primary tools constricted by the Zero Lower Bound, the growing importance of financial stability, and better understanding on how market expectations can affect market prices.
+
+[^3]: See Bernanke (2022).
+
+
+The growing power of monetary authorities and the importance of market expectations in the transmission of monetary policy has yielded new definitions of monetary policy strategy and the central banker toolkit. With the development of communication tools, a lot of literature has emerged trying to understand the impact of central bank's communication on market expectations, signals on the yield curve, and the effective transmission of monetary policy.
+
+[^4]
+
+[^4]: See Campbell et al. (2012), Campbell (2013), Kedan and Stuart (2014), Taborda (2015), Charbonneau and Rennison (2015), Kahveci and Odabas (2016), Luangaram and Wongwachara (2016), Benchimol et al. (2020), Carotta et al. (2021), Casigaghi and Pio Perez (2022), Benchimol et al (2022).
+
+
+Following the later literature, this document is aimed to build a code that computes different measures of readability of central bank's communication documents, such as the monetary policy statements, minutes, inflation reports, financial stability reports, speeches delivered by central bank officials, and other central banking related raw text documents. Moreover, I also present a data mining methodology, based on Benchimol et al (2022), to analyze the content of the documents presenting high-frequency words and semantic analysis. The code can be implemented in English and Spanish written documents, although it can be modified to fit other languages like German, Italian, French, or other languages available in the libraries that are being used.
+
+
+
+
+
+
+
+
+
+
+Prior to 1980, the consensus was that central bankers should be secretive and mysterious authorities with a high degree of opacity. It was believed that central banks should maintain little or no communication with the public and markets, or if so, convey coded messages extremely difficult to read and understand. In this regard, Milton Friedman commented that the most important variables in the central bank's lost function are, on the one hand, avoiding accountancy, and on the other, achieving public prestige.[^3]
 
 
 [^3]: See Faust and Svensson (2001).
@@ -66,12 +96,12 @@ Montagu Norman, former Bank of England chairman, is recognized as having coined 
 
 [^5]: King (2000) as quoted in Lynsey et al. (2005).
 
-
 Even though this view of central banking as full of mysticism, secrecy, and opacity has remained at the heart of some scholars and central bankers, the changes that originated, both in theory and practice, triggered a radical transformation in the behavior and the communication-focused policies of central banks. Alan Blinder considers that the shift toward greater openness and transparency represented a "Quiet Revolution".[^6] This allowed the transition from the prototype of the secretive and ambiguous central bank to a central bank design that should be open, intelligible and honest.
 
 [^6]: See Blinder (2004).
 
-Of course, the tendency to increase transparency and communication channels of the central banks was not the result of spontaneous generation, it was accompanied by an evolution of economic theory and a lot of empirical evidence. While in the 1980s and 1990s the debate was about central bank independence and the adoption of inflation-targeting schemes, the 2000s saw the emergence of quite a bit of literature focused on the transparency of monetary authorities and central bank's communication channels.[^7] 
+
+In the 1980s and 1990s the debate was about central bank independence and the adoption of inflation-targeting schemes, the 2000s saw the emergence of quite a bit of literature focused on the transparency of monetary authorities and central bank's communication channels.[^7] 
 
 [^7]: See Blinder et al. (2001), Blinder (2004), Eijffinger y Geraats (2006), Blinder et al. (2008), Dincer y Eichengreen (2009; 2014), Kedan y Stuart (2014), Dincer, Eichengreen, y Geraats (2019; 2022).
 
