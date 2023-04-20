@@ -51,7 +51,7 @@ For central banks, communication is not only desirable but necessary. This follo
 
 The latter has been extensively studied by the literature on transparency[^1], leading to transparency indicators and the consensus that central banks should share information on their objectives, the way they evaluate the economy as well as the decisions and monetary policy decision-making process. Although, it must be said that transparency does not always imply communication, nor that the central bank is conveying a clear message.
 
-[^1]: See Fry et al. (2000), Blinder et al. (2001), Geraats (2002; 2006), Eijffinger and Geraats (2006), Cujisen and Dermertzis (2007), Dincer and Eichengreen (2009; 2014), Kedan and Stuart (2014), Dincer, Eichengreen, y Geraats (2019; 2022)
+[^1]: See Fry et al. (2000), Blinder et al. (2001), Geraats (2002; 2006), Eijffinger and Geraats (2006), Cujisen and Dermertzis (2007), Čihák (2007), Dincer and Eichengreen (2009; 2014), Kedan and Stuart (2014), Dincer, Eichengreen, y Geraats (2019; 2022)
 
 
 In this regard, in the past few years, there is growing literature using text analysis aimed to interpret both the quantity and quality of the communication that central banks deliver through official documents and other central banking-related text. Some of these works emphasize readability and perspicuity (insert bibliography), whereas others scrutinize central bankers' communication by applying machine learning and dictionary techniques(insert bibliography).
@@ -60,7 +60,7 @@ In the special case of Mexico's national central bank, Banco de México (Banxico
 
 This paper aims to fill the gap existing in literature representing a primer contribution to analyze the readability and perspicuity of Banco de México's official documents, as well as the implementation of text analysis techniques to scrutinize the wording and writing style of the Board of Directors over time. I address the question of whether there have been significant changes in central bank communication, especially following the implementation of an Inflation Forecast Targeting strategy (IFT) in 2018 and the update of the Board of Directors communication criteria in 2020. To do so I perform classic readability and perspicuity measures on the monetary policy statements, the minutes, and the quarterly inflation reports. Then I applied unit root tests that allow for one and two endogenous structural breaks. [insert relevant conclusion of the unit root analysis]. Then, I move forward by analyzing the wording of the minutes and the monetary policy statements [insert findings of text analysis].
 
-The rest of the paper is organized as follows. Section 2 summarizes the literature on central bank communication. Section 3 describes the methodology. Section 4 presents the results of the readability and structural break analysis. Section 5 shows the changes in Banco de México's wording through the presentation of high-frequency words and clustering techniques. Finally, Section 6 concludes.
+The rest of the paper is organized as follows. Section 2 summarizes the literature on central bank communication. Section 3 describes the methodology and the data. Section 4 presents the results of the readability and structural break analysis. Section 5 shows the changes in Banco de México's wording through the presentation of high-frequency words and clustering techniques. Finally, Section 6 concludes.
 
 
 # 2. The central banker's enigma
@@ -72,296 +72,159 @@ The rest of the paper is organized as follows. Section 2 summarizes the literatu
 [^3]: See [Bernanke (2015).](https://www.brookings.edu/blog/ben-bernanke/2015/03/30/inaugurating-a-new-blog/)
 
 
-However, the tendency to increase transparency and communication channels of the central banks was not the result of spontaneous generation, it was accompanied by progress of economic theory and a lot of empirical evidence. The experience of the "Great Inflation" and developments in Time Inconsistency and Institutional Design Theory (insert KP, BG, R bibliography) highlighted the need for central bankers with a high degree of independence and credibility.
+However, the tendency to increase transparency and communication channels of the central banks was not the result of spontaneous generation, it was accompanied by progress of economic theory and a lot of empirical evidence. The experience of the "Great Inflation" and developments in Time Inconsistency and Institutional Design Theory highlighted the need for central bankers with a high degree of independence and credibility.[^4]
 
-Prior to 1980, the consensus was that central bankers should be secretive and mysterious authorities with a high degree of opacity. It was believed that central banks should maintain little or no communication with the public and markets, or if so, convey coded messages extremely difficult to read and understand. In this regard, Milton Friedman commented that the most important variables in the central bank's lost function are, on the one hand, avoiding accountancy, and on the other, achieving public prestige.[^4]
+[^4]: See [Kydland and Prescott (1977)](https://www.jstor.org/stable/1830193), [Calvo (1978)](https://www.jstor.org/stable/pdf/1913836.pdf), [Barro and Gordon (1983)](https://www.sciencedirect.com/science/article/pii/030439328390051X), [Rogoff (1985)](https://www.jstor.org/stable/1885679).
 
-[^4]: See Faust and Svensson (2001).
+Prior to 1980, the consensus was that central bankers should be secretive and mysterious authorities with a high degree of opacity. It was believed that central banks should maintain little or no communication with the public and markets, or if so, convey coded messages extremely difficult to read and understand. In this regard, Milton Friedman commented that the most important variables in the central bank's lost function are, on the one hand, avoiding accountancy, and on the other, achieving public prestige.[^5]
 
-Montagu Norman, former Bank of England chairman, is recognized as having coined the phrase "never excuse, never explain", and it is said that he constantly rejected to testify before the Parliament.[^5] Mervyn King sums up very well the thinking on central bank communication at the end of the 20th century[^6]:
+[^5]: See [Faust and Svensson (2001)](https://www.jstor.org/stable/2648735).
+
+Montagu Norman, former Bank of England chairman, is recognized as having coined the phrase "never excuse, never explain", and it is said that he constantly rejected to testify before the Parliament.[^6] Mervyn King sums up very well the thinking on central bank communication at the end of the 20th century[^7]:
 
   >> \footnotesize When I joined the Bank of England in 1991, I was fortunate enough to be invited to dine with a group that included Paul Volcker.  At the end of the evening, I asked Paul if he had a word of advice for a new central banker. He replied —in one word— "mystique". That single word encapsulates much of the tradition and wisdom of central banking at that time.
 
-[^5]: See Boyle (1967).
+[^6]: See Boyle (1967).
 
-[^6]: King (2000) as quoted in Lynsey et al. (2005).
+[^7]: King (2000) as quoted in Lynsey et al. (2005).
 
 Even though this view of central banking as full of mysticism, secrecy, and opacity has remained at the heart of some scholars and central bankers, the changes that originated, both in theory and practice, triggered a radical transformation toward greater independence, and to the adoption of inflation targeting schemes, which allowed central banks to set clearer and more specific targets, and to gain credibility on them. While in the 1980s and 1990s the debate was about central bank independence and inflation targets, the 2000s saw the emergence of quite a bit of literature focused on the transparency of monetary authorities and central bank's communication channels.
 
-Alan Blinder considers that the shift toward greater openness and transparency represented a "Quiet Revolution".[^7] This allowed the transition from the prototype of the secretive and ambiguous central bank to a central bank design that should be open, intelligible and honest.
+Alan Blinder considers that the shift toward greater openness and transparency represented a "Quiet Revolution".[^8] This allowed the transition from the prototype of the secretive and ambiguous central bank to a central bank design that should be open, intelligible and honest.
 
-[^7]: See [Blinder (2004).](https://yalebooks.yale.edu/book/9780300100877/the-quiet-revolution/)
+[^8]: See [Blinder (2004).](https://yalebooks.yale.edu/book/9780300100877/the-quiet-revolution/)
 
-The work of Christina and David Romer (1989)[^8] represents a seminal contribution to communication literature. Applying the so-called _narrative approach_, they investigate a set of periods in which the Federal Reserve's wording was restrictive to study its relationship to the real effects of monetary shocks. They find that narratives, i.e., the historical record, such as descriptions of the process and reasoning that led to the monetary authority's decisions and accounts of the sources of monetary disturbances, can solve the problem of identifying multiple macroeconomic issues.
+The work of Christina and David Romer (1989)[^9] represents a seminal contribution to communication literature. Applying the so-called _narrative approach_, they investigate a set of periods in which the Federal Reserve's wording was restrictive to study its relationship to the real effects of monetary shocks. They find that narratives, i.e., the historical record, such as descriptions of the process and reasoning that led to the monetary authority's decisions and accounts of the sources of monetary disturbances, can solve the problem of identifying multiple macroeconomic issues.
 
-[^8]: See [Romer and Romer (1989).](https://www.nber.org/system/files/chapters/c10964/c10964.pdf)
+[^9]: See [Romer and Romer (1989).](https://www.nber.org/system/files/chapters/c10964/c10964.pdf)
 
-Later on, Alan Blinder noted, during a lecture at the London School of Economics, that greater openness could improve the effectiveness of monetary policy because the expectations about the central bank's future behavior provide the essential link between short-term and long-term interest rates; in turn, a more open central bank naturally shapes expectations by providing the markets with more information about its view of the fundamental factors guiding monetary policy, becoming more predictable to markets, and making market reactions more predictable to itself.[^9]
+Later on, Alan Blinder noted, during a lecture at the London School of Economics, that greater openness could improve the effectiveness of monetary policy because the expectations about the central bank's future behavior provide the essential link between short-term and long-term interest rates; in turn, a more open central bank naturally shapes expectations by providing the markets with more information about its view of the fundamental factors guiding monetary policy, becoming more predictable to markets, and making market reactions more predictable to itself.[^10]
 
-[^9]: See [Blinder (1999).](http://www.artsrn.ualberta.ca/econweb/landon/1999%20Blinder%20Central%20Banking.pdf)
+[^10]: See [Blinder (1999).](http://www.artsrn.ualberta.ca/econweb/landon/1999%20Blinder%20Central%20Banking.pdf)
 
-In 2001, at the Federal Reserve Jackson Hole Symposium, Michael Woodford said that the success of the monetary policy is not so much a matter of effective control of the overnight interest rate, nor effective control of inflation, but of successfully influencing the evolution of market expectations about these variables in the desired way, therefore, transparency is valuable for the effective conduct of monetary policy.[^10]
+In 2001, at the Federal Reserve Jackson Hole Symposium, Michael Woodford said that the success of the monetary policy is not so much a matter of effective control of the overnight interest rate, nor effective control of inflation, but of successfully influencing the evolution of market expectations about these variables in the desired way, therefore, transparency is valuable for the effective conduct of monetary policy.[^11]
 
-[^10]: See [Woodford (2001).](https://www.kansascityfed.org/Jackson%20Hole/documents/3495/papers-S02WOOD.pdf)
+[^11]: See [Woodford (2001).](https://www.kansascityfed.org/Jackson%20Hole/documents/3495/papers-S02WOOD.pdf)
 
-That same year, Alan Greenspan - who had previously declared himself to "mumble with great incoherence" - recognized the importance of transparency and communication with the public[^11]:
+That same year, Alan Greenspan - who had previously declared himself to "mumble with great incoherence" - recognized the importance of transparency and communication with the public[^12]:
 
     >> \footnotesize The historical record indicates that the increased transparency of the Federal Reserve has helped improve the functioning of markets and enhanced our credibility [...] openness is more than just useful in shaping better economic performance. Openness is an obligation of a central bank in a free and democratic society. U.S. elected leaders chose to vest the responsibility for setting monetary policy in an independent entity, the Federal Reserve. Transparency of our activities is the means by which we make ourselves accountable to our fellow citizens to aid them in judging whether we are worthy of that task.
   
-[^11]: See [Greenspan, (2001).](https://www.federalreserve.gov/boarddocs/speeches/2001/20011011/default.htm)
+[^12]: See [Greenspan, (2001).](https://www.federalreserve.gov/boarddocs/speeches/2001/20011011/default.htm)
   
-Already in the 2000s, in a thorough analysis, Kohn and Sack (2004)[^12] showed that the central bank's talk contain market-relevant information. By testing for volatility in asset prices due to different types of Federal Reserve speaks, they found that statements and policy actions can serve as effective substitutes for one another, at least in the short run. Their analysis conclude that a credible central bank can achieve nearly the same result by implementing a policy action or by promising to implement that action at the next meeting.
+Already in the 2000s, in a thorough analysis, Kohn and Sack (2004)[^13] showed that the central bank's talk contain market-relevant information. By testing for volatility in asset prices due to different types of Federal Reserve speaks, they found that statements and policy actions can serve as effective substitutes for one another, at least in the short run. Their analysis conclude that a credible central bank can achieve nearly the same result by implementing a policy action or by promising to implement that action at the next meeting.
 
-[^12]: See [Kohn and Sack (2004).](https://www.federalreserve.gov/pubs/feds/2003/200355/200355pap.pdf)
+[^13]: See [Kohn and Sack (2004).](https://www.federalreserve.gov/pubs/feds/2003/200355/200355pap.pdf)
 
-Ben Bernanke, during his time at the Federal Reserve, constantly advocated for greater transparency, communication and the formal adoption of inflation targeting. Indeed, following the early experience of the Bank of Japan, his paper co-authored with Vincent Reinhart and Brian Sack (2004)[^13] was one of the first to conclude that when monetary authority is constrained by the Zero Lower Bound, unconventional measures, such as communication and forward guidance, can successfully affect expectations of future policy and thus longer-term yields.
+Ben Bernanke, during his time at the Federal Reserve, constantly advocated for greater transparency, communication and the formal adoption of inflation targeting. Indeed, following the early experience of the Bank of Japan, his paper co-authored with Vincent Reinhart and Brian Sack (2004)[^14] was one of the first to conclude that when monetary authority is constrained by the Zero Lower Bound (ZLB), unconventional measures, such as communication and forward guidance, can successfully affect expectations of future policy and thus longer-term yields.
 
-[^13]: See [Bernanke, Reinhart and Sack (2004).](https://www.federalreserve.gov/pubs/feds/2004/200448/200448pap.pdf)
+[^14]: See [Bernanke, Reinhart and Sack (2004).](https://www.federalreserve.gov/pubs/feds/2004/200448/200448pap.pdf)
 
-After this first generation of empirical studies, Blinder et al. (2008)[^14] surveyed the literature existent at the time, pointing out that even when there was no evident consensus about the optimal communication policy, "communication can be an important and powerful part of the central bank’s toolkit since it has the ability to move financial markets, to improve the predictability of monetary policy, and the potential to help the monetary authorities achieve macroeconomic objectives such as low and stable inflation".
+After this first generation of empirical studies, Blinder et al. (2008)[^15] surveyed the literature existent at the time, pointing out that even when there was no evident consensus about the optimal communication policy, "communication can be an important and powerful part of the central bank’s toolkit since it has the ability to move financial markets, to improve the predictability of monetary policy, and the potential to help the monetary authorities achieve macroeconomic objectives such as low and stable inflation".
 
-[^14]: See [Blinder, Ehrmann, Fratzscher, De Haan and Jansen (2008).](https://www.ecb.europa.eu/pub/pdf/scpwps/ecbwp898.pdf)
-
-
-Despite growing evidence of the benefits of transparency and communication, it was not until the Global Financial Crisis (GFC) that major central banks began to formally introduce communication tools as part of their toolkit.[^15] Since then, in the literature and the world of central banking, there is a clear consensus regarding the role of communication tools in indirectly influencing the yield curve. While the policy rate is seen as the primary tool to influence directly very short-term interest rates, the central bank's communication generally is seen as a supportive tool that can influence long-term interest rates. This management of expectations approach was widely adopted by major central banks and other emerging markets authorities during the GFC due to primary tools constricted by the Zero Lower Bound (ZLB)[^16], the growing importance of financial stability, and better understanding on how market expectations can affect market prices.
-
-[^15]: See [Bernanke (2022).](https://wwnorton.com/books/9781324020462)
-
-[^16]: For instance see [Den Haan, Caselli, Chadha  and Armstrong (2015).](https://cepr.org/voxeu/columns/monetary-policy-zero-lower-bound)
-
-The growing power of monetary authorities and the importance of market expectations in the transmission of monetary policy has yielded new definitions of monetary policy strategy and the central banker toolkit. In the aftermath of the GFC, the central bank's role has been characterized by an increase in procedural transparency and an evolution of clarity in communication. With the development of communication tools, a lot of literature has emerged trying to understand the impact of central bank's communication on market expectations, signals on the yield curve, and the effective transmission of monetary policy.[^16]
-
-Campbell et al. (2012) and Campbell (2013), using both an empirical an theoretical approach, showed how the Fed, through public announcements and forward guidance, can successfully influence assets prices and forecast over a variety of many macroeconomics variables. Their work also derived in new definitions of communication and the types of forward guidance a monetary authority can deliver.[^16]
-
-[^16]: See [Campbell et al. (2012)](https://www.brookings.edu/wp-content/uploads/2012/03/2012a_evans.pdf) and [Campbell (2013).](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwicl8WV7bb-AhVllGoFHV14DzMQFnoECAsQAQ&url=https%3A%2F%2Fwww.chicagofed.org%2F~%2Fmedia%2Fpublications%2Feconomic-perspectives%2F2013%2F4q2013-part1-campbell-pdf.pdf&usg=AOvVaw1SCPs_bzDS02Gmsl3nTnwk)
-
-During the 2010s, a number of works focused on communication and its application in the framework of ZLB in developed countries emerged[^17]. At the same time, new research has concentrated on the implementation of text mining and text analysis tools. The latter, by Natural Language Processing (NLP) and Latent Semantic Analysis (LSA) aim to decipher the clarity and semantic content of central banks communication. For instance, Boukus and Rosenberg (2006) found that topics discuss in the minutes of the Federal Open Market Committee  (FOMC) are correlated with current and future economic conditions. Jedadesh and Wu (2015) show evidence that the Fed possessing superior information, which is transmitted to the market through the text of the minutes. Husted, Rogers and Sun (2020) 
-
-[^17]: See [Charbonneau and Rennison (2015).](https://www.bankofcanada.ca/2015/11/staff-discussion-paper-2015-15/), [Smith and Becker (2015)](https://www.kansascityfed.org/Economic%20Bulletin/documents/412/macrobulletins-Has%20Forward%20Guidance%20Been%20Effective%3F.pdf), [McKay, Nakamura, and Steinsson (2016)](https://www.aeaweb.org/articles?id=10.1257/aer.20150063), [Angeletos, George-Marios, and Chen Lian (2018)](https://www.aeaweb.org/articles?id=10.1257/aer.20161996), [Dell'Ariccia, Rabanal and Sandri (2018)](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.147), [Altavilla, Brugnolini, Gürkaynak, Motto and Ragusa (2019)](https://www.sciencedirect.com/science/article/pii/S0304393219301497), [Bernanke, Kiley and Roberts (2019)](https://www.aeaweb.org/articles?id=10.1257/pandp.20191082), [Bernanke (2020)](https://www.aeaweb.org/articles?id=10.1257/aer.110.4.943),  
-
-[^18]: See [Boukus and Rosenberg (2006)](https://www.newyorkfed.org/medialibrary/media/research/economists/rosenberg/Boukus_and_Rosenberg_072006.pdf), [Jedadesh and Wu (2015)](https://www.aeaweb.org/conference/2016/retrieve.php?pdfid=21466&tk=niAkBk3N), [Husted, Rogers and Sun (2020)](https://www.sciencedirect.com/science/article/abs/pii/S0304393218301661?casa_token=ZWe2yDS3yaYAAAAA:jfOt4hzdUkHyfs1777TVFhx75YsQko2rpcWkTcRvZHbOKu2enlZMDYCl-amksw0RI0vue2aq7Wgd), []()
-
-, Taborda (2015), , Kahveci and Odabas (2016), Luangaram and Wongwachara (2016), Benchimol et al. (2020), Carotta et al. (2021), Casigaghi and Pio Perez (2022), Benchimol et al (2022).
+[^15]: See [Blinder, Ehrmann, Fratzscher, De Haan and Jansen (2008).](https://www.ecb.europa.eu/pub/pdf/scpwps/ecbwp898.pdf)
 
 
-# 1. Readability measures
+Despite growing evidence of the benefits of transparency and communication, it was not until the Global Financial Crisis (GFC) that major central banks began to formally introduce communication tools as part of their toolkit.[^16] Since then, we have seen the role and impact of central bank communication increase steadily. In the past, central banks used to wonder if there was a good reason to communicate something; now they wonder if there is a good reason not to communicate. In the words of the governor of the Central Bank of Ireland, Gabriel Makhlouf, the days of "mumbling with great incoherence" are over.[^17]
 
-\noindent In the context of inflation targeting and central banks operating in democratic societies, transparency is one of the most important mechanisms of central bankers toward openness, public scrutiny, and accountancy. Although, transparency itself does not mean that the message is well delivered, nor does imply assertive and effective communication. Thus, it is necessary for central bankers not only to increase the amount of information available to the public, but also to explain their decisions, the rationale behind them, how the monetary policy works, and to convey a clear message to the public and the markets. For a central bank, clear communication is essential. Research has highlighted how macroeconomic outcomes can be improved by aligning households’ and firms’ expectations with a central bank’s policy objectives. It follows that a central bank that communicates simply and with clarity should have more influence over those expectations and their alignment with the central bank’s objectives.[^12]
+[^16]: See [Bernanke (2022).](https://wwnorton.com/books/9781324020462)
+[^17]: See [Makhlouf (2020).](https://www.centralbank.ie/news/article/speech-end-of-mumbling-incoherence-governor-makhlouf-26-feb-2020)
 
-[^12]: See [(Deslongchamps, 2018).](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/)
+Nowadays, in the literature and the world of central banking, there is a clear consensus regarding the role of communication tools in indirectly influencing the yield curve. While the policy rate is seen as the primary tool to influence directly very short-term interest rates, the central bank's communication generally is seen as a supportive tool that can influence long-term interest rates. This management of expectations approach was widely adopted by major central banks and other emerging markets authorities during the GFC due to primary tools constricted by the ZLB[^18], the growing importance of financial stability, and better understanding on how market expectations can affect market prices.
+
+
+[^18]: For instance see [Den Haan, Caselli, Chadha  and Armstrong (2015).](https://cepr.org/voxeu/columns/monetary-policy-zero-lower-bound)
+
+The growing power of monetary authorities and the importance of market expectations in the transmission of monetary policy has yielded new definitions of monetary policy strategy and the central banker toolkit. In the aftermath of the GFC, the central bank's role has been characterized by an increase in procedural transparency and an evolution of clarity in communication. With the development of communication tools, a lot of literature has emerged trying to understand the impact of central bank's communication on market expectations, signals on the yield curve, and the effective transmission of monetary policy.
+
+During the 2010s, several papers focused on communication and its application under the ZLB in developed countries appeared[^19]. For exmaple, Campbell et al. (2012) and Campbell (2013), using both an empirical an theoretical approach, showed how the Fed, through public announcements and forward guidance, can successfully influence assets prices and forecast over a variety of many macroeconomics variables. Their work also derived in new definitions of communication and the types of forward guidance a monetary authority can deliver.[^20]
+
+[^19]: See [Charbonneau and Rennison (2015).](https://www.bankofcanada.ca/2015/11/staff-discussion-paper-2015-15/), [Smith and Becker (2015)](https://www.kansascityfed.org/Economic%20Bulletin/documents/412/macrobulletins-Has%20Forward%20Guidance%20Been%20Effective%3F.pdf), [McKay, Nakamura, and Steinsson (2016)](https://www.aeaweb.org/articles?id=10.1257/aer.20150063), [Angeletos, George-Marios, and Chen Lian (2018)](https://www.aeaweb.org/articles?id=10.1257/aer.20161996), [Dell'Ariccia, Rabanal and Sandri (2018)](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.147), [Altavilla, Brugnolini, Gürkaynak, Motto and Ragusa (2019)](https://www.sciencedirect.com/science/article/pii/S0304393219301497), [Bernanke, Kiley and Roberts (2019)](https://www.aeaweb.org/articles?id=10.1257/pandp.20191082), [Bernanke (2020)](https://www.aeaweb.org/articles?id=10.1257/aer.110.4.943).
+[^20]: See [Campbell et al. (2012)](https://www.brookings.edu/wp-content/uploads/2012/03/2012a_evans.pdf) and [Campbell (2013).](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwicl8WV7bb-AhVllGoFHV14DzMQFnoECAsQAQ&url=https%3A%2F%2Fwww.chicagofed.org%2F~%2Fmedia%2Fpublications%2Feconomic-perspectives%2F2013%2F4q2013-part1-campbell-pdf.pdf&usg=AOvVaw1SCPs_bzDS02Gmsl3nTnwk)
+
+At the same time, new research has focused on the application of text mining and text analysis tools. The latter, through Natural Language Processing (NLP) and the application of classical readability tests, aim to decipher the clarity and semantic content of central bank communication.
+
+Cihak, Smídková and Bulir (2008) based on an extensive analysis of ECB’s inflation forecasts, inflation targets, and verbal descriptions of inflation factors, risk assessments, and monetary pillar information in monthly bulletins and press statement, conclude that ECB's written communication is clear about 95 percent of the time. Jansen (2010) illustrates the importance of transparent communication about monetary policy by comparing the readability statistics of the Federal Reserve Chairman's Humphrey-Hawkins testimonies and their effect on financial market volatility. Cihák, Jansen and Bulíř (2012; 2013) using a similar methodology for press statements and inflation reports of 7 central banks, show that the relationship between the clarity of communications and the broader economic environment has a significant effect, specially for topics such as inflationary risks, forward-looking inflation gap, inflation deviations from the target, and more dissenting votes on monetary policy decissions. Furthermore, they find a negative change in clarity in the aftermath of the GFC, and point out how communication strategies are often linked to country-specific and institution-specific factors.  Deslongchamps (2018) highlights that even though the readability of Bank of Canada documents has improved, they still lag far behind the benchmark of clarity for a vast sector of the population. Ferrera and Angino (2022) provided evidence that clearer ECB´s communication is strongly and robustly correlated with a higher degree of engagement of journalists and social media users, i.e., journalists and social media users tend to talk less about, and engage less with, the ECB when its language is more difficult to understand.[^21]
+
+[^21]: See [Cihak, Smídková and Bulir (2008)](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Writing-Clearly-ECBs-Monetary-Policy-Communication-22428), [Jansen (2010)](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1465-7287.2010.00238.x), Cihák, Jansen and Bulíř ([2012](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Clarity-of-Central-Bank-Communication-About-Inflation-25607); [2013](https://cepr.org/voxeu/columns/measuring-clarity-central-bank-communication)), [Deslongchamps (2018)](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/), [Ferrera and Angino (2022)](https://www.sciencedirect.com/science/article/pii/S0176268021001191), 
+
+
+In the case of Latin American central banks, Taborda (2015) surveyed the readability of the minutes for Brazil, Chile, Colombia, Mexico, and Peru's central banks from 1997 to 2013, concluding that there has been a modest evolution in the clarity of these documents. Castillo, Herrada, Montoro and Pérez (2019) noted that there are significant challenges in South American central banks' communication. They stressed the need for improving clarity in communication with different types of audiences, especially to approach the youth population, and count with instruments to assess the communication strategy and design. Carotta, Mello and Ponce (2021) find that Uruguay´s central bank readability has improved over time, but there is still room for further improvements in the perspicuity of the messages.[^22]
+
+[^22]: See [Taborda (2015)](http://www.scielo.org.co/scielo.php?script=sci_arttext&pid=S0120-44832015000100008), [Castillo, Herrada, Montoro and Pérez (2019)](https://www.bcrp.gob.pe/docs/Publicaciones/Revista-Estudios-Economicos/37/ree-37-castillo-herrada-montoro-perez.pdf), [Carotta, Mello and Ponce (2021)](https://www.cemla.org/actividades/2021-final/2021-11-xxvi-meeting-of-the-central-bank-researchers-network/5B.2%20PAPER%20Carotta%20Mello%20Ponce.pdf). 
+
+This paper contributes to this growing literature by conducting a comprehensive evaluation of official monetary policy statements, minutes and quarterly inflation reports from Banco de México over the period 2011 to 2022. My paper differs from similar existing papers in the literature, both in terms of the central bank analyzed and the range of documents included. In the following sections, I approach the question whether there have been significant changes in Banxico´s clarity, using classic readability and perspicuity scores as a proxy of the intelligibility of the central bank.
+
+
+# 2. The Data
+
+\noindent In the context of inflation targeting and central banks operating in democratic societies, transparency is one of the most important mechanisms of central bankers toward openness, public scrutiny, and accountancy. Although, transparency itself does not mean that the message is well delivered, nor does imply assertive and effective communication. Thus, it is necessary for central bankers not only to increase the amount of information available to the public, but also to explain their decisions, the rationale behind them, how the monetary policy works, and to convey a clear message to the public and the markets. For a central bank, clear communication is essential. Research has highlighted how macroeconomic outcomes can be improved by aligning households’ and firms’ expectations with a central bank’s policy objectives. It follows that a central bank that communicates simply and with clarity should have more influence over those expectations and their alignment with the central bank’s objectives.[^23]
+
+[^23]: See [(Deslongchamps, 2018).](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/)
 
 With the latter in mind, it is possible to evaluate the clarity of the information delivered by the central banks using the reading ease tests. The purpose of these tests is to study the ease or difficulty of reading a specific text, i.e. to assess the readability of a document in terms of its clarity and accessibility to a wide audience. This is important because it is assumed that central banks want to convey a message not only to a specific audience of technically educated observers, but to the public they serve, which is the entire population.
 
-The literature on readability formulas emerged at the end of the 19th century in the United States, when academics were looking for methods to evaluate the vocabulary and comprehension level of scientific texts used in high school and higher education. Although many researchers have been credited with the development of readability formulas, the literature considers that Rudolph Flesch was the first to propose a versatile formula for analyzing the readability of texts written in English.  
+The literature on readability formulas emerged at the end of the 19th century in the United States, when academics were looking for methods to evaluate the vocabulary and comprehension level of scientific texts used in high school and higher education. Although many researchers have been credited with the development of readability formulas, the literature considers that Rudolph Flesch was the first to propose a versatile formula for analyzing the readability of texts written in English.[^24]
 
-The Flesch Reading Ease test is a formula developed in the 1940s by Rudolf Flesch, who was a consultant with the Associated Press, developing methods for improving the readability of newspapers.[^13] The computation of Flesch test gives a score between 1 and 100, with 100 being the highest readability score. The Flesch reading ease test requires three input variables:
+[^24]: See Flesch (1943; 1949)
 
-[^13]: See Flesch (1943; 1949)
+Following Flesch's research, many other formulas have been developed for analyzing the readability of a document. Like Flesch formula, the majority of these measures suppose that the larger the sentences and the more syllables per word, the more difficult it is to understand and read a text. Therefore, they construct their scores by using the average word length and sentences to asses is a text is easy or difficult to read. For example, the computation of Flesch test gives a score between 1 and 100, with 100 being the highest readability score. Another useful measures are the Flesch-Kincaid and the Gunning Fog scores, both yielding in a score as the US grade level generally required to understand the text.[^25]
 
-  * Total number of words ($W$).
-  * Total number of sentences ($St$).
-  * Total number of syllables ($Sy$).
+[^25]: See Gunning (1952) and Kincaid, Fishburne, Rogers and Chissom (1975).
 
-Resulting in the following formula:
 
-\begin{equation}
-  F = 206.835-1.015 * \frac{W}{St} -8.46 * \frac{Sy}{W}
-\end{equation}
+These formulas, among others, are widely used to analyze the readability of English texts. However, it is not possible to analyze printed texts in Spanish with these methodologies. In the search for the adaptation of these formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the readability of a wide variety of Spanish documents in 1959. Later on, Gutiérrez (1973), Szigriszt-Pazos (1992), [Cantalejo and Lorda (2003)](https://www.sciencedirect.com/science/article/pii/S021265670379146X) and [Cantalejo et al. (2008)](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1137-66272008000300004) expanded the readability literature disposable for Spanish printed text.[^26]
 
-\noindent where $\frac{W}{St}$ is the average sentence length and $\frac{Sy}{W}$ is the average number of syllables per word. The intuition behind this formula is that the larger the sentences and the more syllables per word, the more difficult it is to understand and read a text. 
+[^26]: See Appendix A.
 
+The intuition behind these formulas is the same as Flesch's: the longer the sentences and the more syllables per word, the more difficult it is to understand and read a text. Moreover, as we will see in the next section, the selection of one or the other is quite arbitrary because they are highly correlated. The formal presentation of the formulas can be found in Appendix A. Table 1 shows the three classic scales for interpreting Spanish written texts.
 
 ```{r Table 1 Flesch Score, echo=FALSE, paged.print=TRUE}
-FLESCH.SCALE <- data.frame("Score" = c("90-100","80-90","70-80",
-                                       "60-70","50-60","30-50",
-                                       "0-30"),
-                           "Level" = c("Very easy to read",
-                                       "Easy to read",
-                                       "Fairly easy to read",
-                                       "Easily understood",
-                                       "Fairly difficult to read",
-                                       "Difficult to read",
-                                       "Very difficult to read"),
-                           "Grade" = c("4th grade", "5th grade",
-                                       "6th", "7th-8th grade",
-                                       "High school",
-                                       "University",
-                                       "Graduate student"),
-                           "Type" = c("Comics", "Pulp Fiction",
-                                      "Science Fiction",
-                                      "Digest", "Quality Magazine",
-                                      "General academically oriented magazine",
-                                      "Scientific Journal"))
+FLESCH.SCALE <- data.frame("Score" = c(100,95,90,85,80,75,70,65,60,55,50,
+                                       45,40,35,30,15,0),
+                           "INFLESZ" = c(rep("Very easy",4), rep("Fairly easy",3),
+                                         rep("Standard",2), rep("Fairly difficult",3),
+                                         rep("Very difficult",5)),
+                           "Szigriszt" = c(rep("Very easy",3), rep("Easy", 2),
+                                           rep("Fairly easy",2),rep("Standard",3), 
+                                           rep("Fairly difficult",3), rep("Difficult",2), 
+                                           rep("Very difficult",2)),
+                           "Flesch" = c(rep("Very easy",2), rep("Easy", 2),
+                                           rep("Fairly easy",2),rep("Standard",2), 
+                                           rep("Fairly difficult",2), rep("Difficult",4), 
+                                           rep("Very difficult",3)))
 
-color = c("#e3342f","#f6993f","#ffed4a","#00b159","#4dc0b5","#3990dc","#6574cd")
-color = rev(color)
+color_INFLESZ = c(rep("#e3342f",5),rep("#f6993f",3),rep("#00b159",2),
+                  rep("#4dc0b5",3),rep("#3990dc",4))
+color_INFLESZ = rev(color_INFLESZ)
+
+color_FSZ = c(rep("#e3342f",2),rep("#f6993f",2),rep("#ffed4a",3),
+              rep("#00b159",3),rep("#4dc0b5",2),rep("#3990dc",2),
+              rep("#6574cd",3))
+color_FSZ = rev(color_FSZ)
+
+color_F = c(rep("#e3342f",3),rep("#f6993f",4),rep("#ffed4a",2),
+              rep("#00b159",2),rep("#4dc0b5",2),rep("#3990dc",2),
+              rep("#6574cd",2))
+color_F = rev(color_F)
 
 knitr::kable(FLESCH.SCALE,
-             caption = "Flesch Reading Ease Scale",
+             caption = "Readability and Perspicuity Scales",
              align = "c",
              booktabs = T)  %>%
   kable_styling(latex_options = c("hold_position"),
                 full_width = F) %>%
-  column_spec(2, background = color,
+  column_spec(2, background = color_INFLESZ,
+              color = "black") %>%
+  column_spec(3, background = color_FSZ,
+              color = "black") %>%
+  column_spec(4, background = color_F,
               color = "black") %>%
   add_footnote("Source: Flesch, R. (1943)",
                notation = "none")
 ```
 
 
-Following Flesch's research, many other scholars proposed readability scales or scores based on the same attributes or pointing out other variables, such as Robert Gunning, who introduced an index (FOG index) to estimate the years of formal education a person needs to understand the text at first reading. For example, a FOG index of 12 requires the reading level of a U.S. high school senior.[^14] This index is calculated by selecting a passage of text with 100 or more words and then yields an estimate of grade level based on the average sentence length and the average number of complex words in the passage, which are defined as words with three or more syllables ($W_{3Sy}$).
-
-[^14]: See Gunning (1952).
-
-\begin{equation}
-  FOG = 0.4 * (\frac{W}{St} +100 * \frac{W_{3Sy}}{W})
-\end{equation}
-
-
-```{r Table 2 FOG Gunning scale, echo=FALSE, paged.print=TRUE}
-FLESCH.SCALE <- data.frame("Score" = c("4","5","6",
-                                       "7","8","9", "10"),
-                           "Grade" = c("4th grade", "5th grade",
-                                       "6th", "7th grade" ,
-                                       "8th grade", "high school freeshman",
-                                       "high school sophomore"),
-                           "Score2" = c("11",
-                                       "12","13","14","15",
-                                       "16", "> 17"),
-                           "Grade2" = c("high school junior",
-                                       "high school senior",
-                                       "college freeshman",
-                                       "college sophomore",
-                                       "college junior",
-                                       "college senior",
-                                       "graduate student"))
-
-color = c("#e3342f","#f6993f","#ffed4a","#00b159","#4dc0b5","#3990dc","#6574cd")
-color = rev(color)
-
-knitr::kable(FLESCH.SCALE,
-             caption = "FOG Gunning Reading Ease Scale",
-             align = "c",
-             col.names = c("Score",
-                           "Grade",
-                           "Score",
-                           "Grade"),
-             booktabs = T)  %>%
-  kable_styling(latex_options = c("hold_position"),
-                full_width = F) %>%
-  add_footnote("Source: Bogert (1985)",
-               notation = "none")
-```
-
-
-Another useful measure derived from the Flesch formula is the Flesch-Kincaid reading level. Kincaid, Fishburne, Rogers, and Chissom developed it in 1975 on behalf of the U.S. Navy.[^15] The effort by Kincaid and his team resulted in a readability test designed to assess the difficulty of written English text. The formula yields a score as a US grade level and is widely used to judge the readability level of a variety of books, texts, academic papers, etc. In the literature, the Flesch-Kincaid reading level is commonly interpreted as the number of years of education generally required to understand the text. The formula is as follows:
-
-[^15]: See Kincaid, J.P., Fishburne, R.P., Rogers, R.L., and Chissom, B.S. (1975).
-
-\begin{equation}
-  F_{K} = 0.39 * \frac{W}{St} + 11.18 * \frac{Sy}{W} - 15.59
-\end{equation}
-
-The result is a number that corresponds to the level of education in the United States. These formulas, among others, are widely used to analyze the readability of English texts. However, it is not possible to analyze printed texts in Spanish with these methodologies.
-
-In the search for the adaptation of these formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the readability of a wide variety of Spanish documents in 1959.[^16] The Fernández Huerta test is based on the Flesch test and they have similar readability scale (See Table 3). The formula is as follows:
-
-[^16]: See Fernández Huerta J.(1959).
-
-
-\begin{equation}
-  F_{FH} = 206.835-1.02 * \frac{W}{St} -60 * \frac{Sy}{W}
-\end{equation}
-
-
-```{r Table 3 Flesch-Fernández Huerta Score, echo=FALSE}
-FLESCH.SCALE <- data.frame("Score" = c("90-100","80-90","70-80",
-                                       "60-70","50-60","30-50",
-                                       "0-30"),
-                           "Level" = c("Very easy to read",
-                                       "Easy to read",
-                                       "Fairly easy to read",
-                                       "Standard",
-                                       "Fairly difficult to read",
-                                       "Difficult to read",
-                                       "Very difficult to read"),
-                           "Grade" = c("5th grade", "6 grade",
-                                       "7th", "8th-9th grade",
-                                       "High school",
-                                       "University",
-                                       "Graduate student"))
-knitr::kable(FLESCH.SCALE,
-             caption = "Fernández Huerta Reading Ease Scale",
-             align = "c",
-             booktabs = T)  %>%
-  kable_styling(latex_options = c("hold_position"),
-                full_width = F) %>%
-  column_spec(2, background = color,
-              color = "black") %>%
-  add_footnote("Source: Fernández Huerta J.(1959).",
-               notation = "none")
-```
-
-
-Later in the 1990s, Francisco Szigrist Pazos developed a new validated formula for readability as his doctoral thesis at the Universidad Complutense de Madrid. This test is also an adaptation of the Flesch test for Spanish and French written texts.[^17] Francisco Szigrist Pazos' formula yields a perspicuity score.
-
-[^17]: See Szigriszt, F. (1993). Sistemas predictivos de legibilidad del mensaje escrito: Fórmula de Perspicuidad (tesis de doctorado). Universidad Complutense, Madrid.
-
-As part of the validation of the perspicuity test for the Spanish language, Szigriszt used the proposed criterion prediction, the comparative validity strategy, and a foreign criterion prediction. All the validity tests implemented by Szigriszt yielded statistically significant results, which made Szigriszt one of the modern precursors in the development of readability formulas for Spanish in the last decades.[^18]
-
-[^18]: See Ríos, I. (2009). Influencias del lenguaje y origen de un lector en la comprensión de mensajes de comunicación en salud y en la formación de actitud e intención hacia la realización de una conducta preventiva (tesis doctoral, Universidad Pompeu Fabra, Barcelona).
-
-One of the major advantages of using Szigriszt's formula is that it is applicable to the use of printed Spanish text in publications of various thematic focuses. The Szigriszt formula also establishes the levels of difficulty of a text and its categorization, based on the coefficient of perspicuity obtained from the mathematical calculation performed as established in its formula.
-
-
-\begin{equation}
-  F_{SZ} = 206.835 * \frac{W}{St} -62.3 * \frac{Sy}{W}
-\end{equation}
-
-In a later work, Barrio-Cantalejo adapted the Szigriszt-Pazos scale of interpretation of results, creating the INFLESZ scale (See Table 4).[^19] Unlike Flesch scale, the INFLESZ scale is designed to be interpreted at a level of difficulty in Spanish school grade. 
-
-[^19]: See Bea-Muñoz, Medina-Sánchez and Flórez-García (2015). 
-
-
-```{r Table 4 Flesch-Szigriszt Score, echo=FALSE}
-FLESCH.SCALE <- data.frame("Score" = c("> 80",
-                                       "65-80","55-65","40-55",
-                                       "0-40"),
-                           "Level" = c("Very easy to read",
-                                       "Easy to read",
-                                       "Average",
-                                       "Fairly difficult to read",
-                                       "Very difficult to read"),
-                           "Grade" = c("Elementary", "Elementary",
-                                       "Junior high", 
-                                       "High school",
-                                       "Undergrduate or higher"),
-                           "Type" = c("Comics", 
-                                      "Entertainment press and Successful novels",
-                                      "General press and Sports press",
-                                      "Scientific dissemination and Specialized press",
-                                     "Scientific"))
-
-color2 = c("#e3342f","#f6993f","#00b159","#4dc0b5","#3990dc")
-color2 = rev(color2)
-
-knitr::kable(FLESCH.SCALE,
-             caption = "INFLESZ Perspicuity Scale for Spanish Language",
-             align = "c",
-             booktabs = T)%>%
-  kable_styling(latex_options = c("hold_position", "scale_down"),
-                full_width = F) %>%
-  column_spec(2, background = color2,
-              color = "black") %>%
-  add_footnote("Source: See Bea-Muñoz, Medina-Sánchez and Flórez-García (2015).",
-               threeparttable = F,
-               notation = "none")
-```
-
-
-All these formulas have been widely used in text analysis in fields such as medicine, psychology, education, and political science. Recently, there is a growing literature applying traditional and brand new measures of readability in the field of economics, and specifically in monetary policy trying to measure the clarity of central bank communication conveyed by official documents and speeches of officials, transcripts of interviews, and even central banking news in journals and magazines related to business and finance.[^20]
-
-[^20]: See [Cihák et al. (2012)](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Clarity-of-Central-Bank-Communication-About-Inflation-25607),[Cihák et al. (2013)](https://cepr.org/voxeu/columns/measuring-clarity-central-bank-communication), [Deslonghchamps (2018)](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/), [Carotta et al. (2021)](https://www.cemla.org/actividades/2021-final/2021-11-xxvi-meeting-of-the-central-bank-researchers-network/5B.2%20PAPER%20Carotta%20Mello%20Ponce.pdf), [Huang and Simon (2021)](https://www.rba.gov.au/publications/rdp/2021/pdf/rdp2021-05.pdf), [Ferrara and Angino (2022)](https://eprints.lse.ac.uk/112968/1/Ferrara_does_clarity_make_central_banks_more_engaging_published.pdf).
 
 
 
@@ -853,3 +716,218 @@ Note: Smoothing data using local regression techniques.")+
 
 
 ```
+
+
+
+
+
+# Appendix A. Readability and Perspicuity Scales
+
+The Flesch Reading Ease test is a formula developed in the 1940s by Rudolf Flesch, who was a consultant with the Associated Press, developing methods for improving the readability of newspapers.[^13] The computation of Flesch test gives a score between 1 and 100, with 100 being the highest readability score. The Flesch reading ease test requires three input variables:
+
+[^13]: See Flesch (1943; 1949)
+
+  * Total number of words ($W$).
+  * Total number of sentences ($St$).
+  * Total number of syllables ($Sy$).
+
+Resulting in the following formula:
+
+\begin{equation}
+  F = 206.835-1.015 * \frac{W}{St} -8.46 * \frac{Sy}{W}
+\end{equation}
+
+\noindent where $\frac{W}{St}$ is the average sentence length and $\frac{Sy}{W}$ is the average number of syllables per word. The intuition behind this formula is that the larger the sentences and the more syllables per word, the more difficult it is to understand and read a text. 
+
+
+```{r Table 1 Flesch Score, echo=FALSE, paged.print=TRUE}
+FLESCH.SCALE <- data.frame("Score" = c("90-100","80-90","70-80",
+                                       "60-70","50-60","30-50",
+                                       "0-30"),
+                           "Level" = c("Very easy to read",
+                                       "Easy to read",
+                                       "Fairly easy to read",
+                                       "Easily understood",
+                                       "Fairly difficult to read",
+                                       "Difficult to read",
+                                       "Very difficult to read"),
+                           "Grade" = c("4th grade", "5th grade",
+                                       "6th", "7th-8th grade",
+                                       "High school",
+                                       "University",
+                                       "Graduate student"),
+                           "Type" = c("Comics", "Pulp Fiction",
+                                      "Science Fiction",
+                                      "Digest", "Quality Magazine",
+                                      "General academically oriented magazine",
+                                      "Scientific Journal"))
+
+color = c("#e3342f","#f6993f","#ffed4a","#00b159","#4dc0b5","#3990dc","#6574cd")
+color = rev(color)
+
+knitr::kable(FLESCH.SCALE,
+             caption = "Flesch Reading Ease Scale",
+             align = "c",
+             booktabs = T)  %>%
+  kable_styling(latex_options = c("hold_position"),
+                full_width = F) %>%
+  column_spec(2, background = color,
+              color = "black") %>%
+  add_footnote("Source: Flesch, R. (1943)",
+               notation = "none")
+```
+
+
+Following Flesch's research, many other scholars proposed readability scales or scores based on the same attributes or pointing out other variables, such as Robert Gunning, who introduced an index (FOG index) to estimate the years of formal education a person needs to understand the text at first reading. For example, a FOG index of 12 requires the reading level of a U.S. high school senior.[^14] This index is calculated by selecting a passage of text with 100 or more words and then yields an estimate of grade level based on the average sentence length and the average number of complex words in the passage, which are defined as words with three or more syllables ($W_{3Sy}$).
+
+[^14]: See Gunning (1952).
+
+\begin{equation}
+  FOG = 0.4 * (\frac{W}{St} +100 * \frac{W_{3Sy}}{W})
+\end{equation}
+
+
+```{r Table 2 FOG Gunning scale, echo=FALSE, paged.print=TRUE}
+FLESCH.SCALE <- data.frame("Score" = c("4","5","6",
+                                       "7","8","9", "10"),
+                           "Grade" = c("4th grade", "5th grade",
+                                       "6th", "7th grade" ,
+                                       "8th grade", "high school freeshman",
+                                       "high school sophomore"),
+                           "Score2" = c("11",
+                                       "12","13","14","15",
+                                       "16", "> 17"),
+                           "Grade2" = c("high school junior",
+                                       "high school senior",
+                                       "college freeshman",
+                                       "college sophomore",
+                                       "college junior",
+                                       "college senior",
+                                       "graduate student"))
+
+color = c("#e3342f","#f6993f","#ffed4a","#00b159","#4dc0b5","#3990dc","#6574cd")
+color = rev(color)
+
+knitr::kable(FLESCH.SCALE,
+             caption = "FOG Gunning Reading Ease Scale",
+             align = "c",
+             col.names = c("Score",
+                           "Grade",
+                           "Score",
+                           "Grade"),
+             booktabs = T)  %>%
+  kable_styling(latex_options = c("hold_position"),
+                full_width = F) %>%
+  add_footnote("Source: Bogert (1985)",
+               notation = "none")
+```
+
+
+Another useful measure derived from the Flesch formula is the Flesch-Kincaid reading level. Kincaid, Fishburne, Rogers, and Chissom developed it in 1975 on behalf of the U.S. Navy.[^15] The effort by Kincaid and his team resulted in a readability test designed to assess the difficulty of written English text. The formula yields a score as a US grade level and is widely used to judge the readability level of a variety of books, texts, academic papers, etc. In the literature, the Flesch-Kincaid reading level is commonly interpreted as the number of years of education generally required to understand the text. The formula is as follows:
+
+[^15]: See Kincaid, J.P., Fishburne, R.P., Rogers, R.L., and Chissom, B.S. (1975).
+
+\begin{equation}
+  F_{K} = 0.39 * \frac{W}{St} + 11.18 * \frac{Sy}{W} - 15.59
+\end{equation}
+
+The result is a number that corresponds to the level of education in the United States. These formulas, among others, are widely used to analyze the readability of English texts. However, it is not possible to analyze printed texts in Spanish with these methodologies.
+
+In the search for the adaptation of these formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the readability of a wide variety of Spanish documents in 1959.[^16] The Fernández Huerta test is based on the Flesch test and they have similar readability scale (See Table 3). The formula is as follows:
+
+[^16]: See Fernández Huerta J.(1959).
+
+
+\begin{equation}
+  F_{FH} = 206.835-1.02 * \frac{W}{St} -60 * \frac{Sy}{W}
+\end{equation}
+
+
+```{r Table 3 Flesch-Fernández Huerta Score, echo=FALSE}
+FLESCH.SCALE <- data.frame("Score" = c("90-100","80-90","70-80",
+                                       "60-70","50-60","30-50",
+                                       "0-30"),
+                           "Level" = c("Very easy to read",
+                                       "Easy to read",
+                                       "Fairly easy to read",
+                                       "Standard",
+                                       "Fairly difficult to read",
+                                       "Difficult to read",
+                                       "Very difficult to read"),
+                           "Grade" = c("5th grade", "6 grade",
+                                       "7th", "8th-9th grade",
+                                       "High school",
+                                       "University",
+                                       "Graduate student"))
+knitr::kable(FLESCH.SCALE,
+             caption = "Fernández Huerta Reading Ease Scale",
+             align = "c",
+             booktabs = T)  %>%
+  kable_styling(latex_options = c("hold_position"),
+                full_width = F) %>%
+  column_spec(2, background = color,
+              color = "black") %>%
+  add_footnote("Source: Fernández Huerta J.(1959).",
+               notation = "none")
+```
+
+
+Later in the 1990s, Francisco Szigrist Pazos developed a new validated formula for readability as his doctoral thesis at the Universidad Complutense de Madrid. This test is also an adaptation of the Flesch test for Spanish and French written texts.[^17] Francisco Szigrist Pazos' formula yields a perspicuity score.
+
+[^17]: See Szigriszt, F. (1993). Sistemas predictivos de legibilidad del mensaje escrito: Fórmula de Perspicuidad (tesis de doctorado). Universidad Complutense, Madrid.
+
+As part of the validation of the perspicuity test for the Spanish language, Szigriszt used the proposed criterion prediction, the comparative validity strategy, and a foreign criterion prediction. All the validity tests implemented by Szigriszt yielded statistically significant results, which made Szigriszt one of the modern precursors in the development of readability formulas for Spanish in the last decades.[^18]
+
+[^18]: See Ríos, I. (2009). Influencias del lenguaje y origen de un lector en la comprensión de mensajes de comunicación en salud y en la formación de actitud e intención hacia la realización de una conducta preventiva (tesis doctoral, Universidad Pompeu Fabra, Barcelona).
+
+One of the major advantages of using Szigriszt's formula is that it is applicable to the use of printed Spanish text in publications of various thematic focuses. The Szigriszt formula also establishes the levels of difficulty of a text and its categorization, based on the coefficient of perspicuity obtained from the mathematical calculation performed as established in its formula.
+
+
+\begin{equation}
+  F_{SZ} = 206.835 * \frac{W}{St} -62.3 * \frac{Sy}{W}
+\end{equation}
+
+In a later work, Barrio-Cantalejo adapted the Szigriszt-Pazos scale of interpretation of results, creating the INFLESZ scale (See Table 4).[^19] Unlike Flesch scale, the INFLESZ scale is designed to be interpreted at a level of difficulty in Spanish school grade. 
+
+[^19]: See Bea-Muñoz, Medina-Sánchez and Flórez-García (2015). 
+
+
+```{r Table 4 Flesch-Szigriszt Score, echo=FALSE}
+FLESCH.SCALE <- data.frame("Score" = c("> 80",
+                                       "65-80","55-65","40-55",
+                                       "0-40"),
+                           "Level" = c("Very easy to read",
+                                       "Easy to read",
+                                       "Average",
+                                       "Fairly difficult to read",
+                                       "Very difficult to read"),
+                           "Grade" = c("Elementary", "Elementary",
+                                       "Junior high", 
+                                       "High school",
+                                       "Undergrduate or higher"),
+                           "Type" = c("Comics", 
+                                      "Entertainment press and Successful novels",
+                                      "General press and Sports press",
+                                      "Scientific dissemination and Specialized press",
+                                     "Scientific"))
+
+color2 = c("#e3342f","#f6993f","#00b159","#4dc0b5","#3990dc")
+color2 = rev(color2)
+
+knitr::kable(FLESCH.SCALE,
+             caption = "INFLESZ Perspicuity Scale for Spanish Language",
+             align = "c",
+             booktabs = T)%>%
+  kable_styling(latex_options = c("hold_position", "scale_down"),
+                full_width = F) %>%
+  column_spec(2, background = color2,
+              color = "black") %>%
+  add_footnote("Source: See Bea-Muñoz, Medina-Sánchez and Flórez-García (2015).",
+               threeparttable = F,
+               notation = "none")
+```
+
+
+All these formulas have been widely used in text analysis in fields such as medicine, psychology, education, and political science. Recently, there is a growing literature applying traditional and brand new measures of readability in the field of economics, and specifically in monetary policy trying to measure the clarity of central bank communication conveyed by official documents and speeches of officials, transcripts of interviews, and even central banking news in journals and magazines related to business and finance.[^20]
+
+[^20]: See [Cihák et al. (2012)](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Clarity-of-Central-Bank-Communication-About-Inflation-25607),[Cihák et al. (2013)](https://cepr.org/voxeu/columns/measuring-clarity-central-bank-communication), [Deslonghchamps (2018)](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/), [Carotta et al. (2021)](https://www.cemla.org/actividades/2021-final/2021-11-xxvi-meeting-of-the-central-bank-researchers-network/5B.2%20PAPER%20Carotta%20Mello%20Ponce.pdf), [Huang and Simon (2021)](https://www.rba.gov.au/publications/rdp/2021/pdf/rdp2021-05.pdf), [Ferrara and Angino (2022)](https://eprints.lse.ac.uk/112968/1/Ferrara_does_clarity_make_central_banks_more_engaging_published.pdf).
