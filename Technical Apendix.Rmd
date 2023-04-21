@@ -17,7 +17,7 @@ output:
 library(koRpus)
 library(tidyverse)
 library(koRpus.lang.en)
-library(koRpus.lang.es)
+#library(koRpus.lang.es)
 library(knitr)
 library(kableExtra)
 library(ggthemes)
@@ -232,8 +232,8 @@ Central_Bank_Readability <- function(data,lang){
     M3<- matrix(M[4,]) # difficulty at school level
     
     Statements <- Statements %>%
-      mutate("Flesch-Szigriszt" = as.numeric(M1),
-             "Flesch-Szigriszt grade" = as.character(M3))
+      mutate("Szigriszt" = as.numeric(M1),
+             "Szigriszt grade" = as.character(M3))
     
     
     #Fernandez Huerta
@@ -299,6 +299,15 @@ Central_Bank_Readability <- function(data,lang){
 
 ```
 
+
+## Linguistic Secondary Measures.
+
+```{r}
+load("Methodology data2.RData")
+```
+
+
+
 ## 2.2. Applying the function
 
 The function is applied to the path vector using the line of code:
@@ -319,7 +328,107 @@ The output is a data frame of 19 variables (columns) and 242 observations (one r
 
 ```{r tail Banxico, echo=FALSE, paged.print=TRUE}
 tail(Banxico_readability,3)
+str(Banxico_readability)
 ```
+
+
+
+## Cantalejo measures
+```{r eval=FALSE, include=FALSE}
+
+# Construccion de Cantalejo Flesch-Szigritz FORMULA
+# https://legible.es/blog/escala-inflesz/
+Cantalejo <- function(Sy,W,S){
+    Perspicuity = 206.835 - 62.3*(Sy/W)-(W/S)
+    return(Perspicuity)
+}
+
+#Verificacion que la formula este bien construida
+Flesch <- function(Sy,W,S){
+    Perspicuity = 206.835 - 62.3*(Sy/W) - (W/S)
+    return(Perspicuity)
+}
+
+#FLES <- Flesch(Sy = as.numeric(Banxico_readability$syllables), 
+#       W = as.numeric(Banxico_readability$words),
+#       S = as.numeric(Banxico_readability$sentences))
+
+#BUENA FORMULA 
+#round(Banxico_readability$`Flesch-Szigriszt`) == round(FLES)
+#rm(FLES)
+#rm(Flesch)
+
+#CONSTRUCCION CANTALEJO FLESCH-SZIGRITZ SCORES
+#FSZ <- Cantalejo(Sy = as.numeric(Banxico_readability$syllables), 
+#       W = as.numeric(Banxico_readability$words),
+#       S = as.numeric(Banxico_readability$sentences))
+
+#Banxico_readability$Szigriszt <- Banxico_readability$`Flesch-Szigriszt`
+#Banxico_readability$`Flesch-Szigriszt` <- FSZ
+
+#Banxico_readability <- Banxico_readability[,c(1:12,20,13,14,21:26,15:19,27)]
+
+
+
+```
+
+
+## Legibilidad µ
+
+ $\mu = (\frac{n}{n-1})(\frac{\hat{x}}{\sigma ^2}) * 100$
+ 
+where:
+
+$\mu$: legibility index
+$n$: number of words
+$\hat{x}$: average of the letter count per word
+$\sigma ^2$: variance of the letter count per word
+ 
+```{r eval=FALSE, include=FALSE}
+
+#Legibilidad µ formula
+# https://legible.es/blog/legibilidad-mu/
+
+Legibilidad_Mu <- function(n,xhat,sigma2){
+    Mu = ((n)/(n-1)) * (xhat/sigma2) * 100
+    return(Mu)
+}
+
+## calculating standard deviations
+load("Secondary Linguistic.RData")
+
+# store only words with 1 or more letter
+for (i in 1:242) {
+    
+    Ltr_word[[i]] = Ltr_word[[i]][which(Ltr_word[[i]] > 1)]
+}
+
+ #verify is there any 1
+for (i in 1:242) {
+    print(which(Ltr_word[[i]] == 1))
+}
+
+MUdf <- data.frame(dates, document,
+                   "N" = as.numeric(Banxico_readability$words),
+                   "avg.lttr.word" = rep(NA,242),
+                   "var.lttr.word" = rep(NA,242))
+
+for (i in 1:242) {
+    MUdf$avg.lttr.word[i] = mean(Ltr_word[[i]])
+    MUdf$var.lttr.word[i] = var(Ltr_word[[1]])
+}
+
+MU <- Legibilidad_Mu(n = MUdf$N, 
+                     xhat = MUdf$avg.lttr.word, 
+                     sigma2 = MUdf$var.lttr.word)
+
+Banxico_readability$Readability_MU <- MU
+
+```
+
+
+
+
 
 ## 2.3. Linguistic analysis
 
@@ -335,6 +444,7 @@ Table1 <- table(Banxico_readability %>%
 
 Table1
 ```
+
 
 ```{r Doc count, include=FALSE}
 
