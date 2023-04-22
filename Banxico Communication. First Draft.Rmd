@@ -1,10 +1,9 @@
 ---
-title: "Banco de México Communication. A readability and Text Mining Approach."
+title: "Banco de México's Communication: A Readability and Perspicuity Approach."
 author: "Christian Admin De la Huerta Avila"
 date: "`r Sys.Date()`"
 output:
   pdf_document:
-    fig_height: 4
     latex_engine: xelatex
     df_print: paged
   word_document: default
@@ -13,7 +12,6 @@ linestrech: 1.15
 linkcolor: cyan
 urlcolor: cyan
 ---
-
 
 
 ```{r setup, include=FALSE}
@@ -53,16 +51,19 @@ Banxico_readability$document[Banxico_readability$document == "MPD"] <- "MPS"
 
 For central banks, communication is not only desirable but necessary. This follows the rationale that, on the one hand, central bank communication may have the power to shape expectations of future macroeconomic outcomes, potentially improving the transmission of monetary policy, and on the other, these institutions face the need for greater transparency since central bankers are not democratically elected, but are appointed by the executive branch of government, and for that reason, in a democratic society transparency is necessary for their actions to be judged by the public they serve.
 
-The latter has been extensively studied by the literature on transparency[^1], leading to the creation of various indicators associated with these issues, and to a consensus that central banks should share information on their objectives, their perspective on economic developments, as well as the decisions and monetary policy decision-making process. Although, it must be said that transparency does not always imply communication, nor that the central bank is conveying a clear message.
+The latter has been extensively studied by the literature on transparency[^1], leading to the creation of various indicators associated with these issues, and to a consensus that central banks should share information on their objectives, their perspective on economic developments, as well as the monetary policy decision-making process. 
 
 [^1]: See Fry et al. (2000), Blinder et al. (2001), Geraats (2002; 2006), Eijffinger and Geraats (2006), Cujisen and Dermertzis (2007), Čihák (2007), Dincer and Eichengreen (2009; 2014), Kedan and Stuart (2014), Dincer, Eichengreen, y Geraats (2019; 2022)
 
+The changes originated, both in theory and practice, over the past 30 years, have enabled that monetary authorities tend to communicate more and share a wider range of information with the public. However, it should be noted that transparency does not always imply communication, nor does it always imply that the information that is shared is clear or easily understood.
+
+Given the great power that central banks have to potentially shape expectations and affect the economy, it is not only important to increase the amount of information shared, but to ensure that it is clear and intelligible, provides relevant insights, encourages two-way channels and allows for public scrutiny. In addition, care must be taken to ensure that the information shared can be understood by the widest possible audience, not just highly specialized experts and professional observers who can easily interpret the central bank's message.
 
 In this regard, in the past few years, there is growing literature using text analysis aimed to interpret both the quantity and quality of the communication that central banks deliver through official documents and other central banking-related text. Some of these works emphasize readability and perspicuity (insert bibliography), whereas others scrutinize central bankers' communication by applying machine learning and dictionary techniques(insert bibliography).
 
 In the special case of Mexico's national central bank, Banco de México (Banxico), not many pieces of research focus on communication. To the extent of my knowledge, only López Marmolejo (2013) and Taborda (2014) have formally approached this topic before. The former constructs a communication index by identifying relevant phrases in monetary policy statements and, by incorporating it into a standard Taylor rule, concludes that Banxico sends relevant signals to the markets that allow forecasting the monetary policy rate. Taborda for its part, implements text analysis techniques to study procedural transparency in the minutes of the Board of Directors. However, the scope of his research is limited due to the information available at its time (24 minutes).  
 
-This paper aims to fill the existing gap in the literature by representing a first contribution to analyze the readability and perspicuity of Banco de México's official documents over time. I address the question of whether there have been significant changes in the central bank's communication, especially after the implementation of an Inflation Forecast Targeting (IFT) strategy in 2018 and the update of the Board of Governors' communication criteria in 2020. To do so, I review the main changes to the communication strategy in recent years. I then compute classical measures of readability and perspicuity on monetary policy statements, minutes and quarterly inflation reports, which are considered as a proxy for the clarity and intelligibility of central banks' wording. With the information gathered, I focus on determining whether there is evidence of a structural break in the readability and perspicuity of Banxico's publications, using time series techniques. In particular, I perform unit root tests that allow for one and two endogenous structural breaks . [insert relevant finding from unit root analysis].
+This paper aims to fill the existing gap in the literature by representing a primer contribution to analyze the readability and perspicuity of Banco de México's official documents over time. I address the question of whether there have been significant changes in the central bank's communication, especially after the implementation of an Inflation Forecast Targeting (IFT) strategy in 2018 and the update of the Board of Governors' communication criteria in 2020. To do so, I review the main changes to the communication strategy in recent years. I then compute classical measures of readability and perspicuity on monetary policy statements, minutes and quarterly inflation reports, which are considered as a proxy for the clarity and intelligibility of central banks' wording. With the information gathered, I focus on determining whether there is evidence of a structural break in the readability and perspicuity of Banxico's publications, using time series techniques. In particular, I perform unit root tests that allow for one and two endogenous structural breaks . [insert relevant finding from unit root analysis].
 
 The rest of the paper is organized as follows. Section 2 summarizes the literature on central bank communication. Section 3 present the data and review the evolution of Banco de México's communication strategy. Section 4 describes the evolution over the period 2011 to 2022 of the linguistic properties of Banxico's publications according to various measures. Section 5 contains the main statistical analysis of this paper, presenting the structural change tests and their results. Finally, Section 6 concludes.
 
@@ -171,7 +172,7 @@ Then, in 2018 the bank shifted its strategy to an Inflation Forecast Targeting (
 [^23]: See King (1994), Svensson (1997; 1999, 2008), Clinton et al. (2015), Svensson (2020)
 [^24]: See [Campbell et al. (2012)](https://www.brookings.edu/wp-content/uploads/2012/03/2012a_evans.pdf)
 
-In addition, in this year Banxico updated its communication criteria. The minutes began to discloses the identity of the voters, and in case of dissent also incorporates a section explaining the rationale for the dissenters' vote. On top of that, the Board of Directors announced that transcripts of the meetings will be made available to the public three years after the meeting. Finally, following the major central bankers, the Board of Directors adopted a Banxico Speakers approach, making available transcripts of speeches and public presentations by the members.
+In addition, in this year Banxico updated its communication criteria. The minutes began to discloses the identity of the voters, and in case of dissent also incorporates a section explaining the rationale for the dissenters' vote. On top of that, the central bank announced that transcripts of the meetings will be made available to the public three years after the meeting. Finally, following the major central bankers, the Board of Directors adopted a Banxico Speakers approach, making available transcripts of speeches and public presentations by the members.
 
 In 2020, the General Communication Criteria of the Board of Director and Banxico's staff were updated and made public for the first time. The central bank also established that the press releases, monetary policy statements and minutes would be made clearer and more concise in its extension. Since August 2021, the bank conveyed to release and update the inflation forecast in every monetary policy statement, and identify the direction of the vote of each of the members who participated in said meeting, indicating the members who adopted the decision taken and, if applicable, those who voted for an alternative decision and what it consisted of. 
 
@@ -211,7 +212,7 @@ Banxico_Communication <- data.frame("Year" = c(2000,2001,rep(2003,2),2006,2008,2
                                                                             "The minutes began to discloses the identity of the voters, and in case of dissent also incorporates a section explaining the rationale for the dissenters' vote.",
                                                                             "The minutes and monetary policy statements are realising both in Spanish and English simultaneously on the correspondat date.", 
                                                                             "Announce that transcripts of the meetings will be made available to the public three years after the meeting.", 
-                                                                            "The Board of Directors adopted a central Banxico Speakers approach, making available transcripts of speeches and public presentations by the members.", 
+                                                                            "The Board of Directors adopted a Banxico Speakers approach, making available transcripts of speeches and public presentations by the members.", 
                            
                            "The General Communication Criteria of the Board of Director and Banxico's staff were updated and made public for the first time.",
                                                                             "It is established that the Press Releases, Monetary Policy Statements and Minutes would be made clearer and more concise in its extension.", 
@@ -302,6 +303,7 @@ Then, after apply any text data technique, is necessary to pre-processes the doc
     
 In the sample there are 48 Quarterly Inflation Reports (4 per year), 96 Monetary Policy Minutes (8 per year) and 98 Monetary Policy Statements (8 per year and 2 extemporaneous decisions).
     
+    
 # 3. Linguistic analysis of Banco de México's publications
 
 With the latter in mind, it is possible to evaluate the clarity of the information delivered by the central banks using the reading ease tests. The purpose of these tests is to study the ease or difficulty of reading a specific text, i.e. to assess the readability of a document in terms of its clarity and accessibility to a wide audience. This is important because it is assumed that central banks want to convey a message not only to a specific audience of technically educated observers, but to the public they serve, which is the entire population.
@@ -315,11 +317,12 @@ Following Flesch's research, many other formulas have been developed for analyzi
 [^29]: See Gunning (1952) and Kincaid, Fishburne, Rogers and Chissom (1975).
 
 
-These formulas, among others, are widely used to analyze the readability of English texts. However, it is not possible to analyze printed texts in Spanish with these methodologies. In the search for the adaptation of these formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the readability of a wide variety of Spanish documents in 1959. Later on, Gutiérrez (1973), Szigriszt-Pazos (1992), [Cantalejo and Lorda (2003)](https://www.sciencedirect.com/science/article/pii/S021265670379146X) and [Cantalejo et al. (2008)](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1137-66272008000300004) expanded the readability literature disposable for Spanish printed text.[^30]
+These formulas, among others, are widely used to analyze the readability of English texts. However, it is not possible to analyze printed texts in Spanish with these methodologies. In the search for the adaptation of these formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the readability of a wide variety of Spanish documents in 1959. Later on, Gutiérrez (1973), [Szigriszt-Pazos (1992)](http://webs.ucm.es/BUCM/tesis//19911996/S/3/S3019601.pdf), [Muñoz (2006)](http://www.legibilidadmu.cl/1.pdf), [Cantalejo and Lorda (2003)](https://www.sciencedirect.com/science/article/pii/S021265670379146X) and [Cantalejo et al. (2008)](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1137-66272008000300004) expanded the readability literature disposable for Spanish printed text.[^30]
 
-[^30]: See Appendix A.
 
-The intuition behind these formulas is the same as Flesch's: the longer the sentences and the more syllables per word, the more difficult it is to understand and read a text. Moreover, the selection of one or the other is quite arbitrary because they are highly correlated. The formal presentation of the formulas can be found in Appendix A. Table 3 shows the three classic scales for interpreting Spanish written texts.
+[^30]: See Appendix A for a complete development of the formulas and scales.
+
+The intuition behind these formulas is the same as Flesch's: the longer the sentences and the more syllables per word, the more difficult it is to understand and read a text. Moreover, the selection of one or the other is quite arbitrary because they are highly correlated. The formal presentation of the formulas can be found in Appendix A. Table 3 shows the most common scales for interpreting Spanish written texts.
 
 
 ```{r Table 3 Readability and Perspicuity Scales, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
@@ -369,7 +372,11 @@ color_F = rev(color_F)
 knitr::kable(FLESCH.SCALE,
              caption = "Readability and Perspicuity Scales",
              align = "c",
-             booktabs = T)  %>%
+             booktabs = T,
+                 col.names = c("Score","INFLESZ(Flesch-Szigritz)",
+                               "Readability Mu",
+                               "Szigriszt",
+                               "Fernández Huerta"))  %>%
   kable_styling(latex_options = c("hold_position"),
                 full_width = F) %>%
   collapse_rows(columns = 2:4, latex_hline = "major", valign = "middle",
@@ -382,104 +389,84 @@ knitr::kable(FLESCH.SCALE,
               color = "black",width = "3cm",bold = T) %>%
   column_spec(3, background = color_F,
               color = "black", width = "3cm",bold = T) %>%
-  add_footnote("Source: Flesch (1943; 1949), Szigriszt-Pazos (1992) and Cantalejo et al. (2008)",
+  add_footnote("Source: Fernández Huerta(1959), Szigriszt-Pazos(1992), Muñoz (2006) and Cantalejo et al. (2008)",
                notation = "none")
 ```
 
 
 
-```{r Table 6 Banco de México Documents, eval=FALSE, include=FALSE}
+Table 4 displays the basic descriptive statistics of the word and sentence count. On average, MPSs have the shortest extension, 1,101 and 37 words and sentences respectively, and QIRs the largest extension, 17,546 and 548. The MPMs find in between with and average count of 6,148 words and 178 sentences.
 
-Banxico_readability <- Banxico_readability %>%
-  mutate("Year" = format(dates, format = "%Y"))
+If we observe the information given by Figure 1, it is quite evident that the word count has been changing over time. From 2011 to mid 2019 there is a clear tendency toward increase the total number of words in each publication. However, the distribution of the MPSs has an atypical observation in February 2016. The extension of the statement release on 17 February 2016 might be explained because it was an extemporaneous decision due to turbulence in the international markets that affected the exchange rate and could increase the likelihood of inflation expectations that was not consistent with Banco de México's inflation target of 3%.[^31] The second extemporaneous decision occurred on April 2020 due to the economic disruption of the COVID-19 pandemic, although the word count was closely to the usual extension.
 
+[^31]: See [Banco de México, 17 de febrero de 2016, Anuncio de Poítica Monetaria](https://www.banxico.org.mx/publicaciones-y-prensa/anuncios-de-las-decisiones-de-politica-monetaria/%7B394FBB23-9099-AAB2-6B9B-2FDBAEEE5710%7D.pdf)
 
-
-knitr::kable(table(Banxico_readability %>%
-                     select("Year", "document")),
-                       caption = "Banco de México Documents",
-             align = "c",
-             booktabs = T) %>%
-      kable_styling(latex_options = c("hold_position"),
-                  full_width = T) %>%
-    add_footnote(c("Source: Author's calculation."),
-                 notation = "none")
-
-#table(Banxico_readability$document == "MPM")
-#table(Banxico_readability$document == "IQR")
-#table(Banxico_readability$document == "MPD")
-```
-
-
-Table 4 displays the total documents per type (N), the average numbers of words (Mean), the median of the distribution of words per document (Median), standard deviation (SD), the shortest document (Min.) and the largest document (Max.) over the period from 2011 to 2022. On average, the Monetary Policy Statements have the shortest extension, 1,101 total words, and the Inflation Quarterly Reports the largest extension, 15,546. 
-
-If we observe the information given by Figure 1, it is quite evident that the word count has been changing over time. From 2011 to mid 2019 there is a clear tendency toward increase the total number of words in each document. However, the distribution of the Monetary Policy Statement has an atypical observation in February 2016. The extension of the statement release on 17 February 2016 might be explained because it was an extemporaneous decision due to turbulence in the international markets that affected the exchange rate and could increase the likelihood of inflation expectations that was not consistent with Banco de México's inflation target of 3%.[^31] The second extemporaneous decision occurred on April 2020 due to the economic disruption of the COVID-19 pandemic, although the word count was closely to the usual extension.
-
-```{r Table 4 Word Count - Descriptive Statics, echo=FALSE}
+```{r Table 4 Word Count - Descriptive Statics, echo=FALSE, message=FALSE, warning=FALSE}
 A<- Banxico_readability %>%
-  mutate(words = as.numeric(words))%>%
-  select("Year", "document", "words") %>%
-  group_by(document) %>%
+  mutate(words = as.numeric(words),
+         sentences = as.numeric(sentences))%>%
+  select("Year", "document", "words", "sentences") %>%
+  pivot_longer(cols = c(sentences,words),
+               names_to = "Count", 
+               values_to = "Count_vals") %>%
+  group_by(document,Count) %>%
   summarise(n = length(document),
-            mean = mean(words),
-            median = median(words),
-            sd = sd(words),
-            min = min(words),
-            max = max(words))
+            mean = mean(Count_vals),
+            median = median(Count_vals),
+            sd = sd(Count_vals),
+            min = min(Count_vals),
+            max = max(Count_vals))
+
+# rearrange
+A <- A[,c(1,3,2,4:8)]
+
+#max min dates
+MM<- Banxico_readability %>%
+ filter(document == "MPM") %>% #minutes
+ mutate(D <- format(dates, format = "%m-%y"))
+
+IQR<- Banxico_readability %>%
+    filter(document == "QIR")%>% #reports
+    mutate(D <- format(dates, format = "%m-%y"))
+
+MPS<- Banxico_readability %>%
+    filter(document == "MPS") %>% # statements
+    mutate(D <- format(dates, format = "%m-%y"))
+
+#MIN DATE
+A$mindate <- c(MM$D[which.min(MM$sentences)],MM$D[which.min(MM$words)],
+               MPS$D[which.min(MPS$sentences)],MPS$D[which.min(MPS$words)],
+               IQR$D[which.min(IQR$sentences)],IQR$D[which.min(IQR$words)])
+#MAX DATE
+A$maxdate <- c(MM$D[which.max(MM$sentences)],MM$D[which.max(MM$words)],
+               MPS$D[which.max(MPS$sentences)],MPS$D[which.max(MPS$words)],
+               IQR$D[which.max(IQR$sentences)],IQR$D[which.max(IQR$words)])
+A <- A[,c(1:7,9,8,10)]
 
 #Banxico_readability %>%
  # mutate(words = as.numeric(words))%>%
   #select("dates", "Year", "document", "words") %>%
   #filter(Year == 2020 & document == "MPD")
 
-knitr::kable(Banxico_readability %>%
-  mutate(words = as.numeric(words)) %>%
-  select("Year", "document", "words") %>%
-  group_by(document) %>%
-  summarise(n = length(document),
-            mean = mean(words),
-            median = median(words),
-            sd = sd(words),
-            min = min(words),
-            max = max(words)),
-                       caption = "Word Count- Descriptive Statics",
+knitr::kable(A,
+             caption = "Word Count- Descriptive Statics",
              align = "c",
              booktabs = T,
-  col.names = c("Document","N","Mean","Median","SD",
-                "Min.", "Max.")) %>%
+             col.names = c("Document","No. docs", "Count",
+                           "Mean","Median","SD",
+                "Min.", "Min. Date",
+                "Max.", "Max. Date")) %>%
       kable_styling(latex_options = c("hold_position"),
-                  full_width = T) %>%
-    add_footnote(c("Source: Author's calculation.",
-                   "QIR max. (2020-11-25), IQR min (2011-08-10).", 
-                   "MPS max. (2017-08-10), MPD min. (2016-02-17).", 
-                   "MPM max. (2019-07-11), MPM min. (2011-02-04)."),
-                 notation = "none",
-                 threeparttable = F)
-
-#Max - Min MPM
-#MM<- Banxico_readability %>%
- # filter(document == "MPM")
-#MM$dates[which.max(MM$words)]
-#MM$dates[which.min(MM$words)]
-
-#Max - Min IQR
-#MM<- Banxico_readability %>%
- # filter(document == "IQR")
-#MM$dates[which.max(MM$words)]
-#MM$dates[which.min(MM$words)]
-
-#Max - Min MPD
-#MM<- Banxico_readability %>%
- # filter(document == "MPD")
-#MM$dates[which.max(MM$words)]
-#MM$dates[which.min(MM$words)]
+                  full_width = F) %>%
+    collapse_rows(columns = c(1,2), latex_hline = "major", valign = "middle",
+                row_group_label_position = "identity") %>%
+    add_footnote(c("Source: Author's calculation."),
+                 notation = "none")
+rm(A,MM,MPS,IQR)
 ```
 
-[^31]: See [Banco de México, 17 de febrero de 2016, Anuncio de Poítica Monetaria](https://www.banxico.org.mx/publicaciones-y-prensa/anuncios-de-las-decisiones-de-politica-monetaria/%7B394FBB23-9099-AAB2-6B9B-2FDBAEEE5710%7D.pdf)
-
-
 \noindent
-```{r Figure 1, echo=FALSE, message=FALSE, warning=FALSE}
+```{r Figure 1 Banco de México official publications Word count, echo=FALSE, message=FALSE, warning=FALSE}
 
 Banxico_readability <- Banxico_readability
 Figure1 <- Banxico_readability %>%
@@ -499,7 +486,7 @@ Figure1 %>%
             size = 0.5)+
   #labels of the Figure
   labs( 
-    title = "Figure 1: Banco de México official documents. Word count.",
+    title = "Figure 1: Banco de México's publications - Word count",
         subtitle = "Jan 2011 - Dec 2022 (Number of Words)",
         x = " ",
         y = " ",
@@ -521,7 +508,7 @@ Figure1 %>%
 ```
 
 
-```{r Partial averages, include=FALSE}
+```{r Partial averages, eval=FALSE, include=FALSE}
 Banxico_readability <- Banxico_readability %>%
   mutate(words = as.numeric(words))
 
@@ -545,14 +532,16 @@ B <-Banxico_readability%>%
             sd = sd(words),
             min = min(words),
             max = max(words))
-round(A$mean[2])
-round(A$mean[1])
+#round(A$mean[2])
+#round(A$mean[1])
 ```
 
 
-Another important highlight of this period is that from the start of 2020, both the Minutes and the Policy Statements experienced a change characterized by a decrease in word count, while Inflation Reports began to contain, on average, a higher number of words than in previous years. For instance, before 2020, Policy Statements and Inflation Reports contained an average of 1,223 and 15,571 words, respectively. In the latter period, these averages dropped to 745 and 23,547, respectively. The Minutes on the other hand, despite the break occurred on February 2020, presented a higher average between 2020 and 2022 (7,513 vs 5,668). Perhaps this increase in the average word count responded to better and greater deliberation process during the pandemic, its aftermath, the surge on inflation in mid 2021, and the needed to manage expectations while the macroeconomic and financial conditions remained highly volatile.
+Another important highlight of this period is that from the start of 2020, both the Minutes and the Statements experienced a change characterized by a decrease in word count, while Inflation Reports began to contain, on average, a higher number of words than in previous years. For instance, before 2020, Policy Statements and Inflation Reports contained an average of 1,223 and 15,546 words, respectively. In the latter period, these averages dropped to 745 in the case of the MPSs, and rose to 23,547 in the QIRs. The Minutes on the other hand, despite the shift occurred on February 2020, presented a higher average between 2020 and 2022 (7,513 vs 5,668). 
 
-For its part, Banco de México's communication over time shows an upward trend in readability levels. Inflation Reports consistently have readability levels between 46 and 57, which are considered difficult and fairly difficult to read according to the Flesch and INFLESZ scales. Monetary Policy Minutes and Statements, on the other hand, show a gradual tendency towards a standard level of readability, equivalent to a junior high grade level in the INFLESZ scale. Figure 2 illustrates these trends in the readability levels of Banco de México over time, which suggest that the central bank's communication has become more accessible and easier to read.
+The changes on the average extension of the publications is aligned with 2 major structural changes, the updated on Banxico's communication criteria and the COVID-19 pandemic. Thus, in spite of the promise to make shorter in extension the Minutes, it is possible that the increase in the average word count responded to better and greater deliberation process during the pandemic, its aftermath, the surge on inflation in mid 2021, and the needed to manage expectations while the macroeconomic and financial conditions remained highly volatile.
+
+For its part, Banco de México's communication over time shows an upward trend in readability levels. QIRs consistently have readability levels between 46 and 57, which are considered difficult and fairly difficult to read according to the Szigritzs and INFLESZ scales. MPMs and MPSs, on the other hand, show a gradual tendency towards a standard level of readability, equivalent to a junior high grade level in the INFLESZ scale. Figure 2 illustrates these trends in the readability levels of Banco de México over time, which suggest that the central bank's communication has become more accessible and easier to read.
 
 
 \noindent
@@ -570,11 +559,11 @@ A<- Banxico_readability %>%
                 "Fernández Huerta" = `Fernandez Huerta`,
                 "Flesch-Szigriszt" = `Flesch-Szigriszt`,
                 "Readability Mu" = Readability_MU,
-                "Avg" = (`Fernandez Huerta` + `Flesch-Szigriszt`+ 
-                        `Readability Mu` +  Szigriszt)/4) %>%
+                "Avg" = (`Fernandez Huerta` + `Flesch-Szigriszt` +  
+                             Szigriszt)/3) %>%
   dplyr::filter(Year %in% 2011:2022) %>%
   pivot_longer(cols = c(`Fernández Huerta`,`Flesch-Szigriszt`,
-                        `Readability Mu`, Szigriszt,`Avg`),                                    
+                         Szigriszt,`Avg`),                                    
                             names_to = "Flesch", 
                             values_to = "Flesch_index") 
 A%>%
@@ -600,7 +589,7 @@ level on the INFLESZ scale.")+
   scale_x_date(date_breaks = "3 year",
                date_labels = "%Y")+
   scale_y_continuous(name="INFLESZ Scale",
-               sec.axis = sec_axis(~.*1, name = "Gutiérrez Scale"))+
+               sec.axis = sec_axis(~.*1, name = "INFLESZ Scale"))+
   theme(legend.position = "bottom",
         plot.caption = element_text(hjust = 0),
         plot.caption.position = "plot") +
@@ -613,11 +602,115 @@ level on the INFLESZ scale.")+
              linetype = "dashed", size = 1) +
   geom_hline(yintercept = 65 , color = "#9ECAE1",
              linetype = "dashed", size =1)
-  
+rm(A)
 ```
 
 
-Despite these recent advances in the readability of the central bank, the documents are, on average, at the fairly difficult to read level according to the IFLESZ scale, i.e., Banco de México's communication might be better understood by people with at least a high school education, or who can easily interpret documents such as scientific dissemination articles or specialized press publications (See Table 8). Although, this approach of central bank readability should be interpreted as informative rather than as a recommendation to change the central bank's writing style. These traditional readability scores are useful for interpreting the results given the readability skills of a wide audience, and central banks should aim to make their communication accessible to a broad spectrum of people, often these types of documents are only used by decision-makers, market participants, or individuals with a high technical background who can easily understand the central bank's message.
+Despite these recent advances in the readability of the central bank, the documents are, on average, at the fairly difficult to read level according to the most of the scales, i.e., Banco de México's communication might be better understood by people with at least a high school education, or who can easily interpret documents such as scientific dissemination articles or specialized press publications (See Table 5). This is relevant, specially  due to the fact that INEGI´s 2020 Population and Housing Census shows that more than 50 percent of the population only has basic (elementary and junior high) or none education (See Figure 3). Therefore, the scope of Banxico´s publications still lag of clarity for a vast majority of the population.
+
+
+```{r Table 5 Average readability of Banco de Méxicos publications,echo=FALSE, message=FALSE, warning=FALSE}
+
+A<- Banxico_readability %>%
+  select(dates,document,statement,`Flesch-Szigriszt`,
+         `Flesch-Szigriszt grade`,`Fernandez Huerta`,
+         `Flesch-Szigriszt grade`,Gutierrez,
+         Szigriszt, Readability_MU, Year) %>%
+  mutate(FSZ = `Flesch-Szigriszt`,
+         FH = `Fernandez Huerta`,
+         Gut = Gutierrez,
+         SZ = Szigriszt,
+         Mu = Readability_MU,
+         "sf" = max(`Flesch-Szigriszt`)/max(Gutierrez),
+         "Avg" = (`Fernandez Huerta` + `Flesch-Szigriszt`+ Gutierrez)/3) %>%
+  pivot_longer(cols = c(FH,FSZ,SZ,Mu),                                    
+                            names_to = "Flesch", 
+                            values_to = "Flesch_index") %>%
+    group_by(document, Flesch) %>%
+    summarise(average = mean(Flesch_index))
+#A <- as.data.frame(t(A))
+
+A$scale <- c("Fairly difficult", "Fairly difficult","Difficult","Fairly difficult",
+             
+             "Fairly difficult","Fairly difficult","Difficult","Fairly difficult",
+             
+             "Fairly difficult","Fairly difficult","Difficult","Fairly difficult")
+
+A$grade <- c("High School", "High School", "-", "High School",
+             
+             "High School", "High School", "-", "High School",
+             
+             "High School", "High School", "-", "High School")
+
+A$type <- c("-","Dissemination and Specialized press","-","Literature and Dissemination",
+            
+            "-","Dissemination and Specialized press","-","Literature and Dissemination",
+            
+            "-","Dissemination and Specialized press","-","Literature and Dissemination")
+
+
+
+#color of the scale column
+color= c(rep("#C6DBEF",2),rep("#DEEBF7",1),rep("#C6DBEF",3),
+        rep("#DEEBF7",1),rep("#C6DBEF",3),
+        rep("#DEEBF7",1),rep("#C6DBEF",1))
+
+knitr::kable(A,
+             caption = "Average readability of Banco de México's publications",
+             align = "c",
+             booktabs = T,
+  col.names = c("Test","Document","Average" ,"Scale","Grade Level", "Type")) %>%
+      kable_styling(latex_options = c("hold_position"),
+                  full_width = T) %>%
+    collapse_rows(columns = 1:2, latex_hline = "major", valign = "middle") %>%
+    column_spec(c(3,4), background = color,
+              color = "black",bold = T) %>%
+    add_footnote(c("Source: Author's calculation."),
+                 notation = "none",
+                 threeparttable = F)
+rm(color)
+
+```
+
+```{r}
+
+library(scales)
+#DATA https://www.inegi.org.mx/temas/educacion/
+CENSUS_EDUC_LEV <- data.frame(level = c("No schooling","Basic",
+                                "Upper middle", "Superior", "Not specified"),
+                              percent = c(0.049,0.493,0.240,0.216,0.002))
+
+CENSUS_EDUC_LEV %>% 
+    ggplot(aes(x="",y=percent, fill =level)) +
+    geom_bar(stat = "identity", width = 1, color = "white")+
+    coord_polar("y", start = 0) +
+    labs(
+    title = "Figure 3: Population over 15 years old by educational level",
+    x = "",
+    y = "",
+    color = "",
+    fill = "",
+    caption = "Source: Author's calculation.
+Note: Basic = Elementary and Junior high; Upper middle = High School; Superior = University and Graduate.")+
+  theme_tufte(base_family = "serif",
+            base_size = 12)+
+  scale_fill_wsj()+
+    theme(legend.position = "left",
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot",
+        axis.text.x=element_blank())+
+ geom_text(aes(label = scales::percent(round(percent,2))), 
+            position = position_stack(vjust = 0.5),
+           show.legend = F, size =5,
+           family = "serif",
+           check_overlap = T, color = "white")
+    
+    
+    
+```
+
+
+Although, this approach of central bank readability should be interpreted as informative rather than as a recommendation to change the central bank's writing style. These traditional readability scores are useful for interpreting the results given the readability skills of a wide audience, and central banks should aim to make their communication accessible to a broad spectrum of people, often these types of documents are only used by decision-makers, market participants, or individuals with a high technical background who can easily understand the central bank's message.
 
 One of the reasons for being very cautious with traditional readability measures is that they punish with lower punctuation the more complex the words and the longer the sentences. However, in fields such as economics, there are many complex words that are easy to understand, and in many cases, longer sentences can provide a clear message about the information the central bank wants to convey.[^32] Joan Huang and John Simon also emphasize that better readability does not mean the central bank is successfully explaining its actions and the motivation behind them.[^33] The reason is that while a comprehensive explanation may not be simple or easily understood, a simple explanation may not be accurate.
 
@@ -627,52 +720,14 @@ One of the reasons for being very cautious with traditional readability measures
 [^33]: Joan Huang and John Simon (2021).    
 
 
-```{r Table 8 Readability Measures- Descriptive Statics,echo=FALSE, message=FALSE, warning=FALSE}
 
-A<- Banxico_readability %>%
-  select(dates,document,statement,`Flesch-Szigriszt`,
-         `Flesch-Szigriszt grade`,`Fernandez Huerta`,
-         `Flesch-Szigriszt grade`,Gutierrez,Year) %>%
-  mutate(FSZ = `Flesch-Szigriszt`,
-         FH = `Fernandez Huerta`,
-         Gut = Gutierrez,
-         "sf" = max(`Flesch-Szigriszt`)/max(Gutierrez),
-         "Avg" = (`Fernandez Huerta` + `Flesch-Szigriszt`+ Gutierrez)/3) %>%
-  pivot_longer(cols = c(FH,FSZ,Gut),                                    
-                            names_to = "Flesch", 
-                            values_to = "Flesch_index") %>%
-    group_by(document, Flesch) %>%
-    summarise(mean = mean(Flesch_index),
-              median = median(Flesch_index),
-              sd = sd(Flesch_index),
-              min = min(Flesch_index),
-              max = max(Flesch_index))
-#A <- as.data.frame(t(A))
-
-
-knitr::kable(A,
-             caption = "Readability Measures- Descriptive Statics",
-             align = "c",
-             booktabs = T,
-  col.names = c("Test","Document","Mean","Median","SD",
-                "Min.", "Max.")) %>%
-      kable_styling(latex_options = c("hold_position"),
-                  full_width = T) %>%
-    add_footnote(c("Source: Author's calculation."),
-                 notation = "none",
-                 threeparttable = F) %>%
-  collapse_rows(columns = 1:3, latex_hline = "major", valign = "middle")
-
-```
-
-
-That said, the reality is that there has been an upward trend in the amount of information Banco de México communicates. In addition, the [Pearson] correlation between the linguistic variables yields significant information (See Figure 3). The readability scores within each of the documents are highly correlated. This is because all the formulas use similar variables and parameters, thus the information in each of them is a linear combination of the others. Similarly, word and sentence count have a correlation of about 1 (MPD [0.9], MPM [0.9], IQR [1]). It is understandable that word length and sentence length also follow the same pattern.
+That said, the reality is that there has been an upward trend in the quantity and quality of the information Banco de México communicates. In addition, the [Pearson] correlation between the linguistic variables yields significant information (See Figure 3 and Appendix B). The readability scores within each of the documents are highly correlated. This is because all the formulas use similar variables and parameters, thus the information in each of them is a linear combination of the others. Similarly, word and sentence count have a correlation of about 1 (MPD [0.9], MPM [0.9], IQR [1]). It is understandable that word length and sentence length also follow the same pattern.
 
 The most interesting relationships are those between the word and sentence counts and the readability scores. While there is little or no relationship between these variables in the Inflation Reports, Monetary Policy Statements and Minutes reflect very different patterns. In the former, word count correlates highly negatively with the readability scores and sentence count displays a weaker, but still negative relation. On the other hand, Minutes present a strong and positive correlation between sentence count and readability scores, whereas word count has a moderately positive correlation.
-   
+
 
 \noindent
-```{r Figure 3  Scatter Plots, echo=FALSE, fig.height=8, fig.width=6, message=FALSE, warning=FALSE}
+```{r Figure 3  Scatter Plots, echo=FALSE, fig.height=4.5, fig.width=6, message=FALSE, warning=FALSE}
 #install.packages("GGally")
 library(GGally)
 source("multiplot.R")
@@ -685,113 +740,105 @@ A<- Banxico_readability %>%
                 "sf" = max(`Flesch-Szigriszt`)/max(Gutierrez),
               #  "Gutiérrez" = Gutierrez,
                 "Gutiérrez" = sf*`Gutierrez`,
-                "Avg" = (`Fernandez Huerta` + `Flesch-Szigriszt`+ `Gutiérrez`)/3) %>%
-  dplyr::filter(Year %in% 2011:2022)
+                "Avg" = (`Fernandez Huerta` + `Flesch-Szigriszt`+ `Gutiérrez`)/3)
 
-COR <- A %>%
+COR_MPM <- A %>%
   select(dates,Year,document,words,sentences,
-         `Flesch-Szigriszt`,`Fernandez Huerta`,Gutierrez,Avg) %>%
-  mutate(sentences = as.numeric(sentences)) %>%
-  group_by(document)
-
-A <- COR %>%
-    filter(document == "MPS") %>%
-    ggplot(aes(x = `Flesch-Szigriszt`, y= words)) +
+         `Flesch-Szigriszt`) %>%
+  mutate(sentences = as.numeric(sentences),
+         words = as.numeric(words)) %>%
+    pivot_longer(cols = c(sentences,words),
+                            names_to = "Ling", 
+                            values_to = "Ling_vals") %>%
+    group_by(document) %>%
+    filter(document == "MPM") %>%
+    ggplot(aes(x = `Flesch-Szigriszt`, y = Ling_vals)) +
     geom_point() +
-    geom_smooth(method = "lm",
-                color = "brown1") +
+    geom_smooth(aes(color = Ling),
+                method = "lm") +
     labs(title = "Figure 3: Linguistic Correlations",
          subtitle = "
-         MPS (FSZ-W)",
+         MPM",
          y = "",
-         x = "") +
+         x = "Flesch-Szigriszt score") +
     theme_tufte(base_family = "serif",
             base_size = 12)+
-    scale_color_wsj()
+    scale_color_wsj() +
+      theme(legend.position = "none",
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot")+
+      facet_grid(
+             rows = vars(Ling),
+             shrink = T, scales = "free")
 
-B <- COR %>%
+COR_MPS <- A %>%
+  select(dates,Year,document,words,sentences,
+         `Flesch-Szigriszt`) %>%
+  mutate(sentences = as.numeric(sentences),
+         words = as.numeric(words)) %>%
+    pivot_longer(cols = c(sentences,words),
+                            names_to = "Ling", 
+                            values_to = "Ling_vals") %>%
+    group_by(document) %>%
     filter(document == "MPS") %>%
-    ggplot(aes(x = `Flesch-Szigriszt`, y= sentences)) +
+    ggplot(aes(x = `Flesch-Szigriszt`, y = Ling_vals)) +
     geom_point() +
-    geom_smooth(method = "lm",
-                color = "brown1")+
+    geom_smooth(aes(color = Ling),
+                method = "lm") +
     labs(title = "",
     subtitle = "
-         MPS (FSZ-S)",
+         MPS",
          y = "",
-         x = "")+
+         x = "Flesch-Szigriszt score") +
     theme_tufte(base_family = "serif",
             base_size = 12)+
-    scale_color_wsj()
+    scale_color_wsj() +
+      theme(legend.position = "none",
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot")+
+      facet_grid(
+             rows = vars(Ling),
+             shrink = T, scales = "free")
 
-C <- COR %>%
-    filter(document == "MPM") %>%
-    ggplot(aes(x = `Flesch-Szigriszt`, y= words)) +
-    geom_point() +
-    geom_smooth(method = "lm",
-                color = "royalblue")+
-    labs(title = "",
-        subtitle = "
-        MPM (FSZ-W)",
-         y = "",
-         x = "")+
-    theme_tufte(base_family = "serif",
-            base_size = 12)+
-    scale_color_wsj()
 
-D <- COR %>%
-    filter(document == "MPM") %>%
-    ggplot(aes(x = `Flesch-Szigriszt`, y= sentences)) +
-    geom_point() +
-    geom_smooth(method = "lm",
-                color = "royalblue") +
-    labs(title = "",
-        subtitle = "
-        MPM (FSZ-S)",
-         y = "",
-         x = "")+
-    theme_tufte(base_family = "serif",
-            base_size = 12)+
-    scale_color_wsj()
 
-E <- COR %>%
+COR_QIR <- A %>%
+  select(dates,Year,document,words,sentences,
+         `Flesch-Szigriszt`) %>%
+  mutate(sentences = as.numeric(sentences),
+         words = as.numeric(words)) %>%
+    pivot_longer(cols = c(sentences,words),
+                            names_to = "Ling", 
+                            values_to = "Ling_vals") %>%
+    group_by(document) %>%
     filter(document == "QIR") %>%
-    ggplot(aes(x = `Flesch-Szigriszt`, y= words)) +
+    ggplot(aes(x = `Flesch-Szigriszt`, y = Ling_vals)) +
     geom_point() +
-    geom_smooth(method = "lm",
-                color = "darkgreen")+
+    geom_smooth(aes(color = Ling),
+        method = "lm") +
     labs(title = "",
-         subtitle = "
-         QIR (FSZ-W)",
+    subtitle = "
+         QIR",
          y = "",
-         x = "")+
+         x = "Flesch-Szigriszt score",
+    color ="") +
     theme_tufte(base_family = "serif",
             base_size = 12)+
-    scale_color_wsj()
-
-G <- COR %>%
-    filter(document == "QIR") %>%
-    ggplot(aes(x = `Flesch-Szigriszt`, y= sentences)) +
-    geom_point() +
-    geom_smooth(method = "lm",
-                color = "darkgreen")+
-    labs(title = "",
-         subtitle = "
-         QIR (FSZ-S)",
-         y = "",
-         x = "")+
-    theme_tufte(base_family = "serif",
-            base_size = 12)+
-    scale_color_wsj()
+    scale_color_wsj() +
+      theme(legend.position = "none",
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot")+
+      facet_grid(
+             rows = vars(Ling),
+             shrink = T, scales = "free")
 
 
 
+multiplot(COR_MPM,COR_MPS,COR_QIR,cols = 3)
 
-  
-multiplot(A,C,E,B,D,G,
-          cols = 2)
 ```
    > \footnotesize Source: Author's calculation.
+
 
 
 Several conclusions can be drawn from this analysis. First, even when Inflation Reports have increased in length over time, there is little or no relationship with the clarity of their content. It is reasonable to think that this is due to the fact that the reports are long documents with a lot of descriptive information on the economy over the previous quarter, so although they include relevant information for the public, such as central bank's forecasts and balance of risk, their purpose is rather informative and barely include forward guidance elements.
@@ -863,6 +910,9 @@ Note: Smoothing data using local regression techniques.")+
 
 
 ```
+
+
+
 
 
 
@@ -1115,8 +1165,8 @@ A<-COR %>%
          ZS = Szigriszt,
          Mu = `Readability Mu`,
          ) %>%
-  select(W,ST,FSZ,
-         FH,Gut,ZS,Mu,Avg) %>%
+  select(W,ST,Mu,FSZ,
+         FH,Gut,ZS,Avg) %>%
   ggcorr(label = F,
          geom = "tile",
          family = "serif",
@@ -1139,8 +1189,8 @@ B<-COR %>%
          ZS = Szigriszt,
          Mu = `Readability Mu`,
          ) %>%
-  select(W,ST,FSZ,
-         FH,Gut,ZS,Mu,Avg) %>%
+  select(W,ST,Mu,FSZ,
+         FH,Gut,ZS,Avg) %>%
   ggcorr(label = F,
          geom = "tile",
          family = "serif") +
@@ -1160,8 +1210,8 @@ C<-COR %>%
          ZS = Szigriszt,
          Mu = `Readability Mu`,
          ) %>%
-  select(W,ST,FSZ,
-         FH,Gut,ZS,Mu,Avg) %>%
+  select(W,ST,Mu,FSZ,
+         FH,Gut,ZS,Avg) %>%
   ggcorr(label = F,
          geom = "tile",
          family = "serif")+
@@ -1174,4 +1224,6 @@ C<-COR %>%
   
 multiplot(A,B,C,
           cols = 2)
+
+rm(A,B,C)
 ```
