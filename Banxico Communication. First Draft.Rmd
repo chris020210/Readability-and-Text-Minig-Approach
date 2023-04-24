@@ -8,7 +8,7 @@ output:
     df_print: paged
   word_document: default
 fontsize: 12pt
-linestrech: 1.15
+linestrech: 1.5
 linkcolor: cyan
 urlcolor: cyan
 ---
@@ -49,39 +49,36 @@ Banxico_readability$document[Banxico_readability$document == "MPD"] <- "MPS"
 \section{1. Introduction}
 
 
-For central banks, communication is not only desirable but necessary. This follows the rationale that, on the one hand, central bank communication may have the power to shape expectations of future macroeconomic outcomes, potentially improving the transmission of monetary policy, and on the other, these institutions face the need for greater transparency since central bankers are not democratically elected, but are appointed by the executive branch of government, and for that reason, in a democratic society transparency is necessary for their actions to be judged by the public they serve.
+For central banks, communication is crucial because it serves two important purposes. First, it may have the power to shape public's expectations of future macroeconomic outcomes, which can impact financial market behavior and, in turn, potentially affect the economy. Central banks can use their communication channels to provide guidance and signals about their future policy actions, which can help to anchor expectations and improve the transmission of monetary policy.
+
+Second, as independent authorities appointed by the executive branch of government, central banks operate outside the realm of direct democratic control. In a democratic society, transparency is essential to ensure that these institutions are accountable to the public they serve. Central bank communication can help to increase transparency by providing information about the central bank's policy decisions, the reasoning behind those decisions, and the economic conditions that influence them.
 
 The latter has been extensively studied by the literature on transparency[^1], leading to the creation of various indicators associated with these issues, and to a consensus that central banks should share information on their objectives, their perspective on economic developments, as well as the monetary policy decision-making process. 
 
-[^1]: See Fry et al. (2000), Blinder et al. (2001), Geraats (2002; 2006), Eijffinger and Geraats (2006), Cujisen and Dermertzis (2007), Čihák (2007), Dincer and Eichengreen (2009; 2014), Kedan and Stuart (2014), Dincer, Eichengreen, y Geraats (2019; 2022)
+[^1]: See Fry et al. (2000), Blinder et al. (2001), Geraats (2002; 2006), Eijffinger and Geraats (2006), Cujisen and Dermertzis (2007), Čihák (2007), Dincer and Eichengreen (2009; 2014), Kedan and Stuart (2014), Dincer, Eichengreen, y Geraats (2019; 2022).
 
-The changes originated, both in theory and practice, over the past 30 years, have enabled that monetary authorities tend to communicate more and share a wider range of information with the public. However, it should be noted that transparency does not always imply communication, nor does it always imply that the information that is shared is clear or easily understood.
+Inflation targeting central banks, in particular, need to be transparent to foster openness and accountability. However, transparency alone does not guarantee effective communication, and the information shared may not always be easily understood. Given the great power that central banks have to potentially shape expectations and affect the economy, it is not only important for central banks to increase the amount of information available but convey clear messages that explain their decisions, rationale, and how monetary policy works. Communication must be perspicuous, intelligible, concise, relevant, and encourage two-way channels of communication to allow for public scrutiny.
 
-Given the great power that central banks have to potentially shape expectations and affect the economy, it is not only important to increase the amount of information shared, but to ensure that it is clear and intelligible, provides relevant insights, encourages two-way channels and allows for public scrutiny. In addition, care must be taken to ensure that the information shared can be understood by the widest possible audience, not just highly specialized experts and professional observers who can easily interpret the central bank's message.
+In addition, it is crucial that central banks make their information accessible to a wider audience, not just highly specialized experts, analysts and professional watchers who can easily interpret the central bank's message. Studies have shown that macroeconomic outcomes can be improved by aligning households’ and firms’ expectations with a central bank’s policy objectives.[^2]
 
-In this regard, in the past few years, there is growing literature using text analysis aimed to interpret both the quantity and quality of the communication that central banks deliver through official documents and other central banking-related text. Some of these works emphasize readability and perspicuity (insert bibliography), whereas others scrutinize central bankers' communication by applying machine learning and dictionary techniques(insert bibliography).
+[^2]: See [(Deslongchamps, 2018).](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/)
 
-In the special case of Mexico's national central bank, Banco de México (Banxico), not many pieces of research focus on communication. To the extent of my knowledge, only López Marmolejo (2013) and Taborda (2014) have formally approached this topic before. The former constructs a communication index by identifying relevant phrases in monetary policy statements and, by incorporating it into a standard Taylor rule, concludes that Banxico sends relevant signals to the markets that allow forecasting the monetary policy rate. Taborda for its part, implements text analysis techniques to study procedural transparency in the minutes of the Board of Directors. However, the scope of his research is limited due to the information available at its time (24 minutes).  
+This means that simple and clear communication can be a powerful tool for central banks to align households' and firms' expectations with their policy objectives. By clearly and transparently communicating their goals, perspectives on economic developments, and the decision-making process, central banks can help the public and markets better understand their actions and intentions. This, in turn, can help to build trust and confidence in the central bank, which can improve the effectiveness of monetary policy. Moreover, when households and firms have a better understanding of the central bank's objectives and the factors that influence its decisions, they are more likely to make informed decisions that are in line with the central bank's goals. This can help to reduce the costs of adjustment to changes in monetary policy and can lead to a more stable and predictable economic environment.
 
-This paper aims to fill the existing gap in the literature by representing a primer contribution to analyze the readability and perspicuity of Banco de México's official documents over time. I address the question of whether there have been significant changes in the central bank's communication, especially after the implementation of an Inflation Forecast Targeting (IFT) strategy in 2018 and the update of the Board of Governors' communication criteria in 2020. To do so, I review the main changes to the communication strategy in recent years. I then compute classical measures of readability and perspicuity on monetary policy statements, minutes and quarterly inflation reports, which are considered as a proxy for the clarity and intelligibility of central banks' wording. With the information gathered, I focus on determining whether there is evidence of a structural break in the readability and perspicuity of Banxico's publications, using time series techniques. In particular, I perform unit root tests that allow for one and two endogenous structural breaks . [insert relevant finding from unit root analysis].
+In the special case of Mexico's national central bank, Banco de México (Banxico) has made advances towards greater transparency and effective communication over the past two decades. Since the formal adoption of an Inflation Targeting Regime (ITR) in 2001, Banxico has released bulletins, that explain their monetary policy decisions, and quarterly reports aimed to analyze inflation and economic developments to meet the objective of maintaining low and stable inflation. Since then, the communication strategy has undergone many modifications.
 
-The rest of the paper is organized as follows. Section 2 summarizes the literature on central bank communication. Section 3 present the data and review the evolution of Banco de México's communication strategy. Section 4 describes the evolution over the period 2011 to 2022 of the linguistic properties of Banxico's publications according to various measures. Section 5 contains the main statistical analysis of this paper, presenting the structural change tests and their results. Finally, Section 6 concludes.
+This paper aims to address two important questions: Have there been significant changes in Banco de México's communication over time? Has the information shared by the central bank become more accessible to the majority of the population and to what extent? To answer these questions, I first review the main changes to Banxico's communication strategy in recent years. I then compute classical measures of readability and perspicuity on monetary policy statements, minutes and quarterly inflation reports, which are considered as a proxy for the clarity and intelligibility of central banks' language. With the information gathered, I focus on determining whether there is evidence of a structural break in the readability and perspicuity of Banxico's publications, using time series techniques. In particular, unit root tests are performed that allow for one and two endogenous structural breaks. The findings from the unit root analysis suggest [insert relevant finding from unit root analysis].
+
+The rest of the paper is organized as follows. Section 2 summarizes the literature on central bank communication. Section 3 present the data and review the evolution of Banco de México's communication strategy. Section 4 describes the evolution over the period 2011 to 2022 of the linguistic properties of Banxico's publications according to various measures. Section 5 contains the main statistical analysis of this paper, presenting the structural change tests and their results. Finally, Section 6 concludes with a summary of the findings and implications for central bank communication.
 
 
 # 2. The central banker's enigma
 
-\noindent Ever since Alan Greenspan stressed to "mumble with great incoherence"[^2], the world of central banking and monetary policy has undergone a major evolution. As stated by Ben Bernanke, monetary policy is 98 percent talk and only two percent action, hence, the ability to shape market expectations of future policy through public statements is one of the most powerful tools the central banks have.[^3]
+\noindent Central banking has undergone significant changes over the past few decades. Today, central banks around the world are more independent and transparent than ever before. This wasn't always the case. In the past, central banks were often subject to political pressures and had limited transparency.
 
-[^2]: These words were uttered by Alan Greenspan during his appearance before the Senate in 1987.
+Prior to 1980, the consensus was that central bankers should be secretive and mysterious authorities with a high degree of opacity. It was believed that central banks should maintain little or no communication with the public and markets, or if so, convey coded messages extremely difficult to read and understand. 
 
-[^3]: See [Bernanke (2015).](https://www.brookings.edu/blog/ben-bernanke/2015/03/30/inaugurating-a-new-blog/)
-
-
-However, the tendency to increase transparency and communication channels of the central banks was not the result of spontaneous generation, it was accompanied by progress of economic theory and a lot of empirical evidence. The experience of the "Great Inflation" and developments in Time Inconsistency and Institutional Design Theory highlighted the need for central bankers with a high degree of independence and credibility.[^4]
-
-[^4]: See [Kydland and Prescott (1977)](https://www.jstor.org/stable/1830193), [Calvo (1978)](https://www.jstor.org/stable/pdf/1913836.pdf), [Barro and Gordon (1983)](https://www.sciencedirect.com/science/article/pii/030439328390051X), [Rogoff (1985)](https://www.jstor.org/stable/1885679).
-
-Prior to 1980, the consensus was that central bankers should be secretive and mysterious authorities with a high degree of opacity. It was believed that central banks should maintain little or no communication with the public and markets, or if so, convey coded messages extremely difficult to read and understand. In this regard, Milton Friedman commented that the most important variables in the central bank's lost function are, on the one hand, avoiding accountancy, and on the other, achieving public prestige.[^5]
+In the 1960s, economist Milton Friedman famously commented that the most important variables in the central bank's lost function are, on the one hand, avoiding accountancy, and on the other, achieving public prestige.[^5] 
 
 [^5]: See [Faust and Svensson (2001)](https://www.jstor.org/stable/2648735).
 
@@ -93,95 +90,107 @@ Montagu Norman, former Bank of England chairman, is recognized as having coined 
 
 [^7]: King (2000) as quoted in Lynsey et al. (2005).
 
-Even though this view of central banking as full of mysticism, secrecy, and opacity has remained at the heart of some scholars and central bankers, the changes that originated, both in theory and practice, triggered a radical transformation toward greater independence, and to the adoption of inflation targeting schemes, which allowed central banks to set clearer and more specific targets, and to gain credibility on them. While in the 1980s and 1990s the debate was about central bank independence and inflation targets, the 2000s saw the emergence of quite a bit of literature focused on the transparency of monetary authorities and central bank's communication channels.
+Even though this view of central banking as full of mysticism, secrecy, and opacity has remained at the heart of some scholars and central bankers, the experience of the "Great Inflation" and developments in Time Inconsistency and Institutional Design Theory highlighted the need for central bankers with a high degree of independence and credibility.[^8]
 
-Alan Blinder considers that the shift toward greater openness and transparency represented a "Quiet Revolution".[^8] This allowed the transition from the prototype of the secretive and ambiguous central bank to a central bank design that should be open, intelligible and honest.
+[^8]: See [Kydland and Prescott (1977)](https://www.jstor.org/stable/1830193), [Calvo (1978)](https://www.jstor.org/stable/pdf/1913836.pdf), [Barro and Gordon (1983)](https://www.sciencedirect.com/science/article/pii/030439328390051X), [Rogoff (1985)](https://www.jstor.org/stable/1885679).
 
-[^8]: See [Blinder (2004).](https://yalebooks.yale.edu/book/9780300100877/the-quiet-revolution/)
+The changes that originated, both in theory and practice, triggered a radical transformation toward greater independence. This included the adoption of inflation targeting schemes, which sought to anchor inflation expectations by publicly announcing a numerical target for inflation. This allowed central banks to set clearer and more specific targets, and to gain credibility on them. All of these changes were a significant departure from the past, where central banks often kept their goals and methods of operation secret.
 
-The work of Christina and David Romer (1989)[^9] is a seminal contribution to communication literature. Applying the so-called _narrative approach_, they investigate a set of periods in which Federal Reserve wording was restrictive to study its relationship to the real effects of monetary shocks. They find that narratives, i.e., the historical record, such as descriptions of the process and reasoning that led to the monetary authority's decisions and accounts of the sources of monetary disturbances, are related to the identification of multiple macroeconomic outcomes.
+While in the 1980s and 1990s the debate was about central bank independence and inflation targets, the growing power of central banks set the need for opennes and accountancy. Therefore, the 2000s saw the emergence of quite a bit of literature focused on the transparency of monetary authorities and central bank's communication channels.
 
-[^9]: See [Romer and Romer (1989).](https://www.nber.org/system/files/chapters/c10964/c10964.pdf)
+Alan Blinder, former Vice Chairman of the Federal Reserve, called this transformation the "Quiet Revolution".[^9] He argued that the shift towards greater openness and transparency would improve the effectiveness of monetary policy. This revolution led to central banks becoming more open and transparent about their operations and decision-making processes. The prototype of the secretive and ambiguous central bank turned to a central bank design that should be open, intelligible and honest.
 
-Later on, Alan Blinder noted, during a lecture at the London School of Economics, that greater openness could improve the effectiveness of monetary policy because the expectations about the central bank's future behavior provide the essential link between short-term and long-term interest rates; in turn, a more open central bank naturally shapes expectations by providing the markets with more information about its view of the fundamental factors guiding monetary policy, becoming more predictable to markets, and making market reactions more predictable to itself.[^10]
+[^9]: See [Blinder (2004).](https://yalebooks.yale.edu/book/9780300100877/the-quiet-revolution/)
 
-[^10]: See [Blinder (1999).](http://www.artsrn.ualberta.ca/econweb/landon/1999%20Blinder%20Central%20Banking.pdf)
+The work of Christina and David Romer (1989)[^10] is a seminal contribution to communication literature. Applying the so-called _narrative approach_, they investigate a set of periods in which the Federal Reserve's verbal stance was restrictive. They find that narratives, i.e., the historical record, the descriptions of the process and reasoning that led to the monetary authority's decisions and accounts of the sources of monetary disturbances, are related to multiple macroeconomic outcomes, such as the real effects of monetary shocks.
 
-In 2001, at the Federal Reserve Jackson Hole Symposium, Michael Woodford said that the success of the monetary policy is not so much a matter of effective control of the overnight interest rate, nor effective control of inflation, but of successfully influencing the evolution of market expectations about these variables in the desired way, therefore, transparency is valuable for the effective conduct of monetary policy.[^11]
+[^10]: See [Romer and Romer (1989).](https://www.nber.org/system/files/chapters/c10964/c10964.pdf)
 
-[^11]: See [Woodford (2001).](https://www.kansascityfed.org/Jackson%20Hole/documents/3495/papers-S02WOOD.pdf)
+Later on, Alan Blinder noted, during a lecture at the London School of Economics, that greater openness could improve the effectiveness of monetary policy. He argued that expectations about the central bank's future behavior provide the essential link between short-term and long-term interest rates; in turn, a more open central bank naturally shapes expectations by providing the markets with more information about its view of the fundamental factors guiding monetary policy, becoming more predictable to markets, and making market reactions more predictable to itself.[^11]
 
-That same year, Alan Greenspan - who had previously declared himself to "mumble with great incoherence" - recognized the importance of transparency and communication with the public[^12]:
+[^11]: See [Blinder (1999).](http://www.artsrn.ualberta.ca/econweb/landon/1999%20Blinder%20Central%20Banking.pdf)
+
+At the Federal Reserve Jackson Hole Symposium in 2001, Michael Woodford argued that the success of the monetary policy is not so much a matter of effective control of the overnight interest rate, nor effective control of inflation, but of successfully influencing the evolution of market expectations about these variables in the desired way, therefore, transparency is valuable for the effective conduct of monetary policy.[^12]
+
+[^12]: See [Woodford (2001).](https://www.kansascityfed.org/Jackson%20Hole/documents/3495/papers-S02WOOD.pdf)
+
+That same year, Alan Greenspan, historically acknowledged as a master of the esoteric art of central banking, claimed the importance of transparency and communication with the public[^13]:
 
   >> \footnotesize The historical record indicates that the increased transparency of the Federal Reserve has helped improve the functioning of markets and enhanced our credibility [...] openness is more than just useful in shaping better economic performance. Openness is an obligation of a central bank in a free and democratic society. U.S. elected leaders chose to vest the responsibility for setting monetary policy in an independent entity, the Federal Reserve. Transparency of our activities is the means by which we make ourselves accountable to our fellow citizens to aid them in judging whether we are worthy of that task.
   
-[^12]: See [Greenspan, (2001).](https://www.federalreserve.gov/boarddocs/speeches/2001/20011011/default.htm)
+[^13]: See [Greenspan, (2001).](https://www.federalreserve.gov/boarddocs/speeches/2001/20011011/default.htm)
   
-Already in the 2000s, in a thorough analysis, Kohn and Sack (2004)[^13] showed that central bank's talk contain market-relevant information. By testing for volatility in asset prices due to different types of Federal Reserve speaks, they found that statements and policy actions can serve as effective substitutes for one another, at least in the short run. Their analysis conclude that a credible central bank can achieve nearly the same result by implementing a policy action or by promising to implement that action at the next meeting.
+Later, in a thorough analysis, Kohn and Sack (2004)[^14] showed that central bank's talk contain market-relevant information. By testing for volatility in asset prices due to different types of Federal Reserve speaks, they found that statements and policy actions can serve as effective substitutes for one another, at least in the short run. Their analysis conclude that a credible central bank can achieve nearly the same result by implementing a policy action or by promising to implement that action at the next meeting.
 
-[^13]: See [Kohn and Sack (2004).](https://www.federalreserve.gov/pubs/feds/2003/200355/200355pap.pdf)
+[^14]: See [Kohn and Sack (2004).](https://www.federalreserve.gov/pubs/feds/2003/200355/200355pap.pdf)
 
-Ben Bernanke, during his time at the Federal Reserve, constantly advocated for greater transparency, communication and the formal adoption of inflation targeting. Indeed, following the early experience of the Bank of Japan, his paper co-authored with Vincent Reinhart and Brian Sack (2004)[^14] was one of the first to conclude that when the monetary authority is constrained by the Zero Lower Bound (ZLB), unconventional measures, such as communication and forward guidance, can successfully affect expectations of future policy and thus longer-term yields.
+As stated by Ben Bernanke, former Fed's chairman, monetary policy is 98 percent talk and only two percent action, hence, the ability to shape market expectations of future policy through public statements is one of the most powerful tools the central banks have.[15] During his time at the Federal Reserve, he constantly advocated for greater transparency, communication and the formal adoption of inflation targeting.
 
-[^14]: See [Bernanke, Reinhart and Sack (2004).](https://www.federalreserve.gov/pubs/feds/2004/200448/200448pap.pdf)
+[^15]: See [Bernanke (2015).](https://www.brookings.edu/blog/ben-bernanke/2015/03/30/inaugurating-a-new-blog/)
 
-After this first generation of empirical studies, Blinder et al. (2008)[^15] surveyed the literature existent at the time, pointing out that even when there was no evident consensus about the optimal communication policy, "communication can be an important and powerful part of the central bank’s toolkit since it has the ability to move financial markets, to improve the predictability of monetary policy, and the potential to help the monetary authorities achieve macroeconomic objectives such as low and stable inflation".
+Indeed, following the early experience of the Bank of Japan, Bernanke's paper co-authored with Vincent Reinhart and Brian Sack (2004)[^16] was one of the first to conclude that when primary tools are constrained and can no longer support central bank's objectives, unconventional measures, such as communication and forward guidance, can successfully affect expectations about future policy and longer-term yields, thus providing additional support for monetary policy.
 
-[^15]: See [Blinder, Ehrmann, Fratzscher, De Haan and Jansen (2008).](https://www.ecb.europa.eu/pub/pdf/scpwps/ecbwp898.pdf)
+[^16]: See [Bernanke, Reinhart and Sack (2004).](https://www.federalreserve.gov/pubs/feds/2004/200448/200448pap.pdf)
 
+After the first generation of empirical studies, Blinder et al. (2008)[^17] surveyed the literature existent at the time, pointing out that even when there was no evident consensus about the optimal communication policy, "communication can be an important and powerful part of the central bank’s toolkit since it has the ability to move financial markets, to improve the predictability of monetary policy, and the potential to help the monetary authorities achieve macroeconomic objectives such as low and stable inflation".
 
-Despite growing evidence of the benefits of transparency and communication, it was not until the Global Financial Crisis (GFC) that major central banks began to formally introduce communication tools as part of their toolkit.[^16] Since then, we have seen the role and impact of central bank communication increase steadily. In the past, central banks used to wonder if there was a good reason to communicate something; now they wonder if there is a good reason not to communicate. In the words of the governor of the Central Bank of Ireland, Gabriel Makhlouf, the days of "mumbling with great incoherence" are over.[^17]
-
-[^16]: See [Bernanke (2022).](https://wwnorton.com/books/9781324020462)
-[^17]: See [Makhlouf (2020).](https://www.centralbank.ie/news/article/speech-end-of-mumbling-incoherence-governor-makhlouf-26-feb-2020)
-
-Nowadays, in the literature and the world of central banking, there is a clear consensus regarding the role of communication tools in indirectly influencing the yield curve. While the policy rate is seen as the primary tool to influence directly very short-term interest rates, the central bank's communication generally is seen as a supportive tool that can influence long-term interest rates. This management of expectations approach was widely adopted by major central banks and other emerging markets authorities during the GFC due to primary tools constricted by the ZLB[^18], the growing importance of financial stability, and better understanding on how market expectations can affect market prices.
+[^17]: See [Blinder, Ehrmann, Fratzscher, De Haan and Jansen (2008).](https://www.ecb.europa.eu/pub/pdf/scpwps/ecbwp898.pdf)
 
 
-[^18]: For instance see [Den Haan, Caselli, Chadha  and Armstrong (2015).](https://cepr.org/voxeu/columns/monetary-policy-zero-lower-bound)
-
-The growing power of monetary authorities and the importance of market expectations in the transmission of monetary policy has yielded new definitions of monetary policy strategy and the central banker toolkit. In the aftermath of the GFC, the central bank's role has been characterized by an increase in procedural transparency and an evolution of clarity in communication. With the development of communication tools, a lot of literature has emerged trying to understand the impact of central bank's communication on market expectations, signals on the yield curve, the effective transmission of monetary policy and its application under the ZLB in developed countries[^19]. 
-
-For example, Campbell et al. (2012) and Campbell (2013), using both an empirical an theoretical approach, showed how the Fed, through public announcements and forward guidance, can successfully influence assets prices and forecast over a variety of many macroeconomics variables. Their work also derived in new definitions of communication and the types of forward guidance a monetary authority can deliver.[^20]
-
-[^19]: See [Charbonneau and Rennison (2015).](https://www.bankofcanada.ca/2015/11/staff-discussion-paper-2015-15/), [Smith and Becker (2015)](https://www.kansascityfed.org/Economic%20Bulletin/documents/412/macrobulletins-Has%20Forward%20Guidance%20Been%20Effective%3F.pdf), [McKay, Nakamura, and Steinsson (2016)](https://www.aeaweb.org/articles?id=10.1257/aer.20150063), [Angeletos, George-Marios, and Chen Lian (2018)](https://www.aeaweb.org/articles?id=10.1257/aer.20161996), [Dell'Ariccia, Rabanal and Sandri (2018)](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.147), [Altavilla, Brugnolini, Gürkaynak, Motto and Ragusa (2019)](https://www.sciencedirect.com/science/article/pii/S0304393219301497), [Bernanke, Kiley and Roberts (2019)](https://www.aeaweb.org/articles?id=10.1257/pandp.20191082), [Bernanke (2020)](https://www.aeaweb.org/articles?id=10.1257/aer.110.4.943).
-[^20]: See [Campbell et al. (2012)](https://www.brookings.edu/wp-content/uploads/2012/03/2012a_evans.pdf) and [Campbell (2013).](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwicl8WV7bb-AhVllGoFHV14DzMQFnoECAsQAQ&url=https%3A%2F%2Fwww.chicagofed.org%2F~%2Fmedia%2Fpublications%2Feconomic-perspectives%2F2013%2F4q2013-part1-campbell-pdf.pdf&usg=AOvVaw1SCPs_bzDS02Gmsl3nTnwk)
-
-At the same time, new research has focused on the application of text mining and text analysis tools. The latter, through Natural Language Processing (NLP) and the application of classical readability tests, aim to decipher the clarity and semantic content of central bank communication.
-
-Cihak, Smídková and Bulir (2008) based on an extensive analysis of ECB’s inflation forecasts, inflation targets, and verbal descriptions of inflation factors, risk assessments, and monetary pillar information in monthly bulletins and press statement, conclude that ECB's written communication is clear about 95 percent of the time. Jansen (2010) illustrates the importance of transparent communication about monetary policy by comparing the readability statistics of the Federal Reserve Chairman's Humphrey-Hawkins testimonies and their effect on financial market volatility. Cihák, Jansen and Bulíř (2012; 2013) using a similar methodology for press statements and inflation reports of 7 central banks, show that the relationship between the clarity of communications and the broader economic environment has a significant effect, specially for topics such as inflationary risks, forward-looking inflation gap, inflation deviations from the target, and more dissenting votes on monetary policy decissions. Furthermore, they find a negative change in clarity in the aftermath of the GFC, and point out how communication strategies are often linked to country-specific and institution-specific factors.  Deslongchamps (2018) highlights that even though the readability of Bank of Canada documents has improved, they still lag far behind the benchmark of clarity for a vast sector of the population. Ferrera and Angino (2022) provided evidence that clearer ECB´s communication is strongly and robustly correlated with a higher degree of engagement of journalists and social media users, i.e., journalists and social media users tend to talk less about, and engage less with, the ECB when its language is more difficult to understand.[^21]
-
-[^21]: See [Cihak, Smídková and Bulir (2008)](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Writing-Clearly-ECBs-Monetary-Policy-Communication-22428), [Jansen (2010)](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1465-7287.2010.00238.x), Cihák, Jansen and Bulíř ([2012](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Clarity-of-Central-Bank-Communication-About-Inflation-25607); [2013](https://cepr.org/voxeu/columns/measuring-clarity-central-bank-communication)), [Deslongchamps (2018)](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/), [Ferrera and Angino (2022)](https://www.sciencedirect.com/science/article/pii/S0176268021001191), 
+Ever since Alan Greenspan stressed to "mumble with great incoherence"[^18], the world of central banking and monetary policy has undergone a major evolution. We have seen the role and impact of central bank communication increase steadily. In the past, central banks used to wonder if there was a good reason to communicate something; now they wonder if there is a good reason not to communicate. In the words of the governor of the Central Bank of Ireland, Gabriel Makhlouf, the days of "mumbling with great incoherence" are over.[^19]
 
 
-In the case of Latin American central banks, Taborda (2015) surveyed the readability of the minutes for Brazil, Chile, Colombia, Mexico, and Peru's central banks from 1997 to 2013, concluding that there has been a modest evolution in the clarity of these documents. Castillo, Herrada, Montoro and Pérez (2019) noted that there are significant challenges in South American central banks' communication. They stressed the need for improving clarity in communication with different types of audiences, especially to approach the youth population, and count with instruments to assess the communication strategy and design. Carotta, Mello and Ponce (2021) find that Uruguay´s central bank readability has improved over time, but there is still room for further improvements in the perspicuity of the messages.[^22]
+[^18]: These words were uttered by Alan Greenspan during his appearance before the Senate in 1987.
+[^19]: See [Makhlouf (2020).](https://www.centralbank.ie/news/article/speech-end-of-mumbling-incoherence-governor-makhlouf-26-feb-2020)
 
-[^22]: See [Taborda (2015)](http://www.scielo.org.co/scielo.php?script=sci_arttext&pid=S0120-44832015000100008), [Castillo, Herrada, Montoro and Pérez (2019)](https://www.bcrp.gob.pe/docs/Publicaciones/Revista-Estudios-Economicos/37/ree-37-castillo-herrada-montoro-perez.pdf), [Carotta, Mello and Ponce (2021)](https://www.cemla.org/actividades/2021-final/2021-11-xxvi-meeting-of-the-central-bank-researchers-network/5B.2%20PAPER%20Carotta%20Mello%20Ponce.pdf). 
+Initially communication was perceived as a complement to gain credibility, or to support the effectiveness of the transmission channels when the main tools are limited. Nowadays, in the literature and the world of central banking, there is a clear consensus regarding the role of communication as a tool. While the policy rate is seen as the primary tool to influence directly very short-term interest rates, the central bank's communication is seen as the policy that can potentially influence long-term interest rates. Moreover, the growing importance of financial stability, and better understanding on how market expectations can affect market prices provides a good reason to communicate effectively and clearly.
 
-This paper contributes to this growing literature by conducting a comprehensive evaluation of official monetary policy statements, minutes and quarterly inflation reports from Banco de México over the period 2011 to 2022. My research differs from similar existing papers in the literature, both in terms of the central bank analyzed and the range of documents included. In the following sections, I approach the question whether there have been significant changes in Banxico´s clarity, using classic readability and perspicuity scores as a proxy of the intelligibility of the central bank.
+The growing power of monetary authorities and the importance of market expectations in the transmission of monetary policy has yielded new definitions of monetary policy strategy and the central banker toolkit. With the development of communication tools, a lot of literature has emerged trying to understand the impact of central bank's communication on market expectations, signals on the yield curve, the effective transmission of monetary policy and its application under the ZLB in developed countries[^20]. 
+
+For example, Campbell et al. (2012) and Campbell (2013), using both an empirical an theoretical approach, showed how the Fed, through public announcements and forward guidance, can successfully influence assets prices and forecast over a variety of many macroeconomics variables. Their work also derived in new definitions of communication and the types of forward guidance a monetary authority can deliver.[^21]
+
+[^20]: See [Charbonneau and Rennison (2015).](https://www.bankofcanada.ca/2015/11/staff-discussion-paper-2015-15/), [Smith and Becker (2015)](https://www.kansascityfed.org/Economic%20Bulletin/documents/412/macrobulletins-Has%20Forward%20Guidance%20Been%20Effective%3F.pdf), [McKay, Nakamura, and Steinsson (2016)](https://www.aeaweb.org/articles?id=10.1257/aer.20150063), [Angeletos, George-Marios, and Chen Lian (2018)](https://www.aeaweb.org/articles?id=10.1257/aer.20161996), [Dell'Ariccia, Rabanal and Sandri (2018)](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.147), [Altavilla, Brugnolini, Gürkaynak, Motto and Ragusa (2019)](https://www.sciencedirect.com/science/article/pii/S0304393219301497), [Bernanke, Kiley and Roberts (2019)](https://www.aeaweb.org/articles?id=10.1257/pandp.20191082), [Bernanke (2020)](https://www.aeaweb.org/articles?id=10.1257/aer.110.4.943).
+[^21]: See [Campbell et al. (2012)](https://www.brookings.edu/wp-content/uploads/2012/03/2012a_evans.pdf) and [Campbell (2013).](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwicl8WV7bb-AhVllGoFHV14DzMQFnoECAsQAQ&url=https%3A%2F%2Fwww.chicagofed.org%2F~%2Fmedia%2Fpublications%2Feconomic-perspectives%2F2013%2F4q2013-part1-campbell-pdf.pdf&usg=AOvVaw1SCPs_bzDS02Gmsl3nTnwk)
+
+At the same time, new research has focused on the implementation of text mining and text analysis tools. The latter, through Natural Language Processing (NLP) and classical readability tests, aimed to decipher the clarity and semantic content of central bank communication, interpret both the quantity and quality of the communication that central banks deliver through official documents and other central banking-related text. Some of these works emphasize readability and perspicuity (insert bibliography), whereas others scrutinize central bankers' communication by applying machine learning and dictionary techniques(insert bibliography).
+
+Cihak, Smídková and Bulir (2008) based on an extensive analysis of ECB’s inflation forecasts, inflation targets, and verbal descriptions of inflation factors, risk assessments, and monetary pillar information in monthly bulletins and press statement, conclude that ECB's written communication is clear about 95 percent of the time. Jansen (2010) illustrates the importance of transparent communication about monetary policy by comparing the readability statistics of the Federal Reserve Chairman's Humphrey-Hawkins testimonies and their effect on financial market volatility. Cihák, Jansen and Bulíř (2012; 2013) using a similar methodology for press statements and inflation reports of 7 central banks, show that the relationship between the clarity of communications and the broader economic environment has a significant effect, specially for topics such as inflationary risks, forward-looking inflation gap, inflation deviations from the target, and more dissenting votes on monetary policy decissions. Furthermore, they find a negative change in clarity in the aftermath of the GFC, and point out how communication strategies are often linked to country-specific and institution-specific factors.  Deslongchamps (2018) highlights that even though the readability of Bank of Canada documents has improved, they still lag far behind the benchmark of clarity for a vast sector of the population. Ferrera and Angino (2022) provided evidence that clearer ECB´s communication is strongly and robustly correlated with a higher degree of engagement of journalists and social media users, i.e., journalists and social media users tend to talk less about, and engage less with, the ECB when its language is more difficult to understand.[^22]
+
+[^22]: See [Cihak, Smídková and Bulir (2008)](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Writing-Clearly-ECBs-Monetary-Policy-Communication-22428), [Jansen (2010)](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1465-7287.2010.00238.x), Cihák, Jansen and Bulíř ([2012](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Clarity-of-Central-Bank-Communication-About-Inflation-25607); [2013](https://cepr.org/voxeu/columns/measuring-clarity-central-bank-communication)), [Deslongchamps (2018)](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/), [Ferrera and Angino (2022)](https://www.sciencedirect.com/science/article/pii/S0176268021001191), 
 
 
-# 3. The Data
+For other Latin American central banks Taborda (2015) surveyed the readability of the minutes for Brazil, Chile, Colombia, and Peru from 1997 to 2013, concluding that there has been a modest evolution in the clarity of these documents. Castillo, Herrada, Montoro and Pérez (2019) noted that there are significant challenges in South American central banks' communication. They stressed the need for improving clarity in communication with different types of audiences, especially to approach the youth population, and count with instruments to assess the communication strategy and design. Carotta, Mello and Ponce (2021) find that Uruguay´s central bank readability has improved over time, but there is still room for further improvements in the perspicuity of the messages.[^23]
 
-\noindent Like many other central banks, Banxico's communication strategy has evolved. Since the early 2000s, the central bank began publishing bulletins informing monetary policy decisions, as well as a quarterly inflation report. This was followed in 2001 by the formal adoption of an Inflation Targeting Regime (ITR). Since then, the communication strategy and design have undergone major changes. The first came in 2011 when the central bank adopted its current monetary policy strategy, consisting of 8 meetings a year at which the Board of Directors can raise, leave unchanged, or cut the policy rate to change monetary and financial conditions in line with its mandate to maintain low and stable inflation. 
+[^23]: See [Taborda (2015)](http://www.scielo.org.co/scielo.php?script=sci_arttext&pid=S0120-44832015000100008), [Castillo, Herrada, Montoro and Pérez (2019)](https://www.bcrp.gob.pe/docs/Publicaciones/Revista-Estudios-Economicos/37/ree-37-castillo-herrada-montoro-perez.pdf), [Carotta, Mello and Ponce (2021)](https://www.cemla.org/actividades/2021-final/2021-11-xxvi-meeting-of-the-central-bank-researchers-network/5B.2%20PAPER%20Carotta%20Mello%20Ponce.pdf). 
+
+
+In the case especial case of Banxico, not many pieces of research focus on communication. To the extent of my knowledge, only López Marmolejo (2013) and Taborda (2014) have formally approached this topic before. The former constructs a communication index by identifying relevant phrases in monetary policy statements and, by incorporating it into a standard Taylor rule, concludes that Banxico sends relevant signals to the markets that allow forecasting the monetary policy rate. Taborda for its part, implements text analysis techniques to study procedural transparency in the minutes of the Board of Directors. However, the scope of his research is limited due to the information available at its time (24 minutes).
+
+This paper contributes to this growing literature by conducting a comprehensive evaluation of official monetary policy statements, minutes and quarterly inflation reports from Banco de México over the period 2011 to 2022. My research differs from similar existing papers in the literature, in terms of the central bank under study, the period and the range of documents included. In the following sections, I approach the question whether there have been significant changes in Banxico´s clarity, and if the information shared by the central bank has become more accessible to the majority of the population and to what extent.
+
+
+# 3. Banco de México's Communication Strategy
+
+\noindent Like many other central banks, Banxico's communication strategy has evolved. Since the early 2000s, the central bank began publishing bulletins informing monetary policy decisions, as well as a quarterly inflation report. This was followed in 2001 by the formal adoption of an Inflation Targeting Regime (ITR). Since then, the communication strategy and design have undergone some changes. The first came in 2011 when the central bank adopted its current monetary policy strategy, consisting of 8 meetings a year at which the Board of Directors can raise, leave unchanged, or cut the policy rate to change monetary and financial conditions in line with its mandate to maintain low and stable inflation. 
 
 The same year, Banxico started to release one of the main tools toward greater transparency and effective communication, the minutes of the Board of Directors' meetings. The ones are documents that summarize the discussion of the members during monetary policy meetings, thus providing insight into the decision-making process.
 
-Then, in 2018 the bank shifted its strategy to an Inflation Forecast Targeting (IFT). The same represents a major evolution in the communication strategy because inflation reports for the first time included the point forecasts of quarterly annual inflation. As stated in the ITR literature[^23], in the theoretical structure of the forecasts, the endogenous determination of the monetary policy is considered, that is, the monetary position is established in such a way that it is congruent with the fulfillment of the inflation forecast in the established horizon. The latter implied that the inflation forecast offers the so-called _Delphic forward guidance_, thus tracking the likely future of monetary policy actions, given the current forecast of the economy and the uncertainty surrounding this forecast.[^24]
+Then, in 2018 the bank shifted its strategy to an Inflation Forecast Targeting (IFT). The same represents a major evolution in the communication strategy because inflation reports for the first time included the point forecasts of quarterly annual inflation. As stated in the ITR literature[^24], in the theoretical structure of the forecasts, the endogenous determination of the monetary policy is considered, that is, the monetary position is established in such a way that it is congruent with the fulfillment of the inflation forecast in the established horizon. The latter implied that the inflation forecast offers the so-called _Delphic forward guidance_, thus tracking the likely future of monetary policy actions, given the current forecast of the economy and the uncertainty surrounding this forecast.[^25]
 
-[^23]: See King (1994), Svensson (1997; 1999, 2008), Clinton et al. (2015), Svensson (2020)
-[^24]: See [Campbell et al. (2012)](https://www.brookings.edu/wp-content/uploads/2012/03/2012a_evans.pdf)
+[^24]: See King (1994), Svensson (1997; 1999, 2008), Clinton et al. (2015), Svensson (2020)
+[^25]: See [Campbell et al. (2012)](https://www.brookings.edu/wp-content/uploads/2012/03/2012a_evans.pdf)
 
 In addition, in this year Banxico updated its communication criteria. The minutes began to discloses the identity of the voters, and in case of dissent also incorporates a section explaining the rationale for the dissenters' vote. On top of that, the central bank announced that transcripts of the meetings will be made available to the public three years after the meeting. Finally, following the major central bankers, the Board of Directors adopted a Banxico Speakers approach, making available transcripts of speeches and public presentations by the members.
 
 In 2020, the General Communication Criteria of the Board of Director and Banxico's staff were updated and made public for the first time. The central bank also established that the press releases, monetary policy statements and minutes would be made clearer and more concise in its extension. Since August 2021, the bank conveyed to release and update the inflation forecast in every monetary policy statement, and identify the direction of the vote of each of the members who participated in said meeting, indicating the members who adopted the decision taken and, if applicable, those who voted for an alternative decision and what it consisted of. 
 
-Finally, in May 2022 the Board of Directors took a major step by formally delivering _Odyssean forward guidance_ in the monetary policy statements.[^25] Table 1 summarizes the evolution of Banxico's communication strategy.
+Finally, in May 2022 the Board of Directors took a major step by formally delivering _Odyssean forward guidance_ in the monetary policy statements.[^26] Table 1 summarizes the evolution of Banxico's communication strategy.
 
-[^25]: See [Campbell (2013)](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwicl8WV7bb-AhVllGoFHV14DzMQFnoECAsQAQ&url=https%3A%2F%2Fwww.chicagofed.org%2F~%2Fmedia%2Fpublications%2Feconomic-perspectives%2F2013%2F4q2013-part1-campbell-pdf.pdf&usg=AOvVaw1SCPs_bzDS02Gmsl3nTnwk).
+[^26]: See [Campbell (2013)](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwicl8WV7bb-AhVllGoFHV14DzMQFnoECAsQAQ&url=https%3A%2F%2Fwww.chicagofed.org%2F~%2Fmedia%2Fpublications%2Feconomic-perspectives%2F2013%2F4q2013-part1-campbell-pdf.pdf&usg=AOvVaw1SCPs_bzDS02Gmsl3nTnwk).
 
 
-In the context of inflation targeting and central banks operating in democratic societies, transparency is one of the most important mechanisms of central bankers toward openness, public scrutiny, and accountancy. Although, transparency by itself does not mean that the message is well delivered, nor does imply assertive and effective communication. Thus, it is necessary for Banxico not only to increase the amount of information available to the public, but also to explain the decisions, the rationale behind them, how the monetary policy works, and to convey a clear message to the public and the markets. 
+The first step of the methodology applied in this paper consist of calculating the readability and perspicuity for a set of official documents: the monetary policy statements (MPS), the minutes of the Board of Directors meetings (MPM) and the quarterly inflation reports (QIR). The structure of these documents has also changed across time (See Table 2). All information was obtained in pdf format from the official website of Banco de México. 
+
 
 
 ```{r Table 1 Evolution of Banxico communication strategy, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
@@ -219,10 +228,10 @@ Banxico_Communication <- data.frame("Year" = c(2000,2001,rep(2003,2),2006,2008,2
                                                                             "First disclosure of monetary policy meeting transcripts.",
                                                                             "An update of headline and core inflation forecasts for the following eight quarters is published after each monetary policy decision.",
                                                                             "The monetray policy statements identify the direction of the vote of each of the members of the Board of Directors who participated in said meeting, indicating the members who adopted the decision taken and, if applicable, those who voted for an alternative decision and what it consisted of.", 
-                                                                            "Odyssean forward guidance is included in monetary policy statements.
+                                                                            "*Odyssean forward guidance is included in monetary policy statements.
                                                                             "))
 
-knitr::kable(Banxico_Communication,
+A<-knitr::kable(Banxico_Communication,
              caption = "Evolution of Banxico de México's communication strategy",
              booktabs = T,
              longtable = F,
@@ -236,18 +245,12 @@ knitr::kable(Banxico_Communication,
   #landscape() %>%
   add_footnote("Source: Authors's Elaboration based on Information of Banxico's official docuements.",
                notation = "none")
+A
 ```
 
 
-As introduced in the previous section, clear communication is essential for a central bank. Research has highlighted how macroeconomic outcomes can be improved by aligning households’ and firms’ expectations with a central bank’s policy objectives. It follows that if Banxico communicates simply and with clarity, she should have more influence over those expectations and their alignment with the central bank’s objectives.[^26]
 
-[^26]: See [(Deslongchamps, 2018).](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/)
-
-
-The first step of the methodology applied in this paper consist of calculating the readability and perspicuity for a set of official documents: the monetary policy statements (MPS), the minutes of the Board of Directors meetings (MPM) and the quarterly inflation reports (QIR). The structure of these documents has also changed across time (See Table 2). All information was obtained in pdf format from the official website of Banco de México. 
-
-
-```{r Table 2 Changes in the structure of Banxico official documents, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
+```{r Table 2 Changes in the structure of Banxico official documents, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, paged.print=TRUE}
 Banxico_Communication <- data.frame("Document" = c("Monetary Policy Statements",
                                                "Minutes", 
                                                "Quarterly Inflation Reports"),
@@ -379,7 +382,7 @@ knitr::kable(FLESCH.SCALE,
                                "Fernández Huerta"))  %>%
   kable_styling(latex_options = c("hold_position"),
                 full_width = F) %>%
-  collapse_rows(columns = 2:4, latex_hline = "major", valign = "middle",
+  collapse_rows(columns = 2:5, latex_hline = "major", valign = "middle",
                 row_group_label_position = "identity") %>%
   column_spec(2, background = color_INFLESZ,
               color = "black", width = "3cm",bold = T) %>%
@@ -389,7 +392,8 @@ knitr::kable(FLESCH.SCALE,
               color = "black",width = "3cm",bold = T) %>%
   column_spec(3, background = color_F,
               color = "black", width = "3cm",bold = T) %>%
-  add_footnote("Source: Fernández Huerta(1959), Szigriszt-Pazos(1992), Muñoz (2006) and Cantalejo et al. (2008)",
+  add_footnote("Source: Fernández Huerta(1959), Szigriszt-Pazos(1992), Muñoz (2006) 
+               and Cantalejo et al. (2008)",
                notation = "none")
 ```
 
@@ -404,16 +408,16 @@ If we observe the information given by Figure 1, it is quite evident that the wo
 ```{r Table 4 Word Count - Descriptive Statics, echo=FALSE, message=FALSE, warning=FALSE}
 A<- Banxico_readability %>%
   mutate(words = as.numeric(words),
-         sentences = as.numeric(sentences))%>%
-  select("Year", "document", "words", "sentences") %>%
-  pivot_longer(cols = c(sentences,words),
+         sent = as.numeric(sentences))%>%
+  select("Year", "document", "words", "sent") %>%
+  pivot_longer(cols = c(`sent`,words),
                names_to = "Count", 
                values_to = "Count_vals") %>%
   group_by(document,Count) %>%
   summarise(n = length(document),
-            mean = mean(Count_vals),
-            median = median(Count_vals),
-            sd = sd(Count_vals),
+            mean = round(mean(Count_vals),2),
+            median = round(median(Count_vals),2),
+            sd = round(sd(Count_vals),2),
             min = min(Count_vals),
             max = max(Count_vals))
 
@@ -457,7 +461,7 @@ knitr::kable(A,
                 "Min.", "Min. Date",
                 "Max.", "Max. Date")) %>%
       kable_styling(latex_options = c("hold_position"),
-                  full_width = F) %>%
+                  full_width = T) %>%
     collapse_rows(columns = c(1,2), latex_hline = "major", valign = "middle",
                 row_group_label_position = "identity") %>%
     add_footnote(c("Source: Author's calculation."),
@@ -465,8 +469,12 @@ knitr::kable(A,
 rm(A,MM,MPS,IQR)
 ```
 
+
 \noindent
 ```{r Figure 1 Banco de México official publications Word count, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(latex2exp)
+library(ggtext)
 
 Banxico_readability <- Banxico_readability
 Figure1 <- Banxico_readability %>%
@@ -485,18 +493,17 @@ Figure1 %>%
                 group = 1.5),
             size = 0.5)+
   #labels of the Figure
-  labs( 
-    title = "Figure 1: Banco de México's publications - Word count",
-        subtitle = "Jan 2011 - Dec 2022 (Number of Words)",
-        x = " ",
-        y = " ",
+  labs(title = "",
+        x = "",
+        y = "No. Words",
     color = " ",
-    caption = "Source: Author's calculations.")+
+      caption = "**Figure 1**: Banco de México official publications - Word count<br><br>Source: Author's calculation.")+
     theme_tufte(base_family = "serif",
             base_size = 12)+
   scale_color_wsj()+
   theme(legend.position = "bottom",
-        plot.caption = element_text(hjust = 0),
+        plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
         plot.caption.position = "plot")+
   scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
                date_labels = "%Y") +
@@ -574,15 +581,12 @@ A%>%
              group = Flesch)) +
   geom_line(size = 0.7)+
     labs(
-    title = "Figure 2: Readability of Banco de México Over Time",
-    subtitle = "Jan 2011 - Dec 2022 (Reading Ease Scores)",
+    title = " ",
+    subtitle = " ",
     x = " ",
     y = " ",
     color = " ",
-    caption = "Source: Author's calculation.
-Note: The average was calculated using the standard mean at each time position of the three readability measures. 
-The Gutierrez score was scaled to fit the other two measures. The dashed lines correspond to the respect readability 
-level on the INFLESZ scale.")+
+    caption = "**Figure 2**: Readability of Banco de México Over Time.<br><br>Source: Author's calculation.<br>Note: The average was calculated using the standard mean at each time position of the three readability<br>measures. The Gutierrez score was scaled to fit the other two measures. he dashed lines correspond to<br>the respect readability level on the INFLESZ scale.")+
   theme_tufte(base_family = "serif",
             base_size = 12)+
   scale_color_wsj()+
@@ -591,17 +595,18 @@ level on the INFLESZ scale.")+
   scale_y_continuous(name="INFLESZ Scale",
                sec.axis = sec_axis(~.*1, name = "INFLESZ Scale"))+
   theme(legend.position = "bottom",
-        plot.caption = element_text(hjust = 0),
+        plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
         plot.caption.position = "plot") +
   facet_grid(
              cols = vars(document),
              shrink = T, scales = "free_x") +
   geom_hline(yintercept = 40, color = "#DEEBF7", 
-             linetype = "dashed", size = 1) +
+             linetype = "dashed", size = 0.8) +
   geom_hline(yintercept = 55, color = "#C6DBEF",
-             linetype = "dashed", size = 1) +
+             linetype = "dashed", size = 0.8) +
   geom_hline(yintercept = 65 , color = "#9ECAE1",
-             linetype = "dashed", size =1)
+             linetype = "dashed", size =0.8)
 rm(A)
 ```
 
@@ -642,11 +647,11 @@ A$grade <- c("High School", "High School", "-", "High School",
              
              "High School", "High School", "-", "High School")
 
-A$type <- c("-","Dissemination and Specialized press","-","Literature and Dissemination",
+A$type <- c("-","Dissemination","-","Literature",
             
-            "-","Dissemination and Specialized press","-","Literature and Dissemination",
+            "-","Dissemination","-","Literature",
             
-            "-","Dissemination and Specialized press","-","Literature and Dissemination")
+            "-","Dissemination","-","Literature")
 
 
 
@@ -661,10 +666,12 @@ knitr::kable(A,
              booktabs = T,
   col.names = c("Test","Document","Average" ,"Scale","Grade Level", "Type")) %>%
       kable_styling(latex_options = c("hold_position"),
-                  full_width = T) %>%
+                  full_width = F) %>%
     collapse_rows(columns = 1:2, latex_hline = "major", valign = "middle") %>%
-    column_spec(c(3,4), background = color,
+    column_spec(3, background = color,
               color = "black",bold = T) %>%
+      column_spec(4, background = color,
+              color = "black",bold = T)  %>%
     add_footnote(c("Source: Author's calculation."),
                  notation = "none",
                  threeparttable = F)
@@ -672,7 +679,11 @@ rm(color)
 
 ```
 
-```{r}
+
+
+
+\noindent
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 
 library(scales)
 #DATA https://www.inegi.org.mx/temas/educacion/
@@ -685,26 +696,26 @@ CENSUS_EDUC_LEV %>%
     geom_bar(stat = "identity", width = 1, color = "white")+
     coord_polar("y", start = 0) +
     labs(
-    title = "Figure 3: Population over 15 years old by educational level",
+    title = " ",
     x = "",
     y = "",
     color = "",
     fill = "",
-    caption = "Source: Author's calculation.
-Note: Basic = Elementary and Junior high; Upper middle = High School; Superior = University and Graduate.")+
+    caption = "**Figure 3**: Population over 15 years old by educational level<br><br>Source: Author's calculation.<br>Note: Basic = Elementary and Junior high; Upper middle = High School;<br>Superior = University and Graduate.")+
   theme_tufte(base_family = "serif",
             base_size = 12)+
   scale_fill_wsj()+
     theme(legend.position = "left",
-        plot.caption = element_text(hjust = 0),
+        plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
+        #plot.title.position = element_text(hjust = 0),
         plot.caption.position = "plot",
         axis.text.x=element_blank())+
  geom_text(aes(label = scales::percent(round(percent,2))), 
             position = position_stack(vjust = 0.5),
-           show.legend = F, size =5,
+           show.legend = F, size =3,
            family = "serif",
            check_overlap = T, color = "white")
-    
     
     
 ```
@@ -727,7 +738,7 @@ The most interesting relationships are those between the word and sentence count
 
 
 \noindent
-```{r Figure 3  Scatter Plots, echo=FALSE, fig.height=4.5, fig.width=6, message=FALSE, warning=FALSE}
+```{r Figure 3  Scatter Plots, eval=FALSE, fig.height=4, fig.width=6, message=FALSE, warning=FALSE, include=FALSE}
 #install.packages("GGally")
 library(GGally)
 source("multiplot.R")
@@ -834,9 +845,12 @@ COR_QIR <- A %>%
 
 
 
-multiplot(COR_MPM,COR_MPS,COR_QIR,cols = 3)
+COR_MPM
+COR_MPS
+COR_QIR
 
 ```
+   
    > \footnotesize Source: Author's calculation.
 
 
@@ -914,6 +928,19 @@ Note: Smoothing data using local regression techniques.")+
 
 
 
+# Conclusion
+
+Overall, effective communication is critical to the success of central banks, as it can help to ensure that their policy decisions are well understood, well received, and aligned with the broader economic goals of the society they serve.
+
+Banco de México has made significant progress in improving transparency and communication since the adoption of its Inflation Targeting Regime in 2001. The bank has implemented various communication channels to increase transparency and improve public understanding of its policy decisions.
+
+One of the most notable communication channels used by Banxico is its regular bulletins, which provide detailed explanations of the bank's policy decisions, including the factors that influenced those decisions. These bulletins are released immediately after each monetary policy meeting and are widely read by investors, economists, and the general public.
+
+Additionally, Banxico publishes quarterly reports that analyze inflation and economic developments in the country, which serve to provide the public with a deeper understanding of the bank's policy objectives and actions. These reports also include forecasts for key economic variables such as inflation, GDP growth, and the exchange rate.
+
+Banxico has also made efforts to improve the accessibility and clarity of its communication materials. For example, the bank has simplified the language used in its reports and bulletins to make them more easily understandable for the general public.
+
+Overall, Banxico's communication strategy has undergone several modifications over the years, as the bank has worked to improve its effectiveness and transparency. These efforts have been successful in enhancing public understanding of the bank's policy decisions and promoting accountability and transparency in the country's monetary policy framework.
 
 
 
