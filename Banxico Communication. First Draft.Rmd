@@ -57,15 +57,15 @@ The latter has been extensively studied by the literature on transparency[^1], l
 
 [^1]: See Fry et al. (2000), Blinder et al. (2001), Geraats (2002; 2006), Eijffinger and Geraats (2006), Cujisen and Dermertzis (2007), Čihák (2007), Dincer and Eichengreen (2009; 2014), Kedan and Stuart (2014), Dincer, Eichengreen, y Geraats (2019; 2022).
 
-Inflation targeting central banks, in particular, need to be transparent to foster openness and accountability. However, transparency alone does not guarantee effective communication, and the information shared may not always be easily understood. Given the great power that central banks have to potentially shape expectations and affect the economy, it is not only important for central banks to increase the amount of information available but convey clear messages that explain their decisions, rationale, and how monetary policy works. Communication must be perspicuous, intelligible, concise, relevant, and encourage two-way channels of communication to allow for public scrutiny.
+Inflation targeting central banks, in particular, need to be transparent to foster openness and accountability. However, transparency alone does not guarantee effective communication, and the information shared may not always be easily understood. Given the great power that central banks have to potentially influence expectations and affect the economy, it is not only important to increase the amount of information available but also to make it more accessible. Communication must be perspicuous, intelligible, concise and relevant. Central banks face the need to convey clear messages that explain their decisions, their rationale, and how monetary policy works. 
 
-In addition, it is crucial that central banks make their information accessible to a wider audience, not just highly specialized experts, analysts and professional watchers who can easily interpret the central bank's message. Studies have shown that macroeconomic outcomes can be improved by aligning households’ and firms’ expectations with a central bank’s policy objectives.[^2]
+To allow for public scrutiny, communication strategies and policies should promote two-way channels, i.e., to encourage dialogue and feedback between the central bank and the public. In addition, it is crucial that these institutions make their information accessible to a wider audience, not just to highly specialized experts, analysts and professional watchers who can easily interpret the central bank's message. Studies have shown that macroeconomic outcomes can be improved by aligning households’ and firms’ expectations with a central bank’s policy objectives.[^2]
 
 [^2]: See [(Deslongchamps, 2018).](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/)
 
-This means that simple and clear communication can be a powerful tool for central banks to align households' and firms' expectations with their policy objectives. By clearly and transparently communicating their goals, perspectives on economic developments, and the decision-making process, central banks can help the public and markets better understand their actions and intentions. This, in turn, can help to build trust and confidence in the central bank, which can improve the effectiveness of monetary policy. Moreover, when households and firms have a better understanding of the central bank's objectives and the factors that influence its decisions, they are more likely to make informed decisions that are in line with the central bank's goals. This can help to reduce the costs of adjustment to changes in monetary policy and can lead to a more stable and predictable economic environment.
+This means that simple and clear communication can be a powerful tool for central banks to align households' and firms' expectations. By clearly and transparently communicating their goals, perspectives on economic developments, and the decision-making process, central banks can help the public and markets better understand their actions and intentions. This, in turn, can help to build trust and confidence in the central bank, which can improve the effectiveness of monetary policy. Moreover, when households and firms have a better understanding of the central bank's objectives and the factors that influence its decisions, they are more likely to make informed decisions that are in line with the central bank's goals. This can help to reduce the costs of adjustment to changes in monetary policy and can lead to a more stable and predictable economic environment.
 
-In the special case of Mexico's national central bank, Banco de México (Banxico) has made advances towards greater transparency and effective communication over the past two decades. Since the formal adoption of an Inflation Targeting Regime (ITR) in 2001, Banxico has released bulletins, that explain their monetary policy decisions, and quarterly reports aimed to analyze inflation and economic developments to meet the objective of maintaining low and stable inflation. Since then, the communication strategy has undergone many modifications.
+In the special case of Mexico's national central bank, Banco de México (Banxico) has made advances towards greater transparency and effective communication over the past two decades. Since the formal adoption of an Inflation Targeting Regime (ITR) in 2001, Banxico has released bulletins explaining its monetary policy decisions, and quarterly reports aimed to analyze inflation and economic developments to meet the objective of maintaining low and stable inflation. From then on, the communication strategy has undergone numerous modifications.
 
 This paper aims to address two important questions: Have there been significant changes in Banco de México's communication over time? Has the information shared by the central bank become more accessible to the majority of the population and to what extent? To answer these questions, I first review the main changes to Banxico's communication strategy in recent years. I then compute classical measures of readability and perspicuity on monetary policy statements, minutes and quarterly inflation reports, which are considered as a proxy for the clarity and intelligibility of central banks' language. With the information gathered, I focus on determining whether there is evidence of a structural break in the readability and perspicuity of Banxico's publications, using time series techniques. In particular, unit root tests are performed that allow for one and two endogenous structural breaks. The findings from the unit root analysis suggest [insert relevant finding from unit root analysis].
 
@@ -94,9 +94,9 @@ Even though this view of central banking as full of mysticism, secrecy, and opac
 
 [^8]: See [Kydland and Prescott (1977)](https://www.jstor.org/stable/1830193), [Calvo (1978)](https://www.jstor.org/stable/pdf/1913836.pdf), [Barro and Gordon (1983)](https://www.sciencedirect.com/science/article/pii/030439328390051X), [Rogoff (1985)](https://www.jstor.org/stable/1885679).
 
-The changes that originated, both in theory and practice, triggered a radical transformation toward greater independence. This included the adoption of inflation targeting schemes, which sought to anchor inflation expectations by publicly announcing a numerical target for inflation. This allowed central banks to set clearer and more specific targets, and to gain credibility on them. All of these changes were a significant departure from the past, where central banks often kept their goals and methods of operation secret.
+The changes that originated, both in theory and practice, triggered a radical transformation toward greater independence. This included the adoption of inflation targeting schemes, which sought to anchor inflation expectations by publicly announcing a numerical target for inflation. As a result, central banks were able to set clearer and more specific objectives and gain credibility on them. All of these changes were a significant departure from the past, where central banks often kept their goals and methods of operation secret.
 
-While in the 1980s and 1990s the debate was about central bank independence and inflation targets, the growing power of central banks set the need for opennes and accountancy. Therefore, the 2000s saw the emergence of quite a bit of literature focused on the transparency of monetary authorities and central bank's communication channels.
+While in the 1980s and 1990s the debate was about central bank independence and inflation targets, the growing power of central banks set the need for openness and accountancy. Therefore, the 2000s saw the emergence of quite a bit of literature focused on the transparency of monetary authorities and central bank's communication channels.
 
 Alan Blinder, former Vice Chairman of the Federal Reserve, called this transformation the "Quiet Revolution".[^9] He argued that the shift towards greater openness and transparency would improve the effectiveness of monetary policy. This revolution led to central banks becoming more open and transparent about their operations and decision-making processes. The prototype of the secretive and ambiguous central bank turned to a central bank design that should be open, intelligible and honest.
 
@@ -158,158 +158,127 @@ Cihak, Smídková and Bulir (2008) based on an extensive analysis of ECB’s inf
 
 [^22]: See [Cihak, Smídková and Bulir (2008)](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Writing-Clearly-ECBs-Monetary-Policy-Communication-22428), [Jansen (2010)](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1465-7287.2010.00238.x), Cihák, Jansen and Bulíř ([2012](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Clarity-of-Central-Bank-Communication-About-Inflation-25607); [2013](https://cepr.org/voxeu/columns/measuring-clarity-central-bank-communication)), [Deslongchamps (2018)](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/), [Ferrera and Angino (2022)](https://www.sciencedirect.com/science/article/pii/S0176268021001191), 
 
-
-For other Latin American central banks Taborda (2015) surveyed the readability of the minutes for Brazil, Chile, Colombia, and Peru from 1997 to 2013, concluding that there has been a modest evolution in the clarity of these documents. Castillo, Herrada, Montoro and Pérez (2019) noted that there are significant challenges in South American central banks' communication. They stressed the need for improving clarity in communication with different types of audiences, especially to approach the youth population, and count with instruments to assess the communication strategy and design. Carotta, Mello and Ponce (2021) find that Uruguay´s central bank readability has improved over time, but there is still room for further improvements in the perspicuity of the messages.[^23]
+For Latin American central banks Taborda (2015) surveyed the readability of the minutes for Brazil, Chile, Colombia, Mexico and Peru from 1997 to 2013, concluding that there has been a modest evolution in the clarity of these documents. Castillo, Herrada, Montoro and Pérez (2019) noted that there are significant challenges in South American central banks' communication. They stressed the need for improving clarity in communication with different types of audiences, especially to approach the youth population, and count with instruments to assess the communication strategy and design. Carotta, Mello and Ponce (2021) find that Uruguay´s central bank readability has improved over time, but there is still room for further improvements in the perspicuity of the messages.[^23]
 
 [^23]: See [Taborda (2015)](http://www.scielo.org.co/scielo.php?script=sci_arttext&pid=S0120-44832015000100008), [Castillo, Herrada, Montoro and Pérez (2019)](https://www.bcrp.gob.pe/docs/Publicaciones/Revista-Estudios-Economicos/37/ree-37-castillo-herrada-montoro-perez.pdf), [Carotta, Mello and Ponce (2021)](https://www.cemla.org/actividades/2021-final/2021-11-xxvi-meeting-of-the-central-bank-researchers-network/5B.2%20PAPER%20Carotta%20Mello%20Ponce.pdf). 
 
+In the especial case of Banxico, not many pieces of research focus on communication. To the extent of my knowledge, only [Cermeño y Navarrete](https://www.cide.edu/publicaciones/status/dts/DTE%20514.pdf) and [López Marmolejo (2013)](https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S2448-718X2013000200345) approached this topic before. The former estimate an index of the bias of the monetary policy statement, and by incorporating it in a probit regression with the change in the monetary stance in the subsequent period as the dependent variable, they conclude that Banxico's communication is effective in predicting the next decision, but only in the short term.
 
-In the case especial case of Banxico, not many pieces of research focus on communication. To the extent of my knowledge, only López Marmolejo (2013) and Taborda (2014) have formally approached this topic before. The former constructs a communication index by identifying relevant phrases in monetary policy statements and, by incorporating it into a standard Taylor rule, concludes that Banxico sends relevant signals to the markets that allow forecasting the monetary policy rate. Taborda for its part, implements text analysis techniques to study procedural transparency in the minutes of the Board of Directors. However, the scope of his research is limited due to the information available at its time (24 minutes).
+López Marmolejo constructs a communication index with the identification of relevant phrases in monetary policy statements. By incorporating it as an independent variable in a standard Taylor rule, concludes that Banxico sends pertinent signals to the markets that allow forecasting the monetary policy rate. Furthermore, his study points out that both the market and analysts understand the meaning of the communication, which has contributed to market expectations of interest rates being more congruent with the central bank's vision, as well as closer and more stable in relation to the level finally observed.
+
+This research highlights that Banxico's communication strategy may have the power to potentially influence expectations of future macroeconomic outcomes. In particular, effective and clear communication can reduce the uncertainty of future movements in the monetary stance and contribute to less noise and volatility in financial markets due to the central bank's operation.
 
 This paper contributes to this growing literature by conducting a comprehensive evaluation of official monetary policy statements, minutes and quarterly inflation reports from Banco de México over the period 2011 to 2022. My research differs from similar existing papers in the literature, in terms of the central bank under study, the period and the range of documents included. In the following sections, I approach the question whether there have been significant changes in Banxico´s clarity, and if the information shared by the central bank has become more accessible to the majority of the population and to what extent.
 
 
 # 3. Banco de México's Communication Strategy
 
-\noindent Like many other central banks, Banxico's communication strategy has evolved. Since the early 2000s, the central bank began publishing bulletins informing monetary policy decisions, as well as a quarterly inflation report. This was followed in 2001 by the formal adoption of an Inflation Targeting Regime (ITR). Since then, the communication strategy and design have undergone some changes. The first came in 2011 when the central bank adopted its current monetary policy strategy, consisting of 8 meetings a year at which the Board of Directors can raise, leave unchanged, or cut the policy rate to change monetary and financial conditions in line with its mandate to maintain low and stable inflation. 
+\noindent Like many other central banks, Banxico's communication strategy has evolved. Since the early 2000s, the central bank began publishing bulletins informing monetary policy decisions, as well as a quarterly inflation report. This was followed in 2001 by the formal adoption of an Inflation Targeting Regime (ITR). Since then, the communication strategy and design have undergone some changes. The first culminated in 2011, when the central bank, after a gradual decrease in the number of monetary policy meetings per year, determined a calendar with 8 pre-set dates.
 
-The same year, Banxico started to release one of the main tools toward greater transparency and effective communication, the minutes of the Board of Directors' meetings. The ones are documents that summarize the discussion of the members during monetary policy meetings, thus providing insight into the decision-making process.
+At these meetings the Board of Directors can raise, leave unchanged, or cut the policy rate to influence monetary and financial conditions in line with its mandate to maintain low and stable inflation.  In addition, in the event of extreme economic and financial conditions that require Banxico's intervention, the Board of Directors may adjust the monetary policy stance at dates other than those established in advance.
+
+After each meeting, Baxico releases the monetary policy statement, which consists of a few pages (no more than 3 at their longest over the period under study) describing international developments since the last meeting, the markets and the economy, both observed and expected inflation, the balance of risks to the inflation forecast and the monetary policy decision itself.
+
+The same year, Banxico started to publish one of the main tools toward greater transparency and effective communication, the minutes of the Board of Directors' meetings. The ones are documents that summarize the discussion of the members during monetary policy meetings, thus providing insight into the decision-making process. From 2011 to the April 2018 decision, the minutes consisted of 4 sections, the first one informed of the place, date, and the name of the attendees; the second one presented material that the Economic Research and Central Bank Operations Departments prepared for the meeting, giving an overview on the international markets, financial conditions, economic activity, and inflation; the third encompassed the bulk of the Board of Directors' discussion, although it did not (and still does not) indicate the name of the member who made the specific comment, and finally, it highlighted the monetary policy decision.
 
 Then, in 2018 the bank shifted its strategy to an Inflation Forecast Targeting (IFT). The same represents a major evolution in the communication strategy because inflation reports for the first time included the point forecasts of quarterly annual inflation. As stated in the ITR literature[^24], in the theoretical structure of the forecasts, the endogenous determination of the monetary policy is considered, that is, the monetary position is established in such a way that it is congruent with the fulfillment of the inflation forecast in the established horizon. The latter implied that the inflation forecast offers the so-called _Delphic forward guidance_, thus tracking the likely future of monetary policy actions, given the current forecast of the economy and the uncertainty surrounding this forecast.[^25]
 
 [^24]: See King (1994), Svensson (1997; 1999, 2008), Clinton et al. (2015), Svensson (2020)
 [^25]: See [Campbell et al. (2012)](https://www.brookings.edu/wp-content/uploads/2012/03/2012a_evans.pdf)
 
-In addition, in this year Banxico updated its communication criteria. The minutes began to discloses the identity of the voters, and in case of dissent also incorporates a section explaining the rationale for the dissenters' vote. On top of that, the central bank announced that transcripts of the meetings will be made available to the public three years after the meeting. Finally, following the major central bankers, the Board of Directors adopted a Banxico Speakers approach, making available transcripts of speeches and public presentations by the members.
+In addition, in this year Banxico updated its communication startegy. As of the May 2018 decision, the minutes keep the first section untouched but continue with the analysis and motivation of the votes of the Committee members, the monetary policy decision, and for the first time began to discloses the identity of the voters, and in case of dissent also incorporate a section explaining the rationale for the dissenters' vote. The material presented by the Economic Research and Central Bank Operations Departments is now included as an appendix.
 
-In 2020, the General Communication Criteria of the Board of Director and Banxico's staff were updated and made public for the first time. The central bank also established that the press releases, monetary policy statements and minutes would be made clearer and more concise in its extension. Since August 2021, the bank conveyed to release and update the inflation forecast in every monetary policy statement, and identify the direction of the vote of each of the members who participated in said meeting, indicating the members who adopted the decision taken and, if applicable, those who voted for an alternative decision and what it consisted of. 
+On top of that, the central bank announced that transcripts of the meetings will be made available to the public three years after the meeting. Finally, following the major central bankers, the Board of Directors adopted a Banxico Speakers approach, making available transcripts of speeches and public presentations by the members.
 
-Finally, in May 2022 the Board of Directors took a major step by formally delivering _Odyssean forward guidance_ in the monetary policy statements.[^26] Table 1 summarizes the evolution of Banxico's communication strategy.
+In 2020, the General Communication Criteria of the Board of Director and Banxico's staff were updated and made public for the first time. The central bank also established that the press releases, monetary policy statements and minutes would be made clearer and more concise in its extension. Since August 2021, the bank conveyed to publish and update the inflation forecast in every monetary policy statement, and identify the direction of the vote of each of the members who participated in said meeting, indicating the members who adopted the decision taken and, if applicable, those who voted for an alternative decision and what it consisted of. 
 
-[^26]: See [Campbell (2013)](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwicl8WV7bb-AhVllGoFHV14DzMQFnoECAsQAQ&url=https%3A%2F%2Fwww.chicagofed.org%2F~%2Fmedia%2Fpublications%2Feconomic-perspectives%2F2013%2F4q2013-part1-campbell-pdf.pdf&usg=AOvVaw1SCPs_bzDS02Gmsl3nTnwk).
+Finally, in May 2022 the Board of Directors took a major step by formally delivering verbal _forward guidance_ in the monetary policy statements. Table 1 summarizes the evolution of Banxico's communication strategy.
 
+All of these changes have led to a central bank design more independent and transparent than ever before. However, as reviewed in the previous section, an effective communication strategy does not depend exclusively on the quantity of information disseminated, but also on the quality and clarity of the message. Moreover, not only does this information need to be understandable to market participants and professional analysts, but also to businesses, households and the general public. 
 
-The first step of the methodology applied in this paper consist of calculating the readability and perspicuity for a set of official documents: the monetary policy statements (MPS), the minutes of the Board of Directors meetings (MPM) and the quarterly inflation reports (QIR). The structure of these documents has also changed across time (See Table 2). All information was obtained in pdf format from the official website of Banco de México. 
+The methodology proposed in this paper is along these lines, and for this purpose I examinate the clarity, from the point of view of a broad spectrum of the public, of the content of the three main documents in which Banxico conveys information on its decisions, perspectives and rationale: the monetary policy statements (MPS), the minutes of the meetings of the Board of Directors (MPM) and the quarterly inflation reports (QIR).
 
+All information was obtained in pdf format from the official website of Banco de México. I choose to analyze the publications in the original Spanish language for two reasons: first, the availability of the documents and, second, to eliminate any bias that might be printed on the translation. After apply any text data technique, is necessary to pre-processes the documents in a classic text editor to obtain a set of plain text data. The filter consists of removing all objects not related to the main text, such as headers, page numbers, title pages, indexes, tables of contents, footnotes, appendices, etc. Despite the many efforts made by scholars and researchers to develop techniques to include graphs, tables, figures, charts and other visual elements in linguistic analysis, no such method is available, so even when this material can add valuable content to the analysis, it is necessary to remove them from the documents.
 
 
 ```{r Table 1 Evolution of Banxico communication strategy, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
-Banxico_Communication <- data.frame("Year" = c(2000,2001,rep(2003,2),2006,2008,2010,
-                                    rep(2011,3),2017,rep(2018,5),rep(2020,2),rep(2021,3),2022),
+Banxico_Communication <- data.frame("Year" = c(2000,2000,2001,rep(2003,2),2006,2008,2008,2010,
+                                    rep(2011,3),2017,2016,rep(2018,6),rep(2020,2),rep(2021,3),2022),
                            "Improvements in the communication strategy" = c(
                               
-                             "Start of realeases of monetary policy decision bulletins and quarterly inflation reports, with its respective presentation and press conference.",
+                             "Start of the publication of monetary policy decision bulletins.",
+                             
+                             "The publication of Quarterly Inflation Reports is established, accompanied by a presentation and a press conference.",
                            
-                           "Formal adoption of an Inflation Targeting Regime", 
+                           "Formal adoption of an Inflation Targeting Regime.", 
                            
-                           "The bank establish especific dates for the monetary policy decisions.",
+                           "The bank sets specific dates for monetary policy decisions.",
                            
-                           "It is realease at least one bulleting on the month end and one one if the policy stance change in between months.", 
+                           "At least one bulletin is published at the end of the month and another if the policy changes from one month to the next.", 
                            
-                           "The monetary policy decissions decrease from 23 to 12 a year.", 
+                           "Monetary policy decissions decrease from 23 to 12 a year.", 
                            
-                           "The monetary policy decissions decrease from 12 to 12 a year.", 
+                           "Monetary policy decissions decrease from 12 to 11 a year.",
                            
-                           "The inflation reports include fan charts for inflation and growth forecast.", 
+                           "*The central bank begins to implement its monetary policy through an operational target for the overnight interbank funding rate.",
                            
-                           "Releases of the minutes of the Board of Directors' meetings.",
+                           "Inflation reports include fan charts for inflation and growth forecasts.", 
                            
-                           "Monetary policy decissions decrease from 23 to 8 a year.", 
-                                                                            "Video broadcasting of the quartelrly inflation report.", 
-                                                                            "The path of the central projection of inflation and economic activity of inflation and economic activity are included in the fan charts.", 
-                                                                            "Inflation reports for the first included the point forecasts of quarterly annual inflation.", 
-                                                                            "The minutes began to discloses the identity of the voters, and in case of dissent also incorporates a section explaining the rationale for the dissenters' vote.",
-                                                                            "The minutes and monetary policy statements are realising both in Spanish and English simultaneously on the correspondat date.", 
-                                                                            "Announce that transcripts of the meetings will be made available to the public three years after the meeting.", 
+                           "Start of the publication of the minutes of Board of Directors' meetings.",
+                           
+                           "Monetary policy decissions decrease from 11 to 8 a year.", 
+                                                                            "Video broadcast of the presentation of the Quarterly Inflation Report.", 
+                                                                            "The central projection path for inflation and economic activity is included in the fan charts.", 
+                           
+                           "*Former Governor Agustín Carstens announces the launch of the 'Banxico Educa' website. This site aims to inform and educate the general public about the objectives, goals and duties of Banco de México. It is also intended to be a means of dissemination and education on economic and financial culture for the country.",
+                           
+                           "*The central bank shifts its monetary policy strategy to Inflation Forecast Targeting.",
+                           
+                           "Inflation reports include for the first time point forecasts of annual quarterly inflation.",
+                                                                            "The minutes begin to disclose the identity of the voters and, in case of dissent, also incorporate a section explaining the reasons for the dissenters' vote.",
+                                                                            "The minutes and monetary policy statements are published simultaneously in Spanish and English on the corresponding date.", 
+                                                                            "Announcement that transcripts of the meetings will be made available to the public three years after the meeting.", 
                                                                             "The Board of Directors adopted a Banxico Speakers approach, making available transcripts of speeches and public presentations by the members.", 
                            
-                           "The General Communication Criteria of the Board of Director and Banxico's staff were updated and made public for the first time.",
-                                                                            "It is established that the Press Releases, Monetary Policy Statements and Minutes would be made clearer and more concise in its extension.", 
-                                                                            "First disclosure of monetary policy meeting transcripts.",
+                           "The General Communication Criteria for the Board of Directors and Banxico's staff are updated and made public for the first time.",
+                                                                            "It is established that the press releases, monetary policy statements and minutes would be made clearer and more concise in its extension.", 
+                                                                            "First disclosure of transcripts.",
                                                                             "An update of headline and core inflation forecasts for the following eight quarters is published after each monetary policy decision.",
                                                                             "The monetray policy statements identify the direction of the vote of each of the members of the Board of Directors who participated in said meeting, indicating the members who adopted the decision taken and, if applicable, those who voted for an alternative decision and what it consisted of.", 
-                                                                            "*Odyssean forward guidance is included in monetary policy statements.
-                                                                            "))
+                                                                            "*Odyssean forward guidance is included in monetary policy statements."))
 
 A<-knitr::kable(Banxico_Communication,
-             caption = "Evolution of Banxico de México's communication strategy",
+             caption = "Evolution of Banco de México's communication strategy",
              booktabs = T,
              longtable = F,
              col.names = c("Year",
-                           "Improvements in the communication strategy"))  %>%
+                           "Advances in the communication strategy"))  %>%
   kable_styling(font_size = 10 ,latex_options = c("HOLD_position"),
                 full_width = T) %>%
   collapse_rows(columns = 1, latex_hline = "major", valign = "middle",
                 row_group_label_position = "identity") %>%
   column_spec(1, width = "1cm", bold = T) %>%
   #landscape() %>%
-  add_footnote("Source: Authors's Elaboration based on Information of Banxico's official docuements.",
+  add_footnote(c("Source: Authors's elaboration based on Banxico's official documents and press releases from the Boards of Director.", "Note: (*) denotes observations added by the author other than those officially accepted by Banxico publications."),
                notation = "none")
 A
 ```
 
 
-
-```{r Table 2 Changes in the structure of Banxico official documents, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, paged.print=TRUE}
-Banxico_Communication <- data.frame("Document" = c("Monetary Policy Statements",
-                                               "Minutes", 
-                                               "Quarterly Inflation Reports"),
-                                    
-                           "Changes in structure" = c("In the period under study, the monetary policy statements consist of a few pages (no more than 3 at their longest) describing international developments since the last meeting, the markets and the economy, both observed and expected inflation, the balance of risks to the inflation outlook and the monetary policy decision itself. The structure of the statement has not undergone major modifications over time, however, as of August 2021 the statement includes a table of headline and core inflation forecasts for the remaining quarters of the year and the following two years.",
-                                                      
-                                                      "From 2011 to the April 2018 decision, the minutes consisted of 4 sections, the first one informed of the place, date, and the name of the attendees; the second one presented material that the Economic Research and Central Bank Operations Departments prepared for the meeting, giving an overview on the international markets, financial conditions, economic activity, and inflation; the third encompassed the bulk of the Board of Directors' discussion, although it did not (and still does not) indicate the name of the member who made the specific comment, and finally, it highlighted the monetary policy decision. As of the May 2018 decision, the minutes keep the first section untouched but continue with the analysis and motivation of the votes of the Committee members, the monetary policy decision, and for the first time include a section that discloses the identity of the voters, and in case of dissent also incorporate a section explaining the rationale for the dissenters' vote. The material presented by the Economic Research and Central Bank Operations Departments is now included as an appendix.",
-                                                      "Inflation Reports summarize the evolution of the economy and the financial markets over the previous quarter, focusing on the primary target, the inflation rate. In this regard, the inflation report aimed at informing the public of recent developments in the economy and inflation, and how the central bank is responding to maintain low and stable inflation. [These documents have also undergone many changes in structure of the document. Analyzing the information included and the structure of the report over time is not a trivial task and is beyond the scope of this paper]."))
-
-knitr::kable(Banxico_Communication,
-             caption = "Changes in the structure of Banxico's official documents",
-             booktabs = T,
-             longtable = F,
-             col.names = c("Document",
-                           "Changes in structure"))  %>%
-  kable_styling(font_size = 10 ,latex_options = c("HOLD_position"),
-                full_width = T) %>%
-  column_spec(1, width = "4cm", bold = T) %>%
-  #landscape() %>%
-  add_footnote("Source: Authors's Elaboration based on Information of Banxico's official docuements.",
-               notation = "none")
-```
-
-
-Then, after apply any text data technique, is necessary to pre-processes the documents in a classic text editor to obtain a set of plain text data. The filter consists of removing all objects not related to the main text, such as headers, page numbers, title pages, indexes, tables of contents, footnotes, appendices, etc. Despite the many efforts made by scholars and researchers to develop techniques to include graphs, tables, figures, charts and other visual elements in linguistic analysis, no such method is available, so even when this material can add valuable content to the analysis, it is necessary to remove them from the documents. Elements removed from the documents are:
+Elements removed from the documents are:
 
 -   **Monetary Policy Statements**:
-    -   Headers and footers.
-    -   Titles and captions.
-    -   Dates.
-    -   Footnotes.
-    -   Page numbers.
-    -   Forecast table.
+    -   Headers and footers, titles and captions, dates, footnotes, page numbers and forecast table.
 -   **Minutes**:
-    -   Headers and footers.
-    -   Titles and subtitles.
-    -   Footnotes.
-    -   Page numbers.
-    -   Charts and tables.
-    -   Material presented by the Economic Research and Central Bank Operations Departments.
+    -   Headers and footers, titles and subtitles, footnotes, page numbers, charts and tables and the material presented by the Economic Research and Central Bank Operations Departments.
 -   **Quarterly Inflation Reports**:
-    -   Front and back covers.
-    -   Headers and footers.
-    -   Disclaimers.
-    -   Table of contents.
-    -   Titles and captions.
-    -   Subtitles.
-    -   Footnotes.
-    -   Page numbers.
-    -   Charts and tables.
-    -   Boxes.
-    -   Appendices and technical chapters.
+    -   Front and back covers, headers and footers, disclaimers, table of contents, titles and captions, subtitles, footnotes, page numbers, charts and tables, boxes, appendices and technical chapters.
     
 In the sample there are 48 Quarterly Inflation Reports (4 per year), 96 Monetary Policy Minutes (8 per year) and 98 Monetary Policy Statements (8 per year and 2 extemporaneous decisions).
-    
-    
+
 # 3. Linguistic analysis of Banco de México's publications
 
-With the latter in mind, it is possible to evaluate the clarity of the information delivered by the central banks using the reading ease tests. The purpose of these tests is to study the ease or difficulty of reading a specific text, i.e. to assess the readability of a document in terms of its clarity and accessibility to a wide audience. This is important because it is assumed that central banks want to convey a message not only to a specific audience of technically educated observers, but to the public they serve, which is the entire population.
+With the latter in mind, it is possible to evaluate the clarity of the information delivered by the central banks using the reading ease tests. The purpose of these tests is to study the ease or difficulty of reading a specific text, i.e. to assess the readability of a document in terms of its clarity and accessibility to a wide audience.
 
 The literature on readability formulas emerged at the end of the 19th century in the United States, when academics were looking for methods to evaluate the vocabulary and comprehension level of scientific texts used in high school and higher education. Although many researchers have been credited with the development of readability measures, the literature considers that Rudolph Flesch was the first to propose a versatile formula for analyzing the readability of texts written in English.[^28]
 
@@ -319,13 +288,11 @@ Following Flesch's research, many other formulas have been developed for analyzi
 
 [^29]: See Gunning (1952) and Kincaid, Fishburne, Rogers and Chissom (1975).
 
-
-These formulas, among others, are widely used to analyze the readability of English texts. However, it is not possible to analyze printed texts in Spanish with these methodologies. In the search for the adaptation of these formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the readability of a wide variety of Spanish documents in 1959. Later on, Gutiérrez (1973), [Szigriszt-Pazos (1992)](http://webs.ucm.es/BUCM/tesis//19911996/S/3/S3019601.pdf), [Muñoz (2006)](http://www.legibilidadmu.cl/1.pdf), [Cantalejo and Lorda (2003)](https://www.sciencedirect.com/science/article/pii/S021265670379146X) and [Cantalejo et al. (2008)](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1137-66272008000300004) expanded the readability literature disposable for Spanish printed text.[^30]
-
+These formulas, among others, are widely used to analyze the readability of English texts. However, it is not possible to analyze printed texts in Spanish with these methodologies. In the search for the adaptation of these formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the readability of a wide variety of Spanish documents in 1959. Later on, Gutiérrez (1973), [Szigriszt Pazos (1992)](http://webs.ucm.es/BUCM/tesis//19911996/S/3/S3019601.pdf), [Muñoz (2006)](http://www.legibilidadmu.cl/1.pdf), [Cantalejo and Lorda (2003)](https://www.sciencedirect.com/science/article/pii/S021265670379146X) and [Cantalejo et al. (2008)](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1137-66272008000300004) expanded the readability and perspicuity literature disposable for Spanish printed text.[^30]
 
 [^30]: See Appendix A for a complete development of the formulas and scales.
 
-The intuition behind these formulas is the same as Flesch's: the longer the sentences and the more syllables per word, the more difficult it is to understand and read a text. Moreover, the selection of one or the other is quite arbitrary because they are highly correlated. The formal presentation of the formulas can be found in Appendix A. Table 3 shows the most common scales for interpreting Spanish written texts.
+The intuition behind these formulas is the same as Flesch's: the longer the sentences and the more syllables per word, the more difficult it is to understand and read a text. Moreover, the selection of one or the other is quite arbitrary because they are highly correlated. For the purposes of this research, the scores of Fernández Huerta (FH), Szigriszt Pazos (SZ) and Cantalejo et al. (FSZ, INFLEZS scale) were calculated. The formal presentation of the formulas can be found in Appendix A. Table 3 shows the most common scales for interpreting Spanish written texts.
 
 
 ```{r Table 3 Readability and Perspicuity Scales, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
@@ -398,8 +365,7 @@ knitr::kable(FLESCH.SCALE,
 ```
 
 
-
-Table 4 displays the basic descriptive statistics of the word and sentence count. On average, MPSs have the shortest extension, 1,101 and 37 words and sentences respectively, and QIRs the largest extension, 17,546 and 548. The MPMs find in between with and average count of 6,148 words and 178 sentences.
+Table 4 displays the basic descriptive statistics of the word and sentence count. On average, MPSs have the shortest extension, 1,101 and 37 words and sentences respectively, and QIRs the largest extension, 17,546 and 548. The MPMs find in between with an average count of 6,148 words and 178 sentences.
 
 If we observe the information given by Figure 1, it is quite evident that the word count has been changing over time. From 2011 to mid 2019 there is a clear tendency toward increase the total number of words in each publication. However, the distribution of the MPSs has an atypical observation in February 2016. The extension of the statement release on 17 February 2016 might be explained because it was an extemporaneous decision due to turbulence in the international markets that affected the exchange rate and could increase the likelihood of inflation expectations that was not consistent with Banco de México's inflation target of 3%.[^31] The second extemporaneous decision occurred on April 2020 due to the economic disruption of the COVID-19 pandemic, although the word count was closely to the usual extension.
 
@@ -548,7 +514,7 @@ Another important highlight of this period is that from the start of 2020, both 
 
 The changes on the average extension of the publications is aligned with 2 major structural changes, the updated on Banxico's communication criteria and the COVID-19 pandemic. Thus, in spite of the promise to make shorter in extension the Minutes, it is possible that the increase in the average word count responded to better and greater deliberation process during the pandemic, its aftermath, the surge on inflation in mid 2021, and the needed to manage expectations while the macroeconomic and financial conditions remained highly volatile.
 
-For its part, Banco de México's communication over time shows an upward trend in readability levels. QIRs consistently have readability levels between 46 and 57, which are considered difficult and fairly difficult to read according to the Szigritzs and INFLESZ scales. MPMs and MPSs, on the other hand, show a gradual tendency towards a standard level of readability, equivalent to a junior high grade level in the INFLESZ scale. Figure 2 illustrates these trends in the readability levels of Banco de México over time, which suggest that the central bank's communication has become more accessible and easier to read.
+For its part, Banco de México's communication over time shows an upward trend in readability and persícuity levels. QIRs consistently have clarity levels between 46 and 57, which are considered difficult and fairly difficult to read and understand according to the Szigritzs and INFLESZ scales. MPMs and MPSs, on the other hand, show a gradual tendency towards a standard level of readability and perspicuity, equivalent to a junior high grade level in the Szigritzs and INFLESZ scales respectively. Figure 2 illustrates these trends in the clarity of Banco de México over time, which suggest that the central bank's communication has become more accessible and easier to read.
 
 
 \noindent
@@ -563,14 +529,16 @@ For its part, Banco de México's communication over time shows an upward trend i
 A<- Banxico_readability %>%
   dplyr::mutate("Year" = format(dates, 
                                 format="%Y"),
-                "Fernández Huerta" = `Fernandez Huerta`,
-                "Flesch-Szigriszt" = `Flesch-Szigriszt`,
-                "Readability Mu" = Readability_MU,
-                "Avg" = (`Fernandez Huerta` + `Flesch-Szigriszt` +  
-                             Szigriszt)/3) %>%
+                "FH" = `Fernandez Huerta`,
+                "FSZ" = `Flesch-Szigriszt`,
+                "MU" = Readability_MU,
+                "SZ"= Szigriszt,
+                "Avg" = (FH + FSZ + SZ)/3 ,
+                "Harry Potter" = 80) %>%
   dplyr::filter(Year %in% 2011:2022) %>%
-  pivot_longer(cols = c(`Fernández Huerta`,`Flesch-Szigriszt`,
-                         Szigriszt,`Avg`),                                    
+  pivot_longer(cols = c(FH,FSZ,
+                         SZ,`Avg`,
+                        `Harry Potter`),                                    
                             names_to = "Flesch", 
                             values_to = "Flesch_index") 
 A%>%
@@ -586,7 +554,7 @@ A%>%
     x = " ",
     y = " ",
     color = " ",
-    caption = "**Figure 2**: Readability of Banco de México Over Time.<br><br>Source: Author's calculation.<br>Note: The average was calculated using the standard mean at each time position of the three readability<br>measures. The Gutierrez score was scaled to fit the other two measures. he dashed lines correspond to<br>the respect readability level on the INFLESZ scale.")+
+    caption = "**Figure 2**: Readability of Banco de México Over Time.<br><br>Source: Author's calculation.<br>Note: The average was calculated using the standard mean at each time position of the three readability<br>measures. The dashed lines correspond to the respect readability level on the INFLESZ scale. Harry Potter<br>denotes the minimum score of the book *Harry Potter and the Philosopher's Stone*.")+
   theme_tufte(base_family = "serif",
             base_size = 12)+
   scale_color_wsj()+
@@ -611,7 +579,7 @@ rm(A)
 ```
 
 
-Despite these recent advances in the readability of the central bank, the documents are, on average, at the fairly difficult to read level according to the most of the scales, i.e., Banco de México's communication might be better understood by people with at least a high school education, or who can easily interpret documents such as scientific dissemination articles or specialized press publications (See Table 5). This is relevant, specially  due to the fact that INEGI´s 2020 Population and Housing Census shows that more than 50 percent of the population only has basic (elementary and junior high) or none education (See Figure 3). Therefore, the scope of Banxico´s publications still lag of clarity for a vast majority of the population.
+Despite these recent advances in the readability of the central bank, the documents are, on average, at the fairly difficult to read level according to the most of the scales, i.e., Banco de México's communication might be better understood by people with at least a high school education, or who can easily interpret documents such as scientific dissemination articles or specialized press publications (See Table 5). In addition, the scores are well below the minimum level for Spanish-language measures of the fantasy novel written by J. K. Rowling, *Harry Potter and the Philosopher's Stone*, which is considered very easy to read and interpret. This is relevant, specially due to the fact that INEGI´s 2020 Population and Housing Census shows that more than 50 percent of the population only has basic (elementary and junior high) or none education (See Figure 3). Therefore, the scope of Banxico´s publications still lag of clarity for a vast majority of the population.
 
 
 ```{r Table 5 Average readability of Banco de Méxicos publications,echo=FALSE, message=FALSE, warning=FALSE}
@@ -647,11 +615,11 @@ A$grade <- c("High School", "High School", "-", "High School",
              
              "High School", "High School", "-", "High School")
 
-A$type <- c("-","Dissemination","-","Literature",
+A$type <- c("-","Dissemination","-","Quality Magazine",
             
-            "-","Dissemination","-","Literature",
+            "-","Dissemination","-","Quality Magazine",
             
-            "-","Dissemination","-","Literature")
+            "-","Dissemination","-","Quality Magazine")
 
 
 
@@ -678,8 +646,6 @@ knitr::kable(A,
 rm(color)
 
 ```
-
-
 
 
 \noindent
@@ -731,16 +697,14 @@ One of the reasons for being very cautious with traditional readability measures
 [^33]: Joan Huang and John Simon (2021).    
 
 
-
 That said, the reality is that there has been an upward trend in the quantity and quality of the information Banco de México communicates. In addition, the [Pearson] correlation between the linguistic variables yields significant information (See Figure 3 and Appendix B). The readability scores within each of the documents are highly correlated. This is because all the formulas use similar variables and parameters, thus the information in each of them is a linear combination of the others. Similarly, word and sentence count have a correlation of about 1 (MPD [0.9], MPM [0.9], IQR [1]). It is understandable that word length and sentence length also follow the same pattern.
 
 The most interesting relationships are those between the word and sentence counts and the readability scores. While there is little or no relationship between these variables in the Inflation Reports, Monetary Policy Statements and Minutes reflect very different patterns. In the former, word count correlates highly negatively with the readability scores and sentence count displays a weaker, but still negative relation. On the other hand, Minutes present a strong and positive correlation between sentence count and readability scores, whereas word count has a moderately positive correlation.
 
 
 \noindent
-```{r Figure 3  Scatter Plots, eval=FALSE, fig.height=4, fig.width=6, message=FALSE, warning=FALSE, include=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 #install.packages("GGally")
-library(GGally)
 source("multiplot.R")
 
 A<- Banxico_readability %>%
@@ -845,12 +809,13 @@ COR_QIR <- A %>%
 
 
 
-COR_MPM
-COR_MPS
-COR_QIR
+#COR_MPM
+#COR_MPS
+#COR_QIR
 
+multiplot(COR_MPS,COR_MPM,COR_QIR, cols = 3)
 ```
-   
+
    > \footnotesize Source: Author's calculation.
 
 
@@ -859,8 +824,12 @@ Several conclusions can be drawn from this analysis. First, even when Inflation 
 
 Second, there is and inverse (direct) relation between clarity and amount of information in the Policy Decision releases (Minutes). This affirmation is especially true post-2020, when Banco de México significantly decrease the amount of information contained in the Statements and experienced an increase in document clarity. In turn, it is worth mentioning that according to the results, the longer the minutes, i.e., the more information there is about the decision-making process, the greater their clarity.
 
-Finally, the high correlation between the readability scores means that, regardless of which one we choose, we will obtain the same results. Therefore, the Flesch-Szigriszt score will be used for further developments. Figure 4 shows the fitted calculations for readability according to the INFLESZ scale.
+Finally, the high correlation between the readability scores means that, regardless of which one we choose, we will obtain the same results. Therefore, the Flesch-Szigriszt score will be used for further developments.
 
+
+# 4. Structural Break Analysis
+
+Figure 4 shows the fitted calculations for total perspicuity according to the INFLESZ scale.
 
 \noindent
 ```{r Figure 4 Readability of Banco de México. Flesch-Szigriszt Score, echo=FALSE, message=FALSE, warning=FALSE}
@@ -870,7 +839,7 @@ A<- Banxico_readability %>%
   dplyr::mutate("Year" = format(dates, 
                                 format="%Y"),
                 "Fernández Huerta" = `Fernandez Huerta`,
-                "Flesch-Szigriszt" = `Flesch-Szigriszt`,
+                "FSZ" = `Flesch-Szigriszt`,
                 "sf" = max(`Flesch-Szigriszt`)/max(Gutierrez),
               #  "Gutiérrez" = Gutierrez,
                 "Gutiérrez" = sf*`Gutierrez`,
@@ -879,9 +848,15 @@ A<- Banxico_readability %>%
 
 COR <- A %>%
   select(dates,Year,document,words,sentences,
-         `Flesch-Szigriszt`,`Fernandez Huerta`,Gutierrez,Avg) %>%
-  mutate(sentences = as.numeric(sentences)) %>%
-  group_by(document)
+         FSZ) %>%
+  mutate(sentences = as.numeric(sentences),
+         Governor = NA)
+
+COR$Governor[COR$Year %in% 2011:2017] = "Agustín Carstens"
+COR$Governor[c(140,141)] = "Alejandro Díaz de León"
+COR$Governor[COR$Year %in% 2018:2021] = "Alejandro Díaz de León"
+COR$Governor[COR$Year %in%2022] = "Victoria Rodríguez"
+
 
 #COR<-cor(COR[,4:9])
 
@@ -891,26 +866,26 @@ COR <- A %>%
 #str(COR)
 
 COR %>%
-  group_by(document) %>%
-  ggplot(aes(y=`Flesch-Szigriszt`,x=dates,
-             col = document)) +
+  group_by(document, Governor) %>%
+  ggplot(aes(y=FSZ,x=dates,
+             col = Governor)) +
   geom_point() +
   geom_smooth() +
       labs(
-    title = "Figure 4: Readability of Banco de México. Flesch-Szigriszt Score",
-    subtitle = "Jan 2011 - Dec 2022 (Reading Ease Scores)",
-    x = " ",
+    title = "",
+    subtitle = "",
+    x = "",
     y = "INFLESZ Scale",
     color = " ",
-    caption = "Source: Author's calculation.
-Note: Smoothing data using local regression techniques.")+
+    caption = "**Figure 4**: Perspicuity of Banco de México: Flesch-Szigriszt Score.<br><br>Source: Author's calculation.<br>Note: Smoothing data using local regression techniques.")+
   theme_tufte(base_family = "serif",
             base_size = 12)+
   scale_color_wsj()+
   scale_x_date(date_breaks = "2 year",
                date_labels = "%Y")+
   theme(legend.position = "bottom",
-        plot.caption = element_text(hjust = 0),
+        plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
         plot.caption.position = "plot") 
   #facet_grid(
    #          cols = vars(document),
@@ -924,8 +899,6 @@ Note: Smoothing data using local regression techniques.")+
 
 
 ```
-
-
 
 
 # Conclusion

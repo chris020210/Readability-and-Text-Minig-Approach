@@ -2442,3 +2442,27 @@ findAssocs(dtm2, "fed", corlimit = 0.5)
 [^3]: For further information see [Hvitfeldt and Silge (2011).](https://%20smltar.com)
 
 [^4]: See Taborda (2015).
+
+```{r Table 2 Changes in the structure of Banxico official documents, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE, paged.print=TRUE}
+Banxico_Communication <- data.frame("Document" = c("Monetary Policy Statements",
+                                               "Minutes", 
+                                               "Quarterly Inflation Reports"),
+                                    
+                           "Changes in structure" = c("In the period under study, the monetary policy statements consist of a few pages (no more than 3 at their longest) describing international developments since the last meeting, the markets and the economy, both observed and expected inflation, the balance of risks to the inflation outlook and the monetary policy decision itself. The structure of the statement has not undergone major modifications over time, however, as of August 2021 the statement includes a table of headline and core inflation forecasts for the remaining quarters of the year and the following two years.",
+                                                      
+                                                      "From 2011 to the April 2018 decision, the minutes consisted of 4 sections, the first one informed of the place, date, and the name of the attendees; the second one presented material that the Economic Research and Central Bank Operations Departments prepared for the meeting, giving an overview on the international markets, financial conditions, economic activity, and inflation; the third encompassed the bulk of the Board of Directors' discussion, although it did not (and still does not) indicate the name of the member who made the specific comment, and finally, it highlighted the monetary policy decision. As of the May 2018 decision, the minutes keep the first section untouched but continue with the analysis and motivation of the votes of the Committee members, the monetary policy decision, and for the first time include a section that discloses the identity of the voters, and in case of dissent also incorporate a section explaining the rationale for the dissenters' vote. The material presented by the Economic Research and Central Bank Operations Departments is now included as an appendix.",
+                                                      "Inflation Reports summarize the evolution of the economy and the financial markets over the previous quarter, focusing on the primary target, the inflation rate. In this regard, the inflation report aimed at informing the public of recent developments in the economy and inflation, and how the central bank is responding to maintain low and stable inflation. [These documents have also undergone many changes in structure of the document. Analyzing the information included and the structure of the report over time is not a trivial task and is beyond the scope of this paper]."))
+
+knitr::kable(Banxico_Communication,
+             caption = "Changes in the structure of Banxico's official documents",
+             booktabs = T,
+             longtable = F,
+             col.names = c("Document",
+                           "Changes in structure"))  %>%
+  kable_styling(font_size = 10 ,latex_options = c("HOLD_position"),
+                full_width = T) %>%
+  column_spec(1, width = "4cm", bold = T) %>%
+  #landscape() %>%
+  add_footnote("Source: Authors's Elaboration based on Information of Banxico's official docuements.",
+               notation = "none")
+```
