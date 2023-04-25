@@ -900,14 +900,14 @@ MPM <- Banxico_readability %>%
 
 # MP Statements
 MPD <- Banxico_readability %>%
-  filter(document == "MPD") %>% # select MPDs
+  filter(document == "MPS") %>% # select MPDs
   select(dates,document,`Flesch-Szigriszt`) %>% # filter interest variables
   # dates to monthly frequency
   mutate(dates = as.Date(format(dates, format= "%Y-%m-01")))
 
 # Inflation Reports
 IQR <- Banxico_readability %>%
-  filter(document == "IQR") %>% # select IQRs
+  filter(document == "QIR") %>% # select IQRs
   select(dates,document,`Flesch-Szigriszt`) # filter interest variables
 # separate date into year and quarter, inserting NAs in year as necessary
 IQR <- IQR %>% 
@@ -1089,6 +1089,11 @@ MPD2 <- MPD2 %>%
   mutate(MAFSZ = rollmean(FSZadjusted,k=5,
                           fill = NA,
                           align = "center"))
+TS_data <- data.frame(dates = MPM2$dates,
+                      "MPSs(LOCF)" = MPD2$FSZadjusted,
+                      "MPSs(5MA)" = MPD2$MAFSZ,
+                      "MPMs(LOCF)" = MPM2$FSZadjusted,
+                      "MPMs(5MA)" = MPM2$MAFSZ)
 ```
 
 
@@ -1138,23 +1143,30 @@ multiplot(A,B)
 
 
 
-```{r VARIABLES TO TS, message=FALSE, warning=FALSE, include=FALSE}
+```{r VARIABLES TO TS, echo=FALSE, message=FALSE, warning=FALSE}
 
 #Minutes
 MPM_FSZ <- ts(MPM2$FSZadjusted, start = c(2011,1),
               frequency = 12)
-MPM_MAFSZ <- ts(MPM2$MAFSZ, start = c(2011,3),
-                frequency = 12) 
+MPM_MAFSZ <- ts(log(MPM2$MAFSZ), start = c(2011,1),
+                frequency = 12)
+plot(MPM_MAFSZ)
 
 #MP Statements
 MPD_FSZ <- ts(MPD2$FSZadjusted, start = c(2011,1),
               frequency = 12)
-MPD_MAFSZ <- ts(MPD2$MAFSZ, start = c(2011,3),
+MPD_MAFSZ <- ts(log(MPD2$MAFSZ), start = c(2011,2),
                 frequency = 12)
+plot(MPD_MAFSZ)
 
 # Inflation Reports
-IQR_FSZ <- ts(IQR$`Flesch-Szigriszt`, start = c(2011,1),
+IQR_FSZ <- ts(log(IQR$`Flesch-Szigriszt`), start = c(2011,1),
               frequency = 4)
+plot(IQR_FSZ)
+
+EXPOR <- data.frame(MPM_MAFSZ,MPD_MAFSZ)
+library(openxlsx)
+write.xlsx(EXPOR,"Tsdata.xlsx")
 ```
 
 
@@ -1186,9 +1198,9 @@ __Monetary Policy Statements__
 ```{r}
 
 #Mp statemets
-adf.test(IQR_FSZ)
-pp.test(IQR_FSZ)
-kpss.test(IQR_FSZ)
+adf.test(MPD_MAFSZ)
+pp.test(MPD_MAFSZ)
+kpss.test(MPD_MAFSZ)
 
 ```
 
@@ -1273,10 +1285,10 @@ To do so, I will test for a maximum of 5 lags in the 3 possible specifications:
 # Minutes
 
 # zivot andrews test for trend models
-AIC <- c(rep(NA,6)) # AIC vector
-BIC <- c(rep(NA,6)) # BIC vector
+AIC <- c(rep(NA,8)) # AIC vector
+BIC <- c(rep(NA,8)) # BIC vector
 
-# For 1 to 6 lags, run each trend model and save the AIC and BIC information criteria. Then, print which one has the minimum.
+# For 1 to 8 lags, run each trend model and save the AIC and BIC information criteria. Then, print which one has the minimum.
 
 for (i in 1:6) {
   za<- ur.za(MPM_MAFSZ,

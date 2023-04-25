@@ -3,9 +3,10 @@ title: "Banco de México's Communication: A Readability and Perspicuity Approach
 author: "Christian Admin De la Huerta Avila"
 date: "`r Sys.Date()`"
 output:
-  pdf_document:
+  pdf_document: 
     latex_engine: xelatex
     df_print: paged
+    fig_height: 4
 fontsize: 12pt
 linestrech: 1.5
 linkcolor: cyan
@@ -254,7 +255,7 @@ A<-knitr::kable(Banxico_Communication,
              longtable = F,
              col.names = c("Year",
                            "Advances in the communication strategy"))  %>%
-  kable_styling(font_size = 10 ,latex_options = c(),
+  kable_styling(font_size = 10 ,latex_options = c("hold_position"),
                 full_width = T) %>%
   collapse_rows(columns = 1, latex_hline = "major", valign = "middle",
                 row_group_label_position = "identity") %>%
@@ -291,7 +292,7 @@ Following Flesch's research, many other formulas have been developed for analyzi
 
 These formulas, among others, are widely used to analyze the readability of English texts. However, it is not possible to analyze printed texts in Spanish with these methodologies. In the search for the adaptation of these formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the readability of a wide variety of Spanish documents in 1959. Later on, Gutiérrez (1973), [Szigriszt Pazos (1992)](http://webs.ucm.es/BUCM/tesis//19911996/S/3/S3019601.pdf), [Muñoz (2006)](http://www.legibilidadmu.cl/1.pdf), [Cantalejo and Lorda (2003)](https://www.sciencedirect.com/science/article/pii/S021265670379146X) and [Cantalejo et al. (2008)](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1137-66272008000300004) expanded the readability and perspicuity literature disposable for Spanish printed text.
 
-The intuition behind these formulas is the same as Flesch's: the longer the sentences and the more syllables per word, the more difficult it is to understand and read a text. Moreover, the selection of one or the other is quite arbitrary because they are highly correlated. For the purposes of this research, the scores of Fernández Huerta (FH), Szigriszt Pazos (SZ) and Cantalejo et al. (FSZ, INFLEZS scale) were calculated. The formal presentation of the formulas can be found in Appendix A. Table 3 shows the most common scales for interpreting Spanish written texts.
+The intuition behind these formulas is the same as Flesch's: the longer the sentences and the more syllables per word, the more difficult it is to understand and read a text. Moreover, the selection of one or the other is quite arbitrary because they are highly correlated. For the purposes of this research, the scores of Fernández Huerta (FH), Szigriszt Pazos (SZ) and Cantalejo et al. (FSZ, INFLEZS scale) were calculated. The formal presentation of the formulas can be found in Appendix A. Table 2 shows the most common scales for interpreting Spanish written texts.
 
 
 ```{r Table 2 Readability and Perspicuity Scales, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
@@ -364,13 +365,13 @@ knitr::kable(FLESCH.SCALE,
 ```
 
 
-Table 4 displays the basic descriptive statistics of the word and sentence count. On average, MPSs have the shortest extension, 1,101 and 37 words and sentences respectively, and QIRs the largest extension, 17,546 and 548. The MPMs find in between with an average count of 6,148 words and 178 sentences.
+Table 3 displays the basic descriptive statistics of the word and sentence count. On average, MPSs have the shortest extension, 1,101 and 37 words and sentences respectively, and QIRs the largest extension, 17,546 and 548. The MPMs find in between with an average count of 6,148 words and 178 sentences.
 
 If we observe the information given by Figure 1, it is quite evident that the word count has been changing over time. From 2011 to mid 2019 there is a clear tendency toward increase the total number of words in each publication. However, the distribution of the MPSs has an atypical observation in February 2016. The extension of the statement release on 17 February 2016 might be explained because it was an extemporaneous decision due to turbulence in the international markets that affected the exchange rate and could increase the likelihood of inflation expectations that was not consistent with Banco de México's inflation target of 3%.[^26] The second extemporaneous decision occurred on April 2020 due to the economic disruption of the COVID-19 pandemic, although the word count was closely to the usual extension.
 
 [^26]: See [Banco de México, 17 de febrero de 2016, Anuncio de Poítica Monetaria](https://www.banxico.org.mx/publicaciones-y-prensa/anuncios-de-las-decisiones-de-politica-monetaria/%7B394FBB23-9099-AAB2-6B9B-2FDBAEEE5710%7D.pdf)
 
-```{r Table 4 Word Count - Descriptive Statics, echo=FALSE, message=FALSE, warning=FALSE}
+```{r Table 3 Word Count - Descriptive Statics, echo=FALSE, message=FALSE, warning=FALSE}
 A<- Banxico_readability %>%
   mutate(words = as.numeric(words),
          sent = as.numeric(sentences))%>%
@@ -593,7 +594,7 @@ rm(A)
 ```
 
 
-Despite these recent advances in the readability of the central bank, the documents are, on average, at the fairly difficult to read level according to the most of the scales, i.e., Banco de México's communication might be better understood by people with at least a high school education, or who can easily interpret documents such as scientific dissemination articles or specialized press publications (See Table 4). In addition, the scores are well below the minimum level for Spanish-language measures of the fantasy novel written by J. K. Rowling, *Harry Potter and the Philosopher's Stone*, which is considered very easy to read and interpret. This is relevant, specially due to the fact that INEGI´s 2020 Population and Housing Census shows that more than 50 percent of the population only has basic (elementary and junior high) or none education (See Figure 3). Therefore, the scope of Banxico´s publications still lag of clarity for a vast majority of the population.
+Despite these recent advances in the readability of the central bank, the documents are, on average, at the fairly difficult to read level according to the most of the scales, i.e., Banco de México's communication might be better understood by people with at least a high school education, or who can easily interpret documents such as scientific dissemination articles or specialized press publications (See Table 4).
 
 
 ```{r Table 4 Average readability of Banco de Méxicos publications,echo=FALSE, message=FALSE, warning=FALSE}
@@ -661,6 +662,7 @@ rm(color)
 
 ```
 
+In addition, the scores are well below the minimum level for Spanish-language measures of the fantasy novel written by J. K. Rowling, *Harry Potter and the Philosopher's Stone*, which is considered very easy to read and interpret. This is relevant, specially due to the fact that INEGI´s 2020 Population and Housing Census shows that more than 50 percent of the population only has basic (elementary and junior high) or none education (See Figure 3). Therefore, the scope of Banxico´s publications still lag of clarity for a vast majority of the population.
 
 \noindent
 ```{r Figure 3, echo=FALSE, message=FALSE, warning=FALSE}
@@ -937,7 +939,86 @@ COR %>%
 
 Despite significant progress during Carstens' tenure, on average, document clarity follows a slightly negative slope. From Díaz de León's term onwards, clarity lifts off and adopts a positive trend towards higher levels. It is possible that Governor Diaz de Leon brought new and improved communication policies, however, these changes in clarity levels seem to be aligned with the shift to an inflation targeting scheme and the update in communication criteria.  In addition, during Díaz de León's tenure, Banxico's publications underwent an important modification in their structure, which is not entirely the result of Díaz de León but of Banxico's staff. On the other hand, since Victoria Rodriguez took office, clarity levels have consistently remained below the trend observed in the previous period.
 
-This information, together with the facts reviewed in the previous section, leads us to consider that the levels of clarity have suffered possible structural breaks in the period between 2011 and 2022.
+This information, together with the facts reviewed in the previous section, leads us to consider that the levels of clarity have suffered possible structural breaks in the period between 2011 and 2022. To test this hypothesis in the series of perspicuity for every document, unit root tests that allow for one and two endogenous breaks will be perform. 
+
+First of all, as the MPSs and MPMs observations are not collected on a regular monthly frequency, the imputation technique Last Observation Carried Forward (LOCF) was implemented. The latter follows the rationale that if the central bank coveys communication in month 1 and the next release is not until month 3, the communication given in month 1 still has effect in the later period until the next communication.
+
+In the case of the minutes, two exceptions to the dating rule have been made. In December 2016 and May 2020, we have two observations, each at the beginning and end of the month. Subsequent observations were carried forward to fill in the following month. For the statements, there are two releases in February 2016. In this case, instead of carried forward the second observation, January 2016 was filled with the average. Finally, to remove noise from the imputed series, a 5-window centered moving average was applied. The information of the QIRs needs no further manipulation. Figure 6 shows the transformed monthly series.
+
+
+\noindent
+```{r Figure 6 LOCF data, echo=FALSE, message=FALSE, warning=FALSE}
+
+library(latex2exp)
+library(ggtext)
+
+#install.packages("devtools")
+#devtools::install_github("jaredhuling/jcolors")
+#library(jcolors)
+
+#TS_data$IQRs <- NA
+#IQR$dates = as.Date(format(IQR$dates, format= "%Y-%m-01"))
+#for (i in 1:144) {
+ #   for (j in 1:48) {
+  #      if (TS_data$dates[i] == IQR$dates[j]) {
+   #         TS_data$IQRs[i] = IQR$`Flesch-Szigriszt`[j]
+    #    }
+    #}
+#}
+
+#TS_data2 <- TS_data %>%
+ #   pivot_longer(cols = c(MPSs.LOCF.,MPMs.LOCF.),
+  #               names_to = "LOCF",
+   #              values_to = "LOCF_vals") 
+
+TS_data3 <- TS_data %>%
+    pivot_longer(cols = c(MPSs.5MA.,MPMs.5MA.),
+                 names_to = "MA",
+                 values_to = "MA_vals") %>%
+    mutate(document = substring(MA, first = 1, last = 3))
+
+#TS_data3 <- TS_data3 %>%
+ #   mutate("LOCF" = TS_data2$LOCF,
+  #         "LOCF_vals" = TS_data2$LOCF_vals) %>%
+    #mutate(document = substring(LOCF, first = 1, last = 3))
+
+
+TS_data3%>%
+    ggplot() +
+    geom_line(aes(x= dates, # aesthetics
+               y= MA_vals,
+               color= MA))+
+  #labels of the Figure
+  labs(title = "",
+        x = "",
+        y = " FSZ score",
+    color = " ",
+      caption = "**Figure 6**: Transformed monthly series.<br><br>Source: Author's calculation.")+
+    theme_tufte(base_family = "serif",
+            base_size = 11)+
+  #scale_color_brewer(palette="Set1")+
+  #scale_color_manual(values = winter)+
+  scale_color_economist()+
+  theme(legend.position = "none",
+        plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
+        plot.caption.position = "plot")+
+  scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+               date_labels = "%Y") +
+  # split the figure using the type of document
+  facet_grid(
+             rows =vars(document)
+             , scales = "free")
+
+```
+
+
+For the clarity levels of the three publications, classic unit root tests such as the Augmented Dicky-Fuller [ADF] (Dicky and Fuller, 1981), Phillips-Perron [PP] (Phillips and Perron, 1988) and KPSS (Kwiatkowski et al., 1992) are executed to validate the hypothesis of sationarity in the Data Generating Process (DGP) of the series. The unit root specification includes models with no drift no trend (type A), drift and no trend (type B), and drift with trend (type C) respectively. Overall, there is no convincing evidence against the unit root null-hypothesis (See Appendix C). However, for each series, the KPPS test gives mix evidence on non-stationarity process.
+
+Since the seminal paper by Perron (1989), the literature has stressed that in the presence of one or more structural breaks, the non-rejection of the unit root null may be biased. Perron's test is a variation of the ADF test that takes into account the possibility of a known exogenous structural break in the time series. Perron relied on previous observation of the macroeconomic series studied by Nelson and Plosser (1982), arguing then that the latter's conclusion of integrated process might be biased due to the presence of structural changes in the U.S. economy during the years of the "Great Depression" and the 1973 oil price shock.
+
+In subsequente contribution, Zivot and Andrews (ZA)(1992), Banerjee, Lumsdaine, and Stock (BLS)(1992), and and Perron and Vogelsang (PV)(1992), reviewed Perron's conclusion and criticized the exogenous structural break identification. They propose tests which endogenize the breakpoint selection. Like Perron, these tests allow for the presence of structural break in th level of the series ("crash model"), a change in the trend of the series ("changing growth" model), or both. 
+
 
 # Conclusion
 
@@ -1212,7 +1293,7 @@ A<-COR %>%
   theme(text = element_text(family = "serif"),
         plot.caption = element_text(hjust = 0),
         plot.caption.position = "plot")+
-  labs(title = "Figure 3: Linguistic Correlation Maps",
+  labs(title = "",
        subtitle = "
        MPS")
 
@@ -1265,3 +1346,52 @@ multiplot(A,B,C,
 
 rm(A,B,C)
 ```
+
+
+
+# Appendix C. Unit Root Test Results
+
+
+
+
+```{r echo=FALSE}
+Clasic_Unit <- data.frame( Model = c("Type 1","Type 1",
+                                     "Type 2","Type 2",
+                                     "Type 3","Type 3"),
+                           "ADF(4)" = c(0.514,"(0.790)",-0.387,"(0.905)",-2.06,"(0.548)"),
+                           "PP(4)" = c(0.015,"(0.693)",-1.77,"(0.793)",-5.87,"(0.738)"),
+                           "KPS(2)" = c(0.437,"(>0.1)",0.485,"(0.045)**",0.051,"(>0.1)"),
+                           "ADF(4)" = c(0.548,"(0.80)",-1.27,"(0.599)",-2.04,"(0.557)"),
+                           "PP(4)" = c(0.024,"(0.695)",-3.17,"(0.633)",-6.78,"(0.669)"),
+                           "KPS(2)" = c(0.331,"(>0.1)",0.355,"(0.096)*",0.072,"(>0.1)"),
+                           "ADF(3)" = c(0.173,"(0.689)",-1.97,"(0.339)",-1.59,"(0.732)"),
+                           "PP(3)" = c(0.015,"(0.688)",-16.4,"(0.021)**",-1.6,"(0.136)"),
+                           "KPS(1)" = c(0.105,"(>0.1)",0.206,"(>0.1)",0.203,"(0.014)**")                          )
+
+knitr::kable(Clasic_Unit,
+             caption = "Classic Unit Root Tests",
+             align = "c",
+             booktabs = T,
+             col.names = c(" ","ADF(4)","PP(4)" ,"KPS(2)",
+                "ADF(4)","PP(4)" ,"KPS(2)",
+                "ADF(3)","PP(3)" ,"KPS(1)")) %>%  
+    kable_styling(latex_options = c("hold_position","scale_down"),
+                  full_width = F) %>%
+    collapse_rows(columns = 1, latex_hline = "major", valign = "middle") %>%
+    #column_spec(3, background = color,
+     #         color = "black",bold = T) %>%
+      #column_spec(4, background = color,
+       #       color = "black",bold = T)  %>%
+    add_header_above(c(" " = 1, "MPM" = 3, "MPS" = 3, "QIR" = 3))%>%
+    add_footnote(c("Source: Author's calculation.","Note: rejection of the null at (*)1%, (**)5%, (***)10% level.","Number in parenthesis after the test are the selected lags.","Number in parentheis below the t-statics represents the correspondent p-values"),
+                 notation = "none",
+                 threeparttable = F)
+
+
+```
+
+
+
+
+
+
