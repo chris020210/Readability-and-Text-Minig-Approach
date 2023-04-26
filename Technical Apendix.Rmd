@@ -1146,27 +1146,28 @@ multiplot(A,B)
 ```{r VARIABLES TO TS, echo=FALSE, message=FALSE, warning=FALSE}
 
 #Minutes
-MPM_FSZ <- ts(MPM2$FSZadjusted, start = c(2011,1),
+MPM_FSZ <- ts(MPM2$FSZadjusted, start = c(2011,01),
               frequency = 12)
-MPM_MAFSZ <- ts(log(MPM2$MAFSZ), start = c(2011,1),
+MPM_MAFSZ <- ts(log(MPM2$MAFSZ), start = c(2011,01),
                 frequency = 12)
 plot(MPM_MAFSZ)
 
 #MP Statements
-MPD_FSZ <- ts(MPD2$FSZadjusted, start = c(2011,1),
+MPD_FSZ <- ts(MPD2$FSZadjusted, start = c(2011,01),
               frequency = 12)
-MPD_MAFSZ <- ts(log(MPD2$MAFSZ), start = c(2011,2),
+MPD_MAFSZ <- ts(log(MPD2$MAFSZ), start = c(2011,01),
                 frequency = 12)
 plot(MPD_MAFSZ)
 
 # Inflation Reports
-IQR_FSZ <- ts(log(IQR$`Flesch-Szigriszt`), start = c(2011,1),
+IQR_FSZ <- ts(log(IQR$`Flesch-Szigriszt`), start = c(2011,01),
               frequency = 4)
 plot(IQR_FSZ)
 
 EXPOR <- data.frame(MPM_MAFSZ,MPD_MAFSZ)
 library(openxlsx)
 write.xlsx(EXPOR,"Tsdata.xlsx")
+write.xlsx(IQR_FSZ,"IQRdata.xlsx")
 ```
 
 
@@ -1283,14 +1284,14 @@ To do so, I will test for a maximum of 5 lags in the 3 possible specifications:
 ```{r}
 
 # Minutes
-
+load("Methodology data2.RData")
 # zivot andrews test for trend models
-AIC <- c(rep(NA,8)) # AIC vector
-BIC <- c(rep(NA,8)) # BIC vector
+AIC <- c(rep(NA,12)) # AIC vector
+BIC <- c(rep(NA,12)) # BIC vector
 
 # For 1 to 8 lags, run each trend model and save the AIC and BIC information criteria. Then, print which one has the minimum.
 
-for (i in 1:6) {
+for (i in 1:12) {
   za<- ur.za(MPM_MAFSZ,
             lag = i,
             model = "trend")
@@ -1324,9 +1325,9 @@ The following lines of code repeat the methodology for the drift model and the m
 ```{r}
 
 # zivot andrews test for drift models
-AIC <- c(rep(NA,8))
-BIC <- c(rep(NA,8))
-for (i in 1:6) {
+AIC <- c(rep(NA,12))
+BIC <- c(rep(NA,12))
+for (i in 1:12) {
   za<- ur.za(MPM_MAFSZ,
             lag = i,
             model = "intercept")
@@ -1354,9 +1355,9 @@ BIC2 <- BIC(zad@testreg)
 
 ```{r}
 # zivot andrews test for both breaks models
-AIC <- c(rep(NA,6))
-BIC <- c(rep(NA,6))
-for (i in 1:6) {
+AIC <- c(rep(NA,12))
+BIC <- c(rep(NA,12))
+for (i in 1:12) {
   za<- ur.za(MPM_MAFSZ,
             lag = i,
             model = "both")
@@ -1425,12 +1426,12 @@ The next is to apply the same code to the Monetary Policy Statements and Inflati
 # Minutes
 
 # zivot andrews test for trend models
-AIC <- c(rep(NA,6)) # AIC vector
-BIC <- c(rep(NA,6)) # BIC vector
+AIC <- c(rep(NA,12)) # AIC vector
+BIC <- c(rep(NA,12)) # BIC vector
 
 # For 1 to 12 lags, run each trend model and save the AIC and BIC information criteria. Then, print which one has the minimum.
 
-for (i in 1:6) {
+for (i in 1:12) {
   za<- ur.za(MPD_MAFSZ,
             lag = i,
             model = "trend")
@@ -1450,7 +1451,7 @@ cat("BIC optimun:", which.min(BIC), "\n")
 
 #TREND MODEL SELECT UR.ZA WITH 5 LAG
 zat<- ur.za(MPD_MAFSZ,
-            lag = 6,
+            lag = 7,
             model = "trend")
 AIC1 <- AIC(zat@testreg)
 BIC1 <- BIC(zat@testreg)
@@ -1459,9 +1460,9 @@ BIC1 <- BIC(zat@testreg)
 ```{r}
 
 # zivot andrews test for drift models
-AIC <- c(rep(NA,6))
-BIC <- c(rep(NA,6))
-for (i in 1:6) {
+AIC <- c(rep(NA,12))
+BIC <- c(rep(NA,12))
+for (i in 1:12) {
   za<- ur.za(MPD_MAFSZ,
             lag = i,
             model = "intercept")
@@ -1489,9 +1490,9 @@ BIC2 <- BIC(zad@testreg)
 
 ```{r}
 # zivot andrews test for both breaks models
-AIC <- c(rep(NA,6))
-BIC <- c(rep(NA,6))
-for (i in 1:6) {
+AIC <- c(rep(NA,12))
+BIC <- c(rep(NA,12))
+for (i in 1:12) {
   za<- ur.za(MPD_MAFSZ,
             lag = i,
             model = "both")
@@ -1511,7 +1512,7 @@ cat("BIC optimun:", which.min(BIC), "\n")
 
 # IN both break MODEL SELECT UR.ZA WITH 5 LAG
 zab<- ur.za(MPD_MAFSZ,
-            lag = 6,
+            lag = 1,
             model = "both")
 AIC3 <- AIC(zab@testreg)
 BIC3 <- BIC(zab@testreg)
@@ -1590,7 +1591,7 @@ multiplot(B,ZAPLOT)
 ```
 
 ```{r message=FALSE, warning=FALSE}
-MPD111 <- ts(MPD_MAFSZ[1:111], start = c(2011,03),
+MPD111 <- ts(MPD_MAFSZ[1:111], start = c(2011,01),
              frequency = 12)
 autoplot.zoo(MPD111) +
   labs(title = "Flesch-Szigritz score",
@@ -1618,12 +1619,12 @@ Further investigation will be necessary.
 # IQRs
 
 # zivot andrews test for trend models
-AIC <- c(rep(NA,4)) # AIC vector
-BIC <- c(rep(NA,4)) # BIC vector
+AIC <- c(rep(NA,9)) # AIC vector
+BIC <- c(rep(NA,9)) # BIC vector
 
 # For 1 to 5 lags, run each trend model and save the AIC and BIC information criteria. Then, print which one has the minimum.
 
-for (i in 1:4) {
+for (i in 0:8) {
   za<- ur.za(IQR_FSZ,
             lag = i,
             model = "trend")
@@ -1643,7 +1644,7 @@ cat("BIC optimun:", which.min(BIC), "\n")
 
 #TREND MODEL SELECT UR.ZA WITH 5 LAG
 zat<- ur.za(IQR_FSZ,
-            lag = 4,
+            lag = 0,
             model = "trend")
 AIC1 <- AIC(zat@testreg)
 BIC1 <- BIC(zat@testreg)
@@ -1652,9 +1653,9 @@ BIC1 <- BIC(zat@testreg)
 ```{r}
 
 # zivot andrews test for drift models
-AIC <- c(rep(NA,4))
-BIC <- c(rep(NA,4))
-for (i in 1:4) {
+AIC <- c(rep(NA,9))
+BIC <- c(rep(NA,9))
+for (i in 0:8) {
   za<- ur.za(IQR_FSZ,
             lag = i,
             model = "intercept")
@@ -1673,7 +1674,7 @@ cat("BIC optimun:", which.min(BIC), "\n")
 ```{r}
 # IN DRIFT MODEL SELECT UR.ZA WITH 5 LAG
 zad<- ur.za(IQR_FSZ,
-            lag = 4,
+            lag = 0,
             model = "intercept")
 AIC2 <- AIC(zad@testreg)
 BIC2 <- BIC(zad@testreg)
@@ -1682,9 +1683,9 @@ BIC2 <- BIC(zad@testreg)
 
 ```{r}
 # zivot andrews test for both breaks models
-AIC <- c(rep(NA,4))
-BIC <- c(rep(NA,4))
-for (i in 1:4) {
+AIC <- c(rep(NA,9))
+BIC <- c(rep(NA,9))
+for (i in 0:9) {
   za<- ur.za(IQR_FSZ,
             lag = i,
             model = "both")
@@ -1704,7 +1705,7 @@ cat("BIC optimun:", which.min(BIC), "\n")
 
 # IN both break MODEL SELECT UR.ZA WITH 5 LAG
 zab<- ur.za(IQR_FSZ,
-            lag = 4,
+            lag = 0,
             model = "both")
 AIC3 <- AIC(zab@testreg)
 BIC3 <- BIC(zab@testreg)
@@ -1734,7 +1735,9 @@ The `summary` command return the information contained in the Zivot-Andrews unit
 ```{r}
 summary(zat)
 plot(zat)
-IQR$dates[zat@bpoint]
+IQR$Q[zat@bpoint]
+zat@
+
 ```
 
 

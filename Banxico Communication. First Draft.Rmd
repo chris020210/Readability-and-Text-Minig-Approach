@@ -1015,31 +1015,33 @@ TS_data3%>%
 
 For the clarity levels of the three publications, classic unit root tests such as the Augmented Dicky-Fuller [ADF] (Dicky and Fuller, 1981), Phillips-Perron [PP] (Phillips and Perron, 1988) and KPSS (Kwiatkowski et al., 1992) are executed to validate the hypothesis of sationarity in the Data Generating Process (DGP) of the series. The unit root specification includes models with no drift no trend (type A), drift and no trend (type B), and drift with trend (type C) respectively. Overall, there is no convincing evidence against the unit root null-hypothesis (See Appendix C). However, for each series, the KPPS test gives mix evidence on non-stationarity process.
 
-Since the seminal paper by Perron (1989), the literature has stressed that in the presence of one or more structural breaks, the non-rejection of the unit root null may be biased. Perron's test is a variation of the ADF test that takes into account the possibility of a known exogenous structural break in the time series. Perron relied on previous observation of the macroeconomic series studied by Nelson and Plosser (1982), arguing then that the latter's conclusion of integrated process might be biased due to the presence of structural changes in the U.S. economy during the years of the "Great Depression" and the 1973 oil price shock.
+Since the seminal paper by Perron ([1989](https://www.jstor.org/stable/1913712?searchText=&searchUri=&ab_segments=&searchKey=&refreqid=fastly-default%3A5187955ea05417ef3e6d4821c2f07ea9)), the literature has stressed that in the presence of one or more structural breaks, the non-rejection of the unit root null may be biased. Perron's test is a variation of the ADF test that takes into account the possibility of a known exogenous structural break in the time series. Perron relied on previous observation of the macroeconomic series studied by Nelson and Plosser (1982), arguing then that the latter's conclusion of integrated process might be biased due to the presence of structural changes in the U.S. economy during the years of the "Great Depression" and the 1973 oil price shock.
 
-In subsequente contribution, Zivot and Andrews (ZA)(1992), Banerjee, Lumsdaine, and Stock (BLS)(1992), and and Perron and Vogelsang (PV)(1992), reviewed Perron's conclusion and criticized the exogenous structural break identification. They propose tests which endogenized breakpoint selection. Like Perron, these tests allow for the presence of structural break in th level of the series ("crash" model), a change in the trend ("changing growth" model), or both. 
+In subsequente contribution, Zivot and Andrews (ZA)([1992](https://www.jstor.org/stable/1391541?searchText=&searchUri=&ab_segments=&searchKey=&refreqid=fastly-default%3A22b362ee8348ccf8b5607097327edae9)), Banerjee, Lumsdaine, and Stock (BLS)(1992), and and Perron and Vogelsang (PV)([1992](https://www.jstor.org/stable/1391823?searchText=&searchUri=&ab_segments=&searchKey=&refreqid=fastly-default%3A8d8282cdb8423068941d433f745a7557); [1998](https://www.jstor.org/stable/2527353)), reviewed Perron's conclusion and criticized the exogenous structural break identification. They propose tests which endogenized breakpoint selection. Like Perron, these tests allow for the presence of structural break in th level of the series ("crash" model), a change in the trend ("changing growth" model), or both. 
 
-For purpose of this paper ZA and PV test are performed. The method for the selection of the type of break as well as the lags for the augmented form models were selected using both information criteria and general to specific approach for a maximum of 12 lags in the case of the monthly series and 8 in the quarterly series. Table 5 shows the results.
+For purpose of this paper ZA and PV test are performed. The method for the selection of the type of break as well as the lags for the augmented form models were selected using both information criteria and general to specific approach for a maximum of 12 lags in the case of the monthly series and 8 in the quarterly series. In every model we found for the minimum information criteria and statistic significance at the 5% for the maximum lag coefficient.
+
+Table 5 shows the results of applying an _innovational outlier model_ break selection for the ZA and PV tests. The later means that we assume a gradual rather than a sudden change (_additive outlier model_) in the GDP of the series. 
 
 
-```{r echo=FALSE}
+```{r TAB 5 , echo=FALSE}
 Onebreak_Unit <- data.frame( var = c(rep("MPM",2), rep("MPS",2), rep("QIR",2)),
-                           type = c("crash.", "crash.","crash", "crash", "changing growth", "changing growth"),
-                           ZA = c("-3.6556","[Aug 18]","-4.9539**" , "[Mar 20]", "-4.7234**", "[Nov 18]"),
-                           lag1 = c(6, " ", 6, " ", 4 , " "),
-                           PV = c( " ", " ", " ",  " ", " ", " "),
-                           lag2 = c(7, " ", 7, " ", 4 , " "))
+                           type = c("crash.", "crash.","crash", "crash", "chg. growth", "chg. growth"),
+                           ZA = c("-3.779(6)","-3.779(6)", "-4.875(6)**" , "-4.875(6)**", "-4.7234(0)**", "-4.7234(0)**"),
+                           TB1 = c("Aug-13", "Aug-13", "Mar-20", "Mar-20", "Q2-18" , "Q2-18"),
+                           PV = c( "-3.080(6)", "-3.080(6)", "-4.486(6)**",  "-4.486(6)**", "-5.392(0)***", "-5.392(0)***"),
+                           TB1 = c("Apr-18", "Apr-18", "May-20", "May-20", "Q3-18" , "Q3-18"))
 
 knitr::kable(Onebreak_Unit,
              caption = "Onebreak Unit",
              align = "c",
              booktabs = T,
-             col.names = c(" ","Model","t-stat" ,"lag",
-                           "t-stat" ,"lag")) %>%  
+             col.names = c(" ","Model","t-stat" ,"TB1",
+                           "t-stat" ,"TB1")) %>%  
     kable_styling(latex_options = c("hold_position"),
                   full_width = T) %>%
     collapse_rows(columns = 1, latex_hline = "major", valign = "middle") %>%
-    collapse_rows(columns = 2,
+    collapse_rows(columns = 2:6,
                   latex_hline = "major", valign = "middle") %>%
 
     #column_spec(3, background = color,
