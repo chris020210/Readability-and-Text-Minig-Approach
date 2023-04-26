@@ -1017,7 +1017,43 @@ For the clarity levels of the three publications, classic unit root tests such a
 
 Since the seminal paper by Perron (1989), the literature has stressed that in the presence of one or more structural breaks, the non-rejection of the unit root null may be biased. Perron's test is a variation of the ADF test that takes into account the possibility of a known exogenous structural break in the time series. Perron relied on previous observation of the macroeconomic series studied by Nelson and Plosser (1982), arguing then that the latter's conclusion of integrated process might be biased due to the presence of structural changes in the U.S. economy during the years of the "Great Depression" and the 1973 oil price shock.
 
-In subsequente contribution, Zivot and Andrews (ZA)(1992), Banerjee, Lumsdaine, and Stock (BLS)(1992), and and Perron and Vogelsang (PV)(1992), reviewed Perron's conclusion and criticized the exogenous structural break identification. They propose tests which endogenize the breakpoint selection. Like Perron, these tests allow for the presence of structural break in th level of the series ("crash model"), a change in the trend of the series ("changing growth" model), or both. 
+In subsequente contribution, Zivot and Andrews (ZA)(1992), Banerjee, Lumsdaine, and Stock (BLS)(1992), and and Perron and Vogelsang (PV)(1992), reviewed Perron's conclusion and criticized the exogenous structural break identification. They propose tests which endogenized breakpoint selection. Like Perron, these tests allow for the presence of structural break in th level of the series ("crash" model), a change in the trend ("changing growth" model), or both. 
+
+For purpose of this paper ZA and PV test are performed. The method for the selection of the type of break as well as the lags for the augmented form models were selected using both information criteria and general to specific approach for a maximum of 12 lags in the case of the monthly series and 8 in the quarterly series. Table 5 shows the results.
+
+
+```{r echo=FALSE}
+Onebreak_Unit <- data.frame( var = c(rep("MPM",2), rep("MPS",2), rep("QIR",2)),
+                           type = c("crash.", "crash.","crash", "crash", "changing growth", "changing growth"),
+                           ZA = c("-3.6556","[Aug 18]","-4.9539**" , "[Mar 20]", "-4.7234**", "[Nov 18]"),
+                           lag1 = c(6, " ", 6, " ", 4 , " "),
+                           PV = c( " ", " ", " ",  " ", " ", " "),
+                           lag2 = c(7, " ", 7, " ", 4 , " "))
+
+knitr::kable(Onebreak_Unit,
+             caption = "Onebreak Unit",
+             align = "c",
+             booktabs = T,
+             col.names = c(" ","Model","t-stat" ,"lag",
+                           "t-stat" ,"lag")) %>%  
+    kable_styling(latex_options = c("hold_position"),
+                  full_width = T) %>%
+    collapse_rows(columns = 1, latex_hline = "major", valign = "middle") %>%
+    collapse_rows(columns = 2,
+                  latex_hline = "major", valign = "middle") %>%
+
+    #column_spec(3, background = color,
+     #         color = "black",bold = T) %>%
+      #column_spec(4, background = color,
+       #       color = "black",bold = T)  %>%
+    add_header_above(c(" " = 2, "ZA" = 2, "PV" = 2))%>%
+    add_footnote(c("Source: Author's calculation.","Note: rejection of the null at (*)1%, (**)5%, (***)10% level.", "The date in brackets represent the potentila point break."),
+                 notation = "none",
+                 threeparttable = F)
+
+```
+
+
 
 
 # Conclusion
@@ -1033,6 +1069,7 @@ Additionally, Banxico publishes quarterly reports that analyze inflation and eco
 Banxico has also made efforts to improve the accessibility and clarity of its communication materials. For example, the bank has simplified the language used in its reports and bulletins to make them more easily understandable for the general public.
 
 Overall, Banxico's communication strategy has undergone several modifications over the years, as the bank has worked to improve its effectiveness and transparency. These efforts have been successful in enhancing public understanding of the bank's policy decisions and promoting accountability and transparency in the country's monetary policy framework.
+
 
 
 
