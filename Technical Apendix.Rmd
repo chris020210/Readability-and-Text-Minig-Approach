@@ -1593,7 +1593,14 @@ multiplot(B,ZAPLOT)
 ```{r message=FALSE, warning=FALSE}
 MPD111 <- ts(MPD_MAFSZ[1:111], start = c(2011,01),
              frequency = 12)
+MPD113 <- ts(MPD_MAFSZ[1:113], start = c(2011,01),
+             frequency = 12)
+
 autoplot.zoo(MPD111) +
+  labs(title = "Flesch-Szigritz score",
+       subtitle = "Before March 2020") +
+  geom_hline(yintercept = mean(na.omit(MPD111)))
+autoplot.zoo(MPD113) +
   labs(title = "Flesch-Szigritz score",
        subtitle = "Before March 2020") +
   geom_hline(yintercept = mean(na.omit(MPD111)))
@@ -1603,9 +1610,17 @@ autoplot.zoo(MPD111) +
 #Unit root test
 adf.test(MPD111)
 pp.test(MPD111)
-kpss.test(MPD111,
-          lag.short = F)
+kpss.test(MPD111)
 ```
+
+
+```{r}
+#Unit root test
+adf.test(MPD113)
+pp.test(MPD113)
+kpss.test(MPD113)
+```
+
 
 Considering an specification with drift, no trend a 4 lag length, the time series of the MPDs' readability scores, before March 2020, rejects the null-hypothesis of unit-root.
 The later seems to confirm the conjecture that it is a trend-stationary series with a structural break in mean.
@@ -1736,7 +1751,6 @@ The `summary` command return the information contained in the Zivot-Andrews unit
 summary(zat)
 plot(zat)
 IQR$Q[zat@bpoint]
-zat@
 
 ```
 
@@ -1786,22 +1800,38 @@ multiplot(B, ZAPLOT)
 ```
 
 ```{r message=FALSE, warning=FALSE}
-IQR32 <- ts(IQR_FSZ[1:zat@bpoint], start = c(2011,03),
+IQR30 <- ts(IQR_FSZ[1:30], start = c(2011,01),
              frequency = 4)
-autoplot.zoo(IQR32) +
+
+IQR31 <- ts(IQR_FSZ[1:31], start = c(2011,01),
+             frequency = 4)
+
+autoplot.zoo(IQR30) +
   labs(title = "Flesch-Szigritz score",
        subtitle = "Before 2018Q4") +
-  geom_hline(yintercept = mean(na.omit(IQR32)))
+  geom_hline(yintercept = mean(na.omit(IQR30)))
+
+autoplot.zoo(IQR31) +
+  labs(title = "Flesch-Szigritz score",
+       subtitle = "Before 2018Q4") +
+  geom_hline(yintercept = mean(na.omit(IQR31)))
 ```
 
 ```{r}
 #Unit root test
-adf.test(IQR32)
-pp.test(IQR32)
-kpss.test(IQR32,
-          lag.short = F)
+adf.test(IQR30)
+pp.test(IQR30)
+kpss.test(IQR30)
 ```
 
+
+
+```{r}
+#Unit root test
+adf.test(IQR31)
+pp.test(IQR31)
+kpss.test(IQR31)
+```
 
 Considering an specification with drift, no trend a 4 lag length, the time series of the MPDs' readability scores, before March 2020, rejects the null-hypothesis of unit-root. The later seems to confirm the conjecture that it is a trend-stationary series with a structural break in mean. Further investigation will be necessary.
 
@@ -1813,6 +1843,7 @@ Considering an specification with drift, no trend a 4 lag length, the time serie
 Lumsdaine and Papell [hereafter LP] (1997) showed that allowing for only one point break could biased the results and conclusions of ZA test, therefore, they extended the analysis to allow for two endogenous unknown structural breaks. However, as ZA model specifications, they also contrast their test under the unit root without breaks null.
 
 Lee and Strazicich [herefater LS] (2003) criticized this model specifications, stressing that under the unit root without breaks null, the rejection of the null-hypothesis does not mean that that the time series follows a trend-stationary with breaks DGP. In contrast, they concluded that the rejection of the null under the ZA and LP tests could be biased due to the possibility of difference stationary with breaks DGP. Thus, the solution presented is to expand the test to allows for two endogenous unknown breakpoints under the presence of unit root null. For instance, the model type B follows:
+
 
 __Null__
 ```{=tex}
@@ -1843,7 +1874,7 @@ The implementation of LS test follows the bootstrap procedure developed by Chou 
 
 
 ```{r include=FALSE}
-source("LeeStrazicichUnitRootTest.R")
+#source("LeeStrazicichUnitRootTest.R")
 library(foreach)
 library(doSNOW)
 library(parallel)
@@ -1852,21 +1883,53 @@ library(parallel)
 
 #### Minutes
 ```{r}
+#load("BOOTSRAP.RData")
 
-myLS_test <- ur.ls(y=na.omit(MPM_MAFSZ) , model = "crash", breaks = 2, lags = 6, method = "GTOS",pn = 0.1, print.results = "print" )
+#library(stargazer)
+MPM_BOOTS_RESULTS
+MPM2$dates[111]
+MPM2$dates[120]
+
 ```
 
 
 ```{r}
-load("MPM_boot.RData")
+#MPM_BOOTS_INTERVALS
+
+#Calculate the critical values, based on the distribution of the test statistic
+hist(unlist(MPM_BOOTS_INTERVALS[,"t-stat"]), freq = FALSE)
+quantile(unlist(MPM_BOOTS_INTERVALS[,"t-stat"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+quantile(unlist(MPM_BOOTS_INTERVALS[,"First break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+quantile(unlist(MPM_BOOTS_INTERVALS[,"Second break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
 ```
 
 
 #### Monetary Policy Statements
 
+```{r}
+
+#MPD_BOOTS_RESULTS
+A <- test.results.y <-  ur.ls.bootstrap(y=as.numeric(na.omit(MPD_MAFSZ)) , model = "crash", breaks = 2, lags = 8, method = "Fixed",pn = 0.1, critval = "bootstrap", print.results = "print")
+
+
+
+```
+
+```{r}
+#Calculate the critical values, based on the distribution of the test statistic
+hist(unlist(MPD_BOOTS_INTERVALS[,"t-stat"]), freq = FALSE)
+quantile(unlist(MPD_BOOTS_INTERVALS[,"t-stat"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+quantile(unlist(MPD_BOOTS_INTERVALS[,"First break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+quantile(unlist(MPD_BOOTS_INTERVALS[,"Second break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+```
+
+
 
 #### Quarterly Inflation Reports
 
+```{r}
+IQR_BOOTS_RESULTS
+```
 
 
 # 3. Text mining approach

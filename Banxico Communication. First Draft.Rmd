@@ -255,11 +255,12 @@ A<-knitr::kable(Banxico_Communication,
              longtable = F,
              col.names = c("Year",
                            "Advances in the communication strategy"))  %>%
-  kable_styling(font_size = 10 ,latex_options = c("hold_position"),
+  kable_paper(font_size = 10 ,latex_options = c("hold_position"),
                 full_width = T) %>%
   collapse_rows(columns = 1, latex_hline = "major", valign = "middle",
                 row_group_label_position = "identity") %>%
   column_spec(1, width = "1cm", bold = T) %>%
+  #kableExtra::kable_paper() %>%
   #landscape() %>%
   add_footnote(c("Source: Banxico's official documents and press releases from the Boards of Directors.", "Note: (*)  observations added other than those officially accepted by Banxico."),
                notation = "none", threeparttable = F)
@@ -422,7 +423,7 @@ knitr::kable(A,
              caption = "Word Count- Descriptive Statics",
              align = "c",
              booktabs = T,
-             col.names = c("Document","No. docs", "Count",
+             col.names = c("Document","No.", "Count",
                            "Mean","Median","SD",
                 "Min.", "Min. Date",
                 "Max.", "Max. Date")) %>%
@@ -526,7 +527,7 @@ For its part, Banco de México's communication over time shows an upward trend i
 
 
 \noindent
-```{r Figure 2 Readability of Banco de México Over Time, echo=FALSE, message=FALSE, warning=FALSE}
+```{r Figure 2 Readability of Banco de México Over Time, echo=FALSE, fig.height=5, message=FALSE, warning=FALSE}
 
 #library(gridExtra)
 #library(ggpmisc)
@@ -597,7 +598,7 @@ rm(A)
 Despite these recent advances in the readability of the central bank, the documents are, on average, at the fairly difficult to read level according to the most of the scales, i.e., Banco de México's communication might be better understood by people with at least a high school education, or who can easily interpret documents such as scientific dissemination articles or specialized press publications (See Table 4).
 
 
-```{r Table 4 Average readability of Banco de Méxicos publications,echo=FALSE, message=FALSE, warning=FALSE}
+```{r Table 4 Average readability of Banco de Méxicos publications, echo=FALSE, fig.height=4.5, fig.width=6, message=FALSE, warning=FALSE}
 
 A<- Banxico_readability %>%
   select(dates,document,statement,`Flesch-Szigriszt`,
@@ -947,7 +948,7 @@ In the case of the minutes, two exceptions to the dating rule have been made. In
 
 
 \noindent
-```{r Figure 6 LOCF data, echo=FALSE, message=FALSE, warning=FALSE}
+```{r Figure 6 LOCF data, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
 
 library(latex2exp)
 library(ggtext)
@@ -1021,10 +1022,12 @@ In subsequente contribution, Zivot and Andrews (ZA)([1992](https://www.jstor.org
 
 For purpose of this paper ZA and PV test are performed. The method for the selection of the type of break as well as the lags for the augmented form models were selected using both information criteria and general to specific approach for a maximum of 12 lags in the case of the monthly series and 8 in the quarterly series. In every model we found for the minimum information criteria and statistic significance at the 5% for the maximum lag coefficient.
 
-Table 5 shows the results of applying an _innovational outlier model_ break selection for the ZA and PV tests. The later means that we assume a gradual rather than a sudden change (_additive outlier model_) in the GDP of the series. 
+Table 5 shows the results of applying an _innovational outlier model_ break selection for the ZA and PV tests. The later means that we assume a gradual rather than a sudden change (_additive outlier model_) in the DGP of the series. 
+
+In the case of the ZA test, we contrast the null-hypothesis of the presence of a unit root with no breaks, against the alternative hypothesis of a stationary process with one endogenous break. For the PV test, we allow for one break in the unit root null, against the alternative hypothesis of stationarity with one break. The results show for both test, that the MPMs perspicuity can be characterized as an I(1) process with no breaks (ZA) or a potential and significant break in April 2018 (PV). MPSs and QIRs present evidence of stationarity with a potential time break in level and trend respectively. Furthermore, classic unit root test show that both series might be represented as wise-regime stationary process (see appendix C).
 
 
-```{r TAB 5 , echo=FALSE}
+```{r Tab 5 URT one breal, echo=FALSE}
 Onebreak_Unit <- data.frame( var = c(rep("MPM",2), rep("MPS",2), rep("QIR",2)),
                            type = c("crash.", "crash.","crash", "crash", "chg. growth", "chg. growth"),
                            ZA = c("-3.779(6)","-3.779(6)", "-4.875(6)**" , "-4.875(6)**", "-4.7234(0)**", "-4.7234(0)**"),
@@ -1033,7 +1036,7 @@ Onebreak_Unit <- data.frame( var = c(rep("MPM",2), rep("MPS",2), rep("QIR",2)),
                            TB1 = c("Apr-18", "Apr-18", "May-20", "May-20", "Q3-18" , "Q3-18"))
 
 knitr::kable(Onebreak_Unit,
-             caption = "Onebreak Unit",
+             caption = "Unit Root tests with one endogenous structural break",
              align = "c",
              booktabs = T,
              col.names = c(" ","Model","t-stat" ,"TB1",
@@ -1048,12 +1051,21 @@ knitr::kable(Onebreak_Unit,
      #         color = "black",bold = T) %>%
       #column_spec(4, background = color,
        #       color = "black",bold = T)  %>%
-    add_header_above(c(" " = 2, "ZA" = 2, "PV" = 2))%>%
+    add_header_above(c(" " = 2, "ZA" = 2, "PV" = 2),
+                     bold = T)%>%
     add_footnote(c("Source: Author's calculation.","Note: rejection of the null at (*)1%, (**)5%, (***)10% level.", "The date in brackets represent the potentila point break."),
                  notation = "none",
                  threeparttable = F)
 
 ```
+
+
+
+From an economic perspective, there is no reason to limit the analysis to a single structural change. Moreover, Lumsdaine and Papell (LP)(1997) showed that allowing for only one point break could biased the results and conclusions of the previous tests, therefore, they extended the analysis to allow for two endogenous unknown structural breaks. They also conclude that in test such as the ZA which does not allow for breaks under the unit root null, excludes all the other cases to the alternative hypothesis, i.e., the alternative hypothesis implies that there are breaks in the series including the possibility of unit root with breaks.
+
+Then, is arguably that LP test is not the most appropriate for our data. Instead, Lee and Strazicich (2003), LS test is suitable because expands the analysis to allow for two endogenous unknown breakpoints both under the null and alternative hypothesis. Hence, the model specifications of Ls test is a unit root process with up to two structural breaks in level, trend or both, against the alternative hypothesis of an stationary process with up to two breaks in level, trend or both. In addition, the bootstrap approach by Chou (2007) is implemented to derive the critical values of the t-statics and the distributional properties of the t-statics and the selected break points.[^30]
+
+[^30]: For a similar implementation of this procedure see [Lips (2017)]().
 
 
 
@@ -1287,6 +1299,7 @@ All these formulas have been widely used in text analysis in fields such as medi
 
 [^]: See [Cihák et al. (2012)](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Clarity-of-Central-Bank-Communication-About-Inflation-25607),[Cihák et al. (2013)](https://cepr.org/voxeu/columns/measuring-clarity-central-bank-communication), [Deslonghchamps (2018)](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/), [Carotta et al. (2021)](https://www.cemla.org/actividades/2021-final/2021-11-xxvi-meeting-of-the-central-bank-researchers-network/5B.2%20PAPER%20Carotta%20Mello%20Ponce.pdf), [Huang and Simon (2021)](https://www.rba.gov.au/publications/rdp/2021/pdf/rdp2021-05.pdf), [Ferrara and Angino (2022)](https://eprints.lse.ac.uk/112968/1/Ferrara_does_clarity_make_central_banks_more_engaging_published.pdf).
 
+\newpage
 # Appendix B. Linguistic Correlation Map
 
 \noindent
@@ -1387,10 +1400,8 @@ rm(A,B,C)
 ```
 
 
-
-# Appendix C. Unit Root Test Results
-
-
+\newpage
+# Appendix C. Classic Unit Root Test Results
 
 
 ```{r echo=FALSE}
@@ -1415,14 +1426,15 @@ knitr::kable(Clasic_Unit,
                 "ADF(4)","PP(4)" ,"KPS(2)",
                 "ADF(3)","PP(3)" ,"KPS(1)")) %>%  
     kable_styling(latex_options = c("hold_position","scale_down"),
-                  full_width = F) %>%
+                  full_width = T,font_size = 10) %>%
     collapse_rows(columns = 1, latex_hline = "major", valign = "middle") %>%
     #column_spec(3, background = color,
      #         color = "black",bold = T) %>%
       #column_spec(4, background = color,
        #       color = "black",bold = T)  %>%
-    add_header_above(c(" " = 1, "MPM" = 3, "MPS" = 3, "QIR" = 3))%>%
-    add_footnote(c("Source: Author's calculation.","Note: rejection of the null at (*)1%, (**)5%, (***)10% level.","Number in parenthesis after the test are the selected lags.","Number in parentheis below the t-statics represents the correspondent p-values"),
+    add_header_above(c(" " = 1, "MPM" = 3, "MPS" = 3, "QIR" = 3),
+                     bold = T, font_size = 10)%>%
+    add_footnote(c("Source: Author's calculation."),
                  notation = "none",
                  threeparttable = F)
 
@@ -1430,7 +1442,70 @@ knitr::kable(Clasic_Unit,
 ```
 
 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+Clasic_Unit_MPS<- data.frame(
+                           Model = c("Type 1","Type 1",
+                                     "Type 2","Type 2",
+                                     "Type 3","Type 3"),
+                           "ADF(4)" = c(-0.205,"(0.584)",-3.95,"(<0.01)***",-4.67,"(<0.01)***"),
+                           "PP(4)" = c(-0.023,"(0.684)",-16.8,"(0.023)**",-17.9,"(0.093)*"),
+                           "KPS(2)" = c(0.112,"(>0.1)",0.064,"(>0.1)",0.067,"(>0.1)"),
+                           "ADF(4)" = c(-0.339,"(0.546)",-4.11,"(<0.01)***",-4.95,"(<0.01)***"),
+                           "PP(4)" = c(-0.030,"(0.682)",-17.5,"( 0.020)**",-19.2,"(0.072)*"),
+                           "KPS(2)" = c(0.080,"(>0.1)",0.063,"(>0.1)",0.059,"(>0.1)"))
+
+Clasic_Unit_QIR<- data.frame(
+                           Model = c("Type 1","Type 1",
+                                     "Type 2","Type 2",
+                                     "Type 3","Type 3"),
+                           "ADF(3)" = c(-0.841,"(0.370)",-1.77,"(0.413)",-3.86,"(0.030)**"),
+                           "PP(2)" = c(-0.018,"(0.676)",-9.3,"(0.165)",-25.1,"(<0.01)***"),
+                           "KPS(1)" = c(0.053,"(>0.1)",0.508,"(0.039)**",0.066,"(>0.1)"),
+                           "ADF(3)" = c(-0.839,"(0.370)",-1.82,"(0.397)",-3.77,"(0.036)**"),
+                           "PP(2)" = c(-0.014,"(0.677)",-9.55,"(0.15)",-26.2 ,"(<0.01)***"),
+                           "KPS(1)" = c(0.040,"(>0.1)",0.493 ,"(0.0433)**",0.068,"(>0.1)"))
+knitr::kable(Clasic_Unit_MPS,
+             caption = "MPS - Classic Unit Root Tests Before the Potencial Break",
+             align = "c",
+             booktabs = T,
+             col.names = c(" ","ADF(4)","PP(4)" ,"KPS(2)",
+                "ADF(4)","PP(4)" ,"KPS(2)")) %>%  
+    kable_styling(latex_options = c("hold_position"),
+                  full_width = T,font_size = 10) %>%
+    collapse_rows(columns = 1, latex_hline = "major", valign = "middle") %>%
+    #column_spec(3, background = color,
+     #         color = "black",bold = T) %>%
+      #column_spec(4, background = color,
+       #       color = "black",bold = T)  %>%
+    add_header_above(c(" " = 1, "Before Mar-20" = 3, "Before May-20" = 3),
+                     bold = T, font_size = 10)%>%
+    add_footnote(c("Source: Author's calculation."),
+                 notation = "none")
+
+knitr::kable(Clasic_Unit_QIR,
+             caption = "QIR - Classic Unit Root Tests Before the Potencial Break",
+             align = "c",
+             booktabs = T,
+             col.names = c(" ","ADF(3)","PP(2)" ,"KPS(1)",
+                "ADF(3)","PP(2)" ,"KPS(1)")) %>%  
+    kable_styling(latex_options = c("hold_position"),
+                  full_width = T, font_size = 10) %>%
+    collapse_rows(columns = 1, latex_hline = "major", valign = "middle") %>%
+    #column_spec(3, background = color,
+     #         color = "black",bold = T) %>%
+      #column_spec(4, background = color,
+       #       color = "black",bold = T)  %>%
+    add_header_above(c(" " = 1, "Before Q2-18" = 3, "Before Q3-18" = 3),
+                     bold = T, font_size = 10)%>%
+    add_footnote(c("Source: Author's calculation."),
+                 notation = "none")
+```
 
 
+\noindent Note: rejection of the null at ($*$)1% , ($**$)5% and ($***$)10% level.
+
+\noindent Number in parenthesis after the test are the selected lags.
+
+\noindent Number in parenthesis below the t-statics represents the correspondent p-value.
 
 
