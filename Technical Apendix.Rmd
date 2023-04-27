@@ -2551,3 +2551,118 @@ knitr::kable(Banxico_Communication,
   add_footnote("Source: Authors's Elaboration based on Information of Banxico's official docuements.",
                notation = "none")
 ```
+
+
+
+
+## READABILITY FORMULAS FOR ENGLISH
+
+The Flesch Reading Ease test is a formula developed in the 1940s by Rudolf Flesch, who was a consultant with the Associated Press, developing methods for improving the readability of newspapers.[^] The computation of Flesch test gives a score between 1 and 100, with 100 being the highest readability score. The Flesch reading ease test requires three input variables:
+
+[^]: See Flesch (1943; 1949)
+
+  * Total number of words ($W$).
+  * Total number of sentences ($St$).
+  * Total number of syllables ($Sy$).
+
+Resulting in the following formula:
+
+\begin{equation}
+  F = 206.835-1.015 * \frac{W}{St} -8.46 * \frac{Sy}{W}
+\end{equation}
+
+\noindent where $\frac{W}{St}$ is the average sentence length and $\frac{Sy}{W}$ is the average number of syllables per word. The intuition behind this formula is that the larger the sentences and the more syllables per word, the more difficult it is to understand and read a text. 
+
+
+```{r Table 1 Flesch Score, echo=FALSE, paged.print=TRUE}
+FLESCH.SCALE <- data.frame("Score" = c("90-100","80-90","70-80",
+                                       "60-70","50-60","30-50",
+                                       "0-30"),
+                           "Level" = c("Very easy to read",
+                                       "Easy to read",
+                                       "Fairly easy to read",
+                                       "Easily understood",
+                                       "Fairly difficult to read",
+                                       "Difficult to read",
+                                       "Very difficult to read"),
+                           "Grade" = c("4th grade", "5th grade",
+                                       "6th", "7th-8th grade",
+                                       "High school",
+                                       "University",
+                                       "Graduate student"),
+                           "Type" = c("Comics", "Pulp Fiction",
+                                      "Science Fiction",
+                                      "Digest", "Quality Magazine",
+                                      "General academically oriented magazine",
+                                      "Scientific Journal"))
+
+color = c("#e3342f","#f6993f","#ffed4a","#00b159","#4dc0b5","#3990dc","#6574cd")
+color = rev(color)
+
+knitr::kable(FLESCH.SCALE,
+             caption = "Flesch Reading Ease Scale",
+             align = "c",
+             booktabs = T)  %>%
+  kable_styling(latex_options = c("hold_position"),
+                full_width = F) %>%
+  column_spec(2, background = color,
+              color = "black") %>%
+  add_footnote("Source: Flesch, R. (1943)",
+               notation = "none")
+```
+
+
+Following Flesch's research, many other scholars proposed readability scales or scores based on the same attributes or pointing out other variables, such as Robert Gunning, who introduced an index (FOG index) to estimate the years of formal education a person needs to understand the text at first reading. For example, a FOG index of 12 requires the reading level of a U.S. high school senior.[^] This index is calculated by selecting a passage of text with 100 or more words and then yields an estimate of grade level based on the average sentence length and the average number of complex words in the passage, which are defined as words with three or more syllables ($W_{3Sy}$).
+
+[^]: See Gunning (1952).
+
+\begin{equation}
+  FOG = 0.4 * (\frac{W}{St} +100 * \frac{W_{3Sy}}{W})
+\end{equation}
+
+
+```{r Table 2 FOG Gunning scale, echo=FALSE, paged.print=TRUE}
+FLESCH.SCALE <- data.frame("Score" = c("4","5","6",
+                                       "7","8","9", "10"),
+                           "Grade" = c("4th grade", "5th grade",
+                                       "6th", "7th grade" ,
+                                       "8th grade", "high school freeshman",
+                                       "high school sophomore"),
+                           "Score2" = c("11",
+                                       "12","13","14","15",
+                                       "16", "> 17"),
+                           "Grade2" = c("high school junior",
+                                       "high school senior",
+                                       "college freeshman",
+                                       "college sophomore",
+                                       "college junior",
+                                       "college senior",
+                                       "graduate student"))
+
+color = c("#e3342f","#f6993f","#ffed4a","#00b159","#4dc0b5","#3990dc","#6574cd")
+color = rev(color)
+
+knitr::kable(FLESCH.SCALE,
+             caption = "FOG Gunning Reading Ease Scale",
+             align = "c",
+             col.names = c("Score",
+                           "Grade",
+                           "Score",
+                           "Grade"),
+             booktabs = T)  %>%
+  kable_styling(latex_options = c("hold_position"),
+                full_width = F) %>%
+  add_footnote("Source: Bogert (1985)",
+               notation = "none")
+```
+
+
+Another useful measure derived from the Flesch formula is the Flesch-Kincaid reading level. Kincaid, Fishburne, Rogers, and Chissom developed it in 1975 on behalf of the U.S. Navy.[^] The effort by Kincaid and his team resulted in a readability test designed to assess the difficulty of written English text. The formula yields a score as a US grade level and is widely used to judge the readability level of a variety of books, texts, academic papers, etc. In the literature, the Flesch-Kincaid reading level is commonly interpreted as the number of years of education generally required to understand the text. The formula is as follows:
+
+[^]: See Kincaid, J.P., Fishburne, R.P., Rogers, R.L., and Chissom, B.S. (1975).
+
+\begin{equation}
+  F_{K} = 0.39 * \frac{W}{St} + 11.18 * \frac{Sy}{W} - 15.59
+\end{equation}
+
+The result is a number that corresponds to the level of education in the United States. These formulas, among others, are widely used to analyze the readability of English texts. However, it is not possible to analyze printed texts in Spanish with these methodologies.

@@ -279,7 +279,7 @@ Elements removed from the documents are:
     
 In the sample there are 48 Quarterly Inflation Reports (4 per year), 96 Monetary Policy Minutes (8 per year) and 98 Monetary Policy Statements (8 per year and 2 extemporaneous decisions).
 
-# 3. Linguistic analysis of Banco de México's publications
+# 4. Linguistic analysis of Banco de México's publications
 
 With the latter in mind, it is possible to evaluate the clarity of the information delivered by the central banks using the reading ease tests. The purpose of these tests is to study the ease or difficulty of reading a specific text, i.e. to assess the readability of a document in terms of its clarity and accessibility to a wide audience.
 
@@ -291,7 +291,11 @@ Following Flesch's research, many other formulas have been developed for analyzi
 
 [^25]: See Gunning (1952) and Kincaid, Fishburne, Rogers and Chissom (1975).
 
-These formulas, among others, are widely used to analyze the readability of English texts. However, it is not possible to analyze printed texts in Spanish with these methodologies. In the search for the adaptation of these formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the readability of a wide variety of Spanish documents in 1959. Later on, Gutiérrez (1973), [Szigriszt Pazos (1992)](http://webs.ucm.es/BUCM/tesis//19911996/S/3/S3019601.pdf), [Muñoz (2006)](http://www.legibilidadmu.cl/1.pdf), [Cantalejo and Lorda (2003)](https://www.sciencedirect.com/science/article/pii/S021265670379146X) and [Cantalejo et al. (2008)](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1137-66272008000300004) expanded the readability and perspicuity literature disposable for Spanish printed text.
+These formulas, among others, are widely used to analyze the readability of English texts. Specially they are widely implemented for text analysis in fields such as medicine, psychology, education, and political science. Recently, there is a growing literature applying traditional and brand new measures of readability in the field of economics, and specifically in monetary policy trying to measure the clarity of central bank communication conveyed by official documents and speeches of officials, transcripts of interviews, and even central banking news in journals and magazines related to business and finance.[^26]
+
+[^26]: See [Cihák et al. (2012)](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Clarity-of-Central-Bank-Communication-About-Inflation-25607),[Cihák et al. (2013)](https://cepr.org/voxeu/columns/measuring-clarity-central-bank-communication), [Deslonghchamps (2018)](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/), [Carotta et al. (2021)](https://www.cemla.org/actividades/2021-final/2021-11-xxvi-meeting-of-the-central-bank-researchers-network/5B.2%20PAPER%20Carotta%20Mello%20Ponce.pdf), [Huang and Simon (2021)](https://www.rba.gov.au/publications/rdp/2021/pdf/rdp2021-05.pdf), [Ferrara and Angino (2022)](https://eprints.lse.ac.uk/112968/1/Ferrara_does_clarity_make_central_banks_more_engaging_published.pdf).
+
+However, it is not possible to analyze printed texts in Spanish with these methodologies. In the search for the adaptation of these formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the readability of a wide variety of Spanish documents in 1959. Later on, Gutiérrez (1973), [Szigriszt Pazos (1992)](http://webs.ucm.es/BUCM/tesis//19911996/S/3/S3019601.pdf), [Muñoz (2006)](http://www.legibilidadmu.cl/1.pdf), [Cantalejo and Lorda (2003)](https://www.sciencedirect.com/science/article/pii/S021265670379146X) and [Cantalejo et al. (2008)](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1137-66272008000300004) expanded the readability and perspicuity literature disposable for Spanish printed text.
 
 The intuition behind these formulas is the same as Flesch's: the longer the sentences and the more syllables per word, the more difficult it is to understand and read a text. Moreover, the selection of one or the other is quite arbitrary because they are highly correlated. For the purposes of this research, the scores of Fernández Huerta (FH), Szigriszt Pazos (SZ) and Cantalejo et al. (FSZ, INFLEZS scale) were calculated. The formal presentation of the formulas can be found in Appendix A. Table 2 shows the most common scales for interpreting Spanish written texts.
 
@@ -368,9 +372,9 @@ knitr::kable(FLESCH.SCALE,
 
 Table 3 displays the basic descriptive statistics of the word and sentence count. On average, MPSs have the shortest extension, 1,101 and 37 words and sentences respectively, and QIRs the largest extension, 17,546 and 548. The MPMs find in between with an average count of 6,148 words and 178 sentences.
 
-If we observe the information given by Figure 1, it is quite evident that the word count has been changing over time. From 2011 to mid 2019 there is a clear tendency toward increase the total number of words in each publication. However, the distribution of the MPSs has an atypical observation in February 2016. The extension of the statement release on 17 February 2016 might be explained because it was an extemporaneous decision due to turbulence in the international markets that affected the exchange rate and could increase the likelihood of inflation expectations that was not consistent with Banco de México's inflation target of 3%.[^26] The second extemporaneous decision occurred on April 2020 due to the economic disruption of the COVID-19 pandemic, although the word count was closely to the usual extension.
+If we observe the information given by Figure 1, it is quite evident that the word count has been changing over time. From 2011 to mid 2019 there is a clear tendency toward increase the total number of words in each publication. However, the distribution of the MPSs has an atypical observation in February 2016. The extension of the statement release on 17 February 2016 might be explained because it was an extemporaneous decision due to turbulence in the international markets that affected the exchange rate and could increase the likelihood of inflation expectations that was not consistent with Banco de México's inflation target of 3%.[^27] The second extemporaneous decision occurred on April 2020 due to the economic disruption of the COVID-19 pandemic, although the word count was closely to the usual extension.
 
-[^26]: See [Banco de México, 17 de febrero de 2016, Anuncio de Poítica Monetaria](https://www.banxico.org.mx/publicaciones-y-prensa/anuncios-de-las-decisiones-de-politica-monetaria/%7B394FBB23-9099-AAB2-6B9B-2FDBAEEE5710%7D.pdf)
+[^27]: See [Banco de México, 17 de febrero de 2016, Anuncio de Poítica Monetaria](https://www.banxico.org.mx/publicaciones-y-prensa/anuncios-de-las-decisiones-de-politica-monetaria/%7B394FBB23-9099-AAB2-6B9B-2FDBAEEE5710%7D.pdf)
 
 ```{r Table 3 Word Count - Descriptive Statics, echo=FALSE, message=FALSE, warning=FALSE}
 A<- Banxico_readability %>%
@@ -709,15 +713,15 @@ CENSUS_EDUC_LEV %>%
 
 However, this approach to central bank readability should be interpreted as informative and not as a recommendation to change the central bank's writing style. These traditional readability scores help to interpret the results with the readability of a wide audience in mind. And although central banks should try to make their communication accessible to a broad spectrum of people, often such documents are only used by decision-makers, market participants or people with a high technical background, who can easily understand the central bank's message.
 
-One of the reasons for being very cautious with traditional readability measures is that they punish with lower punctuation the more complex the words and the longer the sentences. However, in fields such as economics, there are many complex words that are easy to understand, and in many cases, longer sentences can provide a clear message about the information the central bank wants to convey.[^27] Joan Huang and John Simon also emphasize that better readability does not mean the central bank is successfully explaining its actions and the motivation behind them.[^28] The reason is that while a comprehensive explanation may not be simple or easily understood, a simple explanation may not be accurate.
+One of the reasons for being very cautious with traditional readability measures is that they punish with lower punctuation the more complex the words and the longer the sentences. However, in fields such as economics, there are many complex words that are easy to understand, and in many cases, longer sentences can provide a clear message about the information the central bank wants to convey.[^28] Joan Huang and John Simon also emphasize that better readability does not mean the central bank is successfully explaining its actions and the motivation behind them.[^29] The reason is that while a comprehensive explanation may not be simple or easily understood, a simple explanation may not be accurate.
 
 
-[^27]: See Janan and Wray (2012).
+[^28]: [See Janan and Wray (2013)](https://hipatiapress.com/hpjournals/index.php/remie/article/view/remie.2012.04).
 
-[^28]: Joan Huang and John Simon (2021).    
+[^29]: [Joan Huang and John Simon (2021)](https://apo.org.au/node/312370).    
 
 
-That said, the reality is that there has been an upward trend in the quantity and quality of the information Banco de México communicates. In addition, the [Pearson] correlation between the linguistic variables yields significant information (See Appendix B). The readability scores within each of the documents are highly correlated. This is because all the formulas use similar variables and parameters, thus the information in each of them is a linear combination of the others. Similarly, word and sentence count have a correlation of about 1 (MPD [0.9], MPM [0.9], IQR [1]). It is understandable that word length and sentence length also follow the same pattern.
+That said, the reality is that there has been an upward trend in the quantity and quality of the information Banco de México communicates. In addition, the [Pearson] correlation between the linguistic variables yields significant information (See Appendix B). The readability scores within each of the documents are highly correlated. This is because all the formulas use similar variables and parameters, thus the information in each of them is a linear combination of the others. Similarly, word and sentence count have a correlation of about 1 (MPS [0.9], MPM [0.9], QIR [1]). It is understandable that word length and sentence length also follow the same pattern.
 
 The most interesting relationships are those between the word and sentence counts and the readability scores (See Figure 4). While there is little or no relationship between these variables in the Inflation Reports, Monetary Policy Statements and Minutes reflect very different patterns. In the former, word count correlates highly negatively with the readability scores and sentence count displays a weaker, but still negative relation. On the other hand, Minutes present a strong and positive correlation between sentence count and readability scores, whereas word count has a moderately positive correlation.
 
@@ -855,11 +859,11 @@ Second, there is and inverse (direct) relation between clarity and amount of inf
 Finally, the high correlation between the readability scores means that, regardless of which one we choose, we will obtain the same results. Therefore, the Flesch-Szigriszt score will be used for further developments.
 
 
-# 4. Structural Break Analysis
+# 5. Structural Break Analysis
 
-The evolution of Banco de México's verbal clarity is strongly linked with institution-specific factors. However, it is possible to identify idiosyncratic biased related to the chairman in office[^29]. Figure 4 shows fitted calculations for total perspicuity of Banxico's publications in the tenures of Agustín Carstens (Jan 10-Nov 17), Alejandro Díaz de León (Dec 17- Dec 21), and Victoria Rodríguez (Jan 22-).
+The evolution of Banco de México's verbal clarity is strongly linked with institution-specific factors. However, it is possible to identify idiosyncratic biased related to the chairman in office[^30]. Figure 4 shows fitted calculations for total perspicuity of Banxico's publications in the tenures of Agustín Carstens (Jan 10-Nov 17), Alejandro Díaz de León (Dec 17- Dec 21), and Victoria Rodríguez (Jan 22-).
 
-[^29]: For exmaple, [Bernanke (2022)](https://wwnorton.com/books/9781324020462) narrates how the Fed's monetary policy decisions have historically been strongly biased by the figure of the chairman, especially referring to the great persuasive power of Paul Volcker and Alan Greenspan over the decisions of the other members of the Federal Open Market Committee (FOMC).
+[^30]: For exmaple, [Bernanke (2022)](https://wwnorton.com/books/9781324020462) narrates how the Fed's monetary policy decisions have historically been strongly biased by the figure of the chairman, especially referring to the great persuasive power of Paul Volcker and Alan Greenspan over the decisions of the other members of the Federal Open Market Committee (FOMC).
 
 \noindent
 ```{r Figure 5 Readability of Banco de México. Flesch-Szigriszt Score, echo=FALSE, message=FALSE, warning=FALSE}
@@ -944,7 +948,7 @@ This information, together with the facts reviewed in the previous section, lead
 
 First of all, as the MPSs and MPMs observations are not collected on a regular monthly frequency, the imputation technique Last Observation Carried Forward (LOCF) was implemented. The latter follows the rationale that if the central bank coveys communication in month 1 and the next release is not until month 3, the communication given in month 1 still has effect in the later period until the next communication.
 
-In the case of the minutes, two exceptions to the dating rule have been made. In December 2016 and May 2020, we have two observations, each at the beginning and end of the month. Subsequent observations were carried forward to fill in the following month. For the statements, there are two releases in February 2016. In this case, instead of carried forward the second observation, January 2016 was filled with the average. Finally, to remove noise from the imputed series, a 5-window centered moving average was applied. The information of the QIRs needs no further manipulation. Figure 6 shows the transformed monthly series.
+In the case of the minutes, two exceptions to the dating rule have been made. In December 2016 and May 2020, we have two observations, each at the beginning and end of the month. Subsequent observations were carried forward to fill in the following month. For the statements, there are two releases in February 2016. In this case, instead of carried forward the second observation, January 2016 was filled with the average. Finally, to remove noise from the imputed series, a 5-window centered moving average was applied. The information of the QIRs needs no further manipulation.
 
 
 \noindent
@@ -1016,7 +1020,7 @@ TS_data3%>%
 
 For the clarity levels of the three publications, classic unit root tests such as the Augmented Dicky-Fuller [ADF] (Dicky and Fuller, 1981), Phillips-Perron [PP] (Phillips and Perron, 1988) and KPSS (Kwiatkowski et al., 1992) are executed to validate the hypothesis of sationarity in the Data Generating Process (DGP) of the series. The unit root specification includes models with no drift no trend (type A), drift and no trend (type B), and drift with trend (type C) respectively. Overall, there is no convincing evidence against the unit root null-hypothesis (See Appendix C). However, for each series, the KPPS test gives mix evidence on non-stationarity process.
 
-Since the seminal paper by Perron ([1989](https://www.jstor.org/stable/1913712?searchText=&searchUri=&ab_segments=&searchKey=&refreqid=fastly-default%3A5187955ea05417ef3e6d4821c2f07ea9)), the literature has stressed that in the presence of one or more structural breaks, the non-rejection of the unit root null may be biased. Perron's test is a variation of the ADF test that takes into account the possibility of a known exogenous structural break in the time series. Perron relied on previous observation of the macroeconomic series studied by Nelson and Plosser (1982), arguing then that the latter's conclusion of integrated process might be biased due to the presence of structural changes in the U.S. economy during the years of the "Great Depression" and the 1973 oil price shock.
+Since the seminal paper by Perron ([1989](https://www.jstor.org/stable/1913712?searchText=&searchUri=&ab_segments=&searchKey=&refreqid=fastly-default%3A5187955ea05417ef3e6d4821c2f07ea9)), the literature has stressed that in the presence of one or more structural breaks, the non-rejection of the unit root null may be biased. Perron's test is a variation of the ADF test that takes into account the possibility of a known exogenous structural break in the time series. Perron relied on previous observation of the macroeconomic series studied by [Nelson and Plosser (1982)](https://www.sciencedirect.com/science/article/pii/0304393282900125), arguing then that the latter's conclusion of integrated process might be biased due to the presence of structural changes in the U.S. economy during the years of the "Great Depression" and the 1973 oil price shock.
 
 In subsequente contribution, Zivot and Andrews (ZA)([1992](https://www.jstor.org/stable/1391541?searchText=&searchUri=&ab_segments=&searchKey=&refreqid=fastly-default%3A22b362ee8348ccf8b5607097327edae9)), Banerjee, Lumsdaine, and Stock (BLS)(1992), and and Perron and Vogelsang (PV)([1992](https://www.jstor.org/stable/1391823?searchText=&searchUri=&ab_segments=&searchKey=&refreqid=fastly-default%3A8d8282cdb8423068941d433f745a7557); [1998](https://www.jstor.org/stable/2527353)), reviewed Perron's conclusion and criticized the exogenous structural break identification. They propose tests which endogenized breakpoint selection. Like Perron, these tests allow for the presence of structural break in th level of the series ("crash" model), a change in the trend ("changing growth" model), or both. 
 
@@ -1063,9 +1067,9 @@ knitr::kable(Onebreak_Unit,
 
 From an economic perspective, there is no reason to limit the analysis to a single structural change. Moreover, Lumsdaine and Papell (LP)(1997) showed that allowing for only one point break could biased the results and conclusions of the previous tests, therefore, they extended the analysis to allow for two endogenous unknown structural breaks. They also conclude that in test such as the ZA which does not allow for breaks under the unit root null, excludes all the other cases to the alternative hypothesis, i.e., the alternative hypothesis implies that there are breaks in the series including the possibility of unit root with breaks.
 
-Then, is arguably that LP test is not the most appropriate for our data. Instead, Lee and Strazicich (2003), LS test is suitable because expands the analysis to allow for two endogenous unknown breakpoints both under the null and alternative hypothesis. Hence, the model specifications of Ls test is a unit root process with up to two structural breaks in level, trend or both, against the alternative hypothesis of an stationary process with up to two breaks in level, trend or both. In addition, the bootstrap approach by Chou (2007) is implemented to derive the critical values of the t-statics and the distributional properties of the t-statics and the selected break points.[^30]
+Then, is arguably that LP test is not the most appropriate for our data. Instead, Lee and Strazicich (2003), LS test is suitable because expands the analysis to allow for two endogenous unknown breakpoints both under the null and alternative hypothesis. Hence, the model specifications of Ls test is a unit root process with up to two structural breaks in level, trend or both, against the alternative hypothesis of an stationary process with up to two breaks in level, trend or both. In addition, the bootstrap approach by [Chou (2007)](https://www.sciencedirect.com/science/article/pii/S0165176506002722) is implemented to derive the critical values of the t-statics and the distributional properties of the t-statics and the selected break points.[^31]
 
-[^30]: For a similar implementation of this procedure see [Lips (2017)]().
+[^31]: For a similar implementation of this procedure see [Lips (2017)](https://www.degruyter.com/document/doi/10.1515/jtse-2016-0018/html).
 
 
 
@@ -1088,158 +1092,56 @@ Overall, Banxico's communication strategy has undergone several modifications ov
 
 
 
-# Appendix A. Readability and Perspicuity Scales
+# Appendix A. Readability and Perspicuity Formulas
 
-The Flesch Reading Ease test is a formula developed in the 1940s by Rudolf Flesch, who was a consultant with the Associated Press, developing methods for improving the readability of newspapers.[^] The computation of Flesch test gives a score between 1 and 100, with 100 being the highest readability score. The Flesch reading ease test requires three input variables:
-
-[^]: See Flesch (1943; 1949)
-
-  * Total number of words ($W$).
-  * Total number of sentences ($St$).
-  * Total number of syllables ($Sy$).
-
-Resulting in the following formula:
-
-\begin{equation}
-  F = 206.835-1.015 * \frac{W}{St} -8.46 * \frac{Sy}{W}
-\end{equation}
-
-\noindent where $\frac{W}{St}$ is the average sentence length and $\frac{Sy}{W}$ is the average number of syllables per word. The intuition behind this formula is that the larger the sentences and the more syllables per word, the more difficult it is to understand and read a text. 
-
-
-```{r Table 1 Flesch Score, echo=FALSE, paged.print=TRUE}
-FLESCH.SCALE <- data.frame("Score" = c("90-100","80-90","70-80",
-                                       "60-70","50-60","30-50",
-                                       "0-30"),
-                           "Level" = c("Very easy to read",
-                                       "Easy to read",
-                                       "Fairly easy to read",
-                                       "Easily understood",
-                                       "Fairly difficult to read",
-                                       "Difficult to read",
-                                       "Very difficult to read"),
-                           "Grade" = c("4th grade", "5th grade",
-                                       "6th", "7th-8th grade",
-                                       "High school",
-                                       "University",
-                                       "Graduate student"),
-                           "Type" = c("Comics", "Pulp Fiction",
-                                      "Science Fiction",
-                                      "Digest", "Quality Magazine",
-                                      "General academically oriented magazine",
-                                      "Scientific Journal"))
-
-color = c("#e3342f","#f6993f","#ffed4a","#00b159","#4dc0b5","#3990dc","#6574cd")
-color = rev(color)
-
-knitr::kable(FLESCH.SCALE,
-             caption = "Flesch Reading Ease Scale",
-             align = "c",
-             booktabs = T)  %>%
-  kable_styling(latex_options = c("hold_position"),
-                full_width = F) %>%
-  column_spec(2, background = color,
-              color = "black") %>%
-  add_footnote("Source: Flesch, R. (1943)",
-               notation = "none")
-```
-
-
-Following Flesch's research, many other scholars proposed readability scales or scores based on the same attributes or pointing out other variables, such as Robert Gunning, who introduced an index (FOG index) to estimate the years of formal education a person needs to understand the text at first reading. For example, a FOG index of 12 requires the reading level of a U.S. high school senior.[^] This index is calculated by selecting a passage of text with 100 or more words and then yields an estimate of grade level based on the average sentence length and the average number of complex words in the passage, which are defined as words with three or more syllables ($W_{3Sy}$).
-
-[^]: See Gunning (1952).
-
-\begin{equation}
-  FOG = 0.4 * (\frac{W}{St} +100 * \frac{W_{3Sy}}{W})
-\end{equation}
-
-
-```{r Table 2 FOG Gunning scale, echo=FALSE, paged.print=TRUE}
-FLESCH.SCALE <- data.frame("Score" = c("4","5","6",
-                                       "7","8","9", "10"),
-                           "Grade" = c("4th grade", "5th grade",
-                                       "6th", "7th grade" ,
-                                       "8th grade", "high school freeshman",
-                                       "high school sophomore"),
-                           "Score2" = c("11",
-                                       "12","13","14","15",
-                                       "16", "> 17"),
-                           "Grade2" = c("high school junior",
-                                       "high school senior",
-                                       "college freeshman",
-                                       "college sophomore",
-                                       "college junior",
-                                       "college senior",
-                                       "graduate student"))
-
-color = c("#e3342f","#f6993f","#ffed4a","#00b159","#4dc0b5","#3990dc","#6574cd")
-color = rev(color)
-
-knitr::kable(FLESCH.SCALE,
-             caption = "FOG Gunning Reading Ease Scale",
-             align = "c",
-             col.names = c("Score",
-                           "Grade",
-                           "Score",
-                           "Grade"),
-             booktabs = T)  %>%
-  kable_styling(latex_options = c("hold_position"),
-                full_width = F) %>%
-  add_footnote("Source: Bogert (1985)",
-               notation = "none")
-```
-
-
-Another useful measure derived from the Flesch formula is the Flesch-Kincaid reading level. Kincaid, Fishburne, Rogers, and Chissom developed it in 1975 on behalf of the U.S. Navy.[^] The effort by Kincaid and his team resulted in a readability test designed to assess the difficulty of written English text. The formula yields a score as a US grade level and is widely used to judge the readability level of a variety of books, texts, academic papers, etc. In the literature, the Flesch-Kincaid reading level is commonly interpreted as the number of years of education generally required to understand the text. The formula is as follows:
-
-[^]: See Kincaid, J.P., Fishburne, R.P., Rogers, R.L., and Chissom, B.S. (1975).
-
-\begin{equation}
-  F_{K} = 0.39 * \frac{W}{St} + 11.18 * \frac{Sy}{W} - 15.59
-\end{equation}
-
-The result is a number that corresponds to the level of education in the United States. These formulas, among others, are widely used to analyze the readability of English texts. However, it is not possible to analyze printed texts in Spanish with these methodologies.
-
-In the search for the adaptation of these formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the readability of a wide variety of Spanish documents in 1959.[^] The Fernández Huerta test is based on the Flesch test and they have similar readability scale (See Table 3). The formula is as follows:
+In the search for the adaptation of the readability formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the reading ease of a wide variety of Spanish documents in 1959.[^] The Fernández Huerta test is based on the famous Flesch test and they have similar readability scale. The formula is as follows:
 
 [^]: See Fernández Huerta J.(1959).
 
 
 \begin{equation}
-  F_{FH} = 206.835-1.02 * \frac{W}{St} -60 * \frac{Sy}{W}
+   FH = 206.835 - 1.02 * \frac{W}{St} - 60 * \frac{Sy}{W}
 \end{equation}
 
+\noindent where $\frac{W}{St}$ is the average sentence length and $\frac{Sy}{W}$ is the average number of syllables per word. The intuition behind this formula is that the larger the sentences and the more syllables per word, the more difficult it is to understand and read a text. 
 
-```{r Table 3 Flesch-Fernández Huerta Score, echo=FALSE}
+
+```{r Table Flesch-Fernández Huerta Score, echo=FALSE}
 FLESCH.SCALE <- data.frame("Score" = c("90-100","80-90","70-80",
                                        "60-70","50-60","30-50",
                                        "0-30"),
-                           "Level" = c("Very easy to read",
-                                       "Easy to read",
-                                       "Fairly easy to read",
+                           "Level" = c("Very easy",
+                                       "Easy ",
+                                       "Fairly",
                                        "Standard",
-                                       "Fairly difficult to read",
-                                       "Difficult to read",
-                                       "Very difficult to read"),
+                                       "Fairly",
+                                       "Difficult",
+                                       "Very"),
                            "Grade" = c("5th grade", "6 grade",
                                        "7th", "8th-9th grade",
                                        "High school",
                                        "University",
                                        "Graduate student"))
+
+color_FH = c(rep("#F7FBFF",1),rep("#DEEBF7",1),rep("#C6DBEF",1),
+              rep("#9ECAE1",1),rep("#6BAED6",1),rep("#4292C6",1),
+              rep("#2171B5",1))
+color_FH = rev(color_FH)
+
 knitr::kable(FLESCH.SCALE,
-             caption = "Fernández Huerta Reading Ease Scale",
+             caption = "Fernández Huerta Readability Scale",
              align = "c",
              booktabs = T)  %>%
   kable_styling(latex_options = c("hold_position"),
                 full_width = F) %>%
-  column_spec(2, background = color,
-              color = "black") %>%
+  column_spec(2, background = color_FH,
+              color = "black", bold = T) %>%
   add_footnote("Source: Fernández Huerta J.(1959).",
                notation = "none")
 ```
 
 
-Later in the 1990s, Francisco Szigrist Pazos developed a new validated formula for readability as his doctoral thesis at the Universidad Complutense de Madrid. This test is also an adaptation of the Flesch test for Spanish and French written texts.[^] Francisco Szigrist Pazos' formula yields a perspicuity score.
+Later in the 1990s, Francisco Szigrist Pazos developed a new validated formula for readability as his doctoral thesis at the Universidad Complutense de Madrid. This test is also an adaptation of the Flesch test for Spanish and French written texts.[^] The main difference is that Szigrist Pazos' formula yields a perspicuity score instead a readability measure.
 
 [^]: See Szigriszt, F. (1993). Sistemas predictivos de legibilidad del mensaje escrito: Fórmula de Perspicuidad (tesis de doctorado). Universidad Complutense, Madrid.
 
@@ -1251,16 +1153,67 @@ One of the major advantages of using Szigriszt's formula is that it is applicabl
 
 
 \begin{equation}
-  F_{SZ} = 206.835 - \frac{W}{St} -62.3 * \frac{Sy}{W}
+  F_{SZ} = 207 - \frac{W}{St} -62.3 * \frac{Sy}{W}
 \end{equation}
 
-In a later work, Barrio-Cantalejo adapted the Szigriszt-Pazos scale of interpretation of results, creating the INFLESZ scale (See Table 4).[^] Unlike Flesch scale, the INFLESZ scale is designed to be interpreted at a level of difficulty in Spanish school grade. 
+$SZ = 207 - \frac{W}{St} - (62.3 * \frac{Sy}{W})$
+
+```{r Szigriszt Score, echo=FALSE}
+FLESCH.SCALE <- data.frame("Score" = c("85-100",  "75-85", "65-75",
+                                       "50-65","35-50","15-35",
+                                       "0-15"),
+                           "Szigriszt" = c(rep("Very easy",1), rep("Easy", 1),
+                                           rep("Fairly easy",1),rep("Standard",1), 
+                                           rep("Fairly difficult",1), 
+                                           rep("Difficult",1), 
+                                           rep("Very difficult",1)),
+                           "Grade" = c("6th-10th grade", "11th grade",
+                                       "12th grade", 
+                                       "Popular",
+                                       "High School",
+                                       "University",
+                                       "Graduate Student"),
+                           "Type" = c("Comics", 
+                                      "Entertainment",
+                                      "Novels",
+                                      "News and Media",
+                                      "Disemination",
+                                      "Technical",
+                                     "Scientific"))
+
+color_FSZ = c(rep("#F7FBFF",1),rep("#DEEBF7",1),rep("#C6DBEF",1),
+              rep("#9ECAE1",1),rep("#6BAED6",1),rep("#4292C6",1),
+              rep("#2171B5",1))
+color_FSZ = rev(color_FSZ)
+
+knitr::kable(FLESCH.SCALE,
+             caption = "INFLESZ Perspicuity Scale for Spanish Language",
+             align = "c",
+             booktabs = T)%>%
+  kable_styling(latex_options = c("hold_position", "scale_down"),
+                full_width = F) %>%
+  column_spec(2, background = color_FSZ,
+              color = "black", bold = T) %>%
+  add_footnote("Source: See Bea-Muñoz, Medina-Sánchez and Flórez-García (2015).",
+               threeparttable = F,
+               notation = "none")
+```
+
+
+In a later work, Barrio-Cantalejo adapted the Szigriszt-Pazos scale of interpretation of results, creating the INFLESZ scale and a new validated perspicuity formula, the Flesch-Szigritsz.[^]
 
 [^]: See Bea-Muñoz, Medina-Sánchez and Flórez-García (2015). 
 
 
+\begin{equation}
+  F_{SZ} = 207 - \frac{W}{St} -62.3 * \frac{Sy}{W}
+\end{equation}
+
+$FSZ = 206.835 -62.3 (\frac{Sy}{W} - \frac{W}{S})$
+
+
 ```{r Table 4 Flesch-Szigriszt Score, echo=FALSE}
-FLESCH.SCALE <- data.frame("Score" = c("> 80",
+FLESCH.SCALE <- data.frame("Score" = c("80-100",
                                        "65-80","55-65","40-55",
                                        "0-40"),
                            "Level" = c("Very easy to read",
@@ -1275,11 +1228,12 @@ FLESCH.SCALE <- data.frame("Score" = c("> 80",
                            "Type" = c("Comics", 
                                       "Entertainment press and Successful novels",
                                       "General press and Sports press",
-                                      "Scientific dissemination and Specialized press",
+                                      "Scientific dissemination and Quality magazines",
                                      "Scientific"))
 
-color2 = c("#e3342f","#f6993f","#00b159","#4dc0b5","#3990dc")
-color2 = rev(color2)
+color_INFLESZ = c(rep("#F7FBFF",5),rep("#C6DBEF",3),rep("#9ECAE1",2),
+                  rep("#6BAED6",3),rep("#2171B5",4))
+color_INFLESZ = rev(color_INFLESZ)
 
 knitr::kable(FLESCH.SCALE,
              caption = "INFLESZ Perspicuity Scale for Spanish Language",
@@ -1287,17 +1241,13 @@ knitr::kable(FLESCH.SCALE,
              booktabs = T)%>%
   kable_styling(latex_options = c("hold_position", "scale_down"),
                 full_width = F) %>%
-  column_spec(2, background = color2,
-              color = "black") %>%
-  add_footnote("Source: See Bea-Muñoz, Medina-Sánchez and Flórez-García (2015).",
+  column_spec(2, background = color_INFLESZ,
+              color = "black", bold = T) %>%
+  add_footnote("Source: See Barrio-Cantalejo et al. (2008).",
                threeparttable = F,
                notation = "none")
 ```
 
-
-All these formulas have been widely used in text analysis in fields such as medicine, psychology, education, and political science. Recently, there is a growing literature applying traditional and brand new measures of readability in the field of economics, and specifically in monetary policy trying to measure the clarity of central bank communication conveyed by official documents and speeches of officials, transcripts of interviews, and even central banking news in journals and magazines related to business and finance.[^]
-
-[^]: See [Cihák et al. (2012)](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Clarity-of-Central-Bank-Communication-About-Inflation-25607),[Cihák et al. (2013)](https://cepr.org/voxeu/columns/measuring-clarity-central-bank-communication), [Deslonghchamps (2018)](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/), [Carotta et al. (2021)](https://www.cemla.org/actividades/2021-final/2021-11-xxvi-meeting-of-the-central-bank-researchers-network/5B.2%20PAPER%20Carotta%20Mello%20Ponce.pdf), [Huang and Simon (2021)](https://www.rba.gov.au/publications/rdp/2021/pdf/rdp2021-05.pdf), [Ferrara and Angino (2022)](https://eprints.lse.ac.uk/112968/1/Ferrara_does_clarity_make_central_banks_more_engaging_published.pdf).
 
 \newpage
 # Appendix B. Linguistic Correlation Map
