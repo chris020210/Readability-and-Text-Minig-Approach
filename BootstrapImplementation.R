@@ -70,7 +70,7 @@ diffmatrix <- function(x,max.diff = 1,max.lag = 1){
 n <- length(myVariable)
 trend <- 1:n
 breaks <- 2
-model <- "crash"
+model <- "break"
 myVariable.diff <- diffmatrix(myVariable, max.diff = 1, max.lag = 1)
 # Run the test once to determine the values for the break dates
 # Definition of all the options needed
@@ -223,7 +223,7 @@ myVariable.diff <- diffmatrix(myVariable, max.diff = 1, max.lag = 1)
 # Run the test once to determine the values for the break dates
 # Definition of all the options needed
 
-test.results.y <-  ur.ls.bootstrap(y=myVariable , model = model, breaks = breaks, lags = 11, method = "Fixed",pn = 0.1, critval = "bootstrap", print.results = "print")
+test.results.y <-  ur.ls.bootstrap(y=myVariable , model = model, breaks = breaks , method = "GTOS",pn = 0.1, critval = "bootstrap", print.results = "print")
 
 
 # Define variable Z, which is either Dt or DTt, depending on the model used
@@ -370,7 +370,7 @@ diffmatrix <- function(x,max.diff = 1,max.lag = 1){
 n <- length(myVariable)
 trend <- 1:n
 breaks <- 2
-model <- "crash"
+model <- "break"
 myVariable.diff <- diffmatrix(myVariable, max.diff = 1, max.lag = 1)
 # Run the test once to determine the values for the break dates
 # Definition of all the options needed

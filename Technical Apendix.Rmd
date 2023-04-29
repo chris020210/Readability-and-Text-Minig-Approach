@@ -1883,12 +1883,12 @@ library(parallel)
 
 #### Minutes
 ```{r}
-#load("BOOTSRAP.RData")
+#load("Methodology data2.RData")
 
 #library(stargazer)
 MPM_BOOTS_RESULTS
-MPM2$dates[111]
-MPM2$dates[120]
+MPM2$dates[49]
+MPM2$dates[104]
 
 ```
 
@@ -1898,9 +1898,117 @@ MPM2$dates[120]
 
 #Calculate the critical values, based on the distribution of the test statistic
 hist(unlist(MPM_BOOTS_INTERVALS[,"t-stat"]), freq = FALSE)
-quantile(unlist(MPM_BOOTS_INTERVALS[,"t-stat"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
-quantile(unlist(MPM_BOOTS_INTERVALS[,"First break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
-quantile(unlist(MPM_BOOTS_INTERVALS[,"Second break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+quantile(unlist(MPM_BOOTS_INTERVALS[,"t-stat"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.975 ,.99))
+
+quantile(unlist(MPM_BOOTS_INTERVALS[,"First break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.975 ,.99))
+MPM2$dates[c(17,62)]
+
+quantile(unlist(MPM_BOOTS_INTERVALS[,"Second break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.975 ,.99))
+MPM2$dates[c(48,121)]
+```
+
+```{r}
+MPM_BOOTS_INTERVALS <- as.data.frame(MPM_BOOTS_INTERVALS)
+MPM_BOOTS_INTERVALS <- MPM_BOOTS_INTERVALS %>%
+    mutate(`t-stat` = as.numeric(`t-stat`), 
+           `First break` = as.numeric(`First break`),
+           `Second break` = as.numeric(`Second break`))
+MPM_BOOTS_INTERVALS %>%
+    ggplot(aes(x = `t-stat`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                 bins =30,
+                 position = "identity",
+                 binwidth = 0.1, width = .5,alpha = 0.5) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+
+MPM_BOOTS_INTERVALS %>%
+    ggplot(aes(x = `First break`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                  binwidth = 2,alpha = 0.5,) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+
+MPM_BOOTS_INTERVALS %>%
+    ggplot(aes(x = `Second break`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                 binwidth = 3,alpha = 0.5) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+```
+
+
+```{r}
+MPM_BOOTS_RESULTS_crash
+
+MPM2$dates[52]
+MPM2$dates[72]
+```
+
+```{r}
+#Calculate the critical values, based on the distribution of the test statistic
+hist(unlist(MPM_BOOTS_INTERVALS_crash[,"t-stat"]), freq = FALSE)
+quantile(unlist(MPM_BOOTS_INTERVALS_crash[,"t-stat"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+quantile(unlist(MPM_BOOTS_INTERVALS_crash[,"First break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+quantile(unlist(MPM_BOOTS_INTERVALS_crash[,"Second break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+```
+
+
+```{r}
+MPM_BOOTS_INTERVALS_crash <- as.data.frame(MPM_BOOTS_INTERVALS_crash)
+MPM_BOOTS_INTERVALS_crash <- MPM_BOOTS_INTERVALS_crash %>%
+    mutate(`t-stat` = as.numeric(`t-stat`), 
+           `First break` = as.numeric(`First break`),
+           `Second break` = as.numeric(`Second break`))
+MPM_BOOTS_INTERVALS_crash %>%
+    ggplot(aes(x = `t-stat`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                 bins =30,
+                 position = "identity",
+                 binwidth = 0.1, width = .5,
+                 alpha = 0.25) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+
+MPM_BOOTS_INTERVALS_crash %>%
+    ggplot(aes(x = `First break`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                  binwidth = 4,
+                 alpha = 0.25) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+
+MPM_BOOTS_INTERVALS_crash %>%
+    ggplot(aes(x = `Second break`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                 binwidth = 3.5,
+                 alpha = 0.25) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
 ```
 
 
@@ -1908,19 +2016,129 @@ quantile(unlist(MPM_BOOTS_INTERVALS[,"Second break"]), c(.01, 0.025, .05, .1, .2
 
 ```{r}
 
-#MPD_BOOTS_RESULTS
-A <- test.results.y <-  ur.ls.bootstrap(y=as.numeric(na.omit(MPD_MAFSZ)) , model = "crash", breaks = 2, lags = 8, method = "Fixed",pn = 0.1, critval = "bootstrap", print.results = "print")
+#library(stargazer)
+MPD_BOOTS_RESULTS
+MPD2$dates[82]
+MPD2$dates[116]
+
+```
 
 
+```{r}
+#MPM_BOOTS_INTERVALS
+
+#Calculate the critical values, based on the distribution of the test statistic
+hist(unlist(MPD_BOOTS_INTERVALS[,"t-stat"]), freq = FALSE)
+
+quantile(unlist(MPD_BOOTS_INTERVALS[,"t-stat"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.975 ,.99))
+
+quantile(unlist(MPD_BOOTS_INTERVALS[,"First break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.975 ,.99))
+MPD2$dates[c(16,93)]
+
+quantile(unlist(MPD_BOOTS_INTERVALS[,"Second break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.975 ,.99))
+MPD2$dates[c(69,123)]
 
 ```
 
 ```{r}
+MPD_BOOTS_INTERVALS <- as.data.frame(MPD_BOOTS_INTERVALS)
+MPD_BOOTS_INTERVALS <- MPD_BOOTS_INTERVALS %>%
+    mutate(`t-stat` = as.numeric(`t-stat`), 
+           `First break` = as.numeric(`First break`),
+           `Second break` = as.numeric(`Second break`))
+MPD_BOOTS_INTERVALS %>%
+    ggplot(aes(x = `t-stat`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                 bins =30,
+                 position = "identity",
+                 binwidth = 0.1, width = .5) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+
+MPD_BOOTS_INTERVALS %>%
+    ggplot(aes(x = `First break`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                  binwidth = 2) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+
+MPD_BOOTS_INTERVALS %>%
+    ggplot(aes(x = `Second break`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                 binwidth = 2) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+```
+
+
+```{r}
+MPD_BOOTS_RESULTS_crash
+
+MPD2$dates[99]
+MPD2$dates[106]
+```
+
+```{r}
 #Calculate the critical values, based on the distribution of the test statistic
-hist(unlist(MPD_BOOTS_INTERVALS[,"t-stat"]), freq = FALSE)
-quantile(unlist(MPD_BOOTS_INTERVALS[,"t-stat"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
-quantile(unlist(MPD_BOOTS_INTERVALS[,"First break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
-quantile(unlist(MPD_BOOTS_INTERVALS[,"Second break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+hist(unlist(MPD_BOOTS_INTERVALS_crash[,"t-stat"]), freq = FALSE)
+quantile(unlist(MPD_BOOTS_INTERVALS_crash[,"t-stat"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+quantile(unlist(MPD_BOOTS_INTERVALS_crash[,"First break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+quantile(unlist(MPD_BOOTS_INTERVALS_crash[,"Second break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+```
+
+
+```{r}
+MPD_BOOTS_INTERVALS_crash <- as.data.frame(MPD_BOOTS_INTERVALS_crash)
+MPD_BOOTS_INTERVALS_crash <- MPD_BOOTS_INTERVALS_crash %>%
+    mutate(`t-stat` = as.numeric(`t-stat`), 
+           `First break` = as.numeric(`First break`),
+           `Second break` = as.numeric(`Second break`))
+MPD_BOOTS_INTERVALS_crash %>%
+    ggplot(aes(x = `t-stat`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                 bins =30,
+                 position = "identity",
+                 binwidth = 0.1, width = .5) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+
+MPD_BOOTS_INTERVALS_crash %>%
+    ggplot(aes(x = `First break`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                  binwidth = 4) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+
+MPD_BOOTS_INTERVALS_crash %>%
+    ggplot(aes(x = `Second break`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                 binwidth = 3.5) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
 ```
 
 
@@ -1928,9 +2146,240 @@ quantile(unlist(MPD_BOOTS_INTERVALS[,"Second break"]), c(.01, 0.025, .05, .1, .2
 #### Quarterly Inflation Reports
 
 ```{r}
+
+
+#library(stargazer)
 IQR_BOOTS_RESULTS
+IQR$dates[18]
+IQR$dates[36]
+
 ```
 
+
+```{r}
+#IQR_BOOTS_INTERVALS
+
+#Calculate the critical values, based on the distribution of the test statistic
+hist(unlist(IQR_BOOTS_INTERVALS[,"t-stat"]), freq = FALSE)
+
+quantile(unlist(IQR_BOOTS_INTERVALS[,"t-stat"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.975 ,.99))
+
+quantile(unlist(IQR_BOOTS_INTERVALS[,"First break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.975 ,.99))
+IQR$Q[c(11,33)]
+
+quantile(unlist(IQR_BOOTS_INTERVALS[,"Second break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.975 ,.99))
+IQR$Q[c(24,42)]
+
+```
+
+```{r}
+IQR_BOOTS_INTERVALS <- as.data.frame(IQR_BOOTS_INTERVALS)
+IQR_BOOTS_INTERVALS <- IQR_BOOTS_INTERVALS %>%
+    mutate(`t-stat` = as.numeric(`t-stat`), 
+           `First break` = as.numeric(`First break`),
+           `Second break` = as.numeric(`Second break`))
+IQR_BOOTS_INTERVALS %>%
+    ggplot(aes(x = `t-stat`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                 bins =30,
+                 position = "identity",
+                 binwidth = 0.1, width = .5) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+
+IQR_BOOTS_INTERVALS %>%
+    ggplot(aes(x = `First break`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                  binwidth = 1) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+
+IQR_BOOTS_INTERVALS %>%
+    ggplot(aes(x = `Second break`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                 binwidth = 1) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+```
+
+
+```{r}
+IQR_BOOTS_RESULTS_crash
+
+IQR$dates[20]
+IQR$dates[42]
+```
+
+```{r}
+#Calculate the critical values, based on the distribution of the test statistic
+hist(unlist(IQR_BOOTS_INTERVALS_crash[,"t-stat"]), freq = FALSE)
+quantile(unlist(IQR_BOOTS_INTERVALS_crash[,"t-stat"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+quantile(unlist(IQR_BOOTS_INTERVALS_crash[,"First break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+quantile(unlist(IQR_BOOTS_INTERVALS_crash[,"Second break"]), c(.01, 0.025, .05, .1, .25, .5, .75, .95, 0.9725 ,.99))
+```
+
+
+```{r}
+IQR_BOOTS_INTERVALS_crash <- as.data.frame(IQR_BOOTS_INTERVALS_crash)
+IQR_BOOTS_INTERVALS_crash <- IQR_BOOTS_INTERVALS_crash %>%
+    mutate(`t-stat` = as.numeric(`t-stat`), 
+           `First break` = as.numeric(`First break`),
+           `Second break` = as.numeric(`Second break`))
+IQR_BOOTS_INTERVALS_crash %>%
+    ggplot(aes(x = `t-stat`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                 bins =30,
+                 position = "identity",
+                 binwidth = 0.1, width = .5) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+
+IQR_BOOTS_INTERVALS_crash %>%
+    ggplot(aes(x = `First break`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                  binwidth = 1) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+
+IQR_BOOTS_INTERVALS_crash %>%
+    ggplot(aes(x = `Second break`)) +
+    geom_histogram(aes(y = ..density..),
+                 colour = 1, fill = "firebrick3",
+                 binwidth = 1) +
+  geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               fill = "firebrick1",
+               alpha = 0.25)
+```
+
+
+# ALL TOGETHER
+
+```{r}
+CV <- data.frame(MPM = as.numeric(MPM_BOOTS_INTERVALS[,1]),
+                 MPS = as.numeric(MPD_BOOTS_INTERVALS[,1]),
+                 QIR = as.numeric(IQR_BOOTS_INTERVALS[,1]))
+CV <- CV%>%
+    pivot_longer(cols = 1:3, 
+                 values_to = "vals",
+                 names_to = "names")
+                 
+CV %>%
+    group_by(names) %>%
+    ggplot(aes(x = vals, fill = names)) +
+    geom_histogram(aes(x = vals,y = ..density..,
+                       fill = names),
+                 #binwidth = 0.5,
+                 alpha = 0.5,
+                 binwidth = 0.3,
+                 inherit.aes = F,
+                 position = "dodge") +
+    geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               alpha = 0.25,
+               outline.type = "full",
+                   )+
+    labs( 
+    title = "Figure 1: Banco de México official documents. Word count.",
+        subtitle = "Jan 2011 - Dec 2022 (Number of Words)",
+        x = " ",
+        y = " ",
+    color = " ",
+    fil = " ",
+    caption = "Source: Author's calculations.")+
+  theme_tufte(base_family = "serif", # type of theme
+            base_size = 12)+
+    scale_colour_wsj()+ # color palette
+    scale_fill_wsj()+
+  #scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+   #            date_labels = "%Y")+
+    theme(legend.position = "bottom", # position and type of labels
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot")
+  # split the figure using the type of document
+     # facet_grid(
+      
+    #       rows =vars(names), scales = "free_y")
+```
+
+
+```{r}
+CV <- data.frame(MPM = as.numeric(MPM_BOOTS_INTERVALS[,1]),
+                 MPS = as.numeric(MPD_BOOTS_INTERVALS[,1]),
+                 QIR = as.numeric(IQR_BOOTS_INTERVALS[,1]))
+
+CV <- CV %>%
+    mutate(density_MPM = dnorm(mean(MPM), sd(MPM)),
+           density_MPS = dnorm(mean(MPS), sd(MPS)),
+           density_QIR = dnorm(mean(QIR), sd(QIR)))
+CV <- CV%>%
+    pivot_longer(cols = 1:3, 
+                 values_to = "vals",
+                 names_to = "names") %>%
+    pivot_longer(cols = 1:5, 
+                 values_to = "density",
+                 names_to = "density_names")
+    
+                 
+CV %>%
+    group_by(names) %>%
+    ggplot(aes(x = vals, fill = names)) +
+    #geom_histogram(aes(x = vals,y = ..density..,
+    #                   fill = names),
+     #            #binwidth = 0.5,
+      #           alpha = 0.5,
+       #          binwidth = 0.1,
+        #         inherit.aes = F) 
+
+    geom_density(aes(),lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               alpha = 0.25,
+               outline.type = "full",
+                   )+
+    labs( 
+    title = "Figure 1: Banco de México official documents. Word count.",
+        subtitle = "Jan 2011 - Dec 2022 (Number of Words)",
+        x = " ",
+        y = " ",
+    color = " ",
+    fil = " ",
+    caption = "Source: Author's calculations.")+
+  theme_tufte(base_family = "serif", # type of theme
+            base_size = 12)+
+    scale_colour_economist()+ # color palette
+    scale_fill_economist()+
+  #scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+   #            date_labels = "%Y")+
+    theme(legend.position = "bottom", # position and type of labels
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot")
+  # split the figure using the type of document
+    #  facet_grid(
+     #        rows =vars(names), scales = "free_y")
+```
 
 # 3. Text mining approach
 

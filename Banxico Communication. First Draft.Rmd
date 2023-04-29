@@ -1031,7 +1031,7 @@ Table 5 shows the results of applying an _innovational outlier model_ break sele
 In the case of the ZA test, we contrast the null-hypothesis of the presence of a unit root with no breaks, against the alternative hypothesis of a stationary process with one endogenous break. For the PV test, we allow for one break in the unit root null, against the alternative hypothesis of stationarity with one break. The results show for both test, that the MPMs perspicuity can be characterized as an I(1) process with no breaks (ZA) or a potential and significant break in April 2018 (PV). MPSs and QIRs present evidence of stationarity with a potential time break in level and trend respectively. Furthermore, classic unit root test show that both series might be represented as wise-regime stationary process (see appendix C).
 
 
-```{r Tab 5 URT one breal, echo=FALSE}
+```{r Tab 5 URT one break, echo=FALSE, message=FALSE, warning=FALSE}
 Onebreak_Unit <- data.frame( var = c(rep("MPM",2), rep("MPS",2), rep("QIR",2)),
                            type = c("crash.", "crash.","crash", "crash", "chg. growth", "chg. growth"),
                            ZA = c("-3.779(6)","-3.779(6)", "-4.875(6)**" , "-4.875(6)**", "-4.7234(0)**", "-4.7234(0)**"),
@@ -1064,7 +1064,6 @@ knitr::kable(Onebreak_Unit,
 ```
 
 
-
 From an economic perspective, there is no reason to limit the analysis to a single structural change. Moreover, Lumsdaine and Papell (LP)(1997) showed that allowing for only one point break could biased the results and conclusions of the previous tests, therefore, they extended the analysis to allow for two endogenous unknown structural breaks. They also conclude that in test such as the ZA which does not allow for breaks under the unit root null, excludes all the other cases to the alternative hypothesis, i.e., the alternative hypothesis implies that there are breaks in the series including the possibility of unit root with breaks.
 
 Then, is arguably that LP test is not the most appropriate for our data. Instead, Lee and Strazicich (2003), LS test is suitable because expands the analysis to allow for two endogenous unknown breakpoints both under the null and alternative hypothesis. Hence, the model specifications of Ls test is a unit root process with up to two structural breaks in level, trend or both, against the alternative hypothesis of an stationary process with up to two breaks in level, trend or both. In addition, the bootstrap approach by [Chou (2007)](https://www.sciencedirect.com/science/article/pii/S0165176506002722) is implemented to derive the critical values of the t-statics and the distributional properties of the t-statics and the selected break points.[^31]
@@ -1072,6 +1071,45 @@ Then, is arguably that LP test is not the most appropriate for our data. Instead
 [^31]: For a similar implementation of this procedure see [Lips (2017)](https://www.degruyter.com/document/doi/10.1515/jtse-2016-0018/html).
 
 
+```{r Tab 6 URT two break, echo=FALSE, message=FALSE, warning=FALSE}
+Onebreak_Unit <- data.frame( var = c(rep("MPM",2), rep("MPS",2), rep("QIR",2)),
+                           #type = c("break", "break","break", "break", "break", "break"),
+                           tstat = c("-5.43","-5.43", "-5.47" , "-5.47", "-5.93", "-5.93"),
+                           TB1 = c("Jan-15", "[May-12,Feb-16]", "Oct-17", "[Apr-12,Sep-18]", "Q2-15" , "[Q3-13,Q1-19]"),
+                           TB2 = c( "Aug-19", "[Dec-14,Jan-21]","Aug-20", "[Sep-23,Mar-21]", "Q3-19", "[Q4-16,Q2-21]"),
+                           LS_CV1 = c("-6.33", "-6.33", "-6.32", "-6.32", "-6.42" , "-6.42"),
+                           LS_CV5 = c("-5.71", "-5.71", "-5.73", "-5.73", "-5.65" , "-5.65"),
+                           LS_CV10 = c("-5.33", "-5.33", "-5.32", "-5.32", "-5.33" , "-5.33"),
+                           
+                           BTS_CV1 = c("-8.32", "-8.32", "-8.54", "-8.54", "-7.99" , "-7.99"),
+                           BTS_CV5 = c("-7.73", "-7.73", "-7.87", "-7.87", "-7.19" , "-7.19"),
+                           BTS_CV10 = c("-7.47", "-7.47", "-7.60", "-7.60", "-6.71" , "-6.71")                           )
+
+
+knitr::kable(Onebreak_Unit,
+             caption = "Unit Root tests with two endogenous structural break",
+             align = "c",
+             booktabs = T,
+             col.names = c(" ","t-stat" ,"TB1",
+                           "TB2" ,"1%", "5%","10%",
+                           "1%", "5%","10%")) %>%  
+    kable_styling(latex_options = c("hold_position"),
+                  full_width = T, font_size = 11) %>%
+    collapse_rows(columns = 1:2, latex_hline = "major", valign = "middle") %>%
+    collapse_rows(columns = 5:10,
+                  latex_hline = "major", valign = "middle") %>%
+    column_spec(2,  width = "2cm") %>%
+    column_spec(3,  width = "3cm") %>%
+    column_spec(4,  width = "3cm") %>%
+      #column_spec(4, background = color,
+       #       color = "black",bold = T)  %>%
+    add_header_above(c(" " = 4, "LS CV" = 3, "Bootstrap CV" = 3),
+                     bold = T, font_size = 11)%>%
+    add_footnote(c("Source: Author's calcultion.","Note: rejection of the null at (*)1%, (**)5%, (***)10% level.", "The date in brackets represent the potentila point break."),
+                 notation = "none",
+                 threeparttable = F)
+
+```
 
 
 # Conclusion
