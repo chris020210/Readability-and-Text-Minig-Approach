@@ -1,16 +1,24 @@
 ---
-title: "Banco de México's Communication: A Readability and Perspicuity Approach."
+title: 'Banco de México''s Communication: A Readability and Perspicuity Approach.'
 author: "Christian Admin De la Huerta Avila"
-date: "`r Sys.Date()`"
 output:
-  pdf_document: 
+  pdf_document:
     latex_engine: xelatex
     df_print: paged
     fig_height: 4
+  word_document: default
+bibliography: Bib.bib
+csl: harvard.csl
+nocite: |
+  @huangCentralBankCommunication2021
 fontsize: 12pt
 linestrech: 1.5
+citecolor: cyan
 linkcolor: cyan
 urlcolor: cyan
+header-includes:
+- \usepackage{float}
+- \usepackage{wrapfig}
 ---
 
 
@@ -44,6 +52,19 @@ Banxico_readability$document[Banxico_readability$document == "MPD"] <- "MPS"
 ```
 
 
+\begin{abstract}
+
+\noindent Central bank communication may potentially improve the effectiveness of monetary policy transmission, and is essential to foster transparency and ensure that these institutions are accountable to the public they serve. However, just providing information to the public does not guarantee that the central bank is conveying a clear message. Therefore, it is crucial, on the one hand, to provide high-quality communication, and on the other, to make the information accessible to a broader audience. The methodology proposed in this paper is along these lines. From the point of view of a broad spectrum of the public, I examine the clarity of the content of Banco de México's main publications: the monetary policy statements, the minutes of the meetings of the Board of Governors, and the quarterly inflation reports. Classical readability and perspicuity measures are computed for these documents for the period from 2011 to 2022. Unit root tests are then performed allowing for one and two endogenous structural breaks in the time series of the clarity of each publication. The findings of the statistical analysis show that there have been significant structural breaks in Banco de México's communication aligned with three major events: the adoption of an Inflation Forecast Targeting scheme in 2018, the update of the General Communication Criteria for the Board of Directors and central bank staff, and the COVID-19 pandemic in 2020. The results also show that these changes have made communication clearer, although it remains inaccessible to the vast majority of the Mexican population.
+
+\end{abstract}
+
+
+__Keywords__: Banco de México, Central bank communication, Clarity, Readability measures, Structural break.     
+
+__JEL Classification__: C12, C820, E52, E58.
+
+
+\newpage
 
 \setlength{\parindent}{10mm}
 \section{1. Introduction}
@@ -55,21 +76,22 @@ Second, as independent authorities appointed by the executive branch of governme
 
 The latter has been extensively studied by the literature on transparency[^1], leading to the creation of various indicators associated with these issues, and to a consensus that central banks should share information on their objectives, their perspective on economic developments, as well as the monetary policy decision-making process. 
 
-[^1]: See Fry et al. (2000), Blinder et al. (2001), Geraats (2002; 2006), Eijffinger and Geraats (2006), Cujisen and Dermertzis (2007), Čihák (2007), Dincer and Eichengreen (2009; 2014), Kedan and Stuart (2014), Dincer, Eichengreen, y Geraats (2019; 2022).
+[^1]: See @fryKeyIssuesChoice2000, @blinderHowCentralBanks2001, @geraatsCentralBankTransparency2002[-@geraatsMystiqueCentralBank2007], @eijffingerHowTransparentAre2006, @cihakCentralBanksFinancial2007, @dincerCentralBankTransparency2008[-@dincerCentralBankTransparency2010; -@dincerCentralBankTransparency2014] and @dincerTransparencyMonetaryPolicy2019[-@dincerTrendsMonetaryPolicy2022].
 
-Inflation targeting central banks, in particular, need to be transparent to foster openness and accountability. However, transparency alone does not guarantee effective communication, and the information shared may not always be easily understood. Given the great power that central banks have to potentially influence expectations and affect the economy, it is not only important to increase the amount of information available but also to make it more accessible. Communication must be perspicuous, intelligible, concise and relevant. Central banks face the need to convey clear messages that explain their decisions, their rationale, and how monetary policy works. 
 
-To allow for public scrutiny, communication strategies and policies should promote two-way channels, i.e., to encourage dialogue and feedback between the central bank and the public. In addition, it is crucial that these institutions make their information accessible to a wider audience, not just to highly specialized experts, analysts and professional watchers who can easily interpret the central bank's message. Studies have shown that macroeconomic outcomes can be improved by aligning households’ and firms’ expectations with a central bank’s policy objectives.[^2]
+Inflation-targeting central banks, in particular, need to be transparent to foster openness and accountability. However, transparency alone does not guarantee effective communication, and the information shared may not always be easily understood. Given the great power that central banks have to potentially influence expectations and affect the economy, it is not only important to increase the amount of information available but also to make it more accessible. Communication must be perspicuous, intelligible, concise, and relevant. Central banks face the need to convey clear messages that explain their decisions, their rationale, and how monetary policy works. 
 
-[^2]: See [(Deslongchamps, 2018).](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/)
+To allow for public scrutiny, communication strategies and policies should promote two-way channels, i.e., to encourage dialogue and feedback between the central bank and the public. In addition, these institutions must make their information accessible to a wider audience, not just to highly specialized experts, analysts, and professional watchers who can easily interpret the central bank's message. Studies have shown that macroeconomic outcomes can be improved by aligning households’ and firms’ expectations with a central bank’s policy objectives.[^2]
+
+[^2]: See @deslongchampsReadabilityBankCanada2018.
 
 This means that simple and clear communication can be a powerful tool for central banks to align households' and firms' expectations. By clearly and transparently communicating their goals, perspectives on economic developments, and the decision-making process, central banks can help the public and markets better understand their actions and intentions. This, in turn, can help to build trust and confidence in the central bank, which can improve the effectiveness of monetary policy. Moreover, when households and firms have a better understanding of the central bank's objectives and the factors that influence its decisions, they are more likely to make informed decisions that are in line with the central bank's goals. This can help to reduce the costs of adjustment to changes in monetary policy and can lead to a more stable and predictable economic environment.
 
 In the special case of Mexico's national central bank, Banco de México (Banxico) has made advances towards greater transparency and effective communication over the past two decades. Since the formal adoption of an Inflation Targeting Regime (ITR) in 2001, Banxico has released bulletins explaining its monetary policy decisions, and quarterly reports aimed to analyze inflation and economic developments to meet the objective of maintaining low and stable inflation. From then on, the communication strategy has undergone numerous modifications.
 
-This paper aims to address two important questions: Have there been significant changes in Banco de México's communication over time? Has the information shared by the central bank become more accessible to the majority of the population and to what extent? To answer these questions, I first review the main changes to Banxico's communication strategy in recent years. I then compute classical measures of readability and perspicuity on monetary policy statements, minutes and quarterly inflation reports, which are considered as a proxy for the clarity and intelligibility of central banks' language. With the information gathered, I focus on determining whether there is evidence of a structural break in the readability and perspicuity of Banxico's publications, using time series techniques. In particular, unit root tests are performed that allow for one and two endogenous structural breaks. The findings from the unit root analysis suggest [insert relevant finding from unit root analysis].
+This paper aims to address two important questions: Have there been significant changes in Banco de México's communication over time? Has the information shared by the central bank become more accessible to the majority of the population and to what extent? To answer these questions, I first review the main changes to Banxico's communication strategy in recent years. I then compute classical measures of readability and perspicuity on monetary policy statements, minutes and quarterly inflation reports, which are considered as a proxy for the clarity and intelligibility of central banks' language. With the information gathered, I focus on determining whether there is evidence of a structural break in the readability and perspicuity of Banxico's publications, using time series techniques. In particular, unit root tests are performed that allow for one and two endogenous structural breaks. The results of the structural break analysis suggest that, overall, changes in Banxico's communication have been effective in increasing the clarity of the publications, especially in 2018 and 2020 significant positive changes are found in the central bank's communication. However, there is still room for improvement as publications have not been made accessible to as much of the population as possible.
 
-The rest of the paper is organized as follows. Section 2 summarizes the literature on central bank communication. Section 3 present the data and review Banco de México's communication strategy. Section 4 describes the evolution over the period 2011 to 2022 of the linguistic properties of Banxico's publications according to various measures. Section 5 contains the main statistical analysis of this paper, presenting the structural change tests and their results. Finally, Section 6 concludes with a summary of the findings and implications for central bank communication.
+The rest of the paper is organized as follows. Section 2 summarizes the literature on central bank communication. Section 3 presents the data and reviews Banco de México's communication strategy. Section 4 describes the evolution over the period 2011 to 2022 of the linguistic properties of Banxico's publications according to various measures. Section 5 contains the main statistical analysis of this paper, presenting the structural change tests and their results. Finally, Section 6 concludes with a summary of the findings and implications for central bank communication.
 
 
 # 2. The central banker's enigma
@@ -80,19 +102,20 @@ Prior to 1980, the consensus was that central bankers should be secretive and my
 
 In the 1960s, economist Milton Friedman famously commented that the most important variables in the central bank's lost function are, on the one hand, avoiding accountancy, and on the other, achieving public prestige.[^3] 
 
-[^3]: See [Faust and Svensson (2001)](https://www.jstor.org/stable/2648735).
+[^3]: See @faustTransparencyCredibilityMonetary2001.
 
 Montagu Norman, former Bank of England chairman, is recognized as having coined the phrase "never excuse, never explain", and it is said that he constantly rejected to testify before the Parliament.[^4] Mervyn King sums up very well the thinking on central bank communication at the end of the 20th century[^5]:
 
   >> \footnotesize When I joined the Bank of England in 1991, I was fortunate enough to be invited to dine with a group that included Paul Volcker.  At the end of the evening, I asked Paul if he had a word of advice for a new central banker. He replied —in one word— "mystique". That single word encapsulates much of the tradition and wisdom of central banking at that time.
 
-[^4]: See Boyle (1967).
+[^4]: See @boyleMontaguNormanBiography1967.
 
-[^5]: King (2000) as quoted in Lynsey et al. (2005).
+[^5]: @kingMonetaryPolicyTheory2000 as quoted in @lindseyReformOctober19792005.
 
 Even though this view of central banking as full of mysticism, secrecy, and opacity has remained at the heart of some scholars and central bankers, the experience of the "Great Inflation" and developments in Time Inconsistency and Institutional Design Theory highlighted the need for central bankers with a high degree of independence and credibility.[^6]
 
-[^6]: See [Kydland and Prescott (1977)](https://www.jstor.org/stable/1830193), [Calvo (1978)](https://www.jstor.org/stable/pdf/1913836.pdf), [Barro and Gordon (1983)](https://www.sciencedirect.com/science/article/pii/030439328390051X), [Rogoff (1985)](https://www.jstor.org/stable/1885679).
+[^6]: See @kydlandRulesRatherDiscretion1977, @calvoTimeConsistencyOptimal1978, @barroRulesDiscretionReputation1983 and @rogoffOptimalDegreeCommitment1985.
+
 
 The changes that originated, both in theory and practice, triggered a radical transformation toward greater independence. This included the adoption of inflation targeting schemes, which sought to anchor inflation expectations by publicly announcing a numerical target for inflation. As a result, central banks were able to set clearer and more specific objectives and gain credibility on them. All of these changes were a significant departure from the past, where central banks often kept their goals and methods of operation secret.
 
@@ -100,69 +123,58 @@ While in the 1980s and 1990s the debate was about central bank independence and 
 
 Alan Blinder, former Vice Chairman of the Federal Reserve, called this transformation the "Quiet Revolution".[^7] He argued that the shift towards greater openness and transparency would improve the effectiveness of monetary policy. This revolution led to central banks becoming more open and transparent about their operations and decision-making processes. The prototype of the secretive and ambiguous central bank turned to a central bank design that should be open, intelligible and honest.
 
-[^7]: See [Blinder (2004).](https://yalebooks.yale.edu/book/9780300100877/the-quiet-revolution/)
+[^7]: See @blinderQuietRevolutionCentral2004.
 
-The work of Christina and David Romer (1989)[^8] is a seminal contribution to communication literature. Applying the so-called _narrative approach_, they investigate a set of periods in which the Federal Reserve's verbal stance was restrictive. They find that narratives, i.e., the historical record, the descriptions of the process and reasoning that led to the monetary authority's decisions and accounts of the sources of monetary disturbances, are related to multiple macroeconomic outcomes, such as the real effects of monetary shocks.
+The work of Christina and David Romer [-@romerDoesMonetaryPolicy1989] is a seminal contribution to communication literature. Applying the so-called _narrative approach_, they investigate a set of periods in which the Federal Reserve's verbal stance was restrictive. They find that narratives, i.e., the historical record, the descriptions of the process and reasoning that led to the monetary authority's decisions and accounts of the sources of monetary disturbances, are related to multiple macroeconomic outcomes, such as the real effects of monetary shocks.
 
-[8]: See [Romer and Romer (1989).](https://www.nber.org/system/files/chapters/c10964/c10964.pdf)
 
 Later on, Alan Blinder noted, during a lecture at the London School of Economics, that greater openness could improve the effectiveness of monetary policy. He argued that expectations about the central bank's future behavior provide the essential link between short-term and long-term interest rates; in turn, a more open central bank naturally shapes expectations by providing the markets with more information about its view of the fundamental factors guiding monetary policy, becoming more predictable to markets, and making market reactions more predictable to itself.[^9]
 
-[^9]: See [Blinder (1999).](http://www.artsrn.ualberta.ca/econweb/landon/1999%20Blinder%20Central%20Banking.pdf)
+[^9]: See @blinderCentralBankingTheory1999.
 
 At the Federal Reserve Jackson Hole Symposium in 2001, Michael Woodford argued that the success of the monetary policy is not so much a matter of effective control of the overnight interest rate, nor effective control of inflation, but of successfully influencing the evolution of market expectations about these variables in the desired way, therefore, transparency is valuable for the effective conduct of monetary policy.[^10]
 
-[^10]: See [Woodford (2001).](https://www.kansascityfed.org/Jackson%20Hole/documents/3495/papers-S02WOOD.pdf)
+[^10]: See @woodfordMonetaryPolicyInformation2001.
 
 That same year, Alan Greenspan, historically acknowledged as a master of the esoteric art of central banking, claimed the importance of transparency and communication with the public[^11]:
 
   >> \footnotesize The historical record indicates that the increased transparency of the Federal Reserve has helped improve the functioning of markets and enhanced our credibility [...] openness is more than just useful in shaping better economic performance. Openness is an obligation of a central bank in a free and democratic society. U.S. elected leaders chose to vest the responsibility for setting monetary policy in an independent entity, the Federal Reserve. Transparency of our activities is the means by which we make ourselves accountable to our fellow citizens to aid them in judging whether we are worthy of that task.
   
-[^11]: See [Greenspan, (2001).](https://www.federalreserve.gov/boarddocs/speeches/2001/20011011/default.htm)
+[^11]: See @greenspanTransparencyMonetaryPolicy2001.
   
-Later, in a thorough analysis, Kohn and Sack (2004)[^12] showed that central bank's talk contain market-relevant information. By testing for volatility in asset prices due to different types of Federal Reserve speaks, they found that statements and policy actions can serve as effective substitutes for one another, at least in the short run. Their analysis conclude that a credible central bank can achieve nearly the same result by implementing a policy action or by promising to implement that action at the next meeting.
+Later, in a thorough analysis, Kohn and Sack [-@kohnCentralBankTalk2004] showed that central bank's talk contain market-relevant information. By testing for volatility in asset prices due to different types of Federal Reserve speaks, they found that statements and policy actions can serve as effective substitutes for one another, at least in the short run. Their analysis conclude that a credible central bank can achieve nearly the same result by implementing a policy action or by promising to implement that action at the next meeting.
 
-[^12]: See [Kohn and Sack (2004).](https://www.federalreserve.gov/pubs/feds/2003/200355/200355pap.pdf)
 
 As stated by Ben Bernanke, former Fed's chairman, monetary policy is 98 percent talk and only two percent action, hence, the ability to shape market expectations of future policy through public statements is one of the most powerful tools the central banks have.[^13] During his time at the Federal Reserve, he constantly advocated for greater transparency, communication and the formal adoption of inflation targeting.
 
-[^13]: See [Bernanke (2015).](https://www.brookings.edu/blog/ben-bernanke/2015/03/30/inaugurating-a-new-blog/)
+[^13]: See @bernankeInauguratingNewBlog2015.
 
-Indeed, following the early experience of the Bank of Japan, Bernanke's paper co-authored with Vincent Reinhart and Brian Sack (2004)[^14] was one of the first to conclude that when primary tools are constrained and can no longer support central bank's objectives, unconventional measures, such as communication and forward guidance, can successfully affect expectations about future policy and longer-term yields, thus providing additional support for monetary policy.
+Indeed, following the early experience of the Bank of Japan, Bernanke's paper co-authored with Vincent Reinhart and Brian Sack [-@bernankeMonetaryPolicyAlternatives2004] was one of the first to conclude that when primary tools are constrained and can no longer support central bank's objectives, unconventional measures, such as communication and forward guidance, can successfully affect expectations about future policy and longer-term yields, thus providing additional support for monetary policy.
 
-[^14]: See [Bernanke, Reinhart and Sack (2004).](https://www.federalreserve.gov/pubs/feds/2004/200448/200448pap.pdf)
-
-After the first generation of empirical studies, Blinder et al. (2008)[^15] surveyed the literature existent at the time, pointing out that even when there was no evident consensus about the optimal communication policy, "communication can be an important and powerful part of the central bank’s toolkit since it has the ability to move financial markets, to improve the predictability of monetary policy, and the potential to help the monetary authorities achieve macroeconomic objectives such as low and stable inflation".
-
-[^15]: See [Blinder, Ehrmann, Fratzscher, De Haan and Jansen (2008).](https://www.ecb.europa.eu/pub/pdf/scpwps/ecbwp898.pdf)
-
+After the first generation of empirical studies, @blinderCentralBankCommunication2008 surveyed the literature existent at the time, pointing out that even when there was no evident consensus about the optimal communication policy, "communication can be an important and powerful part of the central bank’s toolkit since it has the ability to move financial markets, to improve the predictability of monetary policy, and the potential to help the monetary authorities achieve macroeconomic objectives such as low and stable inflation".
 
 Ever since Alan Greenspan stressed to "mumble with great incoherence"[^16], the world of central banking and monetary policy has undergone a major evolution. We have seen the role and impact of central bank communication increase steadily. In the past, central banks used to wonder if there was a good reason to communicate something; now they wonder if there is a good reason not to communicate. In the words of the governor of the Central Bank of Ireland, Gabriel Makhlouf, the days of "mumbling with great incoherence" are over.[^17]
 
 
 [^16]: These words were uttered by Alan Greenspan during his appearance before the Senate in 1987.
-[^17]: See [Makhlouf (2020).](https://www.centralbank.ie/news/article/speech-end-of-mumbling-incoherence-governor-makhlouf-26-feb-2020)
+[^17]: See @makhloufEndMumblingIncoherence2020.
 
 Initially communication was perceived as a complement to gain credibility, or to support the effectiveness of the transmission channels when the main tools are limited. Nowadays, in the literature and the world of central banking, there is a clear consensus regarding the role of communication as a tool. While the policy rate is seen as the primary tool to influence directly very short-term interest rates, the central bank's communication is seen as the policy that can potentially influence long-term interest rates. Moreover, the growing importance of financial stability, and better understanding on how market expectations can affect market prices provides a good reason to communicate effectively and clearly.
 
-The growing power of monetary authorities and the importance of market expectations in the transmission of monetary policy has yielded new definitions of monetary policy strategy and the central banker toolkit. With the development of communication tools, a lot of literature has emerged trying to understand the impact of central bank's communication on market expectations, signals on the yield curve and the effective transmission of monetary policy [^18]. 
+The growing power of monetary authorities and the importance of market expectations in the transmission of monetary policy has yielded new definitions of monetary policy strategy and the central banker toolkit. With the development of communication tools, a lot of literature has emerged trying to understand the impact of central bank's communication on market expectations, signals on the yield curve and the effective transmission of monetary policy.[^18] 
 
-For example, Campbell et al. (2012) and Campbell (2013), using both an empirical an theoretical approach, showed how the Fed, through public announcements and forward guidance, can successfully influence assets prices and forecast over a variety of many macroeconomics variables. Their work also derived in new definitions of communication and the types of forward guidance a monetary authority can deliver.[^19]
+For example, @campbellMacroeconomicEffectsFederal2012 and @campbellOdysseanForwardGuidance2013, using both an empirical an theoretical approach, showed how the Fed, through public announcements and forward guidance, can successfully influence assets prices and forecast over a variety of many macroeconomics variables. Their work also derived in new definitions of communication and the types of forward guidance a monetary authority can deliver.
 
-[^18]: See [Charbonneau and Rennison (2015).](https://www.bankofcanada.ca/2015/11/staff-discussion-paper-2015-15/), [Smith and Becker (2015)](https://www.kansascityfed.org/Economic%20Bulletin/documents/412/macrobulletins-Has%20Forward%20Guidance%20Been%20Effective%3F.pdf), [McKay, Nakamura, and Steinsson (2016)](https://www.aeaweb.org/articles?id=10.1257/aer.20150063), [Angeletos, George-Marios, and Chen Lian (2018)](https://www.aeaweb.org/articles?id=10.1257/aer.20161996), [Dell'Ariccia, Rabanal and Sandri (2018)](https://www.aeaweb.org/articles?id=10.1257/jep.32.4.147), [Altavilla, Brugnolini, Gürkaynak, Motto and Ragusa (2019)](https://www.sciencedirect.com/science/article/pii/S0304393219301497), [Bernanke, Kiley and Roberts (2019)](https://www.aeaweb.org/articles?id=10.1257/pandp.20191082), [Bernanke (2020)](https://www.aeaweb.org/articles?id=10.1257/aer.110.4.943).
-[^19]: See [Campbell et al. (2012)](https://www.brookings.edu/wp-content/uploads/2012/03/2012a_evans.pdf) and [Campbell (2013).](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwicl8WV7bb-AhVllGoFHV14DzMQFnoECAsQAQ&url=https%3A%2F%2Fwww.chicagofed.org%2F~%2Fmedia%2Fpublications%2Feconomic-perspectives%2F2013%2F4q2013-part1-campbell-pdf.pdf&usg=AOvVaw1SCPs_bzDS02Gmsl3nTnwk)
+[^18]: See @charbonneauForwardGuidanceEffective2015, @smithHasForwardGuidance2015, @mckayPowerForwardGuidance2016, @angeletosForwardGuidanceCommon2018, @dellaricciaUnconventionalMonetaryPolicies2018, @altavillaMeasuringEuroArea2019, @bernankeMonetaryPolicyStrategies2019 and @bernankeNewToolsMonetary2020.
+
 
 At the same time, new research has focused on the implementation of text mining and text analysis tools. The latter, through Natural Language Processing (NLP) and classical readability tests, aimed to decipher the clarity and semantic content of central bank communication, interpret both the quantity and quality of the communication that central banks deliver through official documents and other central banking-related text. Some of these works emphasize readability and perspicuity (insert bibliography), whereas others scrutinize central bankers' communication by applying machine learning and dictionary techniques(insert bibliography).
 
-Cihak, Smídková and Bulir (2008) based on an extensive analysis of ECB’s inflation forecasts, inflation targets, and verbal information in monthly bulletins and press statement, conclude that ECB's written communication is clear about 95 percent of the time. Jansen (2010) illustrates the importance of transparent communication about monetary policy by comparing the readability statistics of the Federal Reserve Chairman's Humphrey-Hawkins testimonies and their effect on financial market volatility. Cihák, Jansen and Bulíř (2012; 2013) using a similar methodology for press statements and inflation reports of 7 central banks, show that the relationship between the clarity of communications and the broader economic environment has a significant effect, specially for topics such as inflationary risks, forward-looking inflation gap, inflation deviations from the target, and more dissenting votes on monetary policy decissions. Furthermore, they find a negative change in clarity in the aftermath of the GFC, and point out how communication strategies are often linked to country-specific and institution-specific factors.  Deslongchamps (2018) highlights that even though the readability of Bank of Canada's publications has improved, they still lag far behind the benchmark of clarity for a vast sector of the population. Ferrera and Angino (2022) provided evidence that clearer ECB´s communication is strongly and robustly correlated with a higher degree of engagement of journalists and social media users, i.e., journalists and social media users tend to talk less about, and engage less with, the ECB when its language is more difficult to understand.[^20]
+@cihakWritingClearlyECB2008 based on an extensive analysis of ECB’s inflation forecasts, inflation targets, and verbal information in monthly bulletins and press statement, conclude that ECB's written communication is clear about 95 percent of the time. @jansenDoesClarityCentral2011 illustrates the importance of transparent communication about monetary policy by comparing the readability statistics of the Federal Reserve Chairman's Humphrey-Hawkins testimonies and their effect on financial market volatility. @bulirMeasuringClarityCentralbank2013[-@bulirWhatDrivesClarity2013] using a similar methodology for press statements and inflation reports of 7 central banks, show that the relationship between the clarity of communications and the broader economic environment has a significant effect, specially for topics such as inflationary risks, forward-looking inflation gap, inflation deviations from the target, and more dissenting votes on monetary policy decissions. Furthermore, they find a negative change in clarity in the aftermath of the GFC, and point out how communication strategies are often linked to country-specific and institution-specific factors. @deslongchampsReadabilityBankCanada2018 highlights that even though the readability of Bank of Canada's publications has improved, they still lag far behind the benchmark of clarity for a vast sector of the population. @ferraraDoesClarityMake2022 provided evidence that clearer ECB´s communication is strongly and robustly correlated with a higher degree of engagement of journalists and social media users, i.e., journalists and social media users tend to talk less about, and engage less with, the ECB when its language is more difficult to understand.
 
-[^20]: See [Cihak, Smídková and Bulir (2008)](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Writing-Clearly-ECBs-Monetary-Policy-Communication-22428), [Jansen (2010)](https://onlinelibrary.wiley.com/doi/full/10.1111/j.1465-7287.2010.00238.x), Cihák, Jansen and Bulíř ([2012](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Clarity-of-Central-Bank-Communication-About-Inflation-25607); [2013](https://cepr.org/voxeu/columns/measuring-clarity-central-bank-communication)), [Deslongchamps (2018)](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/), [Ferrera and Angino (2022)](https://www.sciencedirect.com/science/article/pii/S0176268021001191), 
+For Latin American central banks @tabordaProceduralTransparencyLatin2015 surveyed the readability of the minutes for Brazil, Chile, Colombia, Mexico and Peru from 1997 to 2013, concluding that there has been a modest evolution in the clarity of these documents. @herradaComunicacionPoliticaMonetaria2020 noted that there are significant challenges in South American central banks' communication. They stressed the need for improving clarity in communication with different types of audiences, especially to approach the youth population, and count with instruments to assess the communication strategy and design. @carottaMonetaryPolicyCommunication2023 find that Uruguay´s central bank readability has improved over time, but there is still room for further improvements in the perspicuity of the messages.
 
-For Latin American central banks Taborda (2015) surveyed the readability of the minutes for Brazil, Chile, Colombia, Mexico and Peru from 1997 to 2013, concluding that there has been a modest evolution in the clarity of these documents. Castillo, Herrada, Montoro and Pérez (2019) noted that there are significant challenges in South American central banks' communication. They stressed the need for improving clarity in communication with different types of audiences, especially to approach the youth population, and count with instruments to assess the communication strategy and design. Carotta, Mello and Ponce (2021) find that Uruguay´s central bank readability has improved over time, but there is still room for further improvements in the perspicuity of the messages.[^21]
-
-[^21]: See [Taborda (2015)](http://www.scielo.org.co/scielo.php?script=sci_arttext&pid=S0120-44832015000100008), [Castillo, Herrada, Montoro and Pérez (2019)](https://www.bcrp.gob.pe/docs/Publicaciones/Revista-Estudios-Economicos/37/ree-37-castillo-herrada-montoro-perez.pdf), [Carotta, Mello and Ponce (2021)](https://www.cemla.org/actividades/2021-final/2021-11-xxvi-meeting-of-the-central-bank-researchers-network/5B.2%20PAPER%20Carotta%20Mello%20Ponce.pdf). 
-
-In the especial case of Banxico, not many pieces of research focus on communication. To the extent of my knowledge, only [Cermeño and Navarrete (2011)](https://www.cide.edu/publicaciones/status/dts/DTE%20514.pdf) and [López Marmolejo (2013)](https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S2448-718X2013000200345) approached this topic before. The former estimate an index of the bias of the monetary policy statement, and by incorporating it in a probit regression with the change in the monetary stance in the subsequent period as the dependent variable, they conclude that Banxico's communication is effective in predicting the next decision, but only in the short term.
+In the especial case of Banxico, not many pieces of research focus on communication. To the extent of my knowledge, only @cermenoQueTanPredecible2011 and @lopezmarmolejoDescifrandoLenguajeBanco2013 approached this topic before. The former estimate an index of the bias of the monetary policy statement, and by incorporating it in a probit regression with the change in the monetary stance in the subsequent period as the dependent variable, they conclude that Banxico's communication is effective in predicting the next decision, but only in the short term.
 
 López Marmolejo constructs a communication index with the identification of relevant phrases in monetary policy statements. By incorporating it as an independent variable in a standard Taylor rule, concludes that Banxico sends pertinent signals to the markets that allow forecasting the monetary policy rate. Furthermore, his study points out that both the market and analysts understand the meaning of the communication, which has contributed to market expectations of interest rates being more congruent with the central bank's vision, as well as closer and more stable in relation to the level finally observed.
 
@@ -183,8 +195,9 @@ The same year, Banxico started to publish one of the main tools toward greater t
 
 Then, in 2018 the bank shifted its strategy to an Inflation Forecast Targeting (IFT). The same represents a major evolution in the communication design because inflation reports for the first time included the point forecasts of quarterly annual inflation. As stated in the ITR literature[^22], in the theoretical structure of the forecasts, the endogenous determination of the monetary policy is considered, that is, the monetary position is established in such a way that it is congruent with the fulfillment of the inflation forecast in the established horizon. The latter implied that the inflation forecast offers the so-called _Delphic forward guidance_, thus tracking the likely future of monetary policy actions, given the current forecast of the economy and the uncertainty surrounding this forecast.[^23]
 
-[^22]: See King (1994), Svensson (1997; 1999, 2008), Clinton et al. (2015), Svensson (2020)
-[^23]: See [Campbell et al. (2012)](https://www.brookings.edu/wp-content/uploads/2012/03/2012a_evans.pdf)
+[^22]: See @kingMonetaryPolicyUK1994, @svenssonInflationForecastTargeting1997[-@svenssonInflationTargetingMonetary1999; -@svenssonMonetaryPolicyJudgment2005; -@svenssonInflationTargeting2010], @clintonInflationForecastTargetingApplying2015 and @svenssonInflationTargetingLeaning2016[-@svenssonMonetaryPolicyStrategies2020].
+
+[^23]: See @campbellMacroeconomicEffectsFederal2012.
 
 In addition, in this year Banxico updated its communication strategy. As of the May 2018 decision, the minutes keep the first section untouched but continue with the analysis and motivation of the votes of the Committee members, the monetary policy decision, and for the first time began to discloses the identity of the voters, and in case of dissent also incorporate a section explaining the rationale for the dissenters' vote. The material presented by the Economic Research and Central Bank Operations Departments is now included as an appendix.
 
@@ -208,7 +221,7 @@ Banxico_Communication <- data.frame("Year" = c(2000,2000,2001,rep(2003,2),2006,2
                               
                              "Start of the publication of monetary policy decision bulletins.",
                              
-                             "The publication of Quarterly Inflation Reports is established, accompanied by a presentation and a press conference.",
+                             "The publication of Quarterly reports is established, accompanied by a presentation and a press conference.",
                            
                            "Formal adoption of an Inflation Targeting Regime.", 
                            
@@ -285,19 +298,17 @@ With the latter in mind, it is possible to evaluate the clarity of the informati
 
 The literature on readability formulas emerged at the end of the 19th century in the United States, when academics were looking for methods to evaluate the vocabulary and comprehension level of scientific texts used in high school and higher education. Although many researchers have been credited with the development of readability measures, the literature considers that Rudolph Flesch was the first to propose a versatile formula for analyzing the readability of texts written in English.[^24]
 
-[^24]: See Flesch (1943; 1949)
+[^24]: See @fleschEstimatingComprehensionDifficulty1943[-@fleschArtReadableWriting1949].
 
 Following Flesch's research, many other formulas have been developed for analyzing the readability of a document. Like Flesch formula, the majority of these measures suppose that the larger the sentences and the more syllables per word, the more difficult it is to understand and read a text. Therefore, they construct their scores by using the average word length and sentences to asses is a text is easy or difficult to read. For example, the computation of Flesch test gives a score between 1 and 100, with 100 being the highest readability score. Another useful measures are the Flesch-Kincaid and the Gunning Fog scores, both yielding in a numeric measures as the US grade level generally required to understand the text.[^25]
 
-[^25]: See Gunning (1952) and Kincaid, Fishburne, Rogers and Chissom (1975).
+[^25]: See @gunningTechniqueClearWriting1952 and @kincaidDerivationNewReadability1975.
 
-These formulas, among others, are widely used to analyze the readability of English texts. Specially they are widely implemented for text analysis in fields such as medicine, psychology, education, and political science. Recently, there is a growing literature applying traditional and brand new measures of readability in the field of economics, and specifically in monetary policy trying to measure the clarity of central bank communication conveyed by official documents and speeches of officials, transcripts of interviews, and even central banking news in journals and magazines related to business and finance.[^26]
+These formulas, among others, are widely used to analyze the readability of English texts. Specially they are widely implemented for text analysis in fields such as medicine, psychology, education, and political science. Recently, there is a growing literature applying traditional and brand new measures of readability in the field of economics, and specifically in monetary policy trying to measure the clarity of central bank communication conveyed by official documents and speeches of officials, transcripts of interviews, and even central banking news in journals and magazines related to business and finance.
 
-[^26]: See [Cihák et al. (2012)](https://www.imf.org/en/Publications/WP/Issues/2016/12/31/Clarity-of-Central-Bank-Communication-About-Inflation-25607),[Cihák et al. (2013)](https://cepr.org/voxeu/columns/measuring-clarity-central-bank-communication), [Deslonghchamps (2018)](https://www.bankofcanada.ca/2018/06/staff-analytical-note-2018-20/), [Carotta et al. (2021)](https://www.cemla.org/actividades/2021-final/2021-11-xxvi-meeting-of-the-central-bank-researchers-network/5B.2%20PAPER%20Carotta%20Mello%20Ponce.pdf), [Huang and Simon (2021)](https://www.rba.gov.au/publications/rdp/2021/pdf/rdp2021-05.pdf), [Ferrara and Angino (2022)](https://eprints.lse.ac.uk/112968/1/Ferrara_does_clarity_make_central_banks_more_engaging_published.pdf).
+However, it is not possible to analyze printed texts in Spanish with these methodologies. In the search for the adaptation of these formulas to the texts written in Spanish, José Fernández Huerta [-@fernandezhuertaMedidasSencillasLecturabilidad1959] developed a first measure to test the readability of a wide variety of Spanish documents. Later on, @gutierrezdepoliniInvestigacionSobreLectura1972, @szigrisztpazosSistemasPredictivosLegilibilidad1992, @munozbaquedanoLegibilidadVariabilidadTextos2006, @barriocantalejoMedicionLegibilidadTextos2003 and @barriocantalejoValidacionEscalaINFLESZ2008 expanded the readability and perspicuity literature disposable for Spanish printed text.
 
-However, it is not possible to analyze printed texts in Spanish with these methodologies. In the search for the adaptation of these formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the readability of a wide variety of Spanish documents in 1959. Later on, Gutiérrez (1973), [Szigriszt Pazos (1992)](http://webs.ucm.es/BUCM/tesis//19911996/S/3/S3019601.pdf), [Muñoz (2006)](http://www.legibilidadmu.cl/1.pdf), [Cantalejo and Lorda (2003)](https://www.sciencedirect.com/science/article/pii/S021265670379146X) and [Cantalejo et al. (2008)](https://scielo.isciii.es/scielo.php?script=sci_arttext&pid=S1137-66272008000300004) expanded the readability and perspicuity literature disposable for Spanish printed text.
-
-The intuition behind these formulas is the same as Flesch's: the longer the sentences and the more syllables per word, the more difficult it is to understand and read a text. Moreover, the selection of one or the other is quite arbitrary because they are highly correlated. For the purposes of this research, the scores of Fernández Huerta (FH), Szigriszt Pazos (SZ) and Cantalejo et al. (FSZ, INFLEZS scale) were calculated. The formal presentation of the formulas can be found in Appendix A. Table 2 shows the most common scales for interpreting Spanish written texts.
+The intuition behind these formulas is the same as Flesch's: the longer the sentences and the more syllables per word, the more difficult it is to understand and read a text. Moreover, the selection of one or the other is quite arbitrary because they are highly correlated. For the purposes of this research, the scores of Fernández Huerta (FH), Szigriszt Pazos (SZ) and Barrio Cantalejo *et al*. (FSZ, INFLEZS scale) were calculated. The formal presentation of the formulas can be found in Appendix A. Table 2 shows the most common scales for interpreting Spanish written texts.
 
 
 ```{r Table 2 Readability and Perspicuity Scales, echo=FALSE, message=FALSE, warning=FALSE, paged.print=TRUE}
@@ -364,17 +375,12 @@ knitr::kable(FLESCH.SCALE,
               color = "black",width = "3cm",bold = T) %>%
   column_spec(3, background = color_F,
               color = "black", width = "3cm",bold = T) %>%
-  add_footnote("Source: Fernández Huerta(1959), Szigriszt-Pazos(1992), Muñoz (2006) 
-               and Cantalejo et al. (2008)",
+  add_footnote("Source: Fernández Huerta (1959), Szigriszt-Pazos (1992), Muñoz (2006) 
+               and Barrio Cantalejo et al. (2008).",
                notation = "none")
 ```
 
 
-Table 3 displays the basic descriptive statistics of the word and sentence count. On average, MPSs have the shortest extension, 1,101 and 37 words and sentences respectively, and QIRs the largest extension, 17,546 and 548. The MPMs find in between with an average count of 6,148 words and 178 sentences.
-
-If we observe the information given by Figure 1, it is quite evident that the word count has been changing over time. From 2011 to mid 2019 there is a clear tendency toward increase the total number of words in each publication. However, the distribution of the MPSs has an atypical observation in February 2016. The extension of the statement release on 17 February 2016 might be explained because it was an extemporaneous decision due to turbulence in the international markets that affected the exchange rate and could increase the likelihood of inflation expectations that was not consistent with Banco de México's inflation target of 3%.[^27] The second extemporaneous decision occurred on April 2020 due to the economic disruption of the COVID-19 pandemic, although the word count was closely to the usual extension.
-
-[^27]: See [Banco de México, 17 de febrero de 2016, Anuncio de Poítica Monetaria](https://www.banxico.org.mx/publicaciones-y-prensa/anuncios-de-las-decisiones-de-politica-monetaria/%7B394FBB23-9099-AAB2-6B9B-2FDBAEEE5710%7D.pdf)
 
 ```{r Table 3 Word Count - Descriptive Statics, echo=FALSE, message=FALSE, warning=FALSE}
 A<- Banxico_readability %>%
@@ -441,18 +447,23 @@ rm(A,MM,MPS,IQR)
 ```
 
 
+Table 3 displays the basic descriptive statistics of the word and sentence count. On average, MPSs have the shortest extension, 1,101 and 37 words and sentences respectively, and QIRs the largest extension, 17,546 and 548. The MPMs find in between with an average count of 6,148 words and 178 sentences.
+
+
 \noindent
 ```{r Figure 1 Banco de México official publications Word count, echo=FALSE, message=FALSE, warning=FALSE}
 
 library(latex2exp)
 library(ggtext)
+library(ggthemes)
+library(paletteer)
 
 #install.packages("devtools")
 #devtools::install_github("jaredhuling/jcolors")
 #library(jcolors)
 
-vintage <- c("#1c1f4c","#00848c","#037272","#fccf17","#fec20f","#edebd9")
-winter <- c("#f0ac49","#0c2738","#9a062b","#f64440","#dfa650","#041520")
+#vintage <- c("#1c1f4c","#00848c","#037272","#fccf17","#fec20f","#edebd9")
+#winter <- c("#f0ac49","#0c2738","#9a062b","#f64440","#dfa650","#041520")
 Banxico_readability <- Banxico_readability
 Figure1 <- Banxico_readability %>%
   mutate(words = as.numeric(words), # convert words into numeric variable
@@ -479,11 +490,16 @@ Figure1 %>%
             base_size = 11)+
   #scale_color_brewer(palette="Set1")+
   #scale_color_manual(values = winter)+
-  scale_color_economist()+
+  #scale_color_wsj()+
+  #scale_color_economist()+
+  scale_color_manual(values =  paletteer_d("tidyquant::tq_green"))+
   theme(legend.position = "none",
         plot.caption = element_markdown(hjust = 0,
                                         size = 11),
-        plot.caption.position = "plot")+
+        plot.caption.position = "plot",
+        strip.text.y = element_markdown(hjust = 0,
+                                        size = 11, 
+                                        face = "bold"))+
   scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
                date_labels = "%Y") +
   # split the figure using the type of document
@@ -492,6 +508,14 @@ Figure1 %>%
              shrink = T, scales = "free_y")
 
 ```
+
+If we look at the information provided in Figure 1, it is quite evident that the length of publications has changed over time. From 2011 to mid 2019 there is a clear tendency toward increase the total number of words in each publication. However, the distribution of the MPSs has an atypical observation in February 2016. The extension of the statement release on 17 February 2016 might be explained because it was an extemporaneous decision due to turbulence in the international markets that affected the exchange rate and could increase the likelihood of inflation expectations that was not consistent with Banco de México's inflation target of 3%.[^27] The second extemporaneous decision occurred in April 2020 due to economic disruptions resulting from the COVID-19 pandemic, although the word count was close to the usual length.
+
+[^27]: See [Banco de México, 17 de febrero de 2016, Anuncio de Poítica Monetaria](https://www.banxico.org.mx/publicaciones-y-prensa/anuncios-de-las-decisiones-de-politica-monetaria/%7B394FBB23-9099-AAB2-6B9B-2FDBAEEE5710%7D.pdf)
+
+Another important highlight of this period is that from the start of 2020, both the minutes and statements experienced a change characterized by a decrease in word count, while inflation reports began to contain, on average, a higher number of words than in previous years. For instance, before 2020, MPSs and QIRs contained an average of 1,223 and 15,546 words, respectively. In the latter period, these averages dropped to 745 in the case of the MPSs, and rose to 23,547 in the QIRs. The minutes on the other hand, despite the shift occurred on February 2020, presented a higher average between 2020 and 2022 (7,513 vs 5,668). 
+
+The changes on the average extension of the publications is aligned with 2 major events, the updated on Banxico's communication criteria and the COVID-19 pandemic. Thus, in spite of the promise to make shorter in extension the minutes, it is possible that the increase in the average word count responded to better and greater deliberation process during the pandemic, its aftermath, the surge on inflation in mid 2021, and the needed to manage expectations while the macroeconomic and financial conditions remained highly volatile.
 
 
 ```{r Partial averages, eval=FALSE, include=FALSE}
@@ -523,11 +547,10 @@ B <-Banxico_readability%>%
 ```
 
 
-Another important highlight of this period is that from the start of 2020, both the Minutes and the Statements experienced a change characterized by a decrease in word count, while Inflation Reports began to contain, on average, a higher number of words than in previous years. For instance, before 2020, Policy Statements and Inflation Reports contained an average of 1,223 and 15,546 words, respectively. In the latter period, these averages dropped to 745 in the case of the MPSs, and rose to 23,547 in the QIRs. The Minutes on the other hand, despite the shift occurred on February 2020, presented a higher average between 2020 and 2022 (7,513 vs 5,668). 
 
-The changes on the average extension of the publications is aligned with 2 major events, the updated on Banxico's communication criteria and the COVID-19 pandemic. Thus, in spite of the promise to make shorter in extension the Minutes, it is possible that the increase in the average word count responded to better and greater deliberation process during the pandemic, its aftermath, the surge on inflation in mid 2021, and the needed to manage expectations while the macroeconomic and financial conditions remained highly volatile.
+For its part, Banco de México's communication over time shows an upward trend in readability and perspicuity levels. The quarterly reports consistently have clarity levels between 46 and 57, which are considered difficult and fairly difficult to read and understand according to the Szigritzs and INFLESZ scales. 
 
-For its part, Banco de México's communication over time shows an upward trend in readability and persícuity levels. QIRs consistently have clarity levels between 46 and 57, which are considered difficult and fairly difficult to read and understand according to the Szigritzs and INFLESZ scales. MPMs and MPSs, on the other hand, show a gradual tendency towards a standard level of readability and perspicuity, equivalent to a junior high grade level in the Szigritzs and INFLESZ scales respectively. Figure 2 illustrates these trends in the clarity of Banco de México over time, which suggest that the central bank's communication has become more accessible and easier to read.
+Minutes and statements, on the other hand, show a gradual tendency towards a standard level of readability and perspicuity, equivalent to a junior high grade level in the Szigritzs and INFLESZ scales respectively. Figure 2 illustrates these trends in the clarity of Banco de México over time, which suggest that the central bank's communication has become more accessible and easier to read.
 
 
 \noindent
@@ -554,7 +577,8 @@ A<- Banxico_readability %>%
                          SZ,`Avg`,
                         `Harry Potter`),                                    
                             names_to = "Flesch", 
-                            values_to = "Flesch_index") 
+                            values_to = "Flesch_index")
+colorF2 <- c("#0055AA","#C40003","#FF7F00","#00C19B","#EAC862")
 A%>%
   filter(Year %in% 2011:2022) %>%
   ggplot(aes(x= dates,
@@ -563,12 +587,12 @@ A%>%
              group = Flesch)) +
   geom_line(size = 0.7)+
     labs(
-    title = " ",
-    subtitle = " ",
+    #title = "",
+    #subtitle = "",
     x = " ",
     y = " ",
     color = " ",
-    caption = "**Figure 2**: Readability of Banco de México over time.<br><br>Source: Author's calculation.<br>Note: The average was calculated using the standard mean at each time position of the three readability<br>measures. The dashed lines correspond to the respect readability level on the INFLESZ scale. Harry<br>Potter denotes the minimum score of the famous novel *Harry Potter and the Philosopher's Stone*.")+
+    caption = "**Figure 2**: Readability of Banco de México over time.<br><br>Source: Author's calculation.<br>Note: The average was calculated using the standard mean at each time position of the three readability<br>measures. Dashed lines correspond to the level of readability on the INFLESZ scale.  Harry Potter<br>denotes the minimum score of the famous novel *Harry Potter and the Philosopher's Stone*.")+
   theme_tufte(base_family = "serif",
             base_size = 11)+
   #scale_color_brewer(palette="Set1")+
@@ -577,7 +601,11 @@ A%>%
   #scale_color_futurama()+ # ggsci palette
   #scale_color_manual(values = pals::stepped())+ # pal library 
   #scale_color_manual(values = winter)+
-  scale_color_economist()+
+  #scale_color_wsj()+
+  scale_color_manual(values = colorF2)+
+  #scale_color_manual(values =  paletteer_c("ggthemes::Red-Green-White Diverging", 30))+
+  #scale_color_manual(values = paletteer_d("wesanderson::Darjeeling1"))+
+  #scale_color_economist()+
   scale_x_date(date_breaks = "3 year",
                date_labels = "%Y")+
   scale_y_continuous(name="INFLESZ Scale",
@@ -599,7 +627,10 @@ rm(A)
 ```
 
 
-Despite these recent advances in the readability of the central bank, the documents are, on average, at the fairly difficult to read level according to the most of the scales, i.e., Banco de México's communication might be better understood by people with at least a high school education, or who can easily interpret documents such as scientific dissemination articles or specialized press publications (See Table 4).
+Despite these recent advances in the readability of the central bank, the documents are, on average, at a fairly difficult-to-read level according to most of the scales, i.e., Banco de México's communication might be better understood by people with at least a high school education, or who can easily interpret documents such as scientific dissemination articles or specialized press publications (See Table 4).
+
+In addition, the scores are well below the minimum level for Spanish-language measures of the fantasy novel written by J. K. Rowling, *Harry Potter and the Philosopher's Stone*, which is considered very easy to read and interpret. This is relevant, mainly because the National Institute of Statistics and Geography (INEGI) reports, in the 2020 Population and Housing Census, that more than 50 percent of the population has only basic education (elementary and junior high) or no schooling, and the average years of schooling have remained at levels equivalent to junior high education (See Figure 3). Therefore, the scope of Banxico´s publications still lag of clarity for a vast majority of the population.
+
 
 
 ```{r Table 4 Average readability of Banco de Méxicos publications, echo=FALSE, fig.height=4.5, fig.width=6, message=FALSE, warning=FALSE}
@@ -654,7 +685,7 @@ knitr::kable(A,
              booktabs = T,
   col.names = c("Test","Document","Average" ,"Scale","Grade Level", "Type")) %>%
       kable_styling(latex_options = c("hold_position"),
-                  full_width = F) %>%
+                  full_width = F, font_size = 11) %>%
     collapse_rows(columns = 1:2, latex_hline = "major", valign = "middle") %>%
     column_spec(3, background = color,
               color = "black",bold = T) %>%
@@ -667,67 +698,216 @@ rm(color)
 
 ```
 
-In addition, the scores are well below the minimum level for Spanish-language measures of the fantasy novel written by J. K. Rowling, *Harry Potter and the Philosopher's Stone*, which is considered very easy to read and interpret. This is relevant, specially due to the fact that INEGI´s 2020 Population and Housing Census shows that more than 50 percent of the population only has basic (elementary and junior high) or none education (See Figure 3). Therefore, the scope of Banxico´s publications still lag of clarity for a vast majority of the population.
+
 
 \noindent
-```{r Figure 3, echo=FALSE, message=FALSE, warning=FALSE}
+```{r Figure 3 Population educ, echo=FALSE, message=FALSE, warning=FALSE}
 
 library(scales)
+library(egg)
+library(latex2exp)
+library(ggtext)
+library(ggthemes)
+library(paletteer)
+library(ggrepel)
+
+#set.seed(1234)
+#reds <- colorRampPalette(c("#FF6A6A", "#FF3030","#FF4040","#FF0000","#FF6347"))(33)
 #DATA https://www.inegi.org.mx/temas/educacion/
+
+#wsj_pgrade <- c("#C72E29","#016392","#BE9C2E","#098154","#FFDB58","#34495E")
+
 CENSUS_EDUC_LEV <- data.frame(level = c("No schooling","Basic",
                                 "Upper middle", "Superior", "Not specified"),
                               percent = c(0.049,0.493,0.240,0.216,0.002))
 
-CENSUS_EDUC_LEV %>% 
-    ggplot(aes(x="",y=percent, fill =level)) +
-    geom_bar(stat = "identity")+
-    coord_polar("y") +
+
+
+piechart <- CENSUS_EDUC_LEV  %>%
+  #arrange(desc(percent)) %>%
+  mutate(csum = rev(cumsum(rev(percent))), 
+         pos = percent/2 + lead(csum, 1),
+         pos = if_else(is.na(pos), percent/2, pos)) %>%
+  ggplot(aes(x="",y= percent, fill = fct_inorder(level))) +
+    geom_bar(stat = "identity", color = "#363636", width = 0.5)+
+    coord_polar(theta = "y") +
     labs(
     title = " ",
+    subtitle = "**Educational level | 2020**<br>",
     x = "",
     y = "",
     color = "",
-    fill = "",
-    caption = "**Figure 3**: Population over 15 years old by educational level<br><br>Source: INEGI.<br>Note: Basic = Elementary and Junior high; Upper middle = High School;<br>Superior = University and Graduate.")+
+    fill = ""
+    )+
   theme_tufte(base_family = "serif",
               base_size = 11)+
   #scale_fill_wsj()+
+  #scale_fill_economist()+
   #scale_fill_manual(values = winter)+
-  scale_fill_economist()+
+  #scale_fill_economist()+
+  scale_fill_manual(values = paletteer_d("tidyquant::tq_dark"))+
   theme(legend.position = "right",
         plot.caption = element_markdown(hjust = 0,
                                         size = 11),
         #plot.title.position = element_text(hjust = 0),
         plot.caption.position = "plot",
         axis.text.x=element_blank(),
-        complete = F)+
- geom_text(aes(label = scales::percent(round(percent,2))), 
-            position = position_stack(vjust = 0.5),
-           show.legend = F, size =c(3,5,5,5,5),
-           family = "serif",
+        complete = F,
+        plot.subtitle = element_markdown(hjust = 0,
+                                        size = 12))+
+  geom_label_repel(aes(y = pos, label = paste0(percent*100, "%")),
+                   size = c(3,3,3,3,2), nudge_x = 0.5,
+                   #nudge_y = 0.5,
+                   show.legend = F, family = "serif",
+                   color = "white", segment.colour=NA)
+ #geom_text(aes(label = scales::percent(round(percent,2))), 
+  #          position = position_stack(vjust = 0.5),
+   #        show.legend = F, size =c(2.5,4,4,4,4),
+    #       family = "serif",
+     #      check_overlap = T, color = "white")
+
+
+#
+#library(plotly)
+
+#fig <- plot_ly(CENSUS_EDUC_LEV, labels = ~level, values = ~percent, type = 'pie')
+#fig <- fig %>% layout(title = '',
+ #        xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+  #       yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+
+
+#AVERAGE EDUC LEVEL
+
+#https://www.inegi.org.mx/app/tabulados/interactivos/?pxq=Educacion_Educacion_
+#05_2f6d2a08-babc-442f-b4e0-25f7d324dfe0
+
+#library(openxlsx)
+#educlevel <- openxlsx::read.xlsx("educlevel.xlsx")
+#educlevel <- educlevel %>%
+ # pivot_longer(cols = c(3), 
+  #             values_to = "vals",
+   #            names_to = "names")
+
+
+#colors <- rainbow(length(unique(1:33)))
+#set.seed(1234)
+#reds <- colorRampPalette(c("#FF6A6A", "#FF3030","#FF4040","#FF0000","#FF6347"))(33)
+#reds[19] <- "#00B2EE"
+#educlevelplot <- educlevel %>%
+#  group_by(names) %>%
+#  arrange(desc(State)) %>%
+#  ggplot(aes(x= reorder(State, vals), y=vals, fill = factor(State))) +
+#  geom_col(position="dodge", stat = "identity",width = 0.6,
+#           color = "#363636")+
+  #coord_flip()+
+#  labs(title = " ",
+#    subtitle = "**Average schooling**",
+#         y = "Years of schooling",
+#         x = "",
+#      caption = "**Figure 3**: Population over 15 years old.<br><br>Source: INEGI.<br>Note: Basic = Elementary and Junior high; Upper middle = High School;<br>Superior = University and Graduate.") +
+#    theme_tufte(base_family = "serif",
+#            base_size = 11)+
+    #scale_color_brewer(palette="Set1") +
+    #scale_color_manual(values = vintage)+
+  #scale_color_wsj()+
+  #scale_fill_wsj(palette = rep("colors6",6))+
+  #scale_color_economist()+
+#  scale_fill_manual(values = reds)+
+#      theme(legend.position = "none",
+#               plot.caption = element_markdown(hjust = 0,
+#                                        size = 11),
+#        plot.caption.position = "plot",
+#        plot.subtitle = element_markdown(hjust = 0,
+#                                        size = 12),
+#        axis.text.x = element_text(angle = 45)
+#        )
+
+    #  facet_grid(
+     #        rows = vars(Ling),
+      #       shrink = T, scales = "free")
+
+
+
+
+## 
+
+# EDUC LEVEL OVER TIME
+
+##
+
+educ_level <- data.frame(Year = c(2010,2015,2020),
+                         avg = c(8.63, 9.16, 9.74))
+
+educlevelplot <- educ_level %>%
+  ggplot(aes(x= factor(Year), y=avg, fill = factor(Year))) +
+  geom_col(position="dodge", stat = "identity",
+           width = 0.5,
+           color = "#363636")+
+  #coord_flip()+
+  labs(title = " ",
+    subtitle = "**Average years of schooling**",
+         y = "Years of schooling",
+         x = "",
+      caption = "**Figure 3**: Population over 15 years old.<br><br>Source: INEGI.<br>Note: Basic = elementary and junior high; Upper middle = high School;<br>Superior = university and graduate.") +
+    theme_tufte(base_family = "serif",
+            base_size = 11)+
+    #scale_color_brewer(palette="Set1") +
+    #scale_color_manual(values = vintage)+
+  #scale_color_wsj()+
+  #scale_fill_wsj()+
+  scale_fill_manual(values =  paletteer_d("tidyquant::tq_dark"))+
+  #scale_color_economist()+
+#  scale_fill_manual(values = reds)+
+      theme(legend.position = "none",
+               plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
+        plot.caption.position = "plot",
+        plot.subtitle = element_markdown(hjust = 0,
+                                        size = 12)
+        #axis.text.x = element_text(angle = 45)
+        )+
+   geom_text(aes(label = avg), size = 4, hjust = 0.5, vjust = 3, 
+             position = "dodge",
+             family = "serif",
            check_overlap = T, color = "white")
-    
+
+
+
+
+#piechart
+#educlevelplot
+
+
+multiplot(educlevelplot,piechart, cols = 2)
     
 ```
 
 
 However, this approach to central bank readability should be interpreted as informative and not as a recommendation to change the central bank's writing style. These traditional readability scores help to interpret the results with the readability of a wide audience in mind. And although central banks should try to make their communication accessible to a broad spectrum of people, often such documents are only used by decision-makers, market participants or people with a high technical background, who can easily understand the central bank's message.
 
-One of the reasons for being very cautious with traditional readability measures is that they punish with lower punctuation the more complex the words and the longer the sentences. However, in fields such as economics, there are many complex words that are easy to understand, and in many cases, longer sentences can provide a clear message about the information the central bank wants to convey.[^28] Joan Huang and John Simon also emphasize that better readability does not mean the central bank is successfully explaining its actions and the motivation behind them.[^29] The reason is that while a comprehensive explanation may not be simple or easily understood, a simple explanation may not be accurate.
+Another reason to be very cautious with traditional readability measures is that they punish with lower scores the more complex the words and the longer the sentences. However, in fields such as economics, there are many complex words that are easy to understand, and in some cases, longer sentences can provide a clear message about the information the central bank wants to convey.[^20] Joan Huang and John Simon also emphasize that better readability does not mean the central bank is successfully explaining its actions and the motivation behind them.[^21] The reason is that while a comprehensive explanation may not be simple or easily understood, a simple explanation may not be accurate.
 
 
-[^28]: [See Janan and Wray (2013)](https://hipatiapress.com/hpjournals/index.php/remie/article/view/remie.2012.04).
+[^20]: @wrayExploringReadabilityAssessment2013
 
-[^29]: [Joan Huang and John Simon (2021)](https://apo.org.au/node/312370).    
+[^21]: Huang and Simon (2021).
 
 
 That said, the reality is that there has been an upward trend in the quantity and quality of the information Banco de México communicates. In addition, the [Pearson] correlation between the linguistic variables yields significant information (See Appendix B). The readability scores within each of the documents are highly correlated. This is because all the formulas use similar variables and parameters, thus the information in each of them is a linear combination of the others. Similarly, word and sentence count have a correlation of about 1 (MPS [0.9], MPM [0.9], QIR [1]). It is understandable that word length and sentence length also follow the same pattern.
 
-The most interesting relationships are those between the word and sentence counts and the readability scores (See Figure 4). While there is little or no relationship between these variables in the Inflation Reports, Monetary Policy Statements and Minutes reflect very different patterns. In the former, word count correlates highly negatively with the readability scores and sentence count displays a weaker, but still negative relation. On the other hand, Minutes present a strong and positive correlation between sentence count and readability scores, whereas word count has a moderately positive correlation.
+The most interesting relationships are those between the word and sentence counts and the readability scores (See Figure 4). While there is a negatively weakened relationship between these variables in the QIRs, MPSs and MPMs reflect very different patterns. In the former, word count correlates highly negatively with the readability scores and sentence count displays a weaker, but still negative relation. On the other hand, Minutes present a strong and positive correlation between sentence count and readability scores, whereas word count has a moderately positive correlation.
+
+Several conclusions can be drawn from this analysis. First, even when inflation reports have increased in length over time, there is little or no relationship with the clarity of their content. It is reasonable to think that this is due to the fact that the reports are long documents with a lot of descriptive information on the economy over the previous quarter, so although they include relevant information for the public, such as central bank's forecasts and balance of risk, their purpose is rather informative and barely include forward guidance elements. Furthermore, the central bank faces the difficult task of summarizing this information, which is not trivial.
+
+Second, there is and inverse (direct) relation between clarity and amount of information in the MPSs (MPMs). This affirmation is especially true post-2020, when Banco de México significantly decrease the amount of information contained in the statements and experienced an increase in their clarity. In turn, the minutes show a direct relationship, pointing out that the longer they are, i.e., the more information there is about the decision-making process, the clearer the communication. Notably, this appears to be due to voter identity disclosure since 2018.
+
+
+Finally, the high correlation between the readability scores means that, regardless of which one we choose, we will obtain the same results. Therefore, the Flesch-Szigriszt score will be used for further developments.
 
 
 \noindent
-```{r Figure 4, echo=FALSE, message=FALSE, warning=FALSE}
+```{r Figure 4 Scatter plots of Ling vars, echo=FALSE, message=FALSE, warning=FALSE}
 #install.packages("GGally")
 source("multiplot.R")
 
@@ -756,8 +936,7 @@ COR_MPM <- A %>%
     geom_smooth(aes(color = Ling),
                 method = "lm") +
     labs(title = "",
-         subtitle = "
-         MPM",
+         subtitle = "**MPM**",
          y = "",
          x = "FSZ score",
          caption = " <br><br> ") +
@@ -765,11 +944,15 @@ COR_MPM <- A %>%
             base_size = 11)+
     #scale_color_brewer(palette="Set1") +
     #scale_color_manual(values = vintage)+
-  scale_color_economist()+
+  #scale_color_wsj()+
+  scale_color_manual(values = paletteer_d("tidyquant::tq_dark"))+
+  #scale_color_economist()+
       theme(legend.position = "none",
                 plot.caption = element_markdown(hjust = 0,
                                         size = 11),
-        plot.caption.position = "plot")+
+        plot.caption.position = "plot",
+        plot.subtitle = element_markdown(hjust = 0,
+                                        size = 11))+
       facet_grid(
              rows = vars(Ling),
              shrink = T, scales = "free")
@@ -789,20 +972,23 @@ COR_MPS <- A %>%
     geom_smooth(aes(color = Ling),
                 method = "lm") +
     labs(title = "",
-    subtitle = "
-         MPS",
+    subtitle = "**MPS**",
          y = "",
          x = "FSZ score",
-      caption = "**Figure 4**: Scatter plots of linguistic variables.<br><br>Source: Author's calculation.") +
+      caption = "<br>**Figure 4**: Scatter plots of linguistic variables.<br><br>Source: Author's calculation.") +
     theme_tufte(base_family = "serif",
             base_size = 11)+
     #scale_color_brewer(palette="Set1") +
     #scale_color_manual(values = vintage)+
-  scale_color_economist()+
+  #scale_color_wsj()+
+  scale_color_manual(values = paletteer_d("tidyquant::tq_dark"))+
+  #scale_color_economist()+
       theme(legend.position = "none",
                 plot.caption = element_markdown(hjust = 0,
                                         size = 11),
-        plot.caption.position = "plot")+
+        plot.caption.position = "plot",
+        plot.subtitle = element_markdown(hjust = 0,
+                                        size = 11))+
       facet_grid(
              rows = vars(Ling),
              shrink = T, scales = "free")
@@ -824,8 +1010,7 @@ COR_QIR <- A %>%
     geom_smooth(aes(color = Ling),
         method = "lm") +
     labs(title = "",
-    subtitle = "
-         QIR",
+    subtitle = "**QIR**",
          y = "",
          x = "FSZ score",
     color ="",
@@ -834,11 +1019,15 @@ COR_QIR <- A %>%
             base_size = 11)+
     #scale_color_brewer(palette="Set1") +
   #scale_color_manual(values = vintage)+
-  scale_color_economist()+
+  #scale_color_wsj()+
+  scale_color_manual(values = paletteer_d("tidyquant::tq_dark"))+
+  #scale_color_economist()+
       theme(legend.position = "none",
                 plot.caption = element_markdown(hjust = 0,
                                         size = 11),
-        plot.caption.position = "plot")+
+        plot.caption.position = "plot",
+        plot.subtitle = element_markdown(hjust = 0,
+                                        size = 11))+
       facet_grid(
              rows = vars(Ling),
              shrink = T, scales = "free")
@@ -852,18 +1041,15 @@ COR_QIR <- A %>%
 multiplot(COR_MPS,COR_MPM,COR_QIR, cols = 3)
 ```
 
-Several conclusions can be drawn from this analysis. First, even when Inflation Reports have increased in length over time, there is little or no relationship with the clarity of their content. It is reasonable to think that this is due to the fact that the reports are long documents with a lot of descriptive information on the economy over the previous quarter, so although they include relevant information for the public, such as central bank's forecasts and balance of risk, their purpose is rather informative and barely include forward guidance elements.
 
-Second, there is and inverse (direct) relation between clarity and amount of information in the Policy Decision releases (Minutes). This affirmation is especially true post-2020, when Banco de México significantly decrease the amount of information contained in the Statements and experienced an increase in document clarity. In turn, it is worth mentioning that according to the results, the longer the minutes, i.e., the more information there is about the decision-making process, the greater their clarity.
-
-Finally, the high correlation between the readability scores means that, regardless of which one we choose, we will obtain the same results. Therefore, the Flesch-Szigriszt score will be used for further developments.
 
 
 # 5. Structural Break Analysis
 
-The evolution of Banco de México's verbal clarity is strongly linked with institution-specific factors. However, it is possible to identify idiosyncratic biased related to the chairman in office[^30]. Figure 4 shows fitted calculations for total perspicuity of Banxico's publications in the tenures of Agustín Carstens (Jan 10-Nov 17), Alejandro Díaz de León (Dec 17- Dec 21), and Victoria Rodríguez (Jan 22-).
+The evolution of Banco de México's verbal clarity is strongly linked with institution-specific factors. However, it is possible to identify idiosyncratic biases related to the chairman in office[^30]. Figure 5 shows fitted calculations for total perspicuity of Banxico's publications in the tenures of Agustín Carstens (Jan 10-Nov 17), Alejandro Díaz de León (Dec 17- Dec 21), and Victoria Rodríguez (Jan 22-).
 
-[^30]: For exmaple, [Bernanke (2022)](https://wwnorton.com/books/9781324020462) narrates how the Fed's monetary policy decisions have historically been strongly biased by the figure of the chairman, especially referring to the great persuasive power of Paul Volcker and Alan Greenspan over the decisions of the other members of the Federal Open Market Committee (FOMC).
+[^30]: For exmaple, @bernanke21stCenturyMonetary2022 narrates how the Fed's monetary policy decisions have historically been strongly biased by the figure of the chairman, especially referring to the great persuasive power of Paul Volcker and Alan Greenspan over the decisions of the other members of the Federal Open Market Committee (FOMC).
+
 
 \noindent
 ```{r Figure 5 Readability of Banco de México. Flesch-Szigriszt Score, echo=FALSE, message=FALSE, warning=FALSE}
@@ -875,6 +1061,8 @@ library(psych)
 #branded_colors <- list( "#00798c","#d1495b","#edae49","#66a182","#2e4057","#8d96a3")
 
 
+#colorF5 <- c("#0055AA","#007ED3","#7FD2FF")
+colorF5 <- c("#174D79","#007ED3","#7FD2FF")
 A<- Banxico_readability %>%
   dplyr::mutate("Year" = format(dates, 
                                 format="%Y"),
@@ -919,10 +1107,14 @@ COR %>%
     color = " ",
     caption = "**Figure 5**: Perspicuity of Banco de México.<br><br>Source: Author's calculation.<br>Note: Smoothing data using local regression techniques.")+
   theme_tufte(base_family = "serif",
-            base_size = 12)+
+            base_size = 11)+
   #scale_color_manual(values = vintage)+
   #scale_color_brewer(palette="Roma")+
-  scale_color_economist()+
+  #scale_color_wsj()+
+  #scale_color_manual(values = paletteer_d("tidyquant::tq_dark"))+
+  #scale_color_manual(values = paletteer_d("tidyquant::tq_green"))+
+  scale_color_manual(values = colorF5)+
+  #scale_color_economist()+
   scale_x_date(date_breaks = "2 year",
                date_labels = "%Y")+
   theme(legend.position = "bottom",
@@ -942,7 +1134,7 @@ COR %>%
 ```
 
 
-Despite significant progress during Carstens' tenure, on average, document clarity follows a slightly negative slope. From Díaz de León's term onwards, clarity lifts off and adopts a positive trend towards higher levels. It is possible that Governor Diaz de Leon brought new and improved communication policies, however, these changes in clarity levels seem to be aligned with the shift to an inflation targeting scheme and the update in communication criteria.  In addition, during Díaz de León's tenure, Banxico's publications underwent an important modification in their structure, which is not entirely the result of Díaz de León but of Banxico's staff. On the other hand, since Victoria Rodriguez took office, clarity levels have consistently remained below the trend observed in the previous period.
+Despite significant progress during Carstens' tenure, on average, document clarity follows a slightly negative slope. From Díaz de León's term onwards, clarity lifts off and adopts a positive trend towards higher levels. It is possible that Governor Diaz de Leon brought new and improved communication policies, however, these changes in clarity levels seem to be aligned with the shift to an Inflation Forecast Targeting scheme and the update in communication criteria.  In addition, during Díaz de León's tenure, Banxico's publications underwent an important modification in their structure, which is not entirely the result of Díaz de León but of Banxico's staff. On the other hand, since Victoria Rodriguez took office, clarity levels have consistently remained below the trend observed in the previous period.
 
 This information, together with the facts reviewed in the previous section, leads us to consider that the levels of clarity have suffered possible structural breaks in the period between 2011 and 2022. To test this hypothesis in the series of perspicuity for every document, unit root tests that allow for one and two endogenous breaks will be perform. 
 
@@ -951,80 +1143,13 @@ First of all, as the MPSs and MPMs observations are not collected on a regular m
 In the case of the minutes, two exceptions to the dating rule have been made. In December 2016 and May 2020, we have two observations, each at the beginning and end of the month. Subsequent observations were carried forward to fill in the following month. For the statements, there are two releases in February 2016. In this case, instead of carried forward the second observation, January 2016 was filled with the average. Finally, to remove noise from the imputed series, a 5-window centered moving average was applied. The information of the QIRs needs no further manipulation.
 
 
-\noindent
-```{r Figure 6 LOCF data, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+For the clarity levels of the three publications, classic unit root tests such as the Augmented Dicky-Fuller (ADF)(Dicky and Fuller, [-@dickeyLikelihoodRatioStatistics1981]), Phillips-Perron (PP)(Phillips and Perron, [-@phillipsTestingUnitRoot1988]) and KPSS (Kwiatkowski et al., [-@kwiatkowskiTestingNullHypothesis1992]) are executed to validate the hypothesis of sationarity in the Data Generating Process (DGP) of the series. The unit root specification includes models with no drift no trend (type A), drift and no trend (type B), and drift with trend (type C) respectively. Overall, there is no convincing evidence against the unit root null-hypothesis (See Appendix C). However, for each series, the KPPS test gives mix evidence on non-stationarity process.
 
-library(latex2exp)
-library(ggtext)
+Since the seminal paper by @perronGreatCrashOil1989, the literature has stressed that in the presence of one or more structural breaks, the non-rejection of the unit root null may be biased. Perron's test is a variation of the ADF test that takes into account the possibility of a known exogenous structural break in the time series. Perron relied on previous observation of the macroeconomic series studied by @nelsonTrendsRandomWalks1982, arguing then that the latter's conclusion of integrated process might be biased due to the presence of structural changes in the U.S. economy during the years of the "Great Depression" and the 1973 oil price shock.
 
-#install.packages("devtools")
-#devtools::install_github("jaredhuling/jcolors")
-#library(jcolors)
+In subsequent contributions, Zivot and Andrews (ZA)[-@zivotFurtherEvidenceGreat1992], Banerjee, Lumsdaine, and Stock (BLS)[-@banerjeeRecursiveSequentialTests1992], and and Perron and Vogelsang (PV)[-@perronTestingUnitRoot1992; -@phillipsTestingUnitRoot1988], reviewed Perron's conclusion and criticized the exogenous structural break identification. They propose tests that endogenize the selection of breakpoints. Like Perron's, these tests allow for the presence of structural breaks in the level of the series ("crash" model), a change in trend ("changing growth" model), or both. 
 
-#TS_data$IQRs <- NA
-#IQR$dates = as.Date(format(IQR$dates, format= "%Y-%m-01"))
-#for (i in 1:144) {
- #   for (j in 1:48) {
-  #      if (TS_data$dates[i] == IQR$dates[j]) {
-   #         TS_data$IQRs[i] = IQR$`Flesch-Szigriszt`[j]
-    #    }
-    #}
-#}
-
-#TS_data2 <- TS_data %>%
- #   pivot_longer(cols = c(MPSs.LOCF.,MPMs.LOCF.),
-  #               names_to = "LOCF",
-   #              values_to = "LOCF_vals") 
-
-TS_data3 <- TS_data %>%
-    pivot_longer(cols = c(MPSs.5MA.,MPMs.5MA.),
-                 names_to = "MA",
-                 values_to = "MA_vals") %>%
-    mutate(document = substring(MA, first = 1, last = 3))
-
-#TS_data3 <- TS_data3 %>%
- #   mutate("LOCF" = TS_data2$LOCF,
-  #         "LOCF_vals" = TS_data2$LOCF_vals) %>%
-    #mutate(document = substring(LOCF, first = 1, last = 3))
-
-
-TS_data3%>%
-    ggplot() +
-    geom_line(aes(x= dates, # aesthetics
-               y= MA_vals,
-               color= MA))+
-  #labels of the Figure
-  labs(title = "",
-        x = "",
-        y = " FSZ score",
-    color = " ",
-      caption = "**Figure 6**: Transformed monthly series.<br><br>Source: Author's calculation.")+
-    theme_tufte(base_family = "serif",
-            base_size = 11)+
-  #scale_color_brewer(palette="Set1")+
-  #scale_color_manual(values = winter)+
-  scale_color_economist()+
-  theme(legend.position = "none",
-        plot.caption = element_markdown(hjust = 0,
-                                        size = 11),
-        plot.caption.position = "plot")+
-  scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
-               date_labels = "%Y") +
-  # split the figure using the type of document
-  facet_grid(
-             rows =vars(document)
-             , scales = "free")
-
-```
-
-
-For the clarity levels of the three publications, classic unit root tests such as the Augmented Dicky-Fuller [ADF] (Dicky and Fuller, 1981), Phillips-Perron [PP] (Phillips and Perron, 1988) and KPSS (Kwiatkowski et al., 1992) are executed to validate the hypothesis of sationarity in the Data Generating Process (DGP) of the series. The unit root specification includes models with no drift no trend (type A), drift and no trend (type B), and drift with trend (type C) respectively. Overall, there is no convincing evidence against the unit root null-hypothesis (See Appendix C). However, for each series, the KPPS test gives mix evidence on non-stationarity process.
-
-Since the seminal paper by Perron ([1989](https://www.jstor.org/stable/1913712?searchText=&searchUri=&ab_segments=&searchKey=&refreqid=fastly-default%3A5187955ea05417ef3e6d4821c2f07ea9)), the literature has stressed that in the presence of one or more structural breaks, the non-rejection of the unit root null may be biased. Perron's test is a variation of the ADF test that takes into account the possibility of a known exogenous structural break in the time series. Perron relied on previous observation of the macroeconomic series studied by [Nelson and Plosser (1982)](https://www.sciencedirect.com/science/article/pii/0304393282900125), arguing then that the latter's conclusion of integrated process might be biased due to the presence of structural changes in the U.S. economy during the years of the "Great Depression" and the 1973 oil price shock.
-
-In subsequente contribution, Zivot and Andrews (ZA)([1992](https://www.jstor.org/stable/1391541?searchText=&searchUri=&ab_segments=&searchKey=&refreqid=fastly-default%3A22b362ee8348ccf8b5607097327edae9)), Banerjee, Lumsdaine, and Stock (BLS)(1992), and and Perron and Vogelsang (PV)([1992](https://www.jstor.org/stable/1391823?searchText=&searchUri=&ab_segments=&searchKey=&refreqid=fastly-default%3A8d8282cdb8423068941d433f745a7557); [1998](https://www.jstor.org/stable/2527353)), reviewed Perron's conclusion and criticized the exogenous structural break identification. They propose tests which endogenized breakpoint selection. Like Perron, these tests allow for the presence of structural break in th level of the series ("crash" model), a change in the trend ("changing growth" model), or both. 
-
-For purpose of this paper ZA and PV test are performed. The method for the selection of the type of break as well as the lags for the augmented form models were selected using both information criteria and general to specific approach for a maximum of 12 lags in the case of the monthly series and 8 in the quarterly series. In every model we found for the minimum information criteria and statistic significance at the 5% for the maximum lag coefficient.
+For purpose of this paper ZA and PV test are performed. The method for the selection of the type of break as well as the lags for the augmented form models were selected using both information criterion and general to specific approach for a maximum of 12 lags in the case of the monthly series and 8 in the quarterly series. In all models, we looked for the minimum information criterion and statistical significance at 5% for the maximum lag coefficient.
 
 Table 5 shows the results of applying an _innovational outlier model_ break selection for the ZA and PV tests. The later means that we assume a gradual rather than a sudden change (_additive outlier model_) in the DGP of the series. 
 
@@ -1057,18 +1182,23 @@ knitr::kable(Onebreak_Unit,
        #       color = "black",bold = T)  %>%
     add_header_above(c(" " = 2, "ZA" = 2, "PV" = 2),
                      bold = T)%>%
-    add_footnote(c("Source: Author's calculation.","Note: rejection of the null at (*)1%, (**)5%, (***)10% level.", "The date in brackets represent the potentila point break."),
+    add_footnote(c("Source: Author's calculation.","Note: selected lag length in parentheses.","Rejection of the null at (*)1%, (**)5%, (***)10% level."),
                  notation = "none",
                  threeparttable = F)
 
 ```
 
 
-From an economic perspective, there is no reason to limit the analysis to a single structural change. Moreover, Lumsdaine and Papell (LP)(1997) showed that allowing for only one point break could biased the results and conclusions of the previous tests, therefore, they extended the analysis to allow for two endogenous unknown structural breaks. They also conclude that in test such as the ZA which does not allow for breaks under the unit root null, excludes all the other cases to the alternative hypothesis, i.e., the alternative hypothesis implies that there are breaks in the series including the possibility of unit root with breaks.
+From an economic perspective, there is no reason to limit the analysis to a single structural change. Moreover, Lumsdaine and Papell (LP)[-@lumsdaineMultipleTrendBreaks1997] showed that allowing for only one point break could biased the results and conclusions of the previous tests. They extended the analysis to allow for two endogenous unknown structural breaks. However, like the ZA test, the LP test does not allow for breaks under the unit root null, therefore, it excludes all other cases to the alternative hypothesis, i.e., the alternative hypothesis implies that there are breaks in the series including the possibility of unit root with breaks.
 
-Then, is arguably that LP test is not the most appropriate for our data. Instead, Lee and Strazicich (2003), LS test is suitable because expands the analysis to allow for two endogenous unknown breakpoints both under the null and alternative hypothesis. Hence, the model specifications of Ls test is a unit root process with up to two structural breaks in level, trend or both, against the alternative hypothesis of an stationary process with up to two breaks in level, trend or both. In addition, the bootstrap approach by [Chou (2007)](https://www.sciencedirect.com/science/article/pii/S0165176506002722) is implemented to derive the critical values of the t-statics and the distributional properties of the t-statics and the selected break points.[^31]
+Then, is arguably that LP test is not the most appropriate for our data. Instead, Lee and Strazicich (LS)[-@leeMinimumLagrangeMultiplier2003], proposed a minimum Lagrange multiplier test, which is more suitable because expands the analysis to allow for two endogenous unknown breakpoints, both under the null and alternative hypothesis. Hence, the model specifications of Ls test is a unit root process with up to two structural breaks in level, trend or both, against the alternative hypothesis of an stationary process with up to two breaks in level, trend or both. 
 
-[^31]: For a similar implementation of this procedure see [Lips (2017)](https://www.degruyter.com/document/doi/10.1515/jtse-2016-0018/html).
+In addition, the bootstrap procedure proposed by @chouPerformanceLMtypeUnit2007 is implemented to derive the critical values (CVs) of the t-statistics. This methodology is useful because it adjusts the CVs to the specific characteristics of each of the series, rather than assuming asymptomatic properties to be true, and also allows for a detailed analysis of the distributional properties of the t-statistics and possible breakpoints[^31].
+
+[^31]: For a similar implementation of this procedure see @lipsTheyStillMatter2017.
+
+
+Table 6 shows the results of perform the LS minimum Lagrange multiplier test with up to two endogenous breaks in level and trend. The models were selected using both information criterion and general to specific approach, looking for the minimum information criterion and statistical significance at 5% for the maximum lag coefficient. In the selection of the breaks we control 10% of the data heads and tails to avoid endpoint selection, and the second temporal break is allowed to occur only after two periods of the first. Under the critical values derived by @leeMinimumLagrangeMultiplier2003, all tests display statistical significance at 10% level to stationary processes with two break points. Under the bootstrap derived critical values, we can not reject the unit root with breaks null.
 
 
 ```{r Tab 6 URT two break, echo=FALSE, message=FALSE, warning=FALSE}
@@ -1087,7 +1217,7 @@ Onebreak_Unit <- data.frame( var = c(rep("MPM",2), rep("MPS",2), rep("QIR",2)),
 
 
 knitr::kable(Onebreak_Unit,
-             caption = "Unit Root tests with two endogenous structural break",
+             caption = "Unit Root tests with two endogenous structural breaks",
              align = "c",
              booktabs = T,
              col.names = c(" ","t-stat" ,"TB1",
@@ -1103,98 +1233,415 @@ knitr::kable(Onebreak_Unit,
     column_spec(4,  width = "3cm") %>%
       #column_spec(4, background = color,
        #       color = "black",bold = T)  %>%
-    add_header_above(c(" " = 4, "LS CV" = 3, "Bootstrap CV" = 3),
+    add_header_above(c(" " = 4, "LS CVs" = 3, "Bootstrap CVs" = 3),
                      bold = T, font_size = 11)%>%
-    add_footnote(c("Source: Author's calcultion.","Note: rejection of the null at (*)1%, (**)5%, (***)10% level.", "The date in brackets represent the potentila point break."),
+    add_footnote(c("Source: Author's calcultion.","Note: 95% bootstrapped two-sided confidence intervals in squared brackets."),
                  notation = "none",
                  threeparttable = F)
 
 ```
 
 
-# Conclusion
+Despite the stationary characteristics of the series, I(1) processes under these results, the 95% bootstrap confidence intervals (C.Is) yield significant findings (See Appendix D). For the first time break, the point estimates of MPSs and QIRs do not appear to be statistically significantly different since for both the C.Is overlap quite substantially. Therefore, it is possible that the structural break for each series occurs on the same date. Following the C.Is evidence, it is preferable to assume that the structural change occurred in 2018, in line with the progress in Banxico's communication. In the case of MPMs, the first break is estimated to have occurred in early 2015.
+
+
+For the second time break, the three C.Is overlap, thus, the points estimates do not appear to be significantly different. Moreover, for the MPSs and QIRs, the intervals include the point estimates of ZA tests, and the time break of the three series for the PV tests. Based on these findings the structural change date is set rather ad-hoc to have occurred between the first and third quarter of 2020.
+
+Figure 6 illustrates the structural breaks in the adjusted monthly series of the minutes and statements, and the quarterly series of inflation reports. As the statistical tests suggest, the visual trajectory of the series shows that all breakpoints appear to be aligned with the intervals selected ah-hoc in advance.
+
+The clarity of the minutes adopts an upward trajectory after the first-time break, going from levels that are fairly difficult to read and understand to standard difficulty on the INFLESZ scale. However, after the second time break, the upward trajectory is interrupted and the series appears to flatten out without even reaching standard clarity levels.
+
+On the other hand, monetary policy statements show, on average, fairly difficult levels of clarity before the first break. Thereafter, the trajectory of the series turns positive. In 2020, when the second time break occurs, the clarity of the statements decreases for a brief period, then starts to increase and reaches a standard difficulty in mid-2021.
+
+Finally, the clarity of quarterly reports seems to have a downward trend before 2018. After the first break, the difficulty of reading starts to gradually decrease. As with monetary policy statements, the upward trajectory is briefly interrupted in 2020 and clarity levels begin to improve from the second quarter of this year. Although, throughout the entire period reading difficulty remains below the standard level.
+
+
+```{r eval=FALSE, include=FALSE}
+#install.packages("devtools")
+#devtools::install_github("jaredhuling/jcolors")
+#library(jcolors)
+
+
+#___________________________________
+
+# TRANSFORMATONS
+
+#____________________________________
+
+
+#TS_data$IQRs <- NA
+#IQR$dates = as.Date(format(IQR$dates, format= "%Y-%m-01"))
+#for (i in 1:144) {
+ #   for (j in 1:48) {
+  #      if (TS_data$dates[i] == IQR$dates[j]) {
+   #       TS_data$IQRs[i] = IQR$`Flesch-Szigriszt`[j]
+    #    }
+    #}
+#}
+
+#TS_data2 <- TS_data %>%
+ #   pivot_longer(cols = c(MPSs.LOCF.,MPMs.LOCF.),
+  #               names_to = "LOCF",
+   #              values_to = "LOCF_vals") 
+
+#TS_data3 <- TS_data %>%
+ #   pivot_longer(cols = c(MPSs.5MA.,MPMs.5MA.,IQRs),
+  #               names_to = "MA",
+   #              values_to = "MA_vals") %>%
+    #mutate(document = substring(MA, first = 1, last = 3))
+
+
+#TS_data3 <- TS_data3 %>%
+  #  mutate("LOCF" = TS_data2$LOCF,
+   #      "LOCF_vals" = TS_data2$LOCF_vals) %>%
+ #   mutate(document = substring(MA, first = 1, last = 3))
+
+
+
+
+#___________________________________
+
+# MPS graph
+
+#____________________________________
+
+
+MPSplot <- TS_data3%>%
+  filter(document == "MPS") %>%
+    ggplot() +
+    geom_line(aes(x= dates, # aesthetics
+               y= MA_vals),
+              color = "#C40003")+
+  # ADD TIME BREAK 1
+  annotate('rect', xmin=as.Date("2018-01-01"), xmax=as.Date("2018-12-01"), ymin=min(TS_data3$MA_vals[TS_data3$document == "MPS"] ,na.rm = T), ymax=max(TS_data3$MA_vals[TS_data3$document == "MPS"],na.rm = T), alpha=.2, fill='#7FD2FF')+
+  annotate("text", x = c(as.Date("2018-06-01")), y = max(TS_data3$MA_vals[TS_data3$document == "MPS"],na.rm = T) - 1, label = "TB1", family = "serif", fontface="bold")+
+  # ADD TIME BREAK 2
+  annotate('rect', xmin=as.Date("2020-01-01"), xmax=as.Date("2020-09-01"), ymin=min(TS_data3$MA_vals[TS_data3$document == "MPS"] ,na.rm = T), ymax=max(TS_data3$MA_vals[TS_data3$document == "MPS"],na.rm = T), alpha=.2, fill="#00C19B")+
+  annotate("text", x = c(as.Date("2020-05-01")), y = max(TS_data3$MA_vals[TS_data3$document == "MPS"],na.rm = T) - 1, label = "TB2", family = "serif", fontface="bold")+
+  #labels of the Figure
+  labs(title = "",
+        x = "",
+        y = " FSZ score",
+    color = "")+
+    theme_tufte(base_family = "serif",
+            base_size = 11)+
+  #scale_color_brewer(palette="Set1")+
+  #scale_color_manual(values = winter)+
+  #scale_color_economist()+
+  #scale_color_manual(values = paletteer_d("tidyquant::tq_dark"))+
+      theme(legend.position = "none", # position and type of labels
+        plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
+        plot.caption.position = "plot",
+        plot.subtitle = element_markdown(hjust = 0,
+                                        size = 11),
+        strip.text.y = element_markdown(hjust = 0,
+                                        size = 11, 
+                                        face = "bold"))+
+        #legend.background = element_text(face = "bold"))+
+  scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+               date_labels = "%Y") +
+  # split the figure using the type of document
+  facet_grid(
+             rows =vars(document)
+             , scales = "free")
+
+
+#___________________________________
+
+# MPM graph
+
+#____________________________________
+
+library(scales)
+MPMplot <- TS_data3%>%
+  filter(document == "MPM") %>%
+    ggplot +
+    geom_line(aes(x= dates, # aesthetics
+               y= MA_vals),
+              color = "#C40003")+
+  # ADD TIME BREAK 1
+  annotate('rect', xmin=as.Date("2015-01-01"), xmax=as.Date("2015-09-01"), ymin=min(TS_data3$MA_vals[TS_data3$document == "MPM"] ,na.rm = T), ymax=max(TS_data3$MA_vals[TS_data3$document == "MPM"],na.rm = T), alpha=.2, fill="#EAC862")+
+  annotate("text", x = c(as.Date("2015-05-01")), y = max(TS_data3$MA_vals[TS_data3$document == "MPM"],na.rm = T) - 1, label = "TB1", family = "serif", fontface="bold")+
+  # ADD TIME BREAK 2
+  annotate('rect', xmin=as.Date("2020-01-01"), xmax=as.Date("2020-09-01"), ymin=min(TS_data3$MA_vals[TS_data3$document == "MPM"] ,na.rm = T), ymax=max(TS_data3$MA_vals[TS_data3$document == "MPM"],na.rm = T), alpha=.2, fill="#00C19B")+
+  annotate("text", x = c(as.Date("2020-05-01")), y = max(TS_data3$MA_vals[TS_data3$document == "MPM"],na.rm = T) - 5, label = "TB2", family = "serif", fontface="bold")+
+  #labels of the Figure
+  labs(title = "",
+        x = "",
+        y = "FSZ score",
+    color = " ")+
+    theme_tufte(base_family = "serif",
+            base_size = 11)+
+  #scale_color_brewer(palette="Set1")+
+  #scale_color_manual(values = winter)+
+  #scale_color_economist()+
+  #scale_color_manual(values = paletteer_d("tidyquant::tq_dark"))+
+  theme(legend.position = "none",
+        plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
+        plot.caption.position = "plot",
+        strip.text.y = element_markdown(hjust = 0,
+                                        size = 11, 
+                                        face = "bold"))+
+  scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+               date_labels = "%Y") +
+  scale_y_continuous(
+  labels = label_number(accuracy = 1))+
+  # split the figure using the type of document
+  facet_grid(
+             rows =vars(document)
+             , scales = "free")
+
+#___________________________________
+
+  # QIR graph
+
+#____________________________________
+
+
+
+#TS_data3$document[TS_data3$document == "IQR"] ="QIR"
+#A <- TS_data3 %>%
+ # filter(document == "QIR")
+#A <- A[2:144,]
+
+#TS_data3$MA_vals[TS_data3$document == "IQR"] <- na.approx(TS_data3$MA_vals[TS_data3$document == "IQR"])
+
+
+
+
+IQRplot <- IQR%>%
+  filter(document == "QIR") %>%
+      ggplot(aes(x = dates, # aesthetics
+                 y= `Flesch-Szigriszt`)) +
+    geom_line(color = "#C40003")+
+  # ADD TIME BREAK 1
+  annotate('rect', xmin=as.Date("2018-01-01"), xmax=as.Date("2018-12-01"), ymin=min(IQR$`Flesch-Szigriszt` ,na.rm = T), ymax=max(IQR$`Flesch-Szigriszt`,na.rm = T), alpha=.2, fill='#7FD2FF')+
+  annotate("text", x = c(as.Date("2018-06-01")), y = max(IQR$`Flesch-Szigriszt`,na.rm = T) - 1, label = "TB1", family = "serif", fontface="bold")+
+  # ADD TIME BREAK 2
+  annotate('rect', xmin=as.Date("2020-01-01"), xmax=as.Date("2020-09-01"), ymin=min(IQR$`Flesch-Szigriszt` ,na.rm = T), ymax=max(IQR$`Flesch-Szigriszt`,na.rm = T), alpha=.2, fill="#00C19B")+
+  annotate("text", x = c(as.Date("2020-05-01")), y = max(IQR$`Flesch-Szigriszt`,na.rm = T) - 1, label = "TB2", family = "serif", fontface="bold")+
+  #labels of the Figure
+  labs(title = "",
+       subtitle = "",
+        x = "",
+        y = " FSZ score",
+    color = " ",
+      caption = "<br>**Figure 6**: Structural breaks in Banco de México's communication.<br><br>Source: Author's calculation.")+
+    theme_tufte(base_family = "serif",
+            base_size = 11)+
+  #scale_color_brewer(palette="Set1")+
+  #scale_color_manual(values = winter)+
+  #scale_color_economist()+
+  #scale_color_manual(values = paletteer_d("tidyquant::tq_dark"))+
+  theme(legend.position = "none",
+        plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
+        plot.caption.position = "plot",
+        strip.text.y = element_markdown(hjust = 0,
+                                        size = 11, 
+                                        face = "bold"))+
+  scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+               date_labels = "%Y") +
+  #ylim(44,54)+
+  #scale_y_continuous(breaks = c(46,50,54),limits = c(46,54),)+
+  # split the figure using the type of document
+  facet_grid(
+             rows =vars(document)
+             , scales = "free")
+```
+
+\noindent
+```{r Figure 7 LOCF data, echo=FALSE, fig.height=7, message=FALSE, warning=FALSE}
+
+library(latex2exp)
+library(ggtext)
+library(grid)
+library(gridExtra) 
+
+
+
+##__________________________
+
+# MULTIPLOT
+
+##__________________________
+
+#multiplot(MPMplot,MPSplot,IQRplot, cols = 1)
+
+grid.arrange(MPMplot,MPSplot,IQRplot, heights = c(2,2,3))
+```
+
+
+
+# 6. Conclusion
 
 Overall, effective communication is critical to the success of central banks, as it can help to ensure that their policy decisions are well understood, well received, and aligned with the broader economic goals of the society they serve.
 
-Banco de México has made significant progress in improving transparency and communication since the adoption of its Inflation Targeting Regime in 2001. The bank has implemented various communication channels to increase transparency and improve public understanding of its policy decisions.
+Inflation-targeting central banks, in particular, need to communicate with the public and be transparent to foster openness and accountability. Given the great power that they have to potentially influence expectations and affect the economy, it is not only important to increase the amount of information available but also make it accessible to as many people as possible. 
+
+In this regard, Banco de México has made significant progress in improving transparency and communication since the adoption of its Inflation Targeting Regime in 2001. The bank has implemented various communication channels to increase transparency and improve public understanding of its policy decisions.
 
 One of the most notable communication channels used by Banxico is its regular bulletins, which provide detailed explanations of the bank's policy decisions, including the factors that influenced those decisions. These bulletins are released immediately after each monetary policy meeting and are widely read by investors, economists, and the general public.
 
-Additionally, Banxico publishes quarterly reports that analyze inflation and economic developments in the country, which serve to provide the public with a deeper understanding of the bank's policy objectives and actions. These reports also include forecasts for key economic variables such as inflation, GDP growth, and the exchange rate.
+Additionally, Banxico publishes quarterly reports that analyze inflation and economic developments in the country, which serve to provide the public with a deeper understanding of the bank's policy objectives and actions. These reports also include forecasts for key economic variables such as inflation, GDP growth, the exchange rate, and the balance of risk, whcih provide useful information to market participants, firms and households in general.
 
-Banxico has also made efforts to improve the accessibility and clarity of its communication materials. For example, the bank has simplified the language used in its reports and bulletins to make them more easily understandable for the general public.
+In addition, Banxico has made efforts to improve transparency about the decision-making process, providing minutes of the monetary policy meetings since 2011. Also, since 2021, the central bank publishes transcripts of these meetings with a three-year delay, making transcripts for 2018, 2019 and part of 2020 available so far.
 
-Overall, Banxico's communication strategy has undergone several modifications over the years, as the bank has worked to improve its effectiveness and transparency. These efforts have been successful in enhancing public understanding of the bank's policy decisions and promoting accountability and transparency in the country's monetary policy framework.
+Furthermore, in 2018 the central bank shifted its monetary policy strategy to one focus on inflation forecast, and in 2020 updated the General Communication Criteria for the Board of Directors and Banxico’s staff.
+
+All of these events have undergone major changes in the accessibility and clarity of the central bank's communication materials. Especially, the statistical evidence provided in this paper suggests that there is a negative correlation between the length of the publications and clarity levels. Over the years, monetary policy statements have decreased in length and have become clearer than ever before. 
+
+Quarterly reports also show a negative relation, although this is way more weaker than in the statements. It is reasonable to think that this is due to the fact that the reports are long documents with a lot of descriptive information on the economy over the previous quarter, the central banks forecast and balance of risk. Thus, in spite of the efforts of the central to make clearer these documents, it is quite difficult to summarize this amount of information.
+
+On the other hand, the minutes show a direct relationship, pointing out that the longer they are, i.e., the more information there is about the decision-making process, the clearer the communication. The latter seems to be true, especially after the publications reveal the identity of the voters and include a section explaining the reasons for the dissenters' vote.
+
+The results derived from the structural break analysis suggest that there are at least two positive breaks in each of the series. Minutes present a first independent break at the beginning of 2015. This date is not aligned with any major developments in Banxico's communication strategy. Quarterly Reports and Statements show evidence of a first-time break in 2018, which is consistent with all the evolution that the monetary policy and communication strategy underwent in this year.
+
+The second time break is not significantly different for all of the series. Therefore, the structural change is set rather ad-hoc to have occurred between the first and third quarter of 2020. This is consistent with two major events: the update of the central bank's communication criteria and the COVID-19 pandemic. Since then, we have seen the clarity of the central bank's publications increase.
+
+These findings are very informative about the developments on Banxico's communication over time. However, further developments could focus on address the limitations that traditional readability and perspicuity measures impose to economic and financial documents. Moreover, although the statistical methods performed are considered robust for traditional time series, the results should be interpret carefully as the MPMs and MPSs perspicuity observations are not collected on a regular monthly frequency.
+
+That said, this paper represents a first approximation to measure the clarity of Banco de México's communication, and its evolution over time. Have there been significant changes in Banco de México's communication over time? Overall, Yes. Banxico's communication strategy has undergone several modifications over the years, as the bank has worked to improve its effectiveness and transparency. Has the information shared by the central bank become more accessible to the majority of the population? All these changes have led to an upward trend in the readability and perspicuity of the central bank, however, Banxico's main publications still lag behind in clarity, as the average difficulty requires at least a high school education, while the majority of the population has only basic education (primary and secondary) or no schooling, and the average years of schooling have remained at levels equivalent to junior high education.
+
+
+
+# References
+
+<div id="refs"></div>
 
 
 
 
-
+\newpage
 # Appendix A. Readability and Perspicuity Formulas
 
-In the search for the adaptation of the readability formulas to the texts written in Spanish, José Fernández Huerta developed a first measure to test the reading ease of a wide variety of Spanish documents in 1959.[^] The Fernández Huerta test is based on the famous Flesch test and they have similar readability scale. The formula is as follows:
-
-[^]: See Fernández Huerta J.(1959).
+In the search for the adaptation of the readability formulas to the texts written in Spanish, José Fernández Huerta [-@fernandezhuertaMedidasSencillasLecturabilidad1959] developed a first measure to test the reading ease of a wide variety of Spanish documents. The Fernández Huerta test is based on the famous Flesch test and they have similar readability scale. The formula is as follows:
 
 
 \begin{equation}
    FH = 206.835 - 1.02 * \frac{W}{St} - 60 * \frac{Sy}{W}
 \end{equation}
 
-\noindent where $\frac{W}{St}$ is the average sentence length and $\frac{Sy}{W}$ is the average number of syllables per word. The intuition behind this formula is that the larger the sentences and the more syllables per word, the more difficult it is to understand and read a text. 
 
 
-```{r Table Flesch-Fernández Huerta Score, echo=FALSE}
+```{r FH scale, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+library(xtable)
 FLESCH.SCALE <- data.frame("Score" = c("90-100","80-90","70-80",
                                        "60-70","50-60","30-50",
                                        "0-30"),
                            "Level" = c("Very easy",
-                                       "Easy ",
-                                       "Fairly",
+                                       "Easy",
+                                       "Fairly easy",
                                        "Standard",
-                                       "Fairly",
+                                       "Fairly difficult",
                                        "Difficult",
-                                       "Very"),
+                                       "Very difficult"),
                            "Grade" = c("5th grade", "6 grade",
                                        "7th", "8th-9th grade",
                                        "High school",
                                        "University",
-                                       "Graduate student"))
+                                       "Graduate student"), row.names = NULL)
 
 color_FH = c(rep("#F7FBFF",1),rep("#DEEBF7",1),rep("#C6DBEF",1),
               rep("#9ECAE1",1),rep("#6BAED6",1),rep("#4292C6",1),
               rep("#2171B5",1))
 color_FH = rev(color_FH)
 
-knitr::kable(FLESCH.SCALE,
-             caption = "Fernández Huerta Readability Scale",
-             align = "c",
-             booktabs = T)  %>%
-  kable_styling(latex_options = c("hold_position"),
+rownames(FLESCH.SCALE) <- NULL
+
+xtable2kable <- function(x) {
+  out <- capture.output(print(x, table.placement = NULL))[-(1:2)]
+  out <- paste(out, collapse = "\n")
+  structure(out, format = "latex", class = "knitr_kable")
+}
+
+xtable(FLESCH.SCALE,
+             caption = "FH Readability Scale",
+             #align = "c",
+             booktabs = T,
+       include.rownames = FALSE,
+       label = NULL)  %>%
+  xtable2kable( ) %>%
+  kable_styling(#latex_options = c("hold_position"),
+                font_size = 11,
+                position = "float_left", 
                 full_width = F) %>%
-  column_spec(2, background = color_FH,
+  column_spec(3, background = color_FH,
               color = "black", bold = T) %>%
+  column_spec(1, width = "0cm", color="white") %>%
   add_footnote("Source: Fernández Huerta J.(1959).",
                notation = "none")
+
 ```
 
 
-Later in the 1990s, Francisco Szigrist Pazos developed a new validated formula for readability as his doctoral thesis at the Universidad Complutense de Madrid. This test is also an adaptation of the Flesch test for Spanish and French written texts.[^] The main difference is that Szigrist Pazos' formula yields a perspicuity score instead a readability measure.
 
-[^]: See Szigriszt, F. (1993). Sistemas predictivos de legibilidad del mensaje escrito: Fórmula de Perspicuidad (tesis de doctorado). Universidad Complutense, Madrid.
+\noindent where $\frac{W}{St}$ is the average sentence length and $\frac{Sy}{W}$ is the average number of syllables per word. The intuition behind this formula is that the larger the sentences and the more syllables per word, the more difficult it is to understand and read a text. 
 
-As part of the validation of the perspicuity test for the Spanish language, Szigriszt used the proposed criterion prediction, the comparative validity strategy, and a foreign criterion prediction. All the validity tests implemented by Szigriszt yielded statistically significant results, which made Szigriszt one of the modern precursors in the development of readability formulas for Spanish in the last decades.[^]
 
-[^]: See Ríos, I. (2009). Influencias del lenguaje y origen de un lector en la comprensión de mensajes de comunicación en salud y en la formación de actitud e intención hacia la realización de una conducta preventiva (tesis doctoral, Universidad Pompeu Fabra, Barcelona).
+```{r FH scale 2, echo=FALSE, message=FALSE, warning=FALSE}
+library(xtable)
+FLESCH.SCALE <- data.frame("Score" = c("90-100","80-90","70-80",
+                                       "60-70","50-60","30-50",
+                                       "0-30"),
+                           "Level" = c("Very easy",
+                                       "Easy",
+                                       "Fairly easy",
+                                       "Standard",
+                                       "Fairly difficult",
+                                       "Difficult",
+                                       "Very difficult"),
+                           "Grade" = c("5th grade", "6 grade",
+                                       "7th grade", "8th-9th grade",
+                                       "High school",
+                                       "University",
+                                       "Graduate student"), row.names = NULL)
+
+color_FH = c(rep("#F7FBFF",1),rep("#DEEBF7",1),rep("#C6DBEF",1),
+              rep("#9ECAE1",1),rep("#6BAED6",1),rep("#4292C6",1),
+              rep("#2171B5",1))
+color_FH = rev(color_FH)
+
+rownames(FLESCH.SCALE) <- NULL
+
+
+
+kable(FLESCH.SCALE,
+             caption = "FH Readability Scale",
+             align = "c",
+             booktabs = T,
+             linesep = "")  %>%
+  #xtable2kable( ) %>%
+  kable_styling(latex_options = c("hold_position"),
+                font_size = 11,
+                position = "center", 
+                full_width = F) %>%
+  column_spec(2, background = color_FH,
+              color = "black", bold = T) %>%
+  #column_spec(1, width = "0cm", color="white") %>%
+    column_spec(2:3, width = "4.5cm") %>%
+ # column_spec(4, width = "5cm") %>%
+  add_footnote("Source: Fernández Huerta J.(1959).",
+               notation = "none")
+
+```
+
+Later in the 1990s, Francisco Szigrist Pazos [-@szigrisztpazosSistemasPredictivosLegilibilidad1992] developed a new validated formula for readability as his doctoral thesis at the Universidad Complutense de Madrid. This test is also an adaptation of the Flesch test for Spanish and French written texts. The main difference is that Szigrist Pazos' formula yields a perspicuity score instead a readability measure.
+
+
+As part of the validation of the perspicuity test for the Spanish language, Szigriszt used the proposed criterion prediction, the comparative validity strategy, and a foreign criterion prediction. All the validity tests implemented by Szigriszt yielded statistically significant results, which made Szigriszt one of the modern precursors in the development of readability formulas for Spanish in the last decades.[^34]
+
+[^34]: See @rioshernandezInfluenciasLenguajeOrigen2009.
 
 One of the major advantages of using Szigriszt's formula is that it is applicable to the use of printed Spanish text in publications of various thematic focuses. The Szigriszt formula also establishes the levels of difficulty of a text and its categorization, based on the coefficient of perspicuity obtained from the mathematical calculation performed as established in its formula.
 
 
 \begin{equation}
-  F_{SZ} = 207 - \frac{W}{St} -62.3 * \frac{Sy}{W}
+  SZ = 207 - \frac{W}{St} - (62.3 * \frac{Sy}{W})
 \end{equation}
 
-$SZ = 207 - \frac{W}{St} - (62.3 * \frac{Sy}{W})$
 
 ```{r Szigriszt Score, echo=FALSE}
 FLESCH.SCALE <- data.frame("Score" = c("85-100",  "75-85", "65-75",
@@ -1224,63 +1671,72 @@ color_FSZ = c(rep("#F7FBFF",1),rep("#DEEBF7",1),rep("#C6DBEF",1),
               rep("#2171B5",1))
 color_FSZ = rev(color_FSZ)
 
-knitr::kable(FLESCH.SCALE,
+kable(FLESCH.SCALE,
              caption = "INFLESZ Perspicuity Scale for Spanish Language",
              align = "c",
-             booktabs = T)%>%
-  kable_styling(latex_options = c("hold_position", "scale_down"),
+             booktabs = T,
+             linesep = "")%>%
+  #xtable2kable( ) %>%
+  kable_styling(latex_options = c("hold_position"),
+                font_size = 11,
+                position = "center", 
                 full_width = F) %>%
   column_spec(2, background = color_FSZ,
               color = "black", bold = T) %>%
-  add_footnote("Source: See Bea-Muñoz, Medina-Sánchez and Flórez-García (2015).",
+  #column_spec(1, width = "0cm", color="white") %>%
+  column_spec(2:4, width = "4cm") %>%
+  add_footnote("Source: Szigriszt, F. (1993).",
                threeparttable = F,
                notation = "none")
 ```
 
 
-In a later work, Barrio-Cantalejo adapted the Szigriszt-Pazos scale of interpretation of results, creating the INFLESZ scale and a new validated perspicuity formula, the Flesch-Szigritsz.[^]
 
-[^]: See Bea-Muñoz, Medina-Sánchez and Flórez-García (2015). 
+In a later work, @barriocantalejoMedicionLegibilidadTextos2003 adapted the Szigriszt-Pazos scale of interpretation of results, creating the INFLESZ scale and a new validated perspicuity formula, the Flesch-Szigritsz.
 
 
 \begin{equation}
-  F_{SZ} = 207 - \frac{W}{St} -62.3 * \frac{Sy}{W}
+  FSZ = 206.835 - 62.3 (\frac{Sy}{W} - \frac{W}{St})
 \end{equation}
-
-$FSZ = 206.835 -62.3 (\frac{Sy}{W} - \frac{W}{S})$
 
 
 ```{r Table 4 Flesch-Szigriszt Score, echo=FALSE}
 FLESCH.SCALE <- data.frame("Score" = c("80-100",
                                        "65-80","55-65","40-55",
                                        "0-40"),
-                           "Level" = c("Very easy to read",
-                                       "Easy to read",
+                           "Level" = c("Very easy",
+                                       "Easy",
                                        "Average",
-                                       "Fairly difficult to read",
-                                       "Very difficult to read"),
+                                       "Fairly difficult",
+                                       "Very difficult"),
                            "Grade" = c("Elementary", "Elementary",
                                        "Junior high", 
                                        "High school",
-                                       "Undergrduate or higher"),
+                                       "Univeristy"),
                            "Type" = c("Comics", 
-                                      "Entertainment press and Successful novels",
-                                      "General press and Sports press",
-                                      "Scientific dissemination and Quality magazines",
+                                      "Entertainment and novels",
+                                      "General and Sport press",
+                                      "Quality magazines",
                                      "Scientific"))
 
-color_INFLESZ = c(rep("#F7FBFF",5),rep("#C6DBEF",3),rep("#9ECAE1",2),
-                  rep("#6BAED6",3),rep("#2171B5",4))
+color_INFLESZ = c(rep("#F7FBFF",1),rep("#C6DBEF",1),rep("#9ECAE1",1),
+                  rep("#6BAED6",1),rep("#2171B5",1))
 color_INFLESZ = rev(color_INFLESZ)
 
-knitr::kable(FLESCH.SCALE,
+kable(FLESCH.SCALE,
              caption = "INFLESZ Perspicuity Scale for Spanish Language",
              align = "c",
              booktabs = T)%>%
-  kable_styling(latex_options = c("hold_position", "scale_down"),
+  #xtable2kable( ) %>%
+  kable_styling(latex_options = c("hold_position"),
+                font_size = 11,
+                position = "center", 
                 full_width = F) %>%
   column_spec(2, background = color_INFLESZ,
               color = "black", bold = T) %>%
+  #column_spec(1, width = "0cm", color="white") %>%
+  column_spec(2:3, width = "3cm") %>%
+  column_spec(4, width = "5cm") %>%
   add_footnote("Source: See Barrio-Cantalejo et al. (2008).",
                threeparttable = F,
                notation = "none")
@@ -1288,13 +1744,18 @@ knitr::kable(FLESCH.SCALE,
 
 
 \newpage
-# Appendix B. Linguistic Correlation Map
+# Appendix B. Linguistic Correlation Maps
 
 \noindent
-```{r Apenndix B Correlation Maps, echo=FALSE, fig.height=5, fig.width=6, message=FALSE, warning=FALSE}
+```{r Apenndix B Correlation Maps, echo=FALSE, fig.height=6, fig.width=6, message=FALSE, warning=FALSE}
 #install.packages("GGally")
 library(GGally)
 source("multiplot.R")
+library(paletteer)
+library(latex2exp)
+library(ggtext)
+library(grid)
+library(gridExtra)
 
 A<- Banxico_readability %>%
   dplyr::mutate("Year" = format(dates, 
@@ -1308,8 +1769,8 @@ A<- Banxico_readability %>%
 
 COR <- A %>%
   select(dates,Year,document,words,sentences,
-         `Flesch-Szigriszt`,`Fernandez Huerta`,Gutierrez,
-         `Readability Mu`,Szigriszt, Avg) %>%
+         `Flesch-Szigriszt`,`Fernandez Huerta`,
+         Szigriszt, Avg) %>%
   mutate(sentences = as.numeric(sentences),
          words = as.numeric(words)) %>%
   group_by(document)
@@ -1320,19 +1781,29 @@ A<-COR %>%
          ST = sentences,
          FSZ = `Flesch-Szigriszt`,
          FH = `Fernandez Huerta`,
-         Gut = Gutierrez,
+         #Gut = Gutierrez,
          ZS = Szigriszt,
-         Mu = `Readability Mu`,
+         #Mu = `Readability Mu`,
          ) %>%
-  select(W,ST,Mu,FSZ,
-         FH,Gut,ZS,Avg) %>%
+  select(W,ST,FSZ,
+         FH,ZS,Avg) %>%
   ggcorr(label = F,
          geom = "tile",
          family = "serif",
-         label.size  = 3) +
-  theme(text = element_text(family = "serif"),
+         label.size  = 4,
+         low = "#CB1618",
+         #mid = "#F5B35E",
+         high = "#2F327D") +
+  theme(legend.position = "none",
+        text = element_text(family = "serif"),
         plot.caption = element_text(hjust = 0),
+        plot.subtitle = element_text(hjust = 0,
+                                        size = 12,
+                                     family = "serif", face = "bold"),
         plot.caption.position = "plot")+
+  #scale_color_continuous(type = paletteer_c("ggthemes::Sunset-Sunrise Diverging",30))+
+  #scale_fill_manual(values =  paletteer_c("ggthemes::Sunset-Sunrise Diverging"))+
+  #scale_color_manual(values =  paletteer_c("ggthemes::Sunset-Sunrise Diverging"))+
   labs(title = "",
        subtitle = "
        MPS")
@@ -1344,18 +1815,33 @@ B<-COR %>%
          ST = sentences,
          FSZ = `Flesch-Szigriszt`,
          FH = `Fernandez Huerta`,
-         Gut = Gutierrez,
+         #Gut = Gutierrez,
          ZS = Szigriszt,
-         Mu = `Readability Mu`,
+         #Mu = `Readability Mu`,
          ) %>%
-  select(W,ST,Mu,FSZ,
-         FH,Gut,ZS,Avg) %>%
+  select(W,ST,FSZ,
+         FH,ZS,Avg) %>%
   ggcorr(label = F,
          geom = "tile",
-         family = "serif") +
-    theme(text = element_text(family = "serif"),
-        plot.caption = element_text(hjust = 0),
-        plot.caption.position = "plot") +
+         family = "serif",
+         label.size  = 4,
+         low = "#CB1618",
+         #mid = "#F5B35E",
+         high = "#2F327D") +
+        theme(legend.position = "none", # position and type of labels
+        plot.caption = element_text(hjust = 0,
+                                        size = 11,
+                                    family = "serif"),
+        plot.caption.position = "plot",
+        plot.subtitle = element_text(hjust = 0,
+                                        size = 12,
+                                     family = "serif", face = "bold"),
+        strip.text.y = element_text(hjust = 0,
+                                        size = 11, 
+                                        face = "bold", family = "serif")) +
+  #scale_fill_manual(values =  paletteer_c("ggthemes::Sunset-Sunrise Diverging"))+
+  #scale_color_manual(values =  paletteer_c("ggthemes::Sunset-Sunrise Diverging"))+
+  #scale_color_continuous(type = paletteer_c("ggthemes::Sunset-Sunrise Diverging",30))+
   labs(title =" ",subtitle = "
        MPM")
 
@@ -1365,27 +1851,111 @@ C<-COR %>%
          ST = sentences,
          FSZ = `Flesch-Szigriszt`,
          FH = `Fernandez Huerta`,
-         Gut = Gutierrez,
+         #Gut = Gutierrez,
          ZS = Szigriszt,
-         Mu = `Readability Mu`,
+         #Mu = `Readability Mu`,
          ) %>%
-  select(W,ST,Mu,FSZ,
-         FH,Gut,ZS,Avg) %>%
+  select(W,ST,FSZ,
+         FH,ZS,Avg) %>%
   ggcorr(label = F,
          geom = "tile",
-         family = "serif")+
-    theme(text = element_text(family = "serif"),
+         family = "serif",
+         label.size  = 4,
+         low = "#CB1618",
+         #mid = "#F5B35E",
+         high = "#2F327D")+
+    theme(legend.position = "none",
+          text = element_text(family = "serif"),
         plot.caption = element_text(hjust = 0),
+        plot.subtitle = element_text(hjust = 0,
+                                        size = 12,
+                                     family = "serif", face = "bold"),
         plot.caption.position = "plot") +
+  #scale_fill_manual(values =  paletteer_c("ggthemes::Sunset-Sunrise Diverging"))+
+  #scale_color_manual(values =  paletteer_c("ggthemes::Sunset-Sunrise Diverging"))+
+  #scale_color_continuous(type = paletteer_c("ggthemes::Sunset-Sunrise Diverging",30))+
   labs(title =" ",subtitle = "
        QIR")
 
+C2<-COR %>%
+  filter(document == "QIR") %>%
+  mutate(W = words,
+         ST = sentences,
+         FSZ = `Flesch-Szigriszt`,
+         FH = `Fernandez Huerta`,
+         #Gut = Gutierrez,
+         ZS = Szigriszt,
+         #Mu = `Readability Mu`,
+         ) %>%
+  select(W,ST,FSZ,
+         FH,ZS,Avg) %>%
+  ggcorr(label = F,
+         geom = "tile",
+         family = "serif",
+         label.size  = 4,
+         low = "#CB1618",
+         #mid = "#F5B35E",
+         high = "#2F327D")+
+    theme(
+          text = element_text(family = "serif"),
+        plot.caption = element_text(hjust = 0),
+        plot.subtitle = element_text(hjust = 0,
+                                        size = 12,
+                                     family = "serif", face = "bold"),
+        plot.caption.position = "plot") +
+  #scale_fill_manual(values =  paletteer_c("ggthemes::Sunset-Sunrise Diverging"))+
+  #scale_color_manual(values =  paletteer_c("ggthemes::Sunset-Sunrise Diverging"))+
+  #scale_color_continuous(type = paletteer_c("ggthemes::Sunset-Sunrise Diverging",30))+
+  labs(title =" ",subtitle = "
+       QIR")
+
+as_ggplot <- function(x){
+
+  # Open null device to avoid blank page before plot------
+  # see cowplot:::as_grob.ggplot
+  null_device <- base::getOption(
+    "ggpubr.null_device",
+    default = cowplot::pdf_null_device
+  )
+  cur_dev <- grDevices::dev.cur()
+  # Open null device to avoid blank page before plot
+  null_device(width = 6, height = 6)
+  null_dev <- grDevices::dev.cur()
+  on.exit({
+    grDevices::dev.off(null_dev)
+    if (cur_dev > 1) grDevices::dev.set(cur_dev)
+  })
+
+  # Convert to ggplot-------------
+  cowplot::ggdraw() +
+    cowplot::draw_grob(grid::grobTree(x))
+}
+
+legend <- cowplot::get_legend(C2)
+legend <- as_ggplot(legend)
+
   
-multiplot(A,B,C,
+multiplot(A,B,C,legend,
           cols = 2)
 
-rm(A,B,C)
+rm(A,B,C, legend, C2)
 ```
+
+
+> \noindent \footnotesize Source: Author's calculation.
+
+
+\noindent __Avg__: Standard mean of the three readability measures.
+
+\noindent __ZS__: Szigriszt Pazos score.
+
+\noindent __FH__: Fernández Huerta score.
+
+\noindent __FSZ__: Flesch-Szigriszt score.
+
+\noindent __ST__: Sentence count.
+
+\noindent __W__: Word count.
 
 
 \newpage
@@ -1495,5 +2065,403 @@ knitr::kable(Clasic_Unit_QIR,
 \noindent Number in parenthesis after the test are the selected lags.
 
 \noindent Number in parenthesis below the t-statics represents the correspondent p-value.
+
+
+
+
+\newpage
+# Appendix D. Histograms of Bootstrap Results.
+
+\noindent
+```{r Fig 6 Histograms of Bootstrap Results, echo=FALSE, fig.height=8, message=FALSE, warning=FALSE}
+
+library(latex2exp)
+library(ggtext)
+library(grid)
+library(gridExtra) 
+library(ggplot2)
+library(paletteer)
+#_____________________________________________________________
+# T-STAT
+#_____________________________________________________________
+
+#CV <- data.frame(MPM = as.numeric(MPM_BOOTS_INTERVALS[,1]),
+ #                MPS = as.numeric(MPD_BOOTS_INTERVALS[,1]),
+  #               QIR = as.numeric(IQR_BOOTS_INTERVALS[,1]))
+#CV <- CV%>%
+ #   pivot_longer(cols = 1:3, 
+  #               values_to = "vals",
+   #              names_to = "names")
+                 
+CVplot <- CV %>%
+    group_by(names) %>%
+    ggplot(aes(x = vals, fill = names)) +
+    geom_histogram(aes(x = vals,y = ..density..,
+                       fill = names),
+                 #binwidth = 0.8,
+                 alpha = 0.8,
+                 binwidth = 0.3,
+                 inherit.aes = F,
+                 position = "dodge") +
+    geom_density(lwd = 0.8,
+               linetype = 1,
+               colour = "black",
+               alpha = 0.3,
+               outline.type = "full",
+                   )+
+    labs( 
+    title = " ",
+        subtitle = "**t-stat**",
+        x = "t-stat",
+        y = "Density",
+    color = " ",
+    fill = " ",
+    caption = "")+
+  theme_tufte(base_family = "serif", # type of theme
+            base_size = 11)+
+    #scale_colour_wsj()+ # color palette
+    #scale_fill_wsj()+
+  #scale_fill_manual(values =  paletteer_d("tidyquant::tq_dark"))+
+  #scale_color_manual(values =  paletteer_d("tidyquant::tq_dark"))+
+  scale_fill_manual(values =  paletteer_d("tidyquant::tq_green"))+
+  scale_color_manual(values =  paletteer_d("tidyquant::tq_green"))+
+  #scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+   #            date_labels = "%Y")+
+    theme(legend.position = "none", # position and type of labels
+        plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
+        plot.caption.position = "plot",
+        plot.subtitle = element_markdown(hjust = 0,
+                                        size = 11))
+  # split the figure using the type of document
+     # facet_grid(
+      
+    #       rows =vars(names), scales = "free_y")
+
+
+
+
+#_____________________________________________________________
+# FIRST BREAL
+#_____________________________________________________________
+
+
+#IQR$dates = as.Date(format(IQR$dates, format= "%Y-%m-01"))
+#IQR$num <- 1:length(IQR$Q)
+
+#MPM2$num <- 1:length(MPM2$dates)
+
+#MPD2$num <- 1:length(MPD2$dates)
+
+
+#TB1 <- data.frame(MPM = as.numeric(MPM_BOOTS_INTERVALS[,2]),
+     #            MPS = as.numeric(MPD_BOOTS_INTERVALS[,2]),
+      #           QIR = as.numeric(IQR_BOOTS_INTERVALS[,2]))
+
+#TB11 <- TB1 %>%
+#  mutate(MPM =NA,
+#         MPS = NA,
+#         QIR = NA)
+
+
+
+#for (i in 1:1000) {
+ # for (j in 1:length(MPM2$dates)) {
+  #  if (MPM2$num[j] == TB1$MPM[i]) {
+   #   TB11$MPM[i] <- as.Date(MPM2$dates[j])
+      
+  #  }
+    
+  #}
+#}
+#TB11$MPM <- as.Date(TB11$MPM)
+
+
+
+#for (i in 1:1000) {
+ # for (j in 1:length(MPD2$dates)) {
+  #  if (MPD2$num[j] == TB1$MPS[i]) {
+   #   TB11$MPS[i] <- as.Date(MPD2$dates[j])
+      
+  #  }
+    
+  #}
+#}
+#TB11$MPS <- as.Date(TB11$MPS)
+
+
+
+
+#for (i in 1:1000) {
+ # for (j in 1:length(IQR$dates)) {
+  #  if (IQR$num[j] == TB1$QIR[i]) {
+   #   TB11$QIR[i] <- as.Date(IQR$dates[j])
+      
+  #  }
+    
+  #}
+#}
+#TB11$QIR <- as.Date(TB11$QIR)
+
+
+
+
+
+
+
+#TB11 <- TB11%>%
+ #   pivot_longer(cols = 1:3, 
+  #               values_to = "vals",
+   #              names_to = "names")
+
+                 
+TB1plot <- TB11 %>%
+    group_by(names) %>%
+    ggplot(aes(x = vals, fill = names)) +
+    geom_histogram(aes(x = vals,y = ..density..,
+                       fill = names),
+                 #binwidth = 0.5,
+                 alpha = 0.8,
+                 #binwidth = 10,
+                 bins = 20,
+                 inherit.aes = F,
+                 position = "dodge") +
+    geom_density(lwd = 0.8,
+               linetype = 1,
+               colour = "black",
+               alpha = 0.3,
+               outline.type = "full",
+                   )+
+    labs( 
+    title = " ",
+        subtitle = "**TB1**",
+        x = "First break point",
+        y = "Density",
+    color = " ",
+    fill = " ",
+    caption = "")+
+  theme_tufte(base_family = "serif", # type of theme
+            base_size = 11)+
+    #scale_colour_wsj()+ # color palette
+    #scale_fill_wsj()+
+    #scale_fill_manual(values =  paletteer_d("tidyquant::tq_dark"))+
+  #scale_color_manual(values =  paletteer_d("tidyquant::tq_dark"))+
+  scale_fill_manual(values =  paletteer_d("tidyquant::tq_green"))+
+  scale_color_manual(values =  paletteer_d("tidyquant::tq_green"))+
+  #scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+   #            date_labels = "%Y")+
+    theme(legend.position = "none", # position and type of labels
+        plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
+        plot.caption.position = "plot",
+        plot.subtitle = element_markdown(hjust = 0,
+                                        size = 11))
+  # split the figure using the type of document
+     # facet_grid(
+      
+    #       rows =vars(names), scales = "free_y")
+
+#rm(CV)
+#rm(CV2)
+
+
+
+
+#_____________________________________________________________
+# Second Break
+#_____________________________________________________________
+
+
+#TB2 <- data.frame(MPM = as.numeric(MPM_BOOTS_INTERVALS[,3]),
+ #                MPS = as.numeric(MPD_BOOTS_INTERVALS[,3]),
+  #               QIR = as.numeric(IQR_BOOTS_INTERVALS[,3]))
+
+#TB21 <- TB2 %>%
+ # mutate(MPM =NA,
+  #       MPS = NA,
+   #      QIR = NA)
+
+
+
+#for (i in 1:1000) {
+ # for (j in 1:length(MPM2$dates)) {
+  #  if (MPM2$num[j] == TB2$MPM[i]) {
+   #   TB21$MPM[i] <- as.Date(MPM2$dates[j])
+      
+  #  }
+    
+#  }
+#}
+#TB21$MPM <- as.Date(TB21$MPM)
+
+
+
+#for (i in 1:1000) {
+ # for (j in 1:length(MPD2$dates)) {
+  #  if (MPD2$num[j] == TB2$MPS[i]) {
+   #   TB21$MPS[i] <- as.Date(MPD2$dates[j])
+      
+  #  }
+    
+#  }
+#}
+#TB21$MPS <- as.Date(TB21$MPS)
+
+
+
+
+#for (i in 1:1000) {
+ # for (j in 1:length(IQR$dates)) {
+   # if (IQR$num[j] == TB2$QIR[i]) {
+    #  TB21$QIR[i] <- as.Date(IQR$dates[j])
+      
+    #}
+    
+  #}
+#}
+#TB21$QIR <- as.Date(TB21$QIR)
+
+
+
+
+
+
+
+#TB21 <- TB21%>%
+ #   pivot_longer(cols = 1:3, 
+  #               values_to = "vals",
+   #              names_to = "names")
+
+                 
+
+TB2plot <- TB21 %>%
+    group_by(names) %>%
+    ggplot(aes(x = vals, fill = names)) +
+    geom_histogram(aes(x = vals,y = ..density..,
+                       fill = names),
+                 #binwidth = 0.5,
+                 alpha = 0.8,
+                 binwidth = 160,
+                 bins = 100,
+                 inherit.aes = F,
+                 position = "dodge") +
+    geom_density(lwd = 0.8,
+               linetype = 1,
+               colour = "black",
+               alpha = 0.3,
+               outline.type = "full",
+                   )+
+    labs( 
+    title = " ",
+        subtitle = "**TB2**",
+        x = "Second break point",
+        y = "Density",
+    color = " ",
+    fill = " ",
+    caption = "<br>Source: Author's calculation.")+
+  theme_tufte(base_family = "serif", # type of theme
+            base_size = 11)+
+    #scale_colour_wsj()+ # color palette
+    #scale_fill_wsj()+
+    #scale_fill_manual(values =  paletteer_d("tidyquant::tq_dark"))+
+  #scale_color_manual(values =  paletteer_d("tidyquant::tq_dark"))+
+  scale_fill_manual(values =  paletteer_d("tidyquant::tq_green"))+
+  scale_color_manual(values =  paletteer_d("tidyquant::tq_green"))+
+  #scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+   #            date_labels = "%Y")+
+    theme(legend.position = "none", # position and type of labels
+        plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
+        plot.caption.position = "plot",
+        plot.subtitle = element_markdown(hjust = 0,
+                                        size = 11))
+  # split the figure using the type of document
+     # facet_grid(
+      
+    #       rows =vars(names), scales = "free_y")
+
+#rm(CV)
+#rm(CV2)
+
+
+
+
+TB21plot <- TB21 %>%
+    group_by(names) %>%
+    ggplot(aes(x = vals, fill = names)) +
+    geom_histogram(aes(x = vals,y = ..density..,
+                       fill = names),
+                 #binwidth = 0.5,
+                 alpha = 0.8,
+                 binwidth = 160,
+                 bins = 100,
+                 inherit.aes = F,
+                 position = "dodge") +
+    geom_density(lwd = 0.8,
+               linetype = 1,
+               colour = "black",
+               alpha = 0.3,
+               outline.type = "full",
+                   )+
+    labs( 
+    title = " ",
+        subtitle = "**TB2**",
+        x = "Second break point",
+        y = "Density",
+    color = " ",
+    fill = " ",
+    caption = "Source: Author's calculation.")+
+  theme_tufte(base_family = "serif", # type of theme
+            base_size = 11)+
+    #scale_colour_wsj()+ # color palette
+    #scale_fill_wsj()+
+    #scale_fill_manual(values =  paletteer_d("tidyquant::tq_dark"))+
+  #scale_color_manual(values =  paletteer_d("tidyquant::tq_dark"))+
+  scale_fill_manual(values =  paletteer_d("tidyquant::tq_green"))+
+  scale_color_manual(values =  paletteer_d("tidyquant::tq_green"))+
+  #scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+   #            date_labels = "%Y")+
+    theme(legend.position = "top", # position and type of labels
+          legend.box = "horizontal",
+        plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
+        plot.caption.position = "plot",
+        plot.subtitle = element_markdown(hjust = 0,
+                                        size = 11),
+        legend.text = element_markdown(hjust = 0,
+                                        size = 11))
+
+as_ggplot <- function(x){
+
+  # Open null device to avoid blank page before plot------
+  # see cowplot:::as_grob.ggplot
+  null_device <- base::getOption(
+    "ggpubr.null_device",
+    default = cowplot::pdf_null_device
+  )
+  cur_dev <- grDevices::dev.cur()
+  # Open null device to avoid blank page before plot
+  null_device(width = 6, height = 6)
+  null_dev <- grDevices::dev.cur()
+  on.exit({
+    grDevices::dev.off(null_dev)
+    if (cur_dev > 1) grDevices::dev.set(cur_dev)
+  })
+
+  # Convert to ggplot-------------
+  cowplot::ggdraw() +
+    cowplot::draw_grob(grid::grobTree(x))
+}
+
+legend <- cowplot::get_legend(TB21plot)
+#as_ggplot(legend)
+
+#_____________________________________________________________
+# MULTIPLOT
+#_____________________________________________________________
+
+multiplot(CVplot,TB2plot,TB1plot, as_ggplot(legend) , cols = 2)
+
+```
 
 

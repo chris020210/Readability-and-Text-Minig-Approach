@@ -1165,11 +1165,25 @@ IQR_FSZ <- ts(log(IQR$`Flesch-Szigriszt`), start = c(2011,01),
 plot(IQR_FSZ)
 
 EXPOR <- data.frame(MPM_MAFSZ,MPD_MAFSZ)
-library(openxlsx)
-write.xlsx(EXPOR,"Tsdata.xlsx")
-write.xlsx(IQR_FSZ,"IQRdata.xlsx")
+
+#library(openxlsx)
+#write.xlsx(EXPOR,"Tsdata.xlsx")
+#write.xlsx(IQR_FSZ,"IQRdata.xlsx")
 ```
 
+
+# Chech the levels above the fd to read
+```{r}
+MPM2 %>%
+  filter(MAFSZ >= 55)
+
+MPD2 %>%
+  filter(MAFSZ >= 55)
+
+IQR %>%
+  filter(`Flesch-Szigriszt` >= 55)
+  
+```
 
 ## 3.2. Unit Root Tests
 
@@ -1883,7 +1897,7 @@ library(parallel)
 
 #### Minutes
 ```{r}
-#load("Methodology data2.RData")
+load("Methodology data2.RData")
 
 #library(stargazer)
 MPM_BOOTS_RESULTS
@@ -2184,7 +2198,7 @@ IQR_BOOTS_INTERVALS %>%
                  colour = 1, fill = "firebrick3",
                  bins =30,
                  position = "identity",
-                 binwidth = 0.1, width = .5) +
+                 binwidth = 0.5) +
   geom_density(lwd = 1.2,
                linetype = 1,
                colour = "black",
@@ -2276,7 +2290,7 @@ IQR_BOOTS_INTERVALS_crash %>%
 
 # ALL TOGETHER
 
-```{r}
+```{r TSTAT HISTOGRAM}
 CV <- data.frame(MPM = as.numeric(MPM_BOOTS_INTERVALS[,1]),
                  MPS = as.numeric(MPD_BOOTS_INTERVALS[,1]),
                  QIR = as.numeric(IQR_BOOTS_INTERVALS[,1]))
@@ -2290,24 +2304,24 @@ CV %>%
     ggplot(aes(x = vals, fill = names)) +
     geom_histogram(aes(x = vals,y = ..density..,
                        fill = names),
-                 #binwidth = 0.5,
-                 alpha = 0.5,
+                 #binwidth = 0.8,
+                 alpha = 0.8,
                  binwidth = 0.3,
                  inherit.aes = F,
                  position = "dodge") +
     geom_density(lwd = 1.2,
                linetype = 1,
                colour = "black",
-               alpha = 0.25,
+               alpha = 0.3,
                outline.type = "full",
                    )+
     labs( 
     title = "Figure 1: Banco de México official documents. Word count.",
         subtitle = "Jan 2011 - Dec 2022 (Number of Words)",
-        x = " ",
-        y = " ",
+        x = "t-stat",
+        y = "Density",
     color = " ",
-    fil = " ",
+    fill = " ",
     caption = "Source: Author's calculations.")+
   theme_tufte(base_family = "serif", # type of theme
             base_size = 12)+
@@ -2322,64 +2336,243 @@ CV %>%
      # facet_grid(
       
     #       rows =vars(names), scales = "free_y")
+
+rm(CV)
 ```
 
 
-```{r}
-CV <- data.frame(MPM = as.numeric(MPM_BOOTS_INTERVALS[,1]),
-                 MPS = as.numeric(MPD_BOOTS_INTERVALS[,1]),
-                 QIR = as.numeric(IQR_BOOTS_INTERVALS[,1]))
+```{r TB1 HISTOGRAM}
 
-CV <- CV %>%
-    mutate(density_MPM = dnorm(mean(MPM), sd(MPM)),
-           density_MPS = dnorm(mean(MPS), sd(MPS)),
-           density_QIR = dnorm(mean(QIR), sd(QIR)))
-CV <- CV%>%
+IQR$dates = as.Date(format(IQR$dates, format= "%Y-%m-01"))
+IQR$num <- 1:length(IQR$Q)
+
+MPM2$num <- 1:length(MPM2$dates)
+
+MPD2$num <- 1:length(MPD2$dates)
+
+
+TB1 <- data.frame(MPM = as.numeric(MPM_BOOTS_INTERVALS[,2]),
+                 MPS = as.numeric(MPD_BOOTS_INTERVALS[,2]),
+                 QIR = as.numeric(IQR_BOOTS_INTERVALS[,2]))
+
+TB11 <- TB1 %>%
+  mutate(MPM =NA,
+         MPS = NA,
+         QIR = NA)
+
+
+
+for (i in 1:1000) {
+  for (j in 1:length(MPM2$dates)) {
+    if (MPM2$num[j] == TB1$MPM[i]) {
+      TB11$MPM[i] <- as.Date(MPM2$dates[j])
+      
+    }
+    
+  }
+}
+TB11$MPM <- as.Date(TB11$MPM)
+
+
+
+for (i in 1:1000) {
+  for (j in 1:length(MPD2$dates)) {
+    if (MPD2$num[j] == TB1$MPS[i]) {
+      TB11$MPS[i] <- as.Date(MPD2$dates[j])
+      
+    }
+    
+  }
+}
+TB11$MPS <- as.Date(TB11$MPS)
+
+
+
+
+for (i in 1:1000) {
+  for (j in 1:length(IQR$dates)) {
+    if (IQR$num[j] == TB1$QIR[i]) {
+      TB11$QIR[i] <- as.Date(IQR$dates[j])
+      
+    }
+    
+  }
+}
+TB11$QIR <- as.Date(TB11$QIR)
+
+
+
+
+
+
+
+TB11 <- TB11%>%
     pivot_longer(cols = 1:3, 
                  values_to = "vals",
-                 names_to = "names") %>%
-    pivot_longer(cols = 1:5, 
-                 values_to = "density",
-                 names_to = "density_names")
-    
+                 names_to = "names")
+
                  
-CV %>%
+TB11 %>%
     group_by(names) %>%
     ggplot(aes(x = vals, fill = names)) +
-    #geom_histogram(aes(x = vals,y = ..density..,
-    #                   fill = names),
-     #            #binwidth = 0.5,
-      #           alpha = 0.5,
-       #          binwidth = 0.1,
-        #         inherit.aes = F) 
-
-    geom_density(aes(),lwd = 1.2,
+    geom_histogram(aes(x = vals,y = ..density..,
+                       fill = names),
+                 #binwidth = 0.5,
+                 alpha = 0.8,
+                 #binwidth = 10,
+                 bins = 20,
+                 inherit.aes = F,
+                 position = "dodge") +
+    geom_density(lwd = 1.2,
                linetype = 1,
                colour = "black",
-               alpha = 0.25,
+               alpha = 0.3,
                outline.type = "full",
                    )+
     labs( 
     title = "Figure 1: Banco de México official documents. Word count.",
         subtitle = "Jan 2011 - Dec 2022 (Number of Words)",
-        x = " ",
-        y = " ",
+        x = "First break point",
+        y = "Density",
     color = " ",
-    fil = " ",
+    fill = " ",
     caption = "Source: Author's calculations.")+
   theme_tufte(base_family = "serif", # type of theme
             base_size = 12)+
-    scale_colour_economist()+ # color palette
-    scale_fill_economist()+
+    scale_colour_wsj()+ # color palette
+    scale_fill_wsj()+
   #scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
    #            date_labels = "%Y")+
     theme(legend.position = "bottom", # position and type of labels
         plot.caption = element_text(hjust = 0),
         plot.caption.position = "plot")
   # split the figure using the type of document
-    #  facet_grid(
-     #        rows =vars(names), scales = "free_y")
+     # facet_grid(
+      
+    #       rows =vars(names), scales = "free_y")
+
+#rm(CV)
+#rm(CV2)
 ```
+
+
+
+```{r TB2 HISTOGRAM}
+
+#IQR$dates = as.Date(format(IQR$dates, format= "%Y-%m-01"))
+#IQR$num <- 1:length(IQR$Q)
+
+#MPM2$num <- 1:length(MPM2$dates)
+
+#MPD2$num <- 1:length(MPD2$dates)
+
+
+TB2 <- data.frame(MPM = as.numeric(MPM_BOOTS_INTERVALS[,3]),
+                 MPS = as.numeric(MPD_BOOTS_INTERVALS[,3]),
+                 QIR = as.numeric(IQR_BOOTS_INTERVALS[,3]))
+
+TB21 <- TB2 %>%
+  mutate(MPM =NA,
+         MPS = NA,
+         QIR = NA)
+
+
+
+for (i in 1:1000) {
+  for (j in 1:length(MPM2$dates)) {
+    if (MPM2$num[j] == TB2$MPM[i]) {
+      TB21$MPM[i] <- as.Date(MPM2$dates[j])
+      
+    }
+    
+  }
+}
+TB21$MPM <- as.Date(TB21$MPM)
+
+
+
+for (i in 1:1000) {
+  for (j in 1:length(MPD2$dates)) {
+    if (MPD2$num[j] == TB2$MPS[i]) {
+      TB21$MPS[i] <- as.Date(MPD2$dates[j])
+      
+    }
+    
+  }
+}
+TB21$MPS <- as.Date(TB21$MPS)
+
+
+
+
+for (i in 1:1000) {
+  for (j in 1:length(IQR$dates)) {
+    if (IQR$num[j] == TB2$QIR[i]) {
+      TB21$QIR[i] <- as.Date(IQR$dates[j])
+      
+    }
+    
+  }
+}
+TB21$QIR <- as.Date(TB21$QIR)
+
+
+
+
+
+
+
+TB21 <- TB21%>%
+    pivot_longer(cols = 1:3, 
+                 values_to = "vals",
+                 names_to = "names")
+
+                 
+
+TB21 %>%
+    group_by(names) %>%
+    ggplot(aes(x = vals, fill = names)) +
+    geom_histogram(aes(x = vals,y = ..density..,
+                       fill = names),
+                 #binwidth = 0.5,
+                 alpha = 0.8,
+                 binwidth = 160,
+                 bins = 100,
+                 inherit.aes = F,
+                 position = "dodge") +
+    geom_density(lwd = 1.2,
+               linetype = 1,
+               colour = "black",
+               alpha = 0.3,
+               outline.type = "full",
+                   )+
+    labs( 
+    title = "Figure 1: Banco de México official documents. Word count.",
+        subtitle = "Jan 2011 - Dec 2022 (Number of Words)",
+        x = "Second break point",
+        y = "Density",
+    color = " ",
+    fill = " ",
+    caption = "Source: Author's calculations.")+
+  theme_tufte(base_family = "serif", # type of theme
+            base_size = 12)+
+    scale_colour_wsj()+ # color palette
+    scale_fill_wsj()+
+  #scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+   #            date_labels = "%Y")+
+    theme(legend.position = "bottom", # position and type of labels
+        plot.caption = element_text(hjust = 0),
+        plot.caption.position = "plot")
+  # split the figure using the type of document
+     # facet_grid(
+      
+    #       rows =vars(names), scales = "free_y")
+
+#rm(CV)
+#rm(CV2)
+```
+
+
 
 # 3. Text mining approach
 
