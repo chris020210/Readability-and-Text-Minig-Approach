@@ -881,6 +881,71 @@ Note: Smoothing data using local regression techniques.")+
 
 ```
 
+
+```{r}
+library(latex2exp)
+library(ggtext)
+library(ggthemes)
+library(openxlsx)
+write.xlsx(Banxico_readability[,-3], "Linguistic.xlsx")
+Banxico_readability %>%
+    select(dates,document,TTR,Year) %>%
+    mutate(TTR = as.numeric(TTR)) %>%
+    group_by(document, Year) %>%
+    summarise(mean = mean(TTR)) %>%
+    filter(Year %in% c(2011,2022)) %>%
+    arrange(desc(Year)) %>%
+  ggplot(aes(x= Year, # aesthetics
+             y= mean,
+             fill = document)) +
+  geom_col(aes(x= Year, # line plot
+                y= mean), width = 0.5,  
+           just = 0.5, 
+           position = "dodge", 
+           color = "white")+
+  #labels of the Figure
+  labs(title = NULL,
+        x = NULL,
+        y = NULL,
+    color = NULL,
+      caption = NULL,
+    fill = NULL)+
+    #theme_tufte(base_family = "serif",
+     #       base_size = 11, ticks = TRUE)+
+    #theme_clean(base_family = "serif")+
+  #scale_color_brewer(palette="Set1")+
+  #scale_color_manual(values = winter)+
+  #scale_color_wsj()+
+  scale_fill_economist()+
+  #scale_color_manual(values =  paletteer_d("tidyquant::tq_green"))+
+  theme(text = element_text(family = "serif") ,
+        legend.position = "bottom",
+        legend.text.align = 0, 
+        legend.box.just = "left",
+        legend.justification = 0,
+        legend.text = element_markdown(hjust = 0,
+                                        size = 12),
+        plot.caption = element_markdown(hjust = 0,
+                                        size = 11),
+        plot.caption.position = "plot",
+        strip.text.y = element_markdown(hjust = 0,
+                                        size = 11, family = "serif"),
+        axis.line = element_line(linewidth = 0.1, colour = "gray47"),
+        axis.ticks = element_line(linewidth = 0.1, colour = "gray47"),
+        plot.background = element_blank(),
+        panel.background = element_blank(),
+        strip.background = element_rect(fill = "aliceblue"),
+        axis.text = element_markdown(size = 10, family = "serif", colour = "black"),
+        plot.margin = unit(c(0, 0, 0, 0), "cm"))
+  #scale_x_date(date_breaks = "2 year", # change x-axis breaks and format
+   #            date_labels = "%Y") +
+  # split the figure using the type of document
+  #facet_grid(
+   #          rows =vars(document),
+    #         shrink = T, scales = "free_y")
+```
+
+
 # 3. Structural Break Analysis
 
 ## 3.1. Setting up the Variables

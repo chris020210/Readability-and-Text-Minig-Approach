@@ -335,6 +335,8 @@ FLESCH.SCALE <- data.frame("Score" = c(100,95,90,85,80,75,70,65,60,55,50,
                                            rep("Fairly easy",2),rep("Standard",2), 
                                            rep("Fairly difficult",2), 
                                         rep("Difficult",4), rep("Very difficult",3)))
+#library(openxlsx)
+write.xlsx(FLESCH.SCALE, "Legibilidad.xlsx")
 
 color_INFLESZ = c(rep("#F7FBFF",5),rep("#C6DBEF",3),rep("#9ECAE1",2),
                   rep("#6BAED6",3),rep("#2171B5",4))
@@ -470,6 +472,7 @@ Figure1 <- Banxico_readability %>%
          "Year" = format(dates, format = "%Y")) %>% # year variable
   select(dates,document,words,Year) # select specific variables
 
+
 Figure1 %>%
   ggplot(aes(x= dates, # aesthetics
              y= words,
@@ -563,7 +566,7 @@ Minutes and statements, on the other hand, show a gradual tendency towards a sta
 
 #vintage <- c("#1c1f4c","#00848c","#037272","#fccf17","#fec20f","#edebd9")
 
-A<- Banxico_readability %>%
+FIGURE2<- Banxico_readability %>%
   dplyr::mutate("Year" = format(dates, 
                                 format="%Y"),
                 "FH" = `Fernandez Huerta`,
@@ -579,7 +582,7 @@ A<- Banxico_readability %>%
                             names_to = "Flesch", 
                             values_to = "Flesch_index")
 colorF2 <- c("#0055AA","#C40003","#FF7F00","#00C19B","#EAC862")
-A%>%
+FIGURE2%>%
   filter(Year %in% 2011:2022) %>%
   ggplot(aes(x= dates,
              y= Flesch_index,
@@ -911,7 +914,7 @@ Finally, the high correlation between the readability scores means that, regardl
 #install.packages("GGally")
 source("multiplot.R")
 
-A<- Banxico_readability %>%
+FIGURE4 <- Banxico_readability %>%
   dplyr::mutate("Year" = format(dates, 
                                 format="%Y"),
                 "Fernández Huerta" = `Fernandez Huerta`,
@@ -1063,7 +1066,7 @@ library(psych)
 
 #colorF5 <- c("#0055AA","#007ED3","#7FD2FF")
 colorF5 <- c("#174D79","#007ED3","#7FD2FF")
-A<- Banxico_readability %>%
+FIGURE5 <- Banxico_readability %>%
   dplyr::mutate("Year" = format(dates, 
                                 format="%Y"),
                 "Fernández Huerta" = `Fernandez Huerta`,
@@ -1074,26 +1077,26 @@ A<- Banxico_readability %>%
                 "Avg" = (`Fernandez Huerta` + `Flesch-Szigriszt`+ `Gutiérrez`)/3) %>%
   dplyr::filter(Year %in% 2011:2022)
 
-COR <- A %>%
+FIGURE5 <- FIGURE5 %>%
   select(dates,Year,document,words,sentences,
          FSZ) %>%
   mutate(sentences = as.numeric(sentences),
          Governor = NA)
 
-COR$Governor[COR$Year %in% 2011:2017] = "Agustín Carstens"
-COR$Governor[c(140,141)] = "Alejandro Díaz de León"
-COR$Governor[COR$Year %in% 2018:2021] = "Alejandro Díaz de León"
-COR$Governor[COR$Year %in%2022] = "Victoria Rodríguez"
+FIGURE5$Governor[COR$Year %in% 2011:2017] = "Agustín Carstens"
+FIGURE5$Governor[c(140,141)] = "Alejandro Díaz de León"
+FIGURE5$Governor[COR$Year %in% 2018:2021] = "Alejandro Díaz de León"
+FIGURE5$Governor[COR$Year %in%2022] = "Victoria Rodríguez"
 
 
-#COR<-cor(COR[,4:9])
+FIGURE5<-cor(FIGURE5[,4:9])
 
 #corrplot::corrplot(COR,
                   # method = "square")
 #heatmap(COR)
 #str(COR)
 
-COR %>%
+FIGURE5 %>%
   group_by(document, Governor) %>%
   ggplot(aes(y=FSZ,x=dates,
              col = Governor)) +
@@ -1757,7 +1760,7 @@ library(ggtext)
 library(grid)
 library(gridExtra)
 
-A<- Banxico_readability %>%
+APENDIXB<- Banxico_readability %>%
   dplyr::mutate("Year" = format(dates, 
                                 format="%Y"),
                 "Fernández Huerta" = `Fernandez Huerta`,
@@ -1767,7 +1770,7 @@ A<- Banxico_readability %>%
                         `Readability Mu` +  Szigriszt)/4) %>%
   dplyr::filter(Year %in% 2011:2022)
 
-COR <- A %>%
+APENDIXB <- APENDIXB %>%
   select(dates,Year,document,words,sentences,
          `Flesch-Szigriszt`,`Fernandez Huerta`,
          Szigriszt, Avg) %>%
@@ -1775,7 +1778,7 @@ COR <- A %>%
          words = as.numeric(words)) %>%
   group_by(document)
 
-A<-COR %>%
+A <-APENDIXB %>%
   filter(document == "MPS") %>%
   mutate(W = words,
          ST = sentences,
@@ -1809,7 +1812,7 @@ A<-COR %>%
        MPS")
 
 
-B<-COR %>%
+B<-APENDIXB %>%
   filter(document == "MPM") %>%
   mutate(W = words,
          ST = sentences,
@@ -1845,7 +1848,7 @@ B<-COR %>%
   labs(title =" ",subtitle = "
        MPM")
 
-C<-COR %>%
+C<-APENDIXB %>%
   filter(document == "QIR") %>%
   mutate(W = words,
          ST = sentences,
@@ -1877,7 +1880,7 @@ C<-COR %>%
   labs(title =" ",subtitle = "
        QIR")
 
-C2<-COR %>%
+C2<-APENDIXB %>%
   filter(document == "QIR") %>%
   mutate(W = words,
          ST = sentences,
@@ -2462,6 +2465,25 @@ legend <- cowplot::get_legend(TB21plot)
 
 multiplot(CVplot,TB2plot,TB1plot, as_ggplot(legend) , cols = 2)
 
+```
+
+```{r eval=FALSE, include=FALSE}
+library(openxlsx)
+FIGURES <- list(Figure1 = Figure1,
+                FIGURE2 = FIGURE2[,c(1,2,29,31,32)],
+                FIGURE4 = FIGURE4[,c(1,2,11,12,22)],
+                CENSUS_EDUC_LEV = CENSUS_EDUC_LEV,
+                educ_level = educ_level,
+                FIGURE5 = FIGURE5,
+                TS_data3 = TS_data3,
+                APENDIXB = APENDIXB,
+                CV = CV,
+                TB1 = TB1,
+                TB11 = TB11,
+                TB2 = TB2,
+                TB21 = TB21)
+write.xlsx(FIGURES, "figures.xlsx")
+save(FIGURES, file = "FIGURES.RData")
 ```
 
 
